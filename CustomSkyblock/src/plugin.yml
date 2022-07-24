@@ -1,0 +1,14 @@
+name: CustomEssentials
+api-version: 1.13
+version: 1.0.0
+author: GenjutsuUser
+main: CustomEssentials.Main
+description: Custom Essentials
+commands:
+  fly: 
+  feed:
+  eat: 
+  menu: 
+  espawn:
+  weapon:
+   

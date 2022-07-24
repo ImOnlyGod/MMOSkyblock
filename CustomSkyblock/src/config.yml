@@ -1,0 +1,20 @@
+#Essentials
+
+General:
+  no_permission_msg: '&8[&c*&8] &cYou do not have permission to execute this command!'
+  console_argument_error_msg: '&8[&c*&8] &cYou are unable to execute this command, please add argument!'
+  player_not_found_error_msg: '&8[&c*&8] &cInvalid Player Name or Player is Offline!'
+
+FlyCommand:
+  fly_enabled_msg: '&8[&c*&8] &7fly has been &aenabled&7!'
+  fly_disabled_msg: '&8[&c*&8] &7fly has been &4disabled&7!'
+  sender_fly_enabled_msg: '&8[&c*&8] &7fly has been &aenabled for &b'
+  sender_fly_disabled_msg: '&8[&c*&8] &7fly has been &4disabled for &b'
+  
+EatCommand:
+  reciever_eat_msg: '&8[&c*&8] &7Your Hunger has been &aReplenished&7!'
+  sender_eat_msg: '&8[&c*&8] &7You have &aReplenished&7 the Hunger of &b'
+
+WeaponCommand:
+  invalid_amount_msg: '&8[&c*&8] &7Please enter integer amount &b'
+  invalid_player_msg: '&8[&c*&8] &7Player not found &b'
