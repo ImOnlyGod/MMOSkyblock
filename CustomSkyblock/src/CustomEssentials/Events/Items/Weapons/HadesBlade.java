@@ -87,6 +87,7 @@ public class HadesBlade extends ItemsCore{
 		f.setShooter(p);	
 		
 		
+		
 	}
 
 }

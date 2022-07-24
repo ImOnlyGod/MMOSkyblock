@@ -6,6 +6,7 @@ import java.util.Random;
 
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.craftbukkit.v1_17_R1.entity.CraftFireball;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.LivingEntity;
@@ -40,6 +41,7 @@ import CustomEssentials.Events.PlayerStats.Health;
 import CustomEssentials.Events.PlayerStats.Speed;
 import CustomEssentials.Events.PlayerStats.Stats;
 import CustomEssentials.Utils.Utils;
+import net.minecraft.world.entity.projectile.EntityFireball;
 
 
 public class EventsClass implements Listener{
@@ -277,6 +279,10 @@ public class EventsClass implements Listener{
 	
 	@EventHandler
 	public void mobDamageEvent(EntityDamageEvent e) {
+		
+		if (!(e.getEntity() instanceof LivingEntity)) return;
+	
+		
 		LivingEntity entity = (LivingEntity) e.getEntity();		
 		
 		if (e.getEntityType() != EntityType.PLAYER) {
@@ -311,17 +317,21 @@ public class EventsClass implements Listener{
 	@EventHandler
 	public void playerDamageEntityEvent(EntityDamageByEntityEvent e) {
 		
-		//CREATE SEPEARTE CLASS - Test
-		if (e.getDamager() instanceof Fireball) {
-			if (e.getDamager().getCustomName().equals("HadesBladeFireball")) {				
-				Fireball f = (Fireball) e.getEntity();
-				Player shooter = (Player) f.getShooter();
+		//CREATE SEPEARTE CLASS 
+		if (e.getDamager() instanceof CraftFireball) {
+			if (e.getDamager().getCustomName().equals("HadesBladeFireball")) {	
+				
+				Player shooter = (Player) ((Fireball) e.getDamager()).getShooter();
 				if (e.getEntity() == shooter) {
 					e.setDamage(0);
 				}
 				else e.setDamage(100);
+			
 			}
+			
+				
 		}
+		
 		
 		if (!(e.getDamager() instanceof Player)) return;
 		
@@ -334,7 +344,7 @@ public class EventsClass implements Listener{
 		double damage = e.getFinalDamage();
 		
 
-		
+	
 		Random rand = new Random();
 		int crit = rand.nextInt(101);
 		
