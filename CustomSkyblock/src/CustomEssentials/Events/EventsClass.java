@@ -311,7 +311,7 @@ public class EventsClass implements Listener{
 	@EventHandler
 	public void playerDamageEntityEvent(EntityDamageByEntityEvent e) {
 		
-		//CREATE SEPEARTE CLASS
+		//CREATE SEPEARTE CLASS - Test
 		if (e.getDamager() instanceof Fireball) {
 			if (e.getDamager().getCustomName().equals("HadesBladeFireball")) {				
 				Fireball f = (Fireball) e.getEntity();
