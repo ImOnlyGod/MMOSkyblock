@@ -6,9 +6,7 @@ import java.util.Random;
 
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.craftbukkit.v1_17_R1.entity.CraftFireball;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Fireball;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -19,7 +17,6 @@ import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
-import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
@@ -34,6 +31,7 @@ import CustomEssentials.Main;
 import CustomEssentials.Events.Items.ItemStats;
 import CustomEssentials.Events.Items.ItemStorageTable;
 import CustomEssentials.Events.Items.ItemsCore;
+import CustomEssentials.Events.Misc.ProjectileCreator;
 import CustomEssentials.Events.Mobs.MobLevel;
 import CustomEssentials.Events.PlayerStats.AttackDamage;
 import CustomEssentials.Events.PlayerStats.Defence;
@@ -41,7 +39,6 @@ import CustomEssentials.Events.PlayerStats.Health;
 import CustomEssentials.Events.PlayerStats.Speed;
 import CustomEssentials.Events.PlayerStats.Stats;
 import CustomEssentials.Utils.Utils;
-import net.minecraft.world.entity.projectile.EntityFireball;
 
 
 public class EventsClass implements Listener{
@@ -318,20 +315,8 @@ public class EventsClass implements Listener{
 	public void playerDamageEntityEvent(EntityDamageByEntityEvent e) {
 		
 		//CREATE SEPEARTE CLASS 
-		if (e.getDamager() instanceof CraftFireball) {
-			if (e.getDamager().getCustomName().equals("HadesBladeFireball")) {	
-				
-				Player shooter = (Player) ((Fireball) e.getDamager()).getShooter();
-				if (e.getEntity() == shooter) {
-					e.setDamage(0);
-				}
-				else e.setDamage(100);
-			
-			}
-			
-				
-		}
-		
+		ProjectileCreator projectileDamageCalulator = new ProjectileCreator();
+		e.setDamage(projectileDamageCalulator.projectileDamage(e.getDamager(), e.getEntity(), e.getFinalDamage()));
 		
 		if (!(e.getDamager() instanceof Player)) return;
 		
