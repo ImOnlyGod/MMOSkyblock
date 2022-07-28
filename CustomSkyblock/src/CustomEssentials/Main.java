@@ -45,13 +45,9 @@ public class Main extends JavaPlugin{
 		new WeaponCommand(this);
 		new CustomMobsCommand(this);
 		
-		
-		
 		BukkitScheduler scheduler = getServer().getScheduler();
 		scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
-		
-		
-		
+				
 		@Override
 		public void run() {
 			
@@ -65,7 +61,7 @@ public class Main extends JavaPlugin{
 					profiles.createPlayerProfile(p);
 				}
 				 				
-				
+				profiles.getPlayerProfile(p).incrementPlayTime();
 				int currentMana = profileManager.getPlayerProfile(p).getStats().getMana();
 				int TotalMana = profileManager.getPlayerProfile(p).getStats().getTotalMana();
 				
@@ -178,17 +174,13 @@ public class Main extends JavaPlugin{
 		return profileManager;
 	}
 	
-	public void setProfileManager(PlayerProfileManager p) {
-		
-		this.profileManager = p;
-		
+	public void setProfileManager(PlayerProfileManager p) {	
+		this.profileManager = p;	
 	}
-
 
 	public int getDisplayStats() {
 		return displayStats;
 	}
-
 
 	public void setDisplayStats(int displayStats) {
 		this.displayStats = displayStats;

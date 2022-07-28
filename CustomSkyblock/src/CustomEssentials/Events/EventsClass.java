@@ -1,6 +1,7 @@
 package CustomEssentials.Events;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -24,6 +25,7 @@ import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.event.player.PlayerFishEvent.State;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
@@ -32,6 +34,7 @@ import CustomEssentials.Events.Items.ItemStats;
 import CustomEssentials.Events.Items.ItemStorageTable;
 import CustomEssentials.Events.Items.ItemsCore;
 import CustomEssentials.Events.Misc.ProjectileCreator;
+import CustomEssentials.Events.Misc.TimeGenerator;
 import CustomEssentials.Events.Mobs.MobLevel;
 import CustomEssentials.Events.PlayerStats.AttackDamage;
 import CustomEssentials.Events.PlayerStats.Defence;
@@ -44,11 +47,11 @@ import CustomEssentials.Utils.Utils;
 public class EventsClass implements Listener{
 	
 	private Main plugin;
-	
-	
+		
 	public EventsClass(Main plugin) {
 		this.plugin = plugin;
 	}
+	
 
 	@EventHandler
 	public void onJoin(PlayerJoinEvent event) {
@@ -79,8 +82,11 @@ public class EventsClass implements Listener{
 		playerArmor.setArmor(p, armor, magicResist);
 		playerDamage.setDamage(p, physicalDamage, magicDamage);
 		playerSpeed.setPlayerSpeed(p, speed);
+		
+		
 			
 	}
+	
 	
 	@EventHandler
 	public void OnClick(InventoryClickEvent e) {
@@ -126,7 +132,9 @@ public class EventsClass implements Listener{
 			double burstDamage = profile.getStats().getBurstDamage();
 			int CDR = profile.getStats().getCooldownReduction();
 			
-			
+			float playTime = profile.getPlayTime();
+			String playTimeFormat = TimeGenerator.secondsToString(playTime);
+		
 			
 			
 			List<String> lore = new ArrayList<String>();
@@ -138,6 +146,7 @@ public class EventsClass implements Listener{
 			lore.add(Utils.chat("&7Crit: &c") + critDamage + Utils.chat("x &f| &b") + critChance + '%');
 			lore.add(Utils.chat("&7Burst: &c") + burstDamage + Utils.chat("x &f| &b") + burstChance + '%');
 			lore.add(Utils.chat("&7Speed: &f") + speed + Utils.chat(" &f| &b") + CDR);
+			lore.add(Utils.chat("&7PlayTime(Temp): &f") + playTimeFormat);
 			
 
 			meta.setLore(lore);
@@ -357,7 +366,7 @@ public class EventsClass implements Listener{
 		item.itemAbility(p, profiles.getPlayerProfile(p));
 		
 	}
-	
+
 	
 }
 	

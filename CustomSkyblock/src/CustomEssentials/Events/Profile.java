@@ -15,14 +15,16 @@ public class Profile {
 	private FarmingSkill farming;
 	private FishingSkill fishing;
 	private ForagingSkill foraging;
+	private float playTime; //Seconds
 	
-	public Profile(Stats newStats, MiningSkill mining, CombatSkill combat, FarmingSkill farming, FishingSkill fishing, ForagingSkill foraging) {
+	public Profile(Stats newStats, MiningSkill mining, CombatSkill combat, FarmingSkill farming, FishingSkill fishing, ForagingSkill foraging, float playTime) {
 		this.stats = newStats;
 		this.mining = mining;
 		this.combat = combat;
 		this.farming = farming;
 		this.fishing = fishing;
 		this.foraging = foraging;
+		this.playTime = playTime;
 		
 	}
 	
@@ -49,6 +51,18 @@ public class Profile {
 	public Stats getStats() {
 		
 		return this.stats;
+	}
+
+	public float getPlayTime() {
+		return playTime;
+	}
+
+	public void setPlayTime(float playTime) {
+		this.playTime = playTime;
+	}
+	
+	public void incrementPlayTime() {
+		this.playTime += 1;
 	}
 	
 
