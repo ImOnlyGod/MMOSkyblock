@@ -1,7 +1,6 @@
 package CustomEssentials.Events;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -25,8 +24,8 @@ import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.event.player.PlayerFishEvent.State;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import CustomEssentials.Main;
@@ -110,13 +109,14 @@ public class EventsClass implements Listener{
 		
 		if (e.getView().getTitle().equalsIgnoreCase(Utils.chat("&a&lMenu"))) {
 			Player p = (Player) e.getPlayer();
-					
+			
+			//Player Head
 			ItemStack stats = new ItemStack(Material.PLAYER_HEAD,1);		
 			
-			SkullMeta meta = (SkullMeta) stats.getItemMeta();
+			SkullMeta statsMeta = (SkullMeta) stats.getItemMeta();
 			
-			meta.setOwningPlayer(p);
-			meta.setDisplayName(Utils.chat("&c&lStats: &6") + p.getName());
+			statsMeta.setOwningPlayer(p);
+			statsMeta.setDisplayName(Utils.chat("&c&lStats: &7") + p.getName());
 			
 			Profile profile = plugin.getProfileManager().getPlayerProfile(p);
 			
@@ -131,30 +131,34 @@ public class EventsClass implements Listener{
 			double burstChance = profile.getStats().getBurstChance();
 			double burstDamage = profile.getStats().getBurstDamage();
 			int CDR = profile.getStats().getCooldownReduction();
+					
+			List<String> statsLore = new ArrayList<String>();
 			
-			float playTime = profile.getPlayTime();
-			String playTimeFormat = TimeGenerator.secondsToString(playTime);
-		
-			
-			
-			List<String> lore = new ArrayList<String>();
-			
-			lore.add(Utils.chat("&7HP: &a") + p.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
-			lore.add(Utils.chat("&7Mana: &b") + mana);
-			lore.add(Utils.chat("&7Defence: &1") + armor + Utils.chat(" &f| &5") + magicResist);
-			lore.add(Utils.chat("&7Damage: &c") + physicalDamage + Utils.chat(" &f| &b") + magicDamage);
-			lore.add(Utils.chat("&7Crit: &c") + critDamage + Utils.chat("x &f| &b") + critChance + '%');
-			lore.add(Utils.chat("&7Burst: &c") + burstDamage + Utils.chat("x &f| &b") + burstChance + '%');
-			lore.add(Utils.chat("&7Speed: &f") + speed + Utils.chat(" &f| &b") + CDR);
-			lore.add(Utils.chat("&7PlayTime(Temp): &f") + playTimeFormat);
+			statsLore.add(Utils.chat("&7HP: &a") + p.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
+			statsLore.add(Utils.chat("&7Mana: &b") + mana);
+			statsLore.add(Utils.chat("&7Defence: &1") + armor + Utils.chat(" &f| &5") + magicResist);
+			statsLore.add(Utils.chat("&7Damage: &c") + physicalDamage + Utils.chat(" &f| &b") + magicDamage);
+			statsLore.add(Utils.chat("&7Crit: &c") + critDamage + Utils.chat("x &f| &b") + critChance + '%');
+			statsLore.add(Utils.chat("&7Burst: &c") + burstDamage + Utils.chat("x &f| &b") + burstChance + '%');
+			statsLore.add(Utils.chat("&7Speed: &f") + speed + Utils.chat(" &f| &b") + CDR);
 			
 
-			meta.setLore(lore);
-			
-			
-			stats.setItemMeta(meta);
+			statsMeta.setLore(statsLore);
+			stats.setItemMeta(statsMeta);
 			
 			e.getInventory().setItem(13, stats);;
+			//Clock item
+			int playTime = profile.getPlayTime();
+			String playTimeFormat = TimeGenerator.secondsToString(playTime);
+			ItemStack time = new ItemStack(Material.CLOCK,1);	
+			ItemMeta timeMeta = time.getItemMeta();
+			
+			timeMeta.setDisplayName(Utils.chat("&6&lTime: &7"));
+			List<String> timeLore = new ArrayList<String>();
+			timeLore.add(Utils.chat("&7PlayTime: &a") + playTimeFormat);
+			timeMeta.setLore(timeLore);
+			time.setItemMeta(timeMeta);
+			e.getInventory().setItem(26, time);
 			
 			
 			
