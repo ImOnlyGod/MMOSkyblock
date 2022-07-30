@@ -1,6 +1,9 @@
 package CustomEssentials.Events;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -150,17 +153,26 @@ public class EventsClass implements Listener{
 			//Clock item
 			int playTime = profile.getPlayTime();
 			String playTimeFormat = TimeGenerator.secondsToString(playTime);
+			
+			Date currentDate = new Date();
+			SimpleDateFormat formatTime = new SimpleDateFormat("HH:mm:ss");
+			SimpleDateFormat formatDate = new SimpleDateFormat("dd-MM-yyyy");
+			SimpleDateFormat formatDay = new SimpleDateFormat("EEEE");
+			SimpleDateFormat formatZone = new SimpleDateFormat("z");
+			
 			ItemStack time = new ItemStack(Material.CLOCK,1);	
 			ItemMeta timeMeta = time.getItemMeta();
 			
-			timeMeta.setDisplayName(Utils.chat("&6&lTime: &7"));
+			timeMeta.setDisplayName(Utils.chat("&6&lTime:"));
 			List<String> timeLore = new ArrayList<String>();
+			timeLore.add(Utils.chat("&7Day: &a") + formatDay.format(currentDate));
+			timeLore.add(Utils.chat("&7Date: &a") + formatDate.format(currentDate));
+			timeLore.add(Utils.chat("&7Time: &a") + formatTime.format(currentDate));
+			timeLore.add(Utils.chat("&7TimeZone: &a") + formatZone.format(currentDate));
 			timeLore.add(Utils.chat("&7PlayTime: &a") + playTimeFormat);
 			timeMeta.setLore(timeLore);
 			time.setItemMeta(timeMeta);
 			e.getInventory().setItem(26, time);
-			
-			
 			
 		}		
 	}
