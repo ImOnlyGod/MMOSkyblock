@@ -16,6 +16,7 @@ public class Stats {
 	private double burstDamage;
 	private double burstChance;
 	private int cooldownReduction;
+	private double lifeSteal;
 	private int defaultPhysicalDamage;
 	private int defaultMana;
 	private int defaultHealth;
@@ -27,13 +28,14 @@ public class Stats {
 	private double defaultBurstDmg;
 	private double defaultBurstChance;
 	private double defaultCDR;
+	private double defaultLifeSteal;
 	
 
 	public Stats(int health, int armor, int magicResist, int physicalDamage, int magicDamage, int mana, int totalMana,
 			int speed, double criticalDamage, double criticalChance, double burstDamage, double burstChance, 
 			int cooldownReduction,int defaultMana, int defaultHealth, int defaultArmor, int defaultMR, int defaultSpeed,
 			double defaultCritDmg, double defaultCritChance, double defaultBurstDmg, double defaultBurstChance, 
-			double defaultCDR, int defaultPhysicalDamage) {
+			double defaultCDR, int defaultPhysicalDamage, double lifeSteal, double defaultLifeSteal) {
 		this.health = health;
 		this.armor = armor;
 		this.magicResist= magicResist;
@@ -58,6 +60,8 @@ public class Stats {
 		this.defaultBurstChance =  defaultBurstChance;
 		this.defaultCDR = defaultCDR;
 		this.defaultPhysicalDamage = defaultPhysicalDamage;
+		this.lifeSteal = lifeSteal;
+		this.defaultLifeSteal = defaultLifeSteal;
 		
 	}
 	
@@ -86,6 +90,9 @@ public class Stats {
 		this.defaultBurstChance =  0;
 		this.defaultCDR = 0;
 		this.defaultPhysicalDamage = 10;
+		this.lifeSteal = 0;
+		this.defaultLifeSteal = 0;
+		
 		
 		
 	}
@@ -284,6 +291,27 @@ public class Stats {
 
 	public void setBurstChance(double burstChance) {
 		this.burstChance = burstChance;
+	}
+
+	public double getLifeSteal() {
+		return lifeSteal;
+	}
+
+	public void setLifeSteal(double lifeSteal) {
+		this.lifeSteal = lifeSteal;
+	}
+
+	public double getDefaultLifeSteal() {
+		return defaultLifeSteal;
+	}
+
+	public void setDefaultLifeSteal(double defaultLifeSteal) {
+		this.defaultLifeSteal = defaultLifeSteal;
+	}
+	
+	public double getLifeStealHealAmount(double damage) {
+		return (this.getLifeSteal()*damage)/100;
+
 	}
 	
 

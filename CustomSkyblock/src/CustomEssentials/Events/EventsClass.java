@@ -134,6 +134,7 @@ public class EventsClass implements Listener{
 			double burstChance = profile.getStats().getBurstChance();
 			double burstDamage = profile.getStats().getBurstDamage();
 			int CDR = profile.getStats().getCooldownReduction();
+			double lifeSteal = profile.getStats().getLifeSteal();
 					
 			List<String> statsLore = new ArrayList<String>();
 			
@@ -143,6 +144,7 @@ public class EventsClass implements Listener{
 			statsLore.add(Utils.chat("&7Damage: &c") + physicalDamage + Utils.chat(" &f| &b") + magicDamage);
 			statsLore.add(Utils.chat("&7Crit: &c") + critDamage + Utils.chat("x &f| &b") + critChance + '%');
 			statsLore.add(Utils.chat("&7Burst: &c") + burstDamage + Utils.chat("x &f| &b") + burstChance + '%');
+			statsLore.add(Utils.chat("&7LifeSteal: &f") + lifeSteal + Utils.chat(" &f| &b") );
 			statsLore.add(Utils.chat("&7Speed: &f") + speed + Utils.chat(" &f| &b") + CDR);
 			
 
@@ -289,7 +291,7 @@ public class EventsClass implements Listener{
 		int distance = Math.max(Math.abs(e.getEntity().getLocation().getBlockX()),Math.abs(e.getEntity().getLocation().getBlockZ()));
 		
 	
-		//e.getEntity().resetMaxHealth();
+		e.getEntity().resetMaxHealth();
 		e.getEntity().setMaxHealth(level.getHealth(distance));
 		e.getEntity().setHealth(level.getHealth(distance));
 		
@@ -359,9 +361,17 @@ public class EventsClass implements Listener{
 		int crit = rand.nextInt(101);
 		
 		if (crit <= critChance) {
-			e.setDamage(damage*critDamage);
+			damage = damage*critDamage;
+			e.setDamage(damage);
 		}
+		
+		double health = p.getHealth();
+		double lifeSteal = stats.getLifeStealHealAmount(damage);
+		if (!(lifeSteal+health > p.getMaxHealth())) {
+			p.setHealth(health+lifeSteal);
 			
+		}
+		
 	}
 	
 	@EventHandler
