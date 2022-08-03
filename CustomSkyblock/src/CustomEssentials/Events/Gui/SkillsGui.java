@@ -10,6 +10,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -38,7 +39,7 @@ public class SkillsGui implements TabExecutor{
 		
 		//Glass Slots
 		for (int i = 0; i < menu.getSize(); i++) {
-			if ((i < 19) || (i > 34)) {
+			if ((i < 19) || (i > 34) || (i == 26) || (i == 27)) {
 				ItemStack glassSlot = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
 				
 				menu.setItem(i, glassSlot);
@@ -46,11 +47,28 @@ public class SkillsGui implements TabExecutor{
 						
 		}
 		
+		String progressionBar = "▊";
+		
 		//Player Skills
 		MiningSkill mining = playerProfile.getMining();
 		int miningLevel = mining.getLevel();
 		Double currentMiningXp = mining.getCurrentXP();
 		Double finalMiningXp = mining.getMaxXP();
+		
+		int miningProgressionPercent = (int) (100*currentMiningXp/finalMiningXp);
+		String miningProgressionBarGreen = "";
+		String miningProgressionBarRed = "";
+		
+		
+		//Move to separate function
+		for (int i=0; i < 20; i++) {
+			if (((int) miningProgressionPercent/5) > i) {
+				miningProgressionBarGreen += progressionBar;
+				}
+			else miningProgressionBarRed += progressionBar;
+			
+		}
+				
 		
 		FarmingSkill farming = playerProfile.getFarming();
 		int farmingLevel = farming.getLevel();
@@ -77,11 +95,24 @@ public class SkillsGui implements TabExecutor{
 		//Add mining item
 		ItemStack miningItem = new ItemStack(Material.IRON_PICKAXE);
 		ItemMeta miningItemMeta = miningItem.getItemMeta();
-		miningItemMeta.setDisplayName(Utils.chat("&8&lMining Skill"));
+		miningItemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+		miningItemMeta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
+		miningItemMeta.setDisplayName(Utils.chat("&8&l        Mining Skill"));
 		
 		List<String> miningSkillLore = new ArrayList<String>();
 		miningSkillLore.add(Utils.chat("&f&lLevel: &7" + miningLevel));
 		miningSkillLore.add(Utils.chat("&f&lXp: &7" + currentMiningXp + "/" + finalMiningXp));
+		miningSkillLore.add(Utils.chat(""));
+		miningSkillLore.add(Utils.chat("&7Mine stone and Ore blocks"));
+		miningSkillLore.add(Utils.chat("&7to gain more experience."));
+		miningSkillLore.add(Utils.chat(""));
+		miningSkillLore.add(Utils.chat("&f&lNext Level: &7" + (miningLevel+1)));
+		miningSkillLore.add(Utils.chat("&f&lUpcomming Perks:"));
+		miningSkillLore.add(Utils.chat("&7NONE"));
+		miningSkillLore.add(Utils.chat(""));
+		miningSkillLore.add(Utils.chat("&7&l|----->&f&lProgress&7&l<-----|"));
+		miningSkillLore.add(Utils.chat("&a" + miningProgressionBarGreen + "&c" + miningProgressionBarRed));
+		miningSkillLore.add(Utils.chat("&7&l|-------->&f" + miningProgressionPercent + "%&7&l<--------|"));
 
 		
 		miningItemMeta.setLore(miningSkillLore);
