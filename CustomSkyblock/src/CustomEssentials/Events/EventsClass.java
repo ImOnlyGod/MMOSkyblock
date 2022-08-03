@@ -104,6 +104,11 @@ public class EventsClass implements Listener{
 			return;
 		}
 		
+		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&a&lSkills")))) {
+			e.setCancelled(true);
+			return;
+		}
+		
 		
 	}
 	
@@ -144,7 +149,7 @@ public class EventsClass implements Listener{
 			statsLore.add(Utils.chat("&7Damage: &c") + physicalDamage + Utils.chat(" &f| &b") + magicDamage);
 			statsLore.add(Utils.chat("&7Crit: &c") + critDamage + Utils.chat("x &f| &b") + critChance + '%');
 			statsLore.add(Utils.chat("&7Burst: &c") + burstDamage + Utils.chat("x &f| &b") + burstChance + '%');
-			statsLore.add(Utils.chat("&7LifeSteal: &f") + lifeSteal + Utils.chat(" &f| &b") );
+			statsLore.add(Utils.chat("&7LifeSteal: &f") + lifeSteal + Utils.chat("% &f| &b") );
 			statsLore.add(Utils.chat("&7Speed: &f") + speed + Utils.chat(" &f| &b") + CDR);
 			
 

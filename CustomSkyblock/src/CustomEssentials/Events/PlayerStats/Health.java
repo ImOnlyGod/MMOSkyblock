@@ -8,7 +8,9 @@ public class Health implements Listener{
 
 	public void setInitalHealth(Player player) {
 		
-		player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(100);
+		player.resetMaxHealth();
+		player.setMaxHealth(100);
+		//player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(100);
 		player.setHealthScaled(true);
 		player.setHealthScale(20);
 		
@@ -18,7 +20,8 @@ public class Health implements Listener{
 		
 		p.setHealthScaled(true);
 		p.setHealthScale(20);
-		p.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(health);
+		p.setMaxHealth(health);
+		//p.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(health);
 		
 	}
 

@@ -28,6 +28,7 @@ public class ItemsCore {
 	private double itemBurstDamage = 0;
 	private int itemSpeed = 0;
 	private int itemCDR = 0;
+	private double itemLifeSteal = 0;
 	
 	private String itemName;
 	
@@ -156,6 +157,14 @@ public class ItemsCore {
 
 	public void setItemName(String itemName) {
 		this.itemName = itemName;
+	}
+
+	public double getItemLifeSteal() {
+		return itemLifeSteal;
+	}
+
+	public void setItemLifeSteal(double itemLifeSteal) {
+		this.itemLifeSteal = itemLifeSteal;
 	}
 
 

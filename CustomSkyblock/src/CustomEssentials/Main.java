@@ -13,6 +13,7 @@ import CustomEssentials.Events.EventsClass;
 import CustomEssentials.Events.PlayerProfileManager;
 import CustomEssentials.Events.Profile;
 import CustomEssentials.Events.Gui.MenuGui;
+import CustomEssentials.Events.Gui.SkillsGui;
 import CustomEssentials.Events.Items.ItemStats;
 import CustomEssentials.Utils.ArmorUtils;
 import CustomEssentials.Utils.HealthUtils;
@@ -36,6 +37,7 @@ public class Main extends JavaPlugin{
 		this.profileManager = new PlayerProfileManager(this);
 		
 		new MenuGui(this);
+		new SkillsGui(this);
 		getServer().getPluginManager().registerEvents(new EventsClass(this), this);
 		
 		loadConfig();
