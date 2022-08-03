@@ -95,12 +95,15 @@ public class EventsClass implements Listener{
 	
 		if (e.getView().getTitle().equalsIgnoreCase(Utils.chat("&a&lMenu"))) {
 			
-			ItemStack playerStats = e.getInventory().getItem(13);
+			ItemStack skills = e.getInventory().getItem(18);			
 			
-			if (e.getCurrentItem().isSimilar(new ItemStack(Material.BLACK_STAINED_GLASS_PANE)) || e.getCurrentItem().isSimilar(playerStats)) {				
+			if (e.getCurrentItem().isSimilar(skills)) {
 				
-				e.setCancelled(true);
+				Player p = (Player) e.getWhoClicked();
+				p.performCommand("skills");
 			}
+			
+			e.setCancelled(true);
 			return;
 		}
 		
@@ -115,73 +118,7 @@ public class EventsClass implements Listener{
 	@EventHandler
 	public void OpenMenuEvent(InventoryOpenEvent e) {
 		
-		if (e.getView().getTitle().equalsIgnoreCase(Utils.chat("&a&lMenu"))) {
-			Player p = (Player) e.getPlayer();
 			
-			//Player Head
-			ItemStack stats = new ItemStack(Material.PLAYER_HEAD,1);		
-			
-			SkullMeta statsMeta = (SkullMeta) stats.getItemMeta();
-			
-			statsMeta.setOwningPlayer(p);
-			statsMeta.setDisplayName(Utils.chat("&c&lStats: &7") + p.getName());
-			
-			Profile profile = plugin.getProfileManager().getPlayerProfile(p);
-			
-			int mana = profile.getStats().getTotalMana();
-			int physicalDamage= profile.getStats().getPhysicalDamage();
-			int magicDamage = profile.getStats().getMagicDamage();
-			int armor = profile.getStats().getArmor();
-			int magicResist = profile.getStats().getMagicResist();
-			int speed = profile.getStats().getSpeed();
-			double critChance = profile.getStats().getCriticalChance();
-			double critDamage = profile.getStats().getCriticalDamage();
-			double burstChance = profile.getStats().getBurstChance();
-			double burstDamage = profile.getStats().getBurstDamage();
-			int CDR = profile.getStats().getCooldownReduction();
-			double lifeSteal = profile.getStats().getLifeSteal();
-					
-			List<String> statsLore = new ArrayList<String>();
-			
-			statsLore.add(Utils.chat("&7HP: &a") + p.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
-			statsLore.add(Utils.chat("&7Mana: &b") + mana);
-			statsLore.add(Utils.chat("&7Defence: &1") + armor + Utils.chat(" &f| &5") + magicResist);
-			statsLore.add(Utils.chat("&7Damage: &c") + physicalDamage + Utils.chat(" &f| &b") + magicDamage);
-			statsLore.add(Utils.chat("&7Crit: &c") + critDamage + Utils.chat("x &f| &b") + critChance + '%');
-			statsLore.add(Utils.chat("&7Burst: &c") + burstDamage + Utils.chat("x &f| &b") + burstChance + '%');
-			statsLore.add(Utils.chat("&7LifeSteal: &f") + lifeSteal + Utils.chat("% &f| &b") );
-			statsLore.add(Utils.chat("&7Speed: &f") + speed + Utils.chat(" &f| &b") + CDR);
-			
-
-			statsMeta.setLore(statsLore);
-			stats.setItemMeta(statsMeta);
-			
-			e.getInventory().setItem(13, stats);;
-			//Clock item
-			int playTime = profile.getPlayTime();
-			String playTimeFormat = TimeGenerator.secondsToString(playTime);
-			
-			Date currentDate = new Date();
-			SimpleDateFormat formatTime = new SimpleDateFormat("HH:mm:ss");
-			SimpleDateFormat formatDate = new SimpleDateFormat("dd-MM-yyyy");
-			SimpleDateFormat formatDay = new SimpleDateFormat("EEEE");
-			SimpleDateFormat formatZone = new SimpleDateFormat("z");
-			
-			ItemStack time = new ItemStack(Material.CLOCK,1);	
-			ItemMeta timeMeta = time.getItemMeta();
-			
-			timeMeta.setDisplayName(Utils.chat("&6&lTime:"));
-			List<String> timeLore = new ArrayList<String>();
-			timeLore.add(Utils.chat("&7Day: &a") + formatDay.format(currentDate));
-			timeLore.add(Utils.chat("&7Date: &a") + formatDate.format(currentDate));
-			timeLore.add(Utils.chat("&7Time: &a") + formatTime.format(currentDate));
-			timeLore.add(Utils.chat("&7TimeZone: &a") + formatZone.format(currentDate));
-			timeLore.add(Utils.chat("&7PlayTime: &a") + playTimeFormat);
-			timeMeta.setLore(timeLore);
-			time.setItemMeta(timeMeta);
-			e.getInventory().setItem(26, time);
-			
-		}		
 	}
 	
 	@EventHandler
