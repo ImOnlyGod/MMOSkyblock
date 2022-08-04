@@ -58,6 +58,7 @@ public class SkillsGui implements TabExecutor{
 		int miningProgressionPercent = (int) (100*currentMiningXp/finalMiningXp);
 		String miningProgressionBarGreen = "";
 		String miningProgressionBarRed = "";
+		ArrayList<String> miningLevelUpReward = playerProfile.getStats().calclevelUpMining(miningLevel);
 		
 		
 		//Move to separate function
@@ -97,22 +98,25 @@ public class SkillsGui implements TabExecutor{
 		ItemMeta miningItemMeta = miningItem.getItemMeta();
 		miningItemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
 		miningItemMeta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-		miningItemMeta.setDisplayName(Utils.chat("&8&l        Mining Skill"));
+		miningItemMeta.setDisplayName(Utils.chat("&8&l        &nMining Skill"));
 		
 		List<String> miningSkillLore = new ArrayList<String>();
 		miningSkillLore.add(Utils.chat("&f&lLevel: &7" + miningLevel));
-		miningSkillLore.add(Utils.chat("&f&lXp: &7" + currentMiningXp + "/" + finalMiningXp));
+		miningSkillLore.add(Utils.chat("&f&lXp: &7" + Math.floor(currentMiningXp) + "/" + Math.floor(finalMiningXp)));
 		miningSkillLore.add(Utils.chat(""));
 		miningSkillLore.add(Utils.chat("&7Mine stone and Ore blocks"));
 		miningSkillLore.add(Utils.chat("&7to gain more experience."));
 		miningSkillLore.add(Utils.chat(""));
 		miningSkillLore.add(Utils.chat("&f&lNext Level: &7" + (miningLevel+1)));
-		miningSkillLore.add(Utils.chat("&f&lUpcomming Perks:"));
-		miningSkillLore.add(Utils.chat("&7NONE"));
 		miningSkillLore.add(Utils.chat(""));
-		miningSkillLore.add(Utils.chat("&7&l|----->&f&lProgress&7&l<-----|"));
+		miningSkillLore.add(Utils.chat("&7&l&m|----->&f&lProgress&7&l&m<-----|"));
 		miningSkillLore.add(Utils.chat("&a" + miningProgressionBarGreen + "&c" + miningProgressionBarRed));
-		miningSkillLore.add(Utils.chat("&7&l|-------->&f" + miningProgressionPercent + "%&7&l<--------|"));
+		miningSkillLore.add(Utils.chat("&7&l&m|-------->&f" + miningProgressionPercent + "%&7&l&m<--------|"));
+		miningSkillLore.add(Utils.chat(""));
+		miningSkillLore.add(Utils.chat("&f&lUpcomming Perks:"));
+		for (int i=0; i<miningLevelUpReward.size();i++) {
+			miningSkillLore.add(Utils.chat("&2+ " + miningLevelUpReward.get(i)));
+		}
 
 		
 		miningItemMeta.setLore(miningSkillLore);

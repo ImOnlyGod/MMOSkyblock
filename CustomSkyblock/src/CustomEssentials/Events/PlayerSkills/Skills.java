@@ -46,5 +46,5 @@ public abstract class Skills {
 	public void setMaxXP(Double maxXP) {
 		this.maxXP = maxXP;
 	}
-
+	
 }

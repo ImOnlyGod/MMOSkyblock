@@ -1,6 +1,7 @@
 package CustomEssentials;
 
 import org.bukkit.Bukkit;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
@@ -15,6 +16,7 @@ import CustomEssentials.Events.Profile;
 import CustomEssentials.Events.Gui.MenuGui;
 import CustomEssentials.Events.Gui.SkillsGui;
 import CustomEssentials.Events.Items.ItemStats;
+import CustomEssentials.Events.PlayerStats.Defence;
 import CustomEssentials.Utils.ArmorUtils;
 import CustomEssentials.Utils.HealthUtils;
 import CustomEssentials.Utils.ManaUtils;
@@ -71,15 +73,18 @@ public class Main extends JavaPlugin{
 				ItemStats setStats = new ItemStats(p,profileManager);
 				setStats.setItemStats();
 				
+				Defence playerArmor = new Defence();
+				int armorAmount = profile.getStats().getArmor();
+				int mr = profile.getStats().getMagicResist();
+				playerArmor.setArmor(p, armorAmount, mr);
 				
 				
 				if (currentMana < TotalMana) profileManager.getPlayerProfile(p).getStats().setMana(currentMana+1);
 				
 								
 				String health = HealthUtils.getActionBarHealthText(p);
-				String armor = ArmorUtils.getActionBarArmorText(p);
+				String armor = ArmorUtils.getActionBarArmorText(profile);
 				String mana = ManaUtils.getActionBarManaText(p,currentMana, TotalMana);
-				
 				
 				if (displayStats == 0) {
 					p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(health + armor + mana));
@@ -92,6 +97,8 @@ public class Main extends JavaPlugin{
 					
 					if (profile.getMining().getCurrentXP() >= profile.getMining().getMaxXP()) {
 						profile.getMining().levelUp();
+						int level = profile.getMining().getLevel();
+						profile.getStats().levelUpMining(level);
 						
 						p.sendMessage(StatsUtil.miningActionBarLevelUp(profile));	
 					}

@@ -1,5 +1,9 @@
 package CustomEssentials.Events.PlayerStats;
 
+import java.util.ArrayList;
+
+import CustomEssentials.Utils.Utils;
+
 public class Stats {
 	
 
@@ -312,6 +316,25 @@ public class Stats {
 	public double getLifeStealHealAmount(double damage) {
 		return (this.getLifeSteal()*damage)/100;
 
+	}
+	
+	//String of stats with amount
+	public ArrayList<String> calclevelUpMining(int level) {
+		int scalar = (level+"").length();
+		ArrayList<String> result = new ArrayList<String>();
+		result.add(Utils.chat("&7" + scalar + " &aArmor"));
+		result.add(Utils.chat("&7" + 2*scalar + " &5Magic Resist"));
+		return result;
+		
+	}
+	
+	public void levelUpMining(int level) {
+		int scalar = (level+"").length();
+		this.defaultArmor += scalar;
+		this.armor += scalar;
+		this.defaultMR += 2*scalar;
+		this.magicResist += 2*scalar;
+		
 	}
 	
 

@@ -4,6 +4,8 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
+import CustomEssentials.Events.Profile;
+
 public class Defence implements Listener{
 
 public void setInitalArmor(Player player) {

@@ -95,7 +95,9 @@ public class EventsClass implements Listener{
 	
 		if (e.getView().getTitle().equalsIgnoreCase(Utils.chat("&a&lMenu"))) {
 			
-			ItemStack skills = e.getInventory().getItem(18);			
+			ItemStack skills = e.getInventory().getItem(18);
+
+			
 			
 			if (e.getCurrentItem().isSimilar(skills)) {
 				
