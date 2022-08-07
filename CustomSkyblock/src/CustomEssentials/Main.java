@@ -16,7 +16,6 @@ import CustomEssentials.Events.Profile;
 import CustomEssentials.Events.Gui.MenuGui;
 import CustomEssentials.Events.Gui.SkillsGui;
 import CustomEssentials.Events.Items.ItemStats;
-import CustomEssentials.Events.PlayerStats.Defence;
 import CustomEssentials.Utils.ArmorUtils;
 import CustomEssentials.Utils.HealthUtils;
 import CustomEssentials.Utils.ManaUtils;
@@ -64,20 +63,14 @@ public class Main extends JavaPlugin{
 				if (!profiles.hasProfile(p)) {
 					profiles.createPlayerProfile(p);
 				}
-				 				
+								
 				profiles.getPlayerProfile(p).incrementPlayTime();
 				int currentMana = profileManager.getPlayerProfile(p).getStats().getMana();
 				int TotalMana = profileManager.getPlayerProfile(p).getStats().getTotalMana();
 				
 				//Sets item stats
 				ItemStats setStats = new ItemStats(p,profileManager);
-				setStats.setItemStats();
-				
-				Defence playerArmor = new Defence();
-				int armorAmount = profile.getStats().getArmor();
-				int mr = profile.getStats().getMagicResist();
-				playerArmor.setArmor(p, armorAmount, mr);
-				
+				setStats.setItemStats();		
 				
 				if (currentMana < TotalMana) profileManager.getPlayerProfile(p).getStats().setMana(currentMana+1);
 				
@@ -113,6 +106,9 @@ public class Main extends JavaPlugin{
 					
 					if (profile.getForaging().getCurrentXP() >= profile.getForaging().getMaxXP()) {
 						profile.getForaging().levelUp();
+						int level = profile.getForaging().getLevel();
+						profile.getStats().levelUpForaging(level);
+						
 						
 						p.sendMessage(StatsUtil.foragingActionBarLevelUp(profile));	
 					}
@@ -127,6 +123,8 @@ public class Main extends JavaPlugin{
 					
 					if (profile.getFarming().getCurrentXP() >= profile.getFarming().getMaxXP()) {
 						profile.getFarming().levelUp();
+						int level = profile.getFarming().getLevel();
+						profile.getStats().levelUpFarming(level);
 						
 						p.sendMessage(StatsUtil.farmingActionBarLevelUp(profile));	
 					}
@@ -142,6 +140,8 @@ public class Main extends JavaPlugin{
 					
 					if (profile.getCombat().getCurrentXP() >= profile.getCombat().getMaxXP()) {
 						profile.getCombat().levelUp();
+						int level = profile.getCombat().getLevel();
+						profile.getStats().levelUpCombat(level);
 						
 						p.sendMessage(StatsUtil.combatActionBarLevelUp(profile));	
 					}
@@ -156,6 +156,8 @@ public class Main extends JavaPlugin{
 					
 					if (profile.getFishing().getCurrentXP() >= profile.getFishing().getMaxXP()) {
 						profile.getFishing().levelUp();
+						int level = profile.getFishing().getLevel();
+						profile.getStats().levelUpFishing(level);
 						
 						p.sendMessage(StatsUtil.fishingActionBarLevelUp(profile));	
 					}

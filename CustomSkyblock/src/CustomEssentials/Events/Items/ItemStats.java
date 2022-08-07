@@ -2,7 +2,7 @@ package CustomEssentials.Events.Items;
 
 import java.util.ArrayList;
 
-
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -27,6 +27,13 @@ public class ItemStats {
 		stats.setPhysicalDamage(stats.getDefaultPhysicalDamage());
 		stats.setCriticalChance(stats.getDefaultCritChance());
 		stats.setCriticalDamage(stats.getDefaultCritDmg());
+		stats.setArmor(stats.getDefaultArmor());
+		stats.setMagicResist(stats.getDefaultMR());
+		stats.setHealth(stats.getDefaultHealth());
+		p.getAttribute(Attribute.GENERIC_ARMOR).setBaseValue(stats.getArmor());
+		p.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(stats.getDefaultHealth());
+		p.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(stats.getDefaultPhysicalDamage());
+		
 		
 	}
 	
@@ -45,8 +52,10 @@ public class ItemStats {
 		setItemCritChanceStat();
 		setItemCritDamageStat();
 		setItemDamageStat();
+		setItemMRStat();
 		
 	}
+
 	
 	public void setItemManaStat() {
 		Stats stats = profileManager.getPlayerProfile(p).getStats();
@@ -66,7 +75,6 @@ public class ItemStats {
 		
 	}
 	
-	//SET DAMAGE FOR DOUBLE WEAPON WEILD
 	public void setItemDamageStat() {
 		Stats stats = profileManager.getPlayerProfile(p).getStats();
 		int totalDmg = stats.getDefaultPhysicalDamage();
@@ -80,6 +88,7 @@ public class ItemStats {
 			totalDmg = totalDmg + dmg;
 			
 		}
+		p.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(totalDmg);
 		stats.setPhysicalDamage(totalDmg);	
 		
 	}
@@ -121,11 +130,54 @@ public class ItemStats {
 	}
 	
 	public void setItemHealthStat() {
+		Stats stats = profileManager.getPlayerProfile(p).getStats();
+		int totalHealth = stats.getDefaultHealth();
+		ItemStorageTable itemTable = new ItemStorageTable();
+		
+		for (int i = 0; i < items.size(); i++) {
+			int ID = getItemCustomID(items.get(i));
+			ItemsCore item = itemTable.getIDtoItemsCore().get(ID);
+			item.createItem(1);
+			int health= item.getItemHeathStat();
+			totalHealth = totalHealth + health;
+			
+		}
+		p.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(totalHealth);
+		stats.setHealth(totalHealth);	
 		
 	}
 	
 	public void setItemArmorStat() {
+		Stats stats = profileManager.getPlayerProfile(p).getStats();
+		int totalArmor = stats.getDefaultArmor();
+		ItemStorageTable itemTable = new ItemStorageTable();
 		
+		for (int i = 0; i < items.size(); i++) {
+			int ID = getItemCustomID(items.get(i));
+			ItemsCore item = itemTable.getIDtoItemsCore().get(ID);
+			item.createItem(1);
+			int armor = item.getItemArmor();
+			totalArmor = totalArmor + armor;
+			
+		}
+		p.getAttribute(Attribute.GENERIC_ARMOR).setBaseValue(totalArmor);
+		stats.setArmor(totalArmor);	
+	}
+	
+	public void setItemMRStat() {
+		Stats stats = profileManager.getPlayerProfile(p).getStats();
+		int totalMR = stats.getDefaultMR();
+		ItemStorageTable itemTable = new ItemStorageTable();
+		
+		for (int i = 0; i < items.size(); i++) {
+			int ID = getItemCustomID(items.get(i));
+			ItemsCore item = itemTable.getIDtoItemsCore().get(ID);
+			item.createItem(1);
+			int mr= item.getItemMagicResist();
+			totalMR = totalMR + mr;
+			
+		}
+		stats.setMagicResist(totalMR);	
 	}
 	
 	public Boolean isValidItem(ItemStack item) {

@@ -306,8 +306,10 @@ public class EventsClass implements Listener{
 		
 		if (crit <= critChance) {
 			damage = damage*critDamage;
-			e.setDamage(damage);
+			
 		}
+		e.setDamage(damage);
+		
 		
 		double health = p.getHealth();
 		double lifeSteal = stats.getLifeStealHealAmount(damage);

@@ -24,7 +24,7 @@ public class BasicSword extends ItemsCore{
 		
 		//Add stats
 		setItemPhysicalDamage(5);
-		meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, new AttributeModifier("generic.attackDamage", getItemPhysicalDamage(), Operation.ADD_NUMBER));
+		//meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, new AttributeModifier("generic.attackDamage", getItemPhysicalDamage(), Operation.ADD_NUMBER));
 		setItemFlags(meta);
 		
 		//Set name and lore

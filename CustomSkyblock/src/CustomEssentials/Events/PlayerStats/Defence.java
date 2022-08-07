@@ -10,7 +10,7 @@ public class Defence implements Listener{
 
 public void setInitalArmor(Player player) {
 		
-		player.getAttribute(Attribute.GENERIC_ARMOR).setBaseValue(0);
+		player.getAttribute(Attribute.GENERIC_ARMOR).setBaseValue(10);
 		
 	}
 

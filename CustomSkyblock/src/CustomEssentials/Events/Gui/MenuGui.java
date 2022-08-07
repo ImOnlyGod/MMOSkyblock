@@ -74,11 +74,11 @@ public class MenuGui implements TabExecutor{
 				
 		List<String> statsLore = new ArrayList<String>();
 		
-		statsLore.add(Utils.chat("&7HP: &a") + p.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
+		statsLore.add(Utils.chat("&7HP: &c") + p.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
 		statsLore.add(Utils.chat("&7Mana: &b") + mana);
 		statsLore.add(Utils.chat("&7Defence: &1") + armor + Utils.chat(" &f| &5") + magicResist);
-		statsLore.add(Utils.chat("&7Damage: &c") + physicalDamage + Utils.chat(" &f| &b") + magicDamage);
-		statsLore.add(Utils.chat("&7Crit: &c") + critDamage + Utils.chat("x &f| &b") + critChance + '%');
+		statsLore.add(Utils.chat("&7Damage: &4") + physicalDamage + Utils.chat(" &f| &b") + magicDamage);
+		statsLore.add(Utils.chat("&7Crit: &4") + critDamage + Utils.chat("x &f| &b") + critChance + '%');
 		statsLore.add(Utils.chat("&7Burst: &c") + burstDamage + Utils.chat("x &f| &b") + burstChance + '%');
 		statsLore.add(Utils.chat("&7LifeSteal: &f") + lifeSteal + Utils.chat("% &f| &b") );
 		statsLore.add(Utils.chat("&7Speed: &f") + speed + Utils.chat(" &f| &b") + CDR);

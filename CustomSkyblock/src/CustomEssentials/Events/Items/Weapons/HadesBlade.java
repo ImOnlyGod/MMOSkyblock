@@ -32,7 +32,7 @@ public class HadesBlade extends ItemsCore{
 		setItemCritChance(25);
 		setItemCritDamage(0.75);
 		
-		meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, new AttributeModifier("generic.attackDamage", getItemPhysicalDamage(), Operation.ADD_NUMBER));
+		//meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, new AttributeModifier("generic.attackDamage", getItemPhysicalDamage(), Operation.ADD_NUMBER));
 		setItemFlags(meta);
 		
 		//Set name and lore

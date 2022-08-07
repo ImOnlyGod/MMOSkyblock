@@ -52,11 +52,11 @@ public class ItemsCore {
 		this.itemArmor = itemArmor;
 	}
 
-	public int getItemmagicResist() {
+	public int getItemMagicResist() {
 		return itemmagicResist;
 	}
 
-	public void setItemmagicResist(int itemmagicResist) {
+	public void setItemMagicResist(int itemmagicResist) {
 		this.itemmagicResist = itemmagicResist;
 	}
 

@@ -328,14 +328,68 @@ public class Stats {
 		
 	}
 	
-	public void levelUpMining(int level) {
+	public ArrayList<String> calclevelUpFarming(int level) {
 		int scalar = (level+"").length();
-		this.defaultArmor += scalar;
-		this.armor += scalar;
-		this.defaultMR += 2*scalar;
-		this.magicResist += 2*scalar;
+		ArrayList<String> result = new ArrayList<String>();
+		result.add(Utils.chat("&7" + (2*(scalar+1)) + " &cHealth"));
+		return result;
 		
 	}
 	
+	public ArrayList<String> calclevelUpCombat(int level) {
+		int scalar = (level+"").length();
+		ArrayList<String> result = new ArrayList<String>();
+		result.add(Utils.chat("&7" + 0.5 + "x &bCrit Chance"));
+		result.add(Utils.chat("&7" + (0.1*scalar) + "x &bCrit Damage"));
+		return result;
+		
+	}
+	
+	public ArrayList<String> calclevelUpForaging(int level) {
+		int scalar = (level+"").length();
+		ArrayList<String> result = new ArrayList<String>();
+		result.add(Utils.chat("&7" + (2*scalar) + " &4Damage"));
+		return result;
+		
+	}
+		
+	public ArrayList<String> calclevelUpFishing(int level) {
+		int scalar = (level+"").length();
+		ArrayList<String> result = new ArrayList<String>();
+		return result;
+		
+	}
+	
+	public void levelUpMining(int level) {
+		int scalar = (level+"").length();
+		this.defaultArmor += scalar;
+		this.defaultMR += 2*scalar;
+		
+	}
+
+	public void levelUpFarming(int level) {
+		int scalar = (level+"").length();
+		this.defaultHealth += 2*(scalar+1);
+		
+	}
+	
+	public void levelUpCombat(int level) {
+		int scalar = (level+"").length();
+		this.defaultCritChance += 0.5;
+		this.defaultCritDmg += (scalar * 0.1);
+		
+	}
+	
+	public void levelUpForaging(int level) {
+		int scalar = (level+"").length();
+		this.defaultPhysicalDamage += 2*(scalar);
+		this.defaultSpeed += 1;
+		
+	}
+	
+	public void levelUpFishing(int level) {
+		int scalar = (level+"").length();
+		
+	}
 
 }
