@@ -1,5 +1,6 @@
 package CustomEssentials.Events;
 
+import CustomEssentials.Events.PlayerPath.Paths.Path;
 import CustomEssentials.Events.PlayerSkills.CombatSkill;
 import CustomEssentials.Events.PlayerSkills.FarmingSkill;
 import CustomEssentials.Events.PlayerSkills.FishingSkill;
@@ -16,8 +17,9 @@ public class Profile {
 	private FishingSkill fishing;
 	private ForagingSkill foraging;
 	private int playTime; //Seconds
+	private Path path;
 	
-	public Profile(Stats newStats, MiningSkill mining, CombatSkill combat, FarmingSkill farming, FishingSkill fishing, ForagingSkill foraging, int playTime) {
+	public Profile(Stats newStats, MiningSkill mining, CombatSkill combat, FarmingSkill farming, FishingSkill fishing, ForagingSkill foraging, int playTime, Path path) {
 		this.stats = newStats;
 		this.mining = mining;
 		this.combat = combat;
@@ -25,6 +27,7 @@ public class Profile {
 		this.fishing = fishing;
 		this.foraging = foraging;
 		this.playTime = playTime;
+		this.setPath(path);
 		
 	}
 	
@@ -63,6 +66,14 @@ public class Profile {
 	
 	public void incrementPlayTime() {
 		this.playTime += 1;
+	}
+
+	public Path getPath() {
+		return path;
+	}
+
+	public void setPath(Path path) {
+		this.path = path;
 	}
 	
 

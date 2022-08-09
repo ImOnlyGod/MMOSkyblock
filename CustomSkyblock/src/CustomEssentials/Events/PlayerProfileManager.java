@@ -1,6 +1,7 @@
 package CustomEssentials.Events;
 
 import java.util.HashMap;
+
 import java.util.Map;
 import java.util.UUID;
 
@@ -27,7 +28,7 @@ public class PlayerProfileManager {
 	
 	public void createPlayerProfile(Player p) {
 		
-		Profile newProfile = new Profile(new Stats(), new MiningSkill(), new CombatSkill(), new FarmingSkill(), new FishingSkill(), new ForagingSkill(),0);
+		Profile newProfile = new Profile(new Stats(), new MiningSkill(), new CombatSkill(), new FarmingSkill(), new FishingSkill(), new ForagingSkill(),0, null);
 		UUID playerID = p.getUniqueId();
 		
 		
