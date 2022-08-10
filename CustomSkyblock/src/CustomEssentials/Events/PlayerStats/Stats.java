@@ -97,7 +97,35 @@ public class Stats {
 		this.lifeSteal = 0;
 		this.defaultLifeSteal = 0;
 		
-		
+	}
+	
+	public void resetStats() {
+		this.health = 0;
+		this.armor = 0;
+		this.magicResist = 0;
+		this.physicalDamage = 0;
+		this.magicDamage = 0;
+		this.mana = 0;
+		this.totalMana = 0;
+		this.speed = 0;
+		this.criticalDamage = 0;
+		this.setCriticalChance(0);
+		this.burstDamage = 0;
+		this.setBurstChance(0);
+		this.cooldownReduction = 0;
+		this.defaultMana = 0;
+		this.defaultHealth = 0;
+		this.defaultArmor = 0;
+		this.defaultMR = 0;
+		this.defaultSpeed = 0;
+		this.defaultCritDmg = 0;
+		this.defaultCritChance = 0;
+		this.defaultBurstDmg = 0;
+		this.defaultBurstChance =  0;
+		this.defaultCDR = 0;
+		this.defaultPhysicalDamage = 0;
+		this.lifeSteal = 0;
+		this.defaultLifeSteal = 0;
 		
 	}
 

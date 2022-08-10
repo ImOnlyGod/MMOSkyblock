@@ -1,13 +1,13 @@
 package CustomEssentials.Events;
 
 import java.util.HashMap;
-
 import java.util.Map;
 import java.util.UUID;
 
 import org.bukkit.entity.Player;
 
 import CustomEssentials.Main;
+import CustomEssentials.Events.PlayerPath.Paths.Default;
 import CustomEssentials.Events.PlayerSkills.CombatSkill;
 import CustomEssentials.Events.PlayerSkills.FarmingSkill;
 import CustomEssentials.Events.PlayerSkills.FishingSkill;
@@ -28,7 +28,7 @@ public class PlayerProfileManager {
 	
 	public void createPlayerProfile(Player p) {
 		
-		Profile newProfile = new Profile(new Stats(), new MiningSkill(), new CombatSkill(), new FarmingSkill(), new FishingSkill(), new ForagingSkill(),0, null);
+		Profile newProfile = new Profile(new Stats(), new MiningSkill(), new CombatSkill(), new FarmingSkill(), new FishingSkill(), new ForagingSkill(),0, new Default());
 		UUID playerID = p.getUniqueId();
 		
 		
