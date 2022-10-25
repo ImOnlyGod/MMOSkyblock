@@ -23,6 +23,10 @@ public abstract class Path {
 		this.level ++;		
 		this.currentXP = this.currentXP - this.maxXP;
 		this.maxXP = 2*this.maxXP + (Math.PI * this.maxXP/(Math.E));
+		this.levelUpStats();
+	}
+	
+	public void levelUpStats() {
 	}
 	
 	public void prestigeUp() {
@@ -30,7 +34,7 @@ public abstract class Path {
 		this.setCurrentXP(0.0);
 		this.setMaxXP(100.0);
 		this.prestige++;
-		this.stats.resetStats();
+		this.stats.resetStats();   
 	}
 
 	public Stats getStats() {

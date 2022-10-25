@@ -4,6 +4,5 @@ public class Default extends Path{
 
 	public Default() {
 		super();
-		
 	}
 }

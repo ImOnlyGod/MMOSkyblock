@@ -1,7 +1,6 @@
 package CustomEssentials;
 
 import org.bukkit.Bukkit;
-import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
@@ -14,6 +13,7 @@ import CustomEssentials.Events.EventsClass;
 import CustomEssentials.Events.PlayerProfileManager;
 import CustomEssentials.Events.Profile;
 import CustomEssentials.Events.Gui.MenuGui;
+import CustomEssentials.Events.Gui.PathSelectionGui;
 import CustomEssentials.Events.Gui.SkillsGui;
 import CustomEssentials.Events.Items.ItemStats;
 import CustomEssentials.Utils.ArmorUtils;
@@ -39,6 +39,7 @@ public class Main extends JavaPlugin{
 		
 		new MenuGui(this);
 		new SkillsGui(this);
+		new PathSelectionGui(this);
 		getServer().getPluginManager().registerEvents(new EventsClass(this), this);
 		
 		loadConfig();

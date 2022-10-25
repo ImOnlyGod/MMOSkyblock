@@ -12,3 +12,4 @@ commands:
   espawn:
   weapon:
   skills:
+  pathSelector:

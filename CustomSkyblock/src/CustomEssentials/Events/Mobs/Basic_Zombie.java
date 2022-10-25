@@ -28,7 +28,6 @@ public class Basic_Zombie extends EntityZombie{
 		this.setCustomName(null);
 		this.setCustomName(new ChatComponentText("Noob"));
 		this.setCustomNameVisible(true);
-		
 		this.setCanPickupLoot(false);
 		
 		this.bP.a(0, new PathfinderGoalAvoidTarget<EntityPlayer>(this, EntityPlayer.class, 15,1,1));

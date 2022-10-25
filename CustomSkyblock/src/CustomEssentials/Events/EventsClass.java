@@ -114,6 +114,10 @@ public class EventsClass implements Listener{
 			return;
 		}
 		
+		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&5&lChoose a Path")))) {
+			e.setCancelled(true);
+			return;
+		}
 		
 	}
 	
