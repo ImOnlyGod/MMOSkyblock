@@ -320,7 +320,9 @@ public class EventsClass implements Listener{
 		
 		if (physicalDamage > damage) {
 			damage = physicalDamage;
-		}				
+			
+		}	
+		p.sendMessage("" + physicalDamage + "," + damage);
 	
 		Random rand = new Random();
 		int crit = rand.nextInt(101);
