@@ -314,9 +314,12 @@ public class EventsClass implements Listener{
 		Stats stats = profile.getPlayerProfile(p).getStats();
 		double critChance = stats.getCriticalChance();
 		double critDamage = stats.getCriticalDamage();
+		double physicalDamage = stats.getPhysicalDamage();
 		double damage = e.getFinalDamage();
 		
-
+		if (physicalDamage > damage) {
+			damage = physicalDamage;
+		}				
 	
 		Random rand = new Random();
 		int crit = rand.nextInt(101);
@@ -325,6 +328,7 @@ public class EventsClass implements Listener{
 			damage = damage*critDamage;
 			
 		}
+		
 		e.setDamage(damage);
 		
 		
