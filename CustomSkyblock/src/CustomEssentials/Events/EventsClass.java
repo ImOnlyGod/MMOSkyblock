@@ -61,7 +61,7 @@ public class EventsClass implements Listener{
 		}		
 		
 		Health playerHealth =  new Health();
-		AttackDamage playerDamage = new AttackDamage();
+		//AttackDamage playerDamage = new AttackDamage();
 		Defence playerArmor = new Defence();
 		Speed playerSpeed = new Speed();
 		
@@ -77,7 +77,7 @@ public class EventsClass implements Listener{
 		
 		playerHealth.setPlayerHealth(p, health);
 		playerArmor.setArmor(p, armor, magicResist);
-		playerDamage.setDamage(p, physicalDamage, magicDamage);
+		p.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(physicalDamage);
 		playerSpeed.setPlayerSpeed(p, speed);
 		
 		

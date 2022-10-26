@@ -25,7 +25,7 @@ public class ItemStats {
 		Stats stats = profileManager.getPlayerProfile(p).getStats();
 		Stats pathStats = profileManager.getPlayerProfile(p).getPath().getStats();
 		stats.setTotalMana(stats.getDefaultMana() + pathStats.getDefaultMana());
-		stats.setPhysicalDamage(stats.getDefaultPhysicalDamage() + pathStats.getDefaultPhysicalDamage());
+		stats.setPhysicalDamage(stats.getDefaultPhysicalDamage() + pathStats.getDefaultPhysicalDamage() + stats.getPhysicalDamage() + pathStats.getPhysicalDamage());
 		stats.setCriticalChance(stats.getDefaultCritChance() + pathStats.getDefaultCritChance());
 		stats.setCriticalDamage(stats.getDefaultCritDmg() + pathStats.getDefaultCritDmg());
 		stats.setArmor(stats.getDefaultArmor() + pathStats.getDefaultArmor());
