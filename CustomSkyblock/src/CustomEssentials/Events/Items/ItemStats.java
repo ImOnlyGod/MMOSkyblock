@@ -33,7 +33,7 @@ public class ItemStats {
 		stats.setHealth(stats.getDefaultHealth() + pathStats.getDefaultHealth());
 		p.getAttribute(Attribute.GENERIC_ARMOR).setBaseValue(stats.getArmor() + pathStats.getArmor());
 		p.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(stats.getDefaultHealth() + pathStats.getDefaultHealth());
-		p.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(stats.getPhysicalDamage() + stats.getDefaultPhysicalDamage() + pathStats.getPhysicalDamage() + pathStats.getDefaultPhysicalDamage());		
+		p.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(stats.getPhysicalDamage());		
 		
 		
 	}
