@@ -3,6 +3,7 @@ package CustomEssentials.Events;
 import java.util.Random;
 
 import org.bukkit.Material;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -314,7 +315,7 @@ public class EventsClass implements Listener{
 		Stats stats = profile.getPlayerProfile(p).getStats();
 		double critChance = stats.getCriticalChance();
 		double critDamage = stats.getCriticalDamage();
-		double physicalDamage = stats.getPhysicalDamage();
+		double physicalDamage = p.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).getDefaultValue();
 		double damage = e.getFinalDamage();
 		
 		if (physicalDamage > damage) {
