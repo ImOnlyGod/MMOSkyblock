@@ -315,7 +315,7 @@ public class EventsClass implements Listener{
 		Stats stats = profile.getPlayerProfile(p).getStats();
 		double critChance = stats.getCriticalChance();
 		double critDamage = stats.getCriticalDamage();
-		double physicalDamage = p.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).getDefaultValue();
+		double physicalDamage = stats.getPhysicalDamage() + profile.getPlayerProfile(p).getStats().getPhysicalDamage();
 		double damage = e.getFinalDamage();
 		
 		if (physicalDamage > damage) {
