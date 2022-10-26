@@ -16,7 +16,7 @@ public void setInitalDamage(Player player) {
 
 public void setDamage(Player p, int physicalDamage, int magicDamage) {
 	
-	p.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(10+physicalDamage);
+	p.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(physicalDamage);
 	
 }
 

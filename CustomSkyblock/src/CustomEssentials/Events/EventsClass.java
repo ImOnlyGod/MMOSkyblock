@@ -71,7 +71,7 @@ public class EventsClass implements Listener{
 		int health = stats.getHealth();
 		int armor = stats.getArmor();
 		int magicResist = stats.getMagicResist();
-		int physicalDamage = stats.getPhysicalDamage();
+		int physicalDamage = stats.getPhysicalDamage() + playerProfile.getPath().getStats().getPhysicalDamage();
 		int magicDamage = stats.getMagicDamage();
 		int speed = stats.getSpeed();
 		
