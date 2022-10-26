@@ -38,6 +38,7 @@ import CustomEssentials.Events.Items.ItemsCore;
 import CustomEssentials.Events.Misc.ProjectileCreator;
 import CustomEssentials.Events.Misc.TimeGenerator;
 import CustomEssentials.Events.Mobs.MobLevel;
+import CustomEssentials.Events.PlayerPath.Paths.Tank;
 import CustomEssentials.Events.PlayerStats.AttackDamage;
 import CustomEssentials.Events.PlayerStats.Defence;
 import CustomEssentials.Events.PlayerStats.Health;
@@ -92,16 +93,13 @@ public class EventsClass implements Listener{
 	
 	@EventHandler
 	public void OnClick(InventoryClickEvent e) {
-	
+		Player p = (Player) e.getWhoClicked();
+		
 		if (e.getView().getTitle().equalsIgnoreCase(Utils.chat("&a&lMenu"))) {
 			
 			ItemStack skills = e.getInventory().getItem(18);
-
-			
-			
+	
 			if (e.getCurrentItem().isSimilar(skills)) {
-				
-				Player p = (Player) e.getWhoClicked();
 				p.performCommand("skills");
 			}
 			
@@ -115,6 +113,16 @@ public class EventsClass implements Listener{
 		}
 		
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&5&lChoose a Path")))) {
+			
+			Profile profile = this.plugin.getProfileManager().getPlayerProfile(p);
+			ItemStack tank = e.getInventory().getItem(20);
+			
+			if (e.getCurrentItem().isSimilar(tank) && (profile.getPath() instanceof Tank)) {
+				profile.setPath(new Tank());
+				p.sendMessage(Utils.chat("&7&lYou have chosen the &a&lTank &7&lPath."));
+			}
+						
+			
 			e.setCancelled(true);
 			return;
 		}
