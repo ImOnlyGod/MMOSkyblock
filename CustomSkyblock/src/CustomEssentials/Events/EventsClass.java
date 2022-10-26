@@ -117,7 +117,7 @@ public class EventsClass implements Listener{
 			Profile profile = this.plugin.getProfileManager().getPlayerProfile(p);
 			ItemStack tank = e.getInventory().getItem(20);
 			
-			if (e.getCurrentItem().isSimilar(tank) && (profile.getPath() instanceof Tank)) {
+			if (e.getCurrentItem().isSimilar(tank) && (!(profile.getPath() instanceof Tank))) {
 				profile.setPath(new Tank());
 				p.sendMessage(Utils.chat("&7&lYou have chosen the &a&lTank &7&lPath."));
 			}
