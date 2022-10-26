@@ -25,13 +25,15 @@ public class ItemStats {
 		Stats stats = profileManager.getPlayerProfile(p).getStats();
 		Stats pathStats = profileManager.getPlayerProfile(p).getPath().getStats();
 		stats.setTotalMana(stats.getDefaultMana() + pathStats.getDefaultMana());
-		stats.setPhysicalDamage(stats.getDefaultPhysicalDamage() + pathStats.getDefaultPhysicalDamage() + stats.getPhysicalDamage() + pathStats.getPhysicalDamage());
+		stats.setPhysicalDamage(stats.getDefaultPhysicalDamage() + pathStats.getPhysicalDamage());
 		stats.setCriticalChance(stats.getDefaultCritChance() + pathStats.getDefaultCritChance());
 		stats.setCriticalDamage(stats.getDefaultCritDmg() + pathStats.getDefaultCritDmg());
 		stats.setArmor(stats.getDefaultArmor() + pathStats.getDefaultArmor());
 		stats.setMagicResist(stats.getDefaultMR() + pathStats.getDefaultMR());
 		stats.setHealth(stats.getDefaultHealth() + pathStats.getDefaultHealth());
-		
+		p.getAttribute(Attribute.GENERIC_ARMOR).setBaseValue(stats.getArmor() + pathStats.getArmor());
+		p.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(stats.getDefaultHealth() + pathStats.getDefaultHealth());
+		p.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(stats.getDefaultPhysicalDamage() + pathStats.getPhysicalDamage());		
 		
 		
 	}

@@ -85,9 +85,6 @@ public class Main extends JavaPlugin{
 				String armor = ArmorUtils.getActionBarArmorText(profile);
 				String mana = ManaUtils.getActionBarManaText(p,currentMana, TotalMana);
 				
-				p.getAttribute(Attribute.GENERIC_ARMOR).setBaseValue(stats.getArmor() + pathStats.getArmor());
-				p.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(stats.getDefaultHealth() + pathStats.getDefaultHealth());
-				p.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(stats.getDefaultPhysicalDamage() + pathStats.getDefaultPhysicalDamage());
 				
 				
 				if (displayStats == 0) {
