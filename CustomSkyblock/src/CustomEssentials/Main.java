@@ -1,6 +1,7 @@
 package CustomEssentials;
 
 import org.bukkit.Bukkit;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
@@ -16,6 +17,8 @@ import CustomEssentials.Events.Gui.MenuGui;
 import CustomEssentials.Events.Gui.PathSelectionGui;
 import CustomEssentials.Events.Gui.SkillsGui;
 import CustomEssentials.Events.Items.ItemStats;
+import CustomEssentials.Events.PlayerPath.Paths.Path;
+import CustomEssentials.Events.PlayerStats.Stats;
 import CustomEssentials.Utils.ArmorUtils;
 import CustomEssentials.Utils.HealthUtils;
 import CustomEssentials.Utils.ManaUtils;
@@ -66,19 +69,26 @@ public class Main extends JavaPlugin{
 				}
 								
 				profiles.getPlayerProfile(p).incrementPlayTime();
-				int currentMana = profileManager.getPlayerProfile(p).getStats().getMana();
-				int TotalMana = profileManager.getPlayerProfile(p).getStats().getTotalMana();
+				Stats stats = profileManager.getPlayerProfile(p).getStats();
+				Stats pathStats = profileManager.getPlayerProfile(p).getPath().getStats();
+				int currentMana = stats.getMana();
+				int TotalMana = stats.getTotalMana();
 				
 				//Sets item stats
 				ItemStats setStats = new ItemStats(p,profileManager);
 				setStats.setItemStats();		
 				
-				if (currentMana < TotalMana) profileManager.getPlayerProfile(p).getStats().setMana(currentMana+1);
+				if (currentMana < TotalMana) stats.setMana(currentMana+1);
 				
 								
 				String health = HealthUtils.getActionBarHealthText(p);
 				String armor = ArmorUtils.getActionBarArmorText(profile);
 				String mana = ManaUtils.getActionBarManaText(p,currentMana, TotalMana);
+				
+				p.getAttribute(Attribute.GENERIC_ARMOR).setBaseValue(stats.getArmor() + pathStats.getArmor());
+				p.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(stats.getDefaultHealth() + pathStats.getDefaultHealth());
+				p.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(stats.getDefaultPhysicalDamage() + pathStats.getDefaultPhysicalDamage());
+				
 				
 				if (displayStats == 0) {
 					p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(health + armor + mana));
