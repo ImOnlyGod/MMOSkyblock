@@ -7,7 +7,7 @@ public class Assassin extends Path{
 	public Assassin() {
 		super();
 		Stats stats = this.getStats();
-		stats.setPhysicalDamage(300);
+		stats.setDefaultPhysicalDamage(300);
 		stats.setDefaultMana(300);
 		
 	}
@@ -28,7 +28,7 @@ public class Assassin extends Path{
 		stats.setDefaultArmor(stats.getDefaultArmor() + armorScalar);
 		stats.setDefaultMR(stats.getDefaultMR() + mrScalar);
 		stats.setDefaultMana(stats.getDefaultMana() + manaScalar);
-		stats.setPhysicalDamage(stats.getDefaultPhysicalDamage() + pDmgScalar);
+		stats.setDefaultPhysicalDamage(stats.getDefaultPhysicalDamage() + pDmgScalar);
 		stats.setDefaultBurstDmg(stats.getBurstDamage() + mDmgScalar);
 		
 	}

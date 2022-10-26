@@ -25,15 +25,15 @@ public class ItemStats {
 		Stats stats = profileManager.getPlayerProfile(p).getStats();
 		Stats pathStats = profileManager.getPlayerProfile(p).getPath().getStats();
 		stats.setTotalMana(stats.getDefaultMana() + pathStats.getDefaultMana());
-		stats.setPhysicalDamage(stats.getDefaultPhysicalDamage());
+		stats.setPhysicalDamage(stats.getDefaultPhysicalDamage() + pathStats.getDefaultPhysicalDamage());
 		stats.setCriticalChance(stats.getDefaultCritChance() + pathStats.getDefaultCritChance());
 		stats.setCriticalDamage(stats.getDefaultCritDmg() + pathStats.getDefaultCritDmg());
 		stats.setArmor(stats.getDefaultArmor() + pathStats.getDefaultArmor());
 		stats.setMagicResist(stats.getDefaultMR() + pathStats.getDefaultMR());
 		stats.setHealth(stats.getDefaultHealth() + pathStats.getDefaultHealth());
 		p.getAttribute(Attribute.GENERIC_ARMOR).setBaseValue(stats.getArmor() + pathStats.getArmor());
-		p.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(stats.getDefaultHealth() + pathStats.getDefaultHealth());
-		p.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(stats.getPhysicalDamage()  + pathStats.getDefaultPhysicalDamage() + pathStats.getPhysicalDamage());		
+		p.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(stats.getHealth() + pathStats.getHealth());
+		p.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(stats.getPhysicalDamage()  +  pathStats.getPhysicalDamage());		
 		
 		
 	}
@@ -57,7 +57,7 @@ public class ItemStats {
 		
 	}
 
-	
+	//FIX ADAPT WITH PATH STATS CURRENTLY ACCUMULATES
 	public void setItemManaStat() {
 		Stats stats = profileManager.getPlayerProfile(p).getStats();
 		Stats pathStats = profileManager.getPlayerProfile(p).getPath().getStats();
@@ -80,7 +80,7 @@ public class ItemStats {
 	public void setItemDamageStat() {
 		Stats stats = profileManager.getPlayerProfile(p).getStats();
 		Stats pathStats = profileManager.getPlayerProfile(p).getPath().getStats();
-		int totalDmg = stats.getDefaultPhysicalDamage();
+		int totalDmg = stats.getDefaultPhysicalDamage() + pathStats.getDefaultPhysicalDamage() + pathStats.getPhysicalDamage();
 		ItemStorageTable itemTable = new ItemStorageTable();
 		
 		for (int i = 0; i < items.size(); i++) {
@@ -91,7 +91,7 @@ public class ItemStats {
 			totalDmg = totalDmg + dmg;
 			
 		}
-		p.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(totalDmg+ pathStats.getDefaultPhysicalDamage()+ pathStats.getPhysicalDamage());
+		p.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(totalDmg);
 		stats.setPhysicalDamage(totalDmg);	
 		
 	}
