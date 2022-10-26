@@ -60,7 +60,7 @@ public class MenuGui implements TabExecutor{
 		Profile profile = plugin.getProfileManager().getPlayerProfile(p);
 		
 		int mana = profile.getStats().getTotalMana();
-		int physicalDamage= profile.getStats().getPhysicalDamage();
+		int physicalDamage= profile.getStats().getPhysicalDamage() + profile.getPath().getStats().getPhysicalDamage();
 		int magicDamage = profile.getStats().getMagicDamage();
 		int armor = profile.getStats().getArmor();
 		int magicResist = profile.getStats().getMagicResist();
