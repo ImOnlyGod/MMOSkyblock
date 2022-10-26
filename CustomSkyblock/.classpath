@@ -6,13 +6,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/abhir/OneDrive/Desktop/Test/spigot-1.16.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/abhir/Downloads/spigot-1.16.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/abhir/Downloads/spigot-1.16.5.jar" sourcepath="C:/Users/abhir/Downloads/Spigot/Spigot-API"/>
-	<classpathentry kind="lib" path="C:/Users/abhir/Downloads/BuildTools (2).jar"/>
-	<classpathentry kind="lib" path="C:/Users/abhir/Downloads/Spigot/Spigot-API"/>
-	<classpathentry kind="lib" path="C:/Users/abhir/Downloads/spigot-1.19.jar"/>
-	<classpathentry kind="lib" path="C:/Users/abhir/Downloads/spigot-api-1.18.1-R0.1-20220228.150432-81-shaded.jar"/>
-	<classpathentry kind="lib" path="C:/Users/abhir/Documents/server/1.17/spigot-1.17.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/abhir/Downloads/spigot-1.17.1 (1).jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
