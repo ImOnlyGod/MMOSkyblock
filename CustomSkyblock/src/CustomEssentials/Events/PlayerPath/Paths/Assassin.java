@@ -7,7 +7,7 @@ public class Assassin extends Path{
 	public Assassin() {
 		super();
 		Stats stats = this.getStats();
-		stats.setPhysicalDamage(300);
+		stats.setDefaultPhysicalDamage(300);
 		stats.setDefaultMana(300);
 		
 	}

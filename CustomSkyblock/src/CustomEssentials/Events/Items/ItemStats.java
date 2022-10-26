@@ -80,7 +80,7 @@ public class ItemStats {
 	public void setItemDamageStat() {
 		Stats stats = profileManager.getPlayerProfile(p).getStats();
 		Stats pathStats = profileManager.getPlayerProfile(p).getPath().getStats();
-		int totalDmg = stats.getDefaultPhysicalDamage() + pathStats.getDefaultPhysicalDamage() + pathStats.getPhysicalDamage();
+		int totalDmg = stats.getDefaultPhysicalDamage() + pathStats.getDefaultPhysicalDamage();
 		ItemStorageTable itemTable = new ItemStorageTable();
 		
 		for (int i = 0; i < items.size(); i++) {
@@ -99,7 +99,7 @@ public class ItemStats {
 	public void setItemCritChanceStat() {
 		Stats stats = profileManager.getPlayerProfile(p).getStats();
 		Stats pathStats = profileManager.getPlayerProfile(p).getPath().getStats();
-		double totalCritChance = stats.getDefaultCritChance() + pathStats.getDefaultCritChance() + pathStats.getCriticalChance();
+		double totalCritChance = stats.getDefaultCritChance() + pathStats.getDefaultCritChance();
 		ItemStorageTable itemTable = new ItemStorageTable();
 		
 		for (int i = 0; i < items.size(); i++) {
@@ -118,7 +118,7 @@ public class ItemStats {
 	public void setItemCritDamageStat() {
 		Stats stats = profileManager.getPlayerProfile(p).getStats();
 		Stats pathStats = profileManager.getPlayerProfile(p).getPath().getStats();
-		double totalCritDmg = stats.getDefaultCritDmg() + pathStats.getDefaultCritDmg() + pathStats.getCriticalDamage();
+		double totalCritDmg = stats.getDefaultCritDmg() + pathStats.getDefaultCritDmg();
 		ItemStorageTable itemTable = new ItemStorageTable();
 		
 		for (int i = 0; i < items.size(); i++) {
@@ -137,7 +137,7 @@ public class ItemStats {
 	public void setItemHealthStat() {
 		Stats stats = profileManager.getPlayerProfile(p).getStats();
 		Stats pathStats = profileManager.getPlayerProfile(p).getPath().getStats();
-		int totalHealth = stats.getDefaultHealth() + pathStats.getDefaultHealth() + pathStats.getHealth();
+		int totalHealth = stats.getDefaultHealth() + pathStats.getDefaultHealth();
 		ItemStorageTable itemTable = new ItemStorageTable();
 		
 		for (int i = 0; i < items.size(); i++) {
@@ -156,7 +156,7 @@ public class ItemStats {
 	public void setItemArmorStat() {
 		Stats stats = profileManager.getPlayerProfile(p).getStats();
 		Stats pathStats = profileManager.getPlayerProfile(p).getPath().getStats();
-		int totalArmor = stats.getDefaultArmor() + pathStats.getDefaultArmor() + pathStats.getArmor();
+		int totalArmor = stats.getDefaultArmor() + pathStats.getDefaultArmor();
 		ItemStorageTable itemTable = new ItemStorageTable();
 		
 		for (int i = 0; i < items.size(); i++) {
@@ -174,7 +174,7 @@ public class ItemStats {
 	public void setItemMRStat() {
 		Stats stats = profileManager.getPlayerProfile(p).getStats();
 		Stats pathStats = profileManager.getPlayerProfile(p).getPath().getStats();
-		int totalMR = stats.getDefaultMR() + pathStats.getDefaultMR() + pathStats.getMagicResist();
+		int totalMR = stats.getDefaultMR() + pathStats.getDefaultMR();
 		ItemStorageTable itemTable = new ItemStorageTable();
 		
 		for (int i = 0; i < items.size(); i++) {
