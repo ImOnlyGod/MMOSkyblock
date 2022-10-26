@@ -1,14 +1,8 @@
 package CustomEssentials.Events;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.Random;
 
 import org.bukkit.Material;
-import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -28,16 +22,15 @@ import org.bukkit.event.player.PlayerFishEvent.State;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.SkullMeta;
 
 import CustomEssentials.Main;
 import CustomEssentials.Events.Items.ItemStats;
 import CustomEssentials.Events.Items.ItemStorageTable;
 import CustomEssentials.Events.Items.ItemsCore;
 import CustomEssentials.Events.Misc.ProjectileCreator;
-import CustomEssentials.Events.Misc.TimeGenerator;
 import CustomEssentials.Events.Mobs.MobLevel;
+import CustomEssentials.Events.PlayerPath.Paths.Archer;
+import CustomEssentials.Events.PlayerPath.Paths.Assassin;
 import CustomEssentials.Events.PlayerPath.Paths.Tank;
 import CustomEssentials.Events.PlayerStats.AttackDamage;
 import CustomEssentials.Events.PlayerStats.Defence;
@@ -116,10 +109,22 @@ public class EventsClass implements Listener{
 			
 			Profile profile = this.plugin.getProfileManager().getPlayerProfile(p);
 			ItemStack tank = e.getInventory().getItem(20);
+			ItemStack archer = e.getInventory().getItem(21);
+			ItemStack assassin = e.getInventory().getItem(22);
 			
 			if (e.getCurrentItem().isSimilar(tank) && (!(profile.getPath() instanceof Tank))) {
 				profile.setPath(new Tank());
 				p.sendMessage(Utils.chat("&7&lYou have chosen the &a&lTank &7&lPath."));
+			}
+			
+			if (e.getCurrentItem().isSimilar(archer) && (!(profile.getPath() instanceof Archer))) {
+				profile.setPath(new Archer());
+				p.sendMessage(Utils.chat("&7&lYou have chosen the &6&lArcher &7&lPath."));
+			}
+			
+			if (e.getCurrentItem().isSimilar(assassin) && (!(profile.getPath() instanceof Assassin))) {
+				profile.setPath(new Assassin());
+				p.sendMessage(Utils.chat("&7&lYou have chosen the &4&lAssassin &7&lPath."));
 			}
 						
 			
