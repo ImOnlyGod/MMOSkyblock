@@ -325,8 +325,6 @@ public class EventsClass implements Listener{
 			
 		}
 		
-		p.sendMessage(""  + damage);
-		
 		e.setDamage(damage);
 		
 		
