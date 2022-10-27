@@ -72,7 +72,7 @@ public class PathSelectionGui implements TabExecutor{
 		//CHANGE TO ONLY BOW DMG -> ADD BOW DMG
 		ItemStack archer = new ItemStack(Material.BOW);
 		ItemMeta archerMeta = archer.getItemMeta();
-		archerMeta.setDisplayName(Utils.chat("&6&l        Archer &7Path"));
+		archerMeta.setDisplayName(Utils.chat("&6&l         Archer &7Path"));
 		archerMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
 		archerMeta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
 		
@@ -97,9 +97,9 @@ public class PathSelectionGui implements TabExecutor{
 		
 		ItemStack assassin = new ItemStack(Material.REDSTONE);
 		ItemMeta assassinMeta = assassin.getItemMeta();
-		tankMeta.setDisplayName(Utils.chat("&4&l        Assassin &7Path"));
-		tankMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-		tankMeta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
+		assassinMeta.setDisplayName(Utils.chat("&4&l         Assassin &7Path"));
+		assassinMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+		assassinMeta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
 		
 		ArrayList<String> assassinLore = new ArrayList<String>();
 		assassinLore.add(Utils.chat(""));
@@ -116,7 +116,6 @@ public class PathSelectionGui implements TabExecutor{
 		assassinMeta.setLore(assassinLore);
 		assassin.setItemMeta(assassinMeta);
 		menu.setItem(22, assassin);
-		
 		
 		
 		return menu;
@@ -138,8 +137,7 @@ public class PathSelectionGui implements TabExecutor{
 		}
 		
 		Player p = (Player) sender;
-		Profile playerProfile = this.plugin.getProfileManager().getPlayerProfile(p);
-		
+		Profile playerProfile = this.plugin.getProfileManager().getPlayerProfile(p);		
 		
 		Inventory menu = createGui(p, playerProfile);
 		
