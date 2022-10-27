@@ -1,8 +1,5 @@
 package CustomEssentials.Utils;
 
-import org.bukkit.attribute.Attribute;
-import org.bukkit.entity.Player;
-
 import CustomEssentials.Events.Profile;
 
 public class ArmorUtils {
