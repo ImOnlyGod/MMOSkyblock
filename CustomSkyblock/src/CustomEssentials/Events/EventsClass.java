@@ -316,9 +316,7 @@ public class EventsClass implements Listener{
 		double critChance = stats.getCriticalChance();
 		double critDamage = stats.getCriticalDamage();
 		double damage = e.getFinalDamage();
-		
-		p.sendMessage(""  + damage);
-	
+			
 		Random rand = new Random();
 		int crit = rand.nextInt(101);
 		
@@ -326,6 +324,8 @@ public class EventsClass implements Listener{
 			damage = damage*critDamage;
 			
 		}
+		
+		p.sendMessage(""  + damage);
 		
 		e.setDamage(damage);
 		
