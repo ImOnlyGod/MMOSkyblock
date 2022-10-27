@@ -66,12 +66,12 @@ public class MenuGui implements TabExecutor{
 		int armor = profile.getStats().getArmor();
 		int magicResist = profile.getStats().getMagicResist();
 		int speed = profile.getStats().getSpeed();
-		double critChance = Math.round(profile.getStats().getCriticalChance());
-		double critDamage = Math.round(profile.getStats().getCriticalDamage());
-		double burstChance = Math.round(profile.getStats().getBurstChance());
-		double burstDamage = Math.round(profile.getStats().getBurstDamage());
+		double critChance = Math.round(profile.getStats().getCriticalChance()*100.0)/100.0;
+		double critDamage = Math.round(profile.getStats().getCriticalDamage()*100)/100.0;
+		double burstChance = Math.round(profile.getStats().getBurstChance()*100)/100.0;
+		double burstDamage = Math.round(profile.getStats().getBurstDamage()*100)/100.0;
 		int CDR = profile.getStats().getCooldownReduction();
-		double lifeSteal = Math.round(profile.getStats().getLifeSteal());
+		double lifeSteal = Math.round(profile.getStats().getLifeSteal()*100)/100.0;
 				
 		List<String> statsLore = new ArrayList<String>();
 		
