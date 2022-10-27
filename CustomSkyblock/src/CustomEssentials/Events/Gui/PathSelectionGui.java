@@ -115,7 +115,7 @@ public class PathSelectionGui implements TabExecutor{
 		
 		assassinMeta.setLore(assassinLore);
 		assassin.setItemMeta(assassinMeta);
-		menu.setItem(22, assassin);
+		menu.setItem(19, assassin);
 		
 		
 		
