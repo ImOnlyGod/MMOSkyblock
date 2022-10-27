@@ -90,8 +90,8 @@ public class PathSelectionGui implements TabExecutor{
 		tankLore.add(Utils.chat("&7Base Mana: +300"));
 		
 		
-		tankMeta.setLore(archerLore);
-		tank.setItemMeta(archerMeta);
+		archerMeta.setLore(archerLore);
+		archer.setItemMeta(archerMeta);
 		menu.setItem(21, archer);
 		
 		
@@ -113,8 +113,8 @@ public class PathSelectionGui implements TabExecutor{
 		tankLore.add(Utils.chat("&7Base Mana: +300"));
 		
 		
-		tankMeta.setLore(assassinLore);
-		tank.setItemMeta(assassinMeta);
+		assassinMeta.setLore(assassinLore);
+		assassin.setItemMeta(assassinMeta);
 		menu.setItem(22, assassin);
 		
 		
