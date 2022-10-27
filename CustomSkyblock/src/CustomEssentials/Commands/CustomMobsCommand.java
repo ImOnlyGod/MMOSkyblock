@@ -46,9 +46,7 @@ public class CustomMobsCommand implements CommandExecutor{
 			if (this.MobsList.containsKey(key)) {
 				//REPETATION OF CODE NEED TO REWORK
 				this.MobsList.get(key);
-				
-				
-				
+							
 				
 			}
 			
