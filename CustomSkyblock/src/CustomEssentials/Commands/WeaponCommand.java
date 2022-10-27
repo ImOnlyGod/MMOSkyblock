@@ -2,7 +2,6 @@ package CustomEssentials.Commands;
 
 import java.util.HashMap;
 
-
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

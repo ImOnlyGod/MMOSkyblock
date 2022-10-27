@@ -72,22 +72,22 @@ public class PathSelectionGui implements TabExecutor{
 		//CHANGE TO ONLY BOW DMG -> ADD BOW DMG
 		ItemStack archer = new ItemStack(Material.BOW);
 		ItemMeta archerMeta = archer.getItemMeta();
-		tankMeta.setDisplayName(Utils.chat("&6&l        Archer &7Path"));
-		tankMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-		tankMeta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
+		archerMeta.setDisplayName(Utils.chat("&6&l         Archer &7Path"));
+		archerMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+		archerMeta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
 		
 		ArrayList<String> archerLore = new ArrayList<String>();
-		tankLore.add(Utils.chat(""));
-		tankLore.add(Utils.chat("&7This path provides high"));
-		tankLore.add(Utils.chat("&7offensive ranged stats and abilities."));
-		tankLore.add(Utils.chat("&7This comes at a cost of giving"));
-		tankLore.add(Utils.chat("&7up all forms of defences."));
-		tankLore.add(Utils.chat(""));
-		tankLore.add(Utils.chat(""));
-		tankLore.add(Utils.chat("&7Base Health: +100"));
-		tankLore.add(Utils.chat("&7Base Armor: +10"));
-		tankLore.add(Utils.chat("&7Base MR: +10"));
-		tankLore.add(Utils.chat("&7Base Mana: +300"));
+		archerLore.add(Utils.chat(""));
+		archerLore.add(Utils.chat("&7This path provides high"));
+		archerLore.add(Utils.chat("&7offensive ranged stats and abilities."));
+		archerLore.add(Utils.chat("&7This comes at a cost of giving"));
+		archerLore.add(Utils.chat("&7up all forms of defences."));
+		archerLore.add(Utils.chat(""));
+		archerLore.add(Utils.chat(""));
+		archerLore.add(Utils.chat("&7Base Health: +100"));
+		archerLore.add(Utils.chat("&7Base Armor: +10"));
+		archerLore.add(Utils.chat("&7Base MR: +10"));
+		archerLore.add(Utils.chat("&7Base Mana: +300"));
 		
 		
 		archerMeta.setLore(archerLore);
@@ -97,26 +97,25 @@ public class PathSelectionGui implements TabExecutor{
 		
 		ItemStack assassin = new ItemStack(Material.REDSTONE);
 		ItemMeta assassinMeta = assassin.getItemMeta();
-		tankMeta.setDisplayName(Utils.chat("&4&l        Assassin &7Path"));
-		tankMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-		tankMeta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
+		assassinMeta.setDisplayName(Utils.chat("&4&l         Assassin &7Path"));
+		assassinMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+		assassinMeta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
 		
 		ArrayList<String> assassinLore = new ArrayList<String>();
-		tankLore.add(Utils.chat(""));
-		tankLore.add(Utils.chat("&7This path provides high"));
-		tankLore.add(Utils.chat("&7offensive mele stats and abilities."));
-		tankLore.add(Utils.chat("&7This comes at a cost of giving"));
-		tankLore.add(Utils.chat("&7up all forms of defences."));
-		tankLore.add(Utils.chat(""));
-		tankLore.add(Utils.chat(""));
-		tankLore.add(Utils.chat("&7Base Mele Damage: +300"));
-		tankLore.add(Utils.chat("&7Base Mana: +300"));
+		assassinLore.add(Utils.chat(""));
+		assassinLore.add(Utils.chat("&7This path provides high"));
+		assassinLore.add(Utils.chat("&7offensive mele stats and abilities."));
+		assassinLore.add(Utils.chat("&7This comes at a cost of giving"));
+		assassinLore.add(Utils.chat("&7up all forms of defences."));
+		assassinLore.add(Utils.chat(""));
+		assassinLore.add(Utils.chat(""));
+		assassinLore.add(Utils.chat("&7Base Mele Damage: +300"));
+		assassinLore.add(Utils.chat("&7Base Mana: +300"));
 		
 		
 		assassinMeta.setLore(assassinLore);
 		assassin.setItemMeta(assassinMeta);
-		menu.setItem(24, assassin);
-		
+		menu.setItem(22, assassin);
 		
 		
 		return menu;
@@ -138,8 +137,7 @@ public class PathSelectionGui implements TabExecutor{
 		}
 		
 		Player p = (Player) sender;
-		Profile playerProfile = this.plugin.getProfileManager().getPlayerProfile(p);
-		
+		Profile playerProfile = this.plugin.getProfileManager().getPlayerProfile(p);		
 		
 		Inventory menu = createGui(p, playerProfile);
 		

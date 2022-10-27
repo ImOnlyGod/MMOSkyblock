@@ -80,8 +80,7 @@ public class EventsClass implements Listener{
 		p.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(physicalDamage);
 		playerSpeed.setPlayerSpeed(p, speed);
 		
-		
-			
+					
 	}
 	
 	
@@ -295,6 +294,12 @@ public class EventsClass implements Listener{
 				
 				e.getEntity().setCustomName(customName);				
 				
+				
+				
+				
+				
+				
+				
 								
 			}			
 		}
@@ -335,6 +340,7 @@ public class EventsClass implements Listener{
 			
 		}
 		
+				
 	}
 	
 	@EventHandler

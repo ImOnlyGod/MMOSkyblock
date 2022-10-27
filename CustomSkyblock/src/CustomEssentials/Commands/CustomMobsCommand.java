@@ -16,6 +16,7 @@ public class CustomMobsCommand implements CommandExecutor{
 	
 	private HashMap<String, Entity> MobsList = new HashMap<String,Entity>();
 	
+	@SuppressWarnings("unused")
 	private Main plugin; 
 	
 	public CustomMobsCommand(Main plugin) {
@@ -45,9 +46,7 @@ public class CustomMobsCommand implements CommandExecutor{
 			if (this.MobsList.containsKey(key)) {
 				//REPETATION OF CODE NEED TO REWORK
 				this.MobsList.get(key);
-				
-				
-				
+							
 				
 			}
 			
