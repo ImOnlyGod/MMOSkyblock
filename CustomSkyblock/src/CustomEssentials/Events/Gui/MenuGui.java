@@ -59,18 +59,19 @@ public class MenuGui implements TabExecutor{
 		
 		Profile profile = plugin.getProfileManager().getPlayerProfile(p);
 		
+		
 		int mana = profile.getStats().getTotalMana();
 		int physicalDamage= profile.getStats().getPhysicalDamage();
 		int magicDamage = profile.getStats().getMagicDamage();
 		int armor = profile.getStats().getArmor();
 		int magicResist = profile.getStats().getMagicResist();
 		int speed = profile.getStats().getSpeed();
-		double critChance = profile.getStats().getCriticalChance();
-		double critDamage = profile.getStats().getCriticalDamage();
-		double burstChance = profile.getStats().getBurstChance();
-		double burstDamage = profile.getStats().getBurstDamage();
+		double critChance = Math.round(profile.getStats().getCriticalChance());
+		double critDamage = Math.round(profile.getStats().getCriticalDamage());
+		double burstChance = Math.round(profile.getStats().getBurstChance());
+		double burstDamage = Math.round(profile.getStats().getBurstDamage());
 		int CDR = profile.getStats().getCooldownReduction();
-		double lifeSteal = profile.getStats().getLifeSteal();
+		double lifeSteal = Math.round(profile.getStats().getLifeSteal());
 				
 		List<String> statsLore = new ArrayList<String>();
 		
