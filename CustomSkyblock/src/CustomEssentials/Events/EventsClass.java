@@ -3,18 +3,20 @@ package CustomEssentials.Events;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.craftbukkit.v1_17_R1.entity.CraftArmorStand;
 import org.bukkit.craftbukkit.v1_17_R1.entity.CraftEntity;
 import org.bukkit.craftbukkit.v1_17_R1.entity.CraftFireball;
 import org.bukkit.craftbukkit.v1_17_R1.entity.CraftProjectile;
-import org.bukkit.craftbukkit.v1_17_R1.entity.CraftSkeleton;
-import org.bukkit.craftbukkit.v1_17_R1.entity.CraftTippedArrow;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
+import org.bukkit.entity.Skeleton;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -41,7 +43,6 @@ import CustomEssentials.Events.Mobs.MobLevel;
 import CustomEssentials.Events.PlayerPath.Paths.Archer;
 import CustomEssentials.Events.PlayerPath.Paths.Assassin;
 import CustomEssentials.Events.PlayerPath.Paths.Tank;
-import CustomEssentials.Events.PlayerStats.AttackDamage;
 import CustomEssentials.Events.PlayerStats.Defence;
 import CustomEssentials.Events.PlayerStats.Health;
 import CustomEssentials.Events.PlayerStats.Speed;
@@ -52,6 +53,7 @@ import CustomEssentials.Utils.Utils;
 public class EventsClass implements Listener{
 	
 	private Main plugin;
+	private String hasPlayerCrit = "&c&l";
 		
 	public EventsClass(Main plugin) {
 		this.plugin = plugin;
@@ -249,6 +251,7 @@ public class EventsClass implements Listener{
 	@EventHandler
 	public void mobSpawnEvent(CreatureSpawnEvent e) {
 		
+		if (!(e.getEntity() instanceof LivingEntity)) return;
 		
 		if (e.getEntity().getCustomName() == null) {
 					
@@ -270,14 +273,17 @@ public class EventsClass implements Listener{
 		}
 	}
 	
+	//ADD FALL DMG CAUSE!!
 	@EventHandler
 	public void mobDamageEvent(EntityDamageEvent e) {
 		
-		if (!(e.getEntity() instanceof LivingEntity)) return;
+		this.hasPlayerCrit = "&c&l";
+		if (e.getEntityType().equals(EntityType.ARMOR_STAND) || (e.getEntity() instanceof CraftArmorStand)) return;
 		
+		//COMPRESS INTO ONE FUNCTION!
 		LivingEntity entity = (LivingEntity) e.getEntity();		
 		
-		if (e.getEntityType() != EntityType.PLAYER) {
+		if ((e.getEntityType() != EntityType.PLAYER)) {
 			
 			if (e.getEntity().isCustomNameVisible() && e.getEntity().getCustomName().length() > 30) {
 				
@@ -301,30 +307,30 @@ public class EventsClass implements Listener{
 				
 				e.getEntity().setCustomName(customName);				
 				
-				
-							
-				
-								
-			}			
+												
+			}
 		}
+		
 	}
 	
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void playerDamageEntityEvent(EntityDamageByEntityEvent e) {
 		
 		//CREATE SEPEARTE CLASS 
 		ProjectileCreator projectileDamageCalulator = new ProjectileCreator();
 		e.setDamage(projectileDamageCalulator.projectileDamage(e.getDamager(), e.getEntity(), e.getFinalDamage()));
+		this.hasPlayerCrit = "&c&l";
 		
-		if (!(e.getEntity() instanceof LivingEntity)) return;
-		
-		if (!(e.getDamager() instanceof LivingEntity) || !(e.getDamager() instanceof CraftProjectile)) return;
+		if (!(e.getEntity() instanceof LivingEntity)) {
+			return;	
+		}
 		
 		//ADD ARROW DMG SKELETON
-		if (!(e.getDamager() instanceof Player) && (e.getEntity() instanceof LivingEntity)) {
+		if ((!(e.getDamager() instanceof Player)) && (e.getEntity() instanceof LivingEntity)) {
 			
 			
-			CraftEntity entity = getDamagerEntity(e.getDamager());			
+			LivingEntity entity = (LivingEntity) getDamagerEntity(e.getDamager());	
 			
 			if (entity.isCustomNameVisible() && entity.getCustomName().length() > 30) {
 				
@@ -358,6 +364,7 @@ public class EventsClass implements Listener{
 					e.setDamage(lvl*10/p.getAttribute(Attribute.GENERIC_ARMOR).getBaseValue());	
 				}
 				else e.setDamage(lvl*10);
+				
 			}
 		}
 		else {
@@ -373,12 +380,11 @@ public class EventsClass implements Listener{
 				
 			Random rand = new Random();
 			int crit = rand.nextInt(101);
-			
 			if (crit <= critChance) {
 				damage = damage*critDamage;
+				this.hasPlayerCrit = "&6&l";
 				
 			}
-			
 			e.setDamage(damage);
 			
 			
@@ -386,10 +392,42 @@ public class EventsClass implements Listener{
 			double lifeSteal = stats.getLifeStealHealAmount(damage);
 			if (!(lifeSteal+health > p.getMaxHealth())) {
 				p.setHealth(health+lifeSteal);
-				
-		}
+			}
+			
 		}
 		
+		//COMPRESS INTO ONE FUNCTION!
+		if ((e.getEntityType() != EntityType.PLAYER)) {
+				
+			if (e.getEntity().isCustomNameVisible() && e.getEntity().getCustomName().length() > 30) {
+				LivingEntity entity = (LivingEntity) e.getEntity();	
+				String mobName = entity.getCustomName();
+				StringBuilder level = new StringBuilder();
+				boolean continueStr = true;
+				
+				for (int i=9;i < 20;i++) {
+					if (mobName.charAt(i) == ']') {
+						continueStr = false;
+						break;
+					}
+					if (continueStr == true) {
+						level.append(mobName.charAt(i));	
+					}
+					
+				}
+				e.getEntity().setCustomName("");
+				
+				String customName = Utils.chat("&7&l[&a&l" + level + "&7&l] &6&l" + entity.getName() + " &7&l(&a&l" + Math.floor(Math.max(0,entity.getHealth()-e.getFinalDamage())) + "&4♥&7&l)");
+				
+				e.getEntity().setCustomName(customName);				
+				
+												
+			}
+			
+			
+		}
+		//ADD DAMAGE INDICATOR
+		damageIndicator(e.getEntity(),e.getFinalDamage(),e.getDamager());
 				
 	}
 	
@@ -412,16 +450,57 @@ public class EventsClass implements Listener{
 		
 	}
 	
-	public CraftEntity getDamagerEntity(Entity damager) {
-		if ((damager instanceof CraftProjectile) || (damager instanceof CraftFireball)) {
-			CraftProjectile arrow = (CraftProjectile) damager;
-			CraftEntity entity = (CraftEntity) arrow.getShooter();
+	public Entity getDamagerEntity(Entity damager) {
+		if ((damager instanceof CraftProjectile) || (damager instanceof CraftFireball) || (damager instanceof Projectile)) {
+			Projectile arrow = (Projectile) damager;
+			Entity entity = (Entity) arrow.getShooter();
+			
+		
+			
 			return entity;
 			
 		}
 		
 		LivingEntity entity = (LivingEntity) damager;
-		return (CraftEntity) entity;
+		return (Entity) entity;
+	}
+	
+	
+	public void damageIndicator(Entity entity, double damage, Entity damager) {
+		if ((entity instanceof CraftArmorStand) || (entity.getType().equals(EntityType.ARMOR_STAND))) return;
+		
+		String dmg = String.valueOf(Math.ceil(damage));
+		dmg = dmg.replace(".0", "");
+		Location loc = entity.getLocation();	
+		
+		double posX = Math.random();
+		double posY = Math.random();
+		double posZ = Math.random();
+		
+		if (damager instanceof Player) {
+			Player p = (Player) damager;
+			posX += 1*p.getFacing().getDirection().getX();
+			posY += 1*p.getFacing().getDirection().getY();
+			posZ += 1*p.getFacing().getDirection().getZ();
+		}
+		
+		ArmorStand dmgIndicator = (ArmorStand) entity.getWorld().spawnEntity(loc.add(posX,posY-0.5,posZ), EntityType.ARMOR_STAND);
+		dmgIndicator.setVisible(false);
+		dmgIndicator.setInvisible(true);
+		dmgIndicator.setInvulnerable(true);
+		dmgIndicator.setCustomName("");
+		dmgIndicator.setCustomName(Utils.chat(this.hasPlayerCrit+dmg+"🗡"));
+		dmgIndicator.setCustomNameVisible(true);
+		dmgIndicator.setGravity(false);
+		dmgIndicator.setCollidable(false);
+		Bukkit.getScheduler().scheduleSyncDelayedTask(this.plugin, new Runnable() {
+			@Override
+			public void run() {
+				dmgIndicator.remove();				
+			}
+			
+		}, 15L);
+		
 	}
 		
 	
