@@ -8,7 +8,14 @@ import org.bukkit.entity.Player;
 public class ProjectileCreator {
 	
 	public double projectileDamage(Entity damager, Entity shooter, double currentDmg) {
-		if ((damager instanceof Fireball)) return fireballDamage(damager,shooter,currentDmg);
+		if ((damager instanceof Fireball)) return validProjectileDamage(damager,shooter,currentDmg);
+		
+		
+		return currentDmg;
+	}
+	
+	public double validProjectileDamage(Entity damager, Entity shooter, double currentDmg) {
+		if ((damager.getCustomName() != null)) return fireballDamage(damager,shooter,currentDmg);
 		
 		
 		return currentDmg;

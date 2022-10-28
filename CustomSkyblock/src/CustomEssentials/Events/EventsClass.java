@@ -2,11 +2,19 @@ package CustomEssentials.Events;
 
 import java.util.Random;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.craftbukkit.v1_17_R1.entity.CraftEntity;
+import org.bukkit.craftbukkit.v1_17_R1.entity.CraftFireball;
+import org.bukkit.craftbukkit.v1_17_R1.entity.CraftProjectile;
+import org.bukkit.craftbukkit.v1_17_R1.entity.CraftSkeleton;
+import org.bukkit.craftbukkit.v1_17_R1.entity.CraftTippedArrow;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -266,7 +274,6 @@ public class EventsClass implements Listener{
 	public void mobDamageEvent(EntityDamageEvent e) {
 		
 		if (!(e.getEntity() instanceof LivingEntity)) return;
-	
 		
 		LivingEntity entity = (LivingEntity) e.getEntity();		
 		
@@ -295,10 +302,7 @@ public class EventsClass implements Listener{
 				e.getEntity().setCustomName(customName);				
 				
 				
-				
-				
-				
-				
+							
 				
 								
 			}			
@@ -312,32 +316,78 @@ public class EventsClass implements Listener{
 		ProjectileCreator projectileDamageCalulator = new ProjectileCreator();
 		e.setDamage(projectileDamageCalulator.projectileDamage(e.getDamager(), e.getEntity(), e.getFinalDamage()));
 		
-		if (!(e.getDamager() instanceof Player)) return;
+		if (!(e.getEntity() instanceof LivingEntity)) return;
 		
-		Player p = (Player) e.getDamager();		
-		PlayerProfileManager profile = this.plugin.getProfileManager();
+		if (!(e.getDamager() instanceof LivingEntity) || !(e.getDamager() instanceof CraftProjectile)) return;
 		
-		Stats stats = profile.getPlayerProfile(p).getStats();
-		double critChance = stats.getCriticalChance();
-		double critDamage = stats.getCriticalDamage();
-		double damage = e.getFinalDamage();
+		//ADD ARROW DMG SKELETON
+		if (!(e.getDamager() instanceof Player) && (e.getEntity() instanceof LivingEntity)) {
 			
-		Random rand = new Random();
-		int crit = rand.nextInt(101);
-		
-		if (crit <= critChance) {
-			damage = damage*critDamage;
 			
+			CraftEntity entity = getDamagerEntity(e.getDamager());			
+			
+			if (entity.isCustomNameVisible() && entity.getCustomName().length() > 30) {
+				
+				String mobName = entity.getCustomName();
+				StringBuilder level = new StringBuilder();
+				boolean continueStr = true;
+				
+				for (int i=9;i < 20;i++) {
+					if (mobName.charAt(i) == ']') {
+						continueStr = false;
+						break;
+					}
+					if (continueStr == true) {
+						level.append(mobName.charAt(i));	
+					}
+					
+				}
+				
+				String levelAmount = "";
+				
+				for (int i=0;i < level.length();i++) {
+					if (level.charAt(i) == '§') break;
+					levelAmount = levelAmount + level.charAt(i);
+				}
+				
+				float lvl = Float.parseFloat(levelAmount);
+				
+				//CHANGE THE ARMOR DEFENCE RATIO!
+				if (e.getEntity() instanceof Player) {
+					Player p = (Player) e.getEntity();
+					e.setDamage(lvl*10/p.getAttribute(Attribute.GENERIC_ARMOR).getBaseValue());	
+				}
+				else e.setDamage(lvl*10);
+			}
 		}
-		
-		e.setDamage(damage);
-		
-		
-		double health = p.getHealth();
-		double lifeSteal = stats.getLifeStealHealAmount(damage);
-		if (!(lifeSteal+health > p.getMaxHealth())) {
-			p.setHealth(health+lifeSteal);
+		else {
 			
+					
+			Player p = (Player) e.getDamager();		
+			PlayerProfileManager profile = this.plugin.getProfileManager();
+			
+			Stats stats = profile.getPlayerProfile(p).getStats();
+			double critChance = stats.getCriticalChance();
+			double critDamage = stats.getCriticalDamage();
+			double damage = e.getFinalDamage();
+				
+			Random rand = new Random();
+			int crit = rand.nextInt(101);
+			
+			if (crit <= critChance) {
+				damage = damage*critDamage;
+				
+			}
+			
+			e.setDamage(damage);
+			
+			
+			double health = p.getHealth();
+			double lifeSteal = stats.getLifeStealHealAmount(damage);
+			if (!(lifeSteal+health > p.getMaxHealth())) {
+				p.setHealth(health+lifeSteal);
+				
+		}
 		}
 		
 				
@@ -361,7 +411,19 @@ public class EventsClass implements Listener{
 		item.itemAbility(p, profiles.getPlayerProfile(p));
 		
 	}
-
+	
+	public CraftEntity getDamagerEntity(Entity damager) {
+		if ((damager instanceof CraftProjectile) || (damager instanceof CraftFireball)) {
+			CraftProjectile arrow = (CraftProjectile) damager;
+			CraftEntity entity = (CraftEntity) arrow.getShooter();
+			return entity;
+			
+		}
+		
+		LivingEntity entity = (LivingEntity) damager;
+		return (CraftEntity) entity;
+	}
+		
 	
 }
 	
