@@ -252,6 +252,7 @@ public class EventsClass implements Listener{
 	public void mobSpawnEvent(CreatureSpawnEvent e) {
 		
 		if (!(e.getEntity() instanceof LivingEntity)) return;
+		if (e.getEntity() instanceof ArmorStand) return;
 		
 		if (e.getEntity().getCustomName() == null) {
 					
@@ -485,14 +486,17 @@ public class EventsClass implements Listener{
 		}
 		
 		ArmorStand dmgIndicator = (ArmorStand) entity.getWorld().spawnEntity(loc.add(posX,posY-0.5,posZ), EntityType.ARMOR_STAND);
-		dmgIndicator.setVisible(false);
 		dmgIndicator.setInvisible(true);
+		dmgIndicator.setVisible(false);
 		dmgIndicator.setInvulnerable(true);
+		dmgIndicator.setBasePlate(false);
 		dmgIndicator.setCustomName("");
 		dmgIndicator.setCustomName(Utils.chat(this.hasPlayerCrit+dmg+"🗡"));
 		dmgIndicator.setCustomNameVisible(true);
-		dmgIndicator.setGravity(false);
+		dmgIndicator.setGravity(true);
 		dmgIndicator.setCollidable(false);
+		dmgIndicator.teleport(loc.add(posX,posY-0.5,posZ));
+		
 		Bukkit.getScheduler().scheduleSyncDelayedTask(this.plugin, new Runnable() {
 			@Override
 			public void run() {
