@@ -470,8 +470,8 @@ public class EventsClass implements Listener{
 	public void damageIndicator(Entity entity, double damage, Entity damager) {
 		if ((entity instanceof CraftArmorStand) || (entity.getType().equals(EntityType.ARMOR_STAND))) return;
 		
-		String dmg = String.valueOf(Math.ceil(damage));
-		dmg = dmg.replace(".0", "");
+		String dmgStr = String.valueOf(Math.ceil(damage));
+		final String dmg = dmgStr.replace(".0", "");
 		Location loc = entity.getLocation();	
 		
 		double posX = Math.random();
@@ -484,18 +484,17 @@ public class EventsClass implements Listener{
 			posY += 1.5*p.getFacing().getDirection().getY();
 			posZ += 1.5*p.getFacing().getDirection().getZ();
 		}
-		
-		ArmorStand dmgIndicator = (ArmorStand) entity.getWorld().spawnEntity(loc.add(posX,posY-0.5,posZ), EntityType.ARMOR_STAND);
-		dmgIndicator.setInvisible(true);
-		dmgIndicator.setVisible(false);
-		dmgIndicator.setInvulnerable(true);
-		dmgIndicator.setBasePlate(false);
-		dmgIndicator.setCustomName("");
-		dmgIndicator.setCustomName(Utils.chat(this.hasPlayerCrit+dmg+"🗡"));
-		dmgIndicator.setCustomNameVisible(true);
-		dmgIndicator.setGravity(true);
-		dmgIndicator.setCollidable(false);
-		dmgIndicator.teleport(loc.add(posX,posY-0.5,posZ));
+				
+		ArmorStand dmgIndicator = (ArmorStand) entity.getWorld().spawn(loc.add(posX,posY,posZ), ArmorStand.class, armorstand->{
+			armorstand.setInvisible(true);
+			armorstand.setVisible(false);
+			armorstand.setInvulnerable(true);
+			armorstand.setBasePlate(false);
+			armorstand.setCustomName(Utils.chat(this.hasPlayerCrit+dmg+"🗡"));
+			armorstand.setCustomNameVisible(true);
+			armorstand.setGravity(true);
+			
+		});
 		
 		Bukkit.getScheduler().scheduleSyncDelayedTask(this.plugin, new Runnable() {
 			@Override
@@ -503,7 +502,7 @@ public class EventsClass implements Listener{
 				dmgIndicator.remove();				
 			}
 			
-		}, 15L);
+		}, 10L);
 		
 	}
 		
