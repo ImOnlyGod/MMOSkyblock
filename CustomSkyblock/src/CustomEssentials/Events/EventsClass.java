@@ -480,9 +480,9 @@ public class EventsClass implements Listener{
 		
 		if (damager instanceof Player) {
 			Player p = (Player) damager;
-			posX += 1*p.getFacing().getDirection().getX();
-			posY += 1*p.getFacing().getDirection().getY();
-			posZ += 1*p.getFacing().getDirection().getZ();
+			posX += 1.5*p.getFacing().getDirection().getX();
+			posY += 1.5*p.getFacing().getDirection().getY();
+			posZ += 1.5*p.getFacing().getDirection().getZ();
 		}
 		
 		ArmorStand dmgIndicator = (ArmorStand) entity.getWorld().spawnEntity(loc.add(posX,posY-0.5,posZ), EntityType.ARMOR_STAND);
