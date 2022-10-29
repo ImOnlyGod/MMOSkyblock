@@ -14,7 +14,7 @@ public class Stats {
 	private int magicDamage;
 	private int mana;
 	private int totalMana;
-	private int speed;
+	private double speed;
 	private double criticalDamage;
 	private double criticalChance;
 	private double burstDamage;
@@ -22,11 +22,12 @@ public class Stats {
 	private int cooldownReduction;
 	private double lifeSteal;
 	private int defaultPhysicalDamage;
+	private int defaultMagicDamage;
 	private int defaultMana;
 	private int defaultHealth;
 	private int defaultArmor;
 	private int defaultMR;
-	private int defaultSpeed;
+	private double defaultSpeed;
 	private double defaultCritDmg;
 	private double defaultCritChance;
 	private double defaultBurstDmg;
@@ -39,7 +40,7 @@ public class Stats {
 			int speed, double criticalDamage, double criticalChance, double burstDamage, double burstChance, 
 			int cooldownReduction,int defaultMana, int defaultHealth, int defaultArmor, int defaultMR, int defaultSpeed,
 			double defaultCritDmg, double defaultCritChance, double defaultBurstDmg, double defaultBurstChance, 
-			double defaultCDR, int defaultPhysicalDamage, double lifeSteal, double defaultLifeSteal) {
+			double defaultCDR, int defaultPhysicalDamage, double lifeSteal, double defaultLifeSteal,int defaultMagicDamage) {
 		this.health = health;
 		this.armor = armor;
 		this.magicResist= magicResist;
@@ -66,6 +67,7 @@ public class Stats {
 		this.defaultPhysicalDamage = defaultPhysicalDamage;
 		this.lifeSteal = lifeSteal;
 		this.defaultLifeSteal = defaultLifeSteal;
+		this.defaultMagicDamage = defaultMagicDamage;
 		
 	}
 	
@@ -96,6 +98,7 @@ public class Stats {
 		this.defaultPhysicalDamage = 10;
 		this.lifeSteal = 0;
 		this.defaultLifeSteal = 0;
+		this.defaultMagicDamage = 0;
 		
 	}
 	
@@ -126,6 +129,7 @@ public class Stats {
 		this.defaultPhysicalDamage = 0;
 		this.lifeSteal = 0;
 		this.defaultLifeSteal = 0;
+		this.defaultMagicDamage = 0;
 		
 	}
 
@@ -153,7 +157,7 @@ public class Stats {
 		return defaultMR;
 	}
 
-	public int getDefaultSpeed() {
+	public double getDefaultSpeed() {
 		return defaultSpeed;
 	}
 
@@ -197,7 +201,7 @@ public class Stats {
 		this.defaultMR = defaultMR;
 	}
 
-	public void setDefaultSpeed(int defaultSpeed) {
+	public void setDefaultSpeed(double defaultSpeed) {
 		this.defaultSpeed = defaultSpeed;
 	}
 
@@ -269,12 +273,12 @@ public class Stats {
 		this.magicDamage = magicDamage;
 	}
 
-	public int getSpeed() {
+	public double getSpeed() {
 		return speed;
 	}
 
-	public void setSpeed(int speed) {
-		this.speed = speed;
+	public void setSpeed(double d) {
+		this.speed = d;
 	}
 
 	public int getPhysicalDamage() {
@@ -418,6 +422,14 @@ public class Stats {
 	public void levelUpFishing(int level) {
 		int scalar = (level+"").length();
 		
+	}
+
+	public int getDefaultMagicDamage() {
+		return defaultMagicDamage;
+	}
+
+	public void setDefaultMagicDamage(int defaultMagicDamage) {
+		this.defaultMagicDamage = defaultMagicDamage;
 	}
 
 }

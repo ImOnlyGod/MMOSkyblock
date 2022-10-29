@@ -1,13 +1,14 @@
 package CustomEssentials.Events;
 
+import java.io.File;
 import java.util.Random;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.craftbukkit.v1_17_R1.entity.CraftArmorStand;
-import org.bukkit.craftbukkit.v1_17_R1.entity.CraftEntity;
 import org.bukkit.craftbukkit.v1_17_R1.entity.CraftFireball;
 import org.bukkit.craftbukkit.v1_17_R1.entity.CraftProjectile;
 import org.bukkit.entity.ArmorStand;
@@ -16,7 +17,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
-import org.bukkit.entity.Skeleton;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -32,6 +32,7 @@ import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.event.player.PlayerFishEvent.State;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 
 import CustomEssentials.Main;
@@ -59,21 +60,17 @@ public class EventsClass implements Listener{
 		this.plugin = plugin;
 	}
 	
-
-	@EventHandler
-	public void onJoin(PlayerJoinEvent event) {
-		
-		Player p = event.getPlayer();
+	public void initialisePlayerProfile(Player p) {
 		PlayerProfileManager profiles = this.plugin.getProfileManager();
 		
 		if (!profiles.hasProfile(p)) {
 			profiles.createPlayerProfile(p);
 		}		
 		
-		Health playerHealth =  new Health();
+	    Health playerHealth =  new Health();
 		//AttackDamage playerDamage = new AttackDamage();
 		Defence playerArmor = new Defence();
-		Speed playerSpeed = new Speed();
+		//Speed playerSpeed = new Speed();
 		
 		Profile playerProfile = profiles.getPlayerProfile(p);
 		Stats stats = playerProfile.getStats();
@@ -83,14 +80,31 @@ public class EventsClass implements Listener{
 		int magicResist = stats.getMagicResist();
 		int physicalDamage = stats.getPhysicalDamage() + playerProfile.getPath().getStats().getPhysicalDamage();
 		int magicDamage = stats.getMagicDamage();
-		int speed = stats.getSpeed();
 		
 		playerHealth.setPlayerHealth(p, health);
 		playerArmor.setArmor(p, armor, magicResist);
 		p.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(physicalDamage);
-		playerSpeed.setPlayerSpeed(p, speed);
+	}
+
+	@EventHandler
+	public void onJoin(PlayerJoinEvent event) {
 		
+		Player p = event.getPlayer();		
+		this.plugin.readPlayerProfile(p);
+
+		
+		initialisePlayerProfile(p);		
 					
+	}
+	
+	@EventHandler
+	public void onLeave(PlayerQuitEvent event) {
+		Player p = event.getPlayer();
+		PlayerProfileManager profiles = this.plugin.getProfileManager();
+		File directory = this.plugin.getFolderLocation();
+		
+		this.plugin.writePlayerFile(directory, p);
+		
 	}
 	
 	

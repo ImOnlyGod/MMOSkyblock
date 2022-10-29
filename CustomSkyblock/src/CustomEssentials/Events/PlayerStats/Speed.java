@@ -7,13 +7,13 @@ public class Speed implements Listener{
 
 	public void setInitalSpeed(Player player) {
 		
-		player.setWalkSpeed(100);
+		player.setWalkSpeed(1);
 		
 	}
 
 	public void setPlayerSpeed(Player p, int speed) {
 		
-		p.setWalkSpeed(speed);
+		p.setWalkSpeed(1);
 		
 	}
 

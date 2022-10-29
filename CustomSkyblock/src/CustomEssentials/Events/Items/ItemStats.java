@@ -31,11 +31,11 @@ public class ItemStats {
 		stats.setArmor(stats.getDefaultArmor() + pathStats.getDefaultArmor());
 		stats.setMagicResist(stats.getDefaultMR() + pathStats.getDefaultMR() + pathStats.getMagicResist());
 		stats.setHealth(stats.getDefaultHealth() + pathStats.getDefaultHealth());
+		stats.setSpeed(stats.getDefaultSpeed() + pathStats.getDefaultSpeed());
 		p.getAttribute(Attribute.GENERIC_ARMOR).setBaseValue(stats.getArmor() + pathStats.getArmor());
 		p.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(stats.getHealth() + pathStats.getHealth());
-		p.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(stats.getPhysicalDamage()  +  pathStats.getPhysicalDamage());		
-		
-		
+		p.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(stats.getPhysicalDamage()  +  pathStats.getPhysicalDamage());	
+		p.setWalkSpeed((float) ((stats.getSpeed() + pathStats.getSpeed())/500f));
 	}
 	
 	public void setItemStats() {

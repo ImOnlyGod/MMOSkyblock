@@ -65,7 +65,7 @@ public class MenuGui implements TabExecutor{
 		int magicDamage = profile.getStats().getMagicDamage();
 		int armor = profile.getStats().getArmor();
 		int magicResist = profile.getStats().getMagicResist();
-		int speed = profile.getStats().getSpeed();
+		double speed = profile.getStats().getSpeed();
 		double critChance = Math.round(profile.getStats().getCriticalChance()*100.0)/100.0;
 		double critDamage = Math.round(profile.getStats().getCriticalDamage()*100)/100.0;
 		double burstChance = Math.round(profile.getStats().getBurstChance()*100)/100.0;
