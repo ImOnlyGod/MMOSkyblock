@@ -287,6 +287,8 @@ public class EventsClass implements Listener{
 		if (e.getEntityType().equals(EntityType.ARMOR_STAND) || (e.getEntity() instanceof CraftArmorStand)) return;
 		
 		//COMPRESS INTO ONE FUNCTION!
+		if (!(e.getEntity() instanceof LivingEntity)) return;
+		
 		LivingEntity entity = (LivingEntity) e.getEntity();		
 		
 		if ((e.getEntityType() != EntityType.PLAYER)) {

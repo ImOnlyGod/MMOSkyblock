@@ -34,13 +34,15 @@ public class Stats {
 	private double defaultBurstChance;
 	private double defaultCDR;
 	private double defaultLifeSteal;
+	private int manaRegen;
+	private int defaultManaRegen;
 	
 
 	public Stats(int health, int armor, int magicResist, int physicalDamage, int magicDamage, int mana, int totalMana,
 			int speed, double criticalDamage, double criticalChance, double burstDamage, double burstChance, 
 			int cooldownReduction,int defaultMana, int defaultHealth, int defaultArmor, int defaultMR, int defaultSpeed,
 			double defaultCritDmg, double defaultCritChance, double defaultBurstDmg, double defaultBurstChance, 
-			double defaultCDR, int defaultPhysicalDamage, double lifeSteal, double defaultLifeSteal,int defaultMagicDamage) {
+			double defaultCDR, int defaultPhysicalDamage, double lifeSteal, double defaultLifeSteal,int defaultMagicDamage, int manaRegen, int defaultManaRegen) {
 		this.health = health;
 		this.armor = armor;
 		this.magicResist= magicResist;
@@ -68,6 +70,8 @@ public class Stats {
 		this.lifeSteal = lifeSteal;
 		this.defaultLifeSteal = defaultLifeSteal;
 		this.defaultMagicDamage = defaultMagicDamage;
+		this.manaRegen = manaRegen;
+		this.defaultManaRegen = defaultManaRegen;
 		
 	}
 	
@@ -99,6 +103,8 @@ public class Stats {
 		this.lifeSteal = 0;
 		this.defaultLifeSteal = 0;
 		this.defaultMagicDamage = 0;
+		this.manaRegen = 1;
+		this.defaultManaRegen = 1;
 		
 	}
 	
@@ -130,6 +136,8 @@ public class Stats {
 		this.lifeSteal = 0;
 		this.defaultLifeSteal = 0;
 		this.defaultMagicDamage = 0;
+		this.manaRegen = 0;
+		this.defaultManaRegen = 0;
 		
 	}
 
@@ -430,6 +438,22 @@ public class Stats {
 
 	public void setDefaultMagicDamage(int defaultMagicDamage) {
 		this.defaultMagicDamage = defaultMagicDamage;
+	}
+
+	public int getManaRegen() {
+		return manaRegen;
+	}
+
+	public void setManaRegen(int manaRegen) {
+		this.manaRegen = manaRegen;
+	}
+
+	public int getDefaultManaRegen() {
+		return defaultManaRegen;
+	}
+
+	public void setDefaultManaRegen(int defaultManaRegen) {
+		this.defaultManaRegen = defaultManaRegen;
 	}
 
 }

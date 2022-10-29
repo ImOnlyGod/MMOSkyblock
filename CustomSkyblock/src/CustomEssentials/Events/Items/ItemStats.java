@@ -32,6 +32,7 @@ public class ItemStats {
 		stats.setMagicResist(stats.getDefaultMR() + pathStats.getDefaultMR() + pathStats.getMagicResist());
 		stats.setHealth(stats.getDefaultHealth() + pathStats.getDefaultHealth());
 		stats.setSpeed(stats.getDefaultSpeed() + pathStats.getDefaultSpeed());
+		stats.setManaRegen(Math.max(1,stats.getDefaultManaRegen()+pathStats.getManaRegen()));
 		p.getAttribute(Attribute.GENERIC_ARMOR).setBaseValue(stats.getArmor() + pathStats.getArmor());
 		p.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(stats.getHealth() + pathStats.getHealth());
 		p.setHealthScaled(true);

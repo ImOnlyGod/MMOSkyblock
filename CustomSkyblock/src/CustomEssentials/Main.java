@@ -78,13 +78,14 @@ public class Main extends JavaPlugin{
 				Stats stats = profileManager.getPlayerProfile(p).getStats();
 				Stats pathStats = profileManager.getPlayerProfile(p).getPath().getStats();
 				int currentMana = stats.getMana();
+				int manaRegen = stats.getManaRegen();
 				int TotalMana = stats.getTotalMana();
 				
 				//Sets item stats
 				ItemStats setStats = new ItemStats(p,profileManager);
 				setStats.setItemStats();		
 				
-				if (currentMana < TotalMana) stats.setMana(currentMana+1);
+				if (currentMana < TotalMana) stats.setMana(currentMana+Math.max(manaRegen, 1));
 				
 								
 				String health = HealthUtils.getActionBarHealthText(p);
@@ -274,6 +275,7 @@ public class Main extends JavaPlugin{
 			playerData.set("Stats.Burst_Chance", stats.getBurstChance());
 			playerData.set("Stats.CooldownReduction", stats.getCooldownReduction());
 			playerData.set("Stats.LifeSteal", stats.getLifeSteal());
+			playerData.set("Stats.ManaRegen", stats.getManaRegen());
 			playerData.set("Stats.DefaultHealth", stats.getDefaultHealth());
 			playerData.set("Stats.DefaultArmor", stats.getDefaultArmor());
 			playerData.set("Stats.DefaultMagicResist", stats.getDefaultMR());
@@ -287,6 +289,7 @@ public class Main extends JavaPlugin{
 			playerData.set("Stats.DefaultBurst_Chance", stats.getDefaultBurstChance());
 			playerData.set("Stats.DefaultCooldownReduction", stats.getDefaultCDR());
 			playerData.set("Stats.DefaultLifeSteal", stats.getDefaultLifeSteal());
+			playerData.set("Stats.DefaultManaRegen", stats.getDefaultManaRegen());
 			
 			playerData.set("CombatSkill.level", combat.getLevel());
 			playerData.set("FarmingSkill.level", farming.getLevel());
@@ -371,6 +374,7 @@ public class Main extends JavaPlugin{
 		stats.setBurstChance((double) playerData.get("Stats.Burst_Chance"));
 		stats.setCooldownReduction(playerData.getInt("Stats.CooldownReduction"));
 		stats.setLifeSteal((double) playerData.get("Stats.LifeSteal"));
+		stats.setManaRegen(playerData.getInt("Stats.ManaRegen"));
 		
 		stats.setDefaultHealth(playerData.getInt("Stats.DefaultHealth"));
 		stats.setDefaultArmor(playerData.getInt("Stats.DefaultArmor"));
@@ -385,6 +389,7 @@ public class Main extends JavaPlugin{
 		stats.setDefaultBurstChance((double) playerData.get("Stats.DefaultBurst_Chance"));
 		stats.setDefaultCDR(playerData.getInt("Stats.DefaultCooldownReduction"));
 		stats.setDefaultLifeSteal((double) playerData.get("Stats.DefaultLifeSteal"));
+		stats.setDefaultManaRegen(playerData.getInt("Stats.DefaultManaRegen"));
 		
 		combat.setLevel(playerData.getInt("CombatSkill.level"));
 		farming.setLevel(playerData.getInt("FarmingSkill.level"));
