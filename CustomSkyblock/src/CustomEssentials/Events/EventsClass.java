@@ -67,23 +67,6 @@ public class EventsClass implements Listener{
 			profiles.createPlayerProfile(p);
 		}		
 		
-	    Health playerHealth =  new Health();
-		//AttackDamage playerDamage = new AttackDamage();
-		Defence playerArmor = new Defence();
-		//Speed playerSpeed = new Speed();
-		
-		Profile playerProfile = profiles.getPlayerProfile(p);
-		Stats stats = playerProfile.getStats();
-		
-		int health = stats.getHealth();
-		int armor = stats.getArmor();
-		int magicResist = stats.getMagicResist();
-		int physicalDamage = stats.getPhysicalDamage() + playerProfile.getPath().getStats().getPhysicalDamage();
-		int magicDamage = stats.getMagicDamage();
-		
-		playerHealth.setPlayerHealth(p, health);
-		playerArmor.setArmor(p, armor, magicResist);
-		p.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(physicalDamage);
 	}
 
 	@EventHandler
@@ -92,7 +75,6 @@ public class EventsClass implements Listener{
 		Player p = event.getPlayer();		
 		this.plugin.readPlayerProfile(p);
 
-		
 		initialisePlayerProfile(p);		
 					
 	}
@@ -229,19 +211,28 @@ public class EventsClass implements Listener{
 	
 	@EventHandler
 	public void onMobKill(EntityDeathEvent e) {
-				
+		
+		if (!(e.getEntity() instanceof LivingEntity)) return;
+		
 		LivingEntity mob = e.getEntity();
 		
-		if (mob.getType().equals(EntityType.CREEPER) && (e.getEntity().getKiller() != null)) {
+		if (!(mob.getKiller() instanceof Player)) return;
 			
-			Player p = e.getEntity().getKiller();
-			Profile profile = plugin.getProfileManager().getPlayerProfile(p);
+		if (!(mob.getType().equals(EntityType.CREEPER) ||
+			mob.getType().equals(EntityType.ZOMBIE) ||
+			mob.getType().equals(EntityType.SKELETON))) return;
 			
-			plugin.setDisplayStats(4);
-			Double xpAmount = profile.getCombat().getXPamount(mob.getType());
+		Player p = mob.getKiller();	
+		Profile profile = plugin.getProfileManager().getPlayerProfile(p);
+				
+		plugin.setDisplayStats(4);
+		Double xpAmount = profile.getCombat().getXPamount(mob.getType());
+				
+		profile.getCombat().addCurrentXP(xpAmount);
+		
 			
-			profile.getCombat().addCurrentXP(xpAmount);
-		}
+		
+		
 	}
 	
 	@EventHandler

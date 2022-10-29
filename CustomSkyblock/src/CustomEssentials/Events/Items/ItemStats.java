@@ -34,6 +34,8 @@ public class ItemStats {
 		stats.setSpeed(stats.getDefaultSpeed() + pathStats.getDefaultSpeed());
 		p.getAttribute(Attribute.GENERIC_ARMOR).setBaseValue(stats.getArmor() + pathStats.getArmor());
 		p.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(stats.getHealth() + pathStats.getHealth());
+		p.setHealthScaled(true);
+		p.setHealthScale(20);
 		p.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(stats.getPhysicalDamage()  +  pathStats.getPhysicalDamage());	
 		p.setWalkSpeed((float) ((stats.getSpeed() + pathStats.getSpeed())/500f));
 	}
