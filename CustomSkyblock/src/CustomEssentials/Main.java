@@ -1,5 +1,7 @@
 package CustomEssentials;
 
+import java.io.File;
+
 import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
@@ -179,8 +181,10 @@ public class Main extends JavaPlugin{
 	}
 	
 	
-	public void onDisable() {
-		getServer().getConsoleSender().sendMessage(Utils.chat("&cPlugin has been disabled!"));
+	public void onDisable() {		
+		
+		savePlayerData();
+		getServer().getConsoleSender().sendMessage("Plugin has been disabled!");
 		
 	}
 	
@@ -205,6 +209,15 @@ public class Main extends JavaPlugin{
 		this.displayStats = displayStats;
 	}
 
+	public void savePlayerData() {
+		String path = this.getDataFolder().getPath();
+		File directory = new File(path.concat("\\PlayerData"));
+		
+		if (!directory.exists()) directory.mkdir();
+		
+		
+
+	}
 
 }
 	
