@@ -20,6 +20,7 @@ import CustomEssentials.Events.Gui.MenuGui;
 import CustomEssentials.Events.Gui.PathSelectionGui;
 import CustomEssentials.Events.Gui.SkillsGui;
 import CustomEssentials.Events.Items.ItemStats;
+import CustomEssentials.Events.PlayerPath.Paths.Path;
 import CustomEssentials.Events.PlayerSkills.Skills;
 import CustomEssentials.Events.PlayerStats.Stats;
 import CustomEssentials.Utils.ArmorUtils;
@@ -259,6 +260,10 @@ public class Main extends JavaPlugin{
 			playerData.createSection("FishingSkill");
 			playerData.createSection("ForagingSkill");
 			playerData.createSection("MiningSkill");
+			playerData.createSection("GeneralPath");
+			playerData.createSection("TankPath");
+			playerData.createSection("ArcherPath");
+			playerData.createSection("AssassinPath");
 			
 			playerData.set("General.PlayTime", profile.getPlayTime());
 			playerData.set("Stats.Health", stats.getHealth());
@@ -309,6 +314,156 @@ public class Main extends JavaPlugin{
 			playerData.set("ForagingSkill.MaxXp", foraging.getMaxXP());
 			playerData.set("MiningSkill.MaxXp", mining.getMaxXP());
 			
+			//CURRENT PATH
+			playerData.set("GeneralPath.Name", profile.getPath().getName());
+			playerData.set("GeneralPath.level", profile.getPath().getLevel());
+			playerData.set("GeneralPath.xp", profile.getPath().getCurrentXP());
+			playerData.set("GeneralPath.MaxXp", profile.getPath().getMaxXP());
+			playerData.set("GeneralPath.prestige", profile.getPath().getPrestige());
+			playerData.set("GeneralPath.Health", pathStats.getHealth());
+			playerData.set("GeneralPath.Armor", pathStats.getArmor());
+			playerData.set("GeneralPath.MagicResist", pathStats.getMagicResist());
+			playerData.set("GeneralPath.PhysicalDamage", pathStats.getPhysicalDamage());
+			playerData.set("GeneralPath.MagicDamage", pathStats.getMagicDamage());
+			playerData.set("GeneralPath.Mana", pathStats.getMana());
+			playerData.set("GeneralPath.TotalMana", pathStats.getTotalMana());
+			playerData.set("GeneralPath.Speed", pathStats.getSpeed());
+			playerData.set("GeneralPath.Crit_Damage", pathStats.getCriticalDamage());
+			playerData.set("GeneralPath.Crit_Chance", pathStats.getCriticalChance());
+			playerData.set("GeneralPath.Burst_Damage", pathStats.getBurstDamage());
+			playerData.set("GeneralPath.Burst_Chance", pathStats.getBurstChance());
+			playerData.set("GeneralPath.CooldownReduction", pathStats.getCooldownReduction());
+			playerData.set("GeneralPath.LifeSteal", pathStats.getLifeSteal());
+			playerData.set("GeneralPath.ManaRegen", pathStats.getManaRegen());
+			playerData.set("GeneralPath.DefaultHealth", pathStats.getDefaultHealth());
+			playerData.set("GeneralPath.DefaultArmor", pathStats.getDefaultArmor());
+			playerData.set("GeneralPath.DefaultMagicResist", pathStats.getDefaultMR());
+			playerData.set("GeneralPath.DefaultPhysicalDamage", pathStats.getDefaultPhysicalDamage());
+			playerData.set("GeneralPath.DefaultMagicDamage", pathStats.getDefaultMagicDamage());
+			playerData.set("GeneralPath.DefaultMana", pathStats.getDefaultMana());
+			playerData.set("GeneralPath.DefaultSpeed", pathStats.getDefaultSpeed());
+			playerData.set("GeneralPath.DefaultCrit_Damage", pathStats.getDefaultCritDmg());
+			playerData.set("GeneralPath.DefaultCrit_Chance", pathStats.getDefaultCritChance());
+			playerData.set("GeneralPath.DefaultBurst_Damage", pathStats.getDefaultBurstDmg());
+			playerData.set("GeneralPath.DefaultBurst_Chance", pathStats.getDefaultBurstChance());
+			playerData.set("GeneralPath.DefaultCooldownReduction", pathStats.getDefaultCDR());
+			playerData.set("GeneralPath.DefaultLifeSteal", pathStats.getDefaultLifeSteal());
+			playerData.set("GeneralPath.DefaultManaRegen", pathStats.getDefaultManaRegen());
+			
+			Path tankPath = profile.getPaths().get("tank");	
+			Stats tankStats = tankPath.getStats();
+			//TANK PATH
+			playerData.set("TankPath.Name", tankPath.getName());
+			playerData.set("TankPath.level", tankPath.getLevel());
+			playerData.set("TankPath.xp",tankPath.getCurrentXP());
+			playerData.set("TankPath.MaxXp", tankPath.getMaxXP());
+			playerData.set("TankPath.prestige", tankPath.getPrestige());
+			playerData.set("TankPath.Health", tankStats.getHealth());
+			playerData.set("TankPath.Armor", tankStats.getArmor());
+			playerData.set("TankPath.MagicResist", tankStats.getMagicResist());
+			playerData.set("TankPath.PhysicalDamage", tankStats.getPhysicalDamage());
+			playerData.set("TankPath.MagicDamage", tankStats.getMagicDamage());
+			playerData.set("TankPath.Mana", tankStats.getMana());
+			playerData.set("TankPath.TotalMana", tankStats.getTotalMana());
+			playerData.set("TankPath.Speed", tankStats.getSpeed());
+			playerData.set("TankPath.Crit_Damage", tankStats.getCriticalDamage());
+			playerData.set("TankPath.Crit_Chance", tankStats.getCriticalChance());
+			playerData.set("TankPath.Burst_Damage", tankStats.getBurstDamage());
+			playerData.set("TankPath.Burst_Chance", tankStats.getBurstChance());
+			playerData.set("TankPath.CooldownReduction", tankStats.getCooldownReduction());
+			playerData.set("TankPath.LifeSteal", tankStats.getLifeSteal());
+			playerData.set("TankPath.ManaRegen", tankStats.getManaRegen());
+			playerData.set("TankPath.DefaultHealth", tankStats.getDefaultHealth());
+			playerData.set("TankPath.DefaultArmor", tankStats.getDefaultArmor());
+			playerData.set("TankPath.DefaultMagicResist", tankStats.getDefaultMR());
+			playerData.set("TankPath.DefaultPhysicalDamage", tankStats.getDefaultPhysicalDamage());
+			playerData.set("TankPath.DefaultMagicDamage", tankStats.getDefaultMagicDamage());
+			playerData.set("TankPath.DefaultMana", tankStats.getDefaultMana());
+			playerData.set("TankPath.DefaultSpeed", tankStats.getDefaultSpeed());
+			playerData.set("TankPath.DefaultCrit_Damage", tankStats.getDefaultCritDmg());
+			playerData.set("TankPath.DefaultCrit_Chance", tankStats.getDefaultCritChance());
+			playerData.set("TankPath.DefaultBurst_Damage", tankStats.getDefaultBurstDmg());
+			playerData.set("TankPath.DefaultBurst_Chance", tankStats.getDefaultBurstChance());
+			playerData.set("TankPath.DefaultCooldownReduction", tankStats.getDefaultCDR());
+			playerData.set("TankPath.DefaultLifeSteal", tankStats.getDefaultLifeSteal());
+			playerData.set("TankPath.DefaultManaRegen", tankStats.getDefaultManaRegen());
+			
+			Path archerPath = profile.getPaths().get("archer");	
+			Stats archerStats = archerPath.getStats();
+			//ARCHER PATH
+			playerData.set("ArcherPath.Name", archerPath.getName());
+			playerData.set("ArcherPath.level", archerPath.getLevel());
+			playerData.set("ArcherPath.xp",archerPath.getCurrentXP());
+			playerData.set("ArcherPath.MaxXp", archerPath.getMaxXP());
+			playerData.set("ArcherPath.prestige", archerPath.getPrestige());
+			playerData.set("ArcherPath.Health", archerStats.getHealth());
+			playerData.set("ArcherPath.Armor", archerStats.getArmor());
+			playerData.set("ArcherPath.MagicResist", archerStats.getMagicResist());
+			playerData.set("ArcherPath.PhysicalDamage", archerStats.getPhysicalDamage());
+			playerData.set("ArcherPath.MagicDamage", archerStats.getMagicDamage());
+			playerData.set("ArcherPath.Mana", archerStats.getMana());
+			playerData.set("ArcherPath.TotalMana", archerStats.getTotalMana());
+			playerData.set("ArcherPath.Speed", archerStats.getSpeed());
+			playerData.set("ArcherPath.Crit_Damage", archerStats.getCriticalDamage());
+			playerData.set("ArcherPath.Crit_Chance", archerStats.getCriticalChance());
+			playerData.set("ArcherPath.Burst_Damage", archerStats.getBurstDamage());
+			playerData.set("ArcherPath.Burst_Chance", archerStats.getBurstChance());
+			playerData.set("ArcherPath.CooldownReduction", archerStats.getCooldownReduction());
+			playerData.set("ArcherPath.LifeSteal", archerStats.getLifeSteal());
+			playerData.set("ArcherPath.ManaRegen", archerStats.getManaRegen());
+			playerData.set("ArcherPath.DefaultHealth", archerStats.getDefaultHealth());
+			playerData.set("ArcherPath.DefaultArmor", archerStats.getDefaultArmor());
+			playerData.set("ArcherPath.DefaultMagicResist", archerStats.getDefaultMR());
+			playerData.set("ArcherPath.DefaultPhysicalDamage", archerStats.getDefaultPhysicalDamage());
+			playerData.set("ArcherPath.DefaultMagicDamage", archerStats.getDefaultMagicDamage());
+			playerData.set("ArcherPath.DefaultMana", archerStats.getDefaultMana());
+			playerData.set("ArcherPath.DefaultSpeed", archerStats.getDefaultSpeed());
+			playerData.set("ArcherPath.DefaultCrit_Damage", archerStats.getDefaultCritDmg());
+			playerData.set("ArcherPath.DefaultCrit_Chance", archerStats.getDefaultCritChance());
+			playerData.set("ArcherPath.DefaultBurst_Damage", archerStats.getDefaultBurstDmg());
+			playerData.set("ArcherPath.DefaultBurst_Chance", archerStats.getDefaultBurstChance());
+			playerData.set("ArcherPath.DefaultCooldownReduction", archerStats.getDefaultCDR());
+			playerData.set("ArcherPath.DefaultLifeSteal", archerStats.getDefaultLifeSteal());
+			playerData.set("ArcherPath.DefaultManaRegen", archerStats.getDefaultManaRegen());
+			
+			Path assassinPath = profile.getPaths().get("assassin");	
+			Stats assassinStats = assassinPath.getStats();
+			//ARCHER PATH
+			playerData.set("AssassinPath.Name", assassinPath.getName());
+			playerData.set("AssassinPath.level", assassinPath.getLevel());
+			playerData.set("AssassinPath.xp",assassinPath.getCurrentXP());
+			playerData.set("AssassinPath.MaxXp", assassinPath.getMaxXP());
+			playerData.set("AssassinPath.prestige", assassinPath.getPrestige());
+			playerData.set("AssassinPath.Health", assassinStats.getHealth());
+			playerData.set("AssassinPath.Armor", assassinStats.getArmor());
+			playerData.set("AssassinPath.MagicResist", assassinStats.getMagicResist());
+			playerData.set("AssassinPath.PhysicalDamage", assassinStats.getPhysicalDamage());
+			playerData.set("AssassinPath.MagicDamage", assassinStats.getMagicDamage());
+			playerData.set("AssassinPath.Mana", assassinStats.getMana());
+			playerData.set("AssassinPath.TotalMana", assassinStats.getTotalMana());
+			playerData.set("AssassinPath.Speed", assassinStats.getSpeed());
+			playerData.set("AssassinPath.Crit_Damage", assassinStats.getCriticalDamage());
+			playerData.set("AssassinPath.Crit_Chance", assassinStats.getCriticalChance());
+			playerData.set("AssassinPath.Burst_Damage", assassinStats.getBurstDamage());
+			playerData.set("AssassinPath.Burst_Chance", assassinStats.getBurstChance());
+			playerData.set("AssassinPath.CooldownReduction", assassinStats.getCooldownReduction());
+			playerData.set("AssassinPath.LifeSteal", assassinStats.getLifeSteal());
+			playerData.set("AssassinPath.ManaRegen", assassinStats.getManaRegen());
+			playerData.set("AssassinPath.DefaultHealth", assassinStats.getDefaultHealth());
+			playerData.set("AssassinPath.DefaultArmor", assassinStats.getDefaultArmor());
+			playerData.set("AssassinPath.DefaultMagicResist", assassinStats.getDefaultMR());
+			playerData.set("AssassinPath.DefaultPhysicalDamage", assassinStats.getDefaultPhysicalDamage());
+			playerData.set("AssassinPath.DefaultMagicDamage", assassinStats.getDefaultMagicDamage());
+			playerData.set("AssassinPath.DefaultMana", assassinStats.getDefaultMana());
+			playerData.set("AssassinPath.DefaultSpeed", assassinStats.getDefaultSpeed());
+			playerData.set("AssassinPath.DefaultCrit_Damage", assassinStats.getDefaultCritDmg());
+			playerData.set("AssassinPath.DefaultCrit_Chance", assassinStats.getDefaultCritChance());
+			playerData.set("AssassinPath.DefaultBurst_Damage", assassinStats.getDefaultBurstDmg());
+			playerData.set("AssassinPath.DefaultBurst_Chance", assassinStats.getDefaultBurstChance());
+			playerData.set("AssassinPath.DefaultCooldownReduction", assassinStats.getDefaultCDR());
+			playerData.set("AssassinPath.DefaultLifeSteal", assassinStats.getDefaultLifeSteal());
+			playerData.set("AssassinPath.DefaultManaRegen", assassinStats.getDefaultManaRegen());
+						
 			
 			playerData.save(PlayerFile);
 		} catch (IOException e) {
@@ -408,6 +563,165 @@ public class Main extends JavaPlugin{
 		fishing.setMaxXP((Double) playerData.get("FishingSkill.MaxXp"));
 		foraging.setMaxXP((Double) playerData.get("ForagingSkill.MaxXp"));
 		mining.setMaxXP((Double) playerData.get("MiningSkill.MaxXp"));
+		
+		//GENERAL PATH
+		playerProfile.setPath(playerProfile.getPaths().get(playerData.get("GeneralPath.Name")));
+		Path playerPath = playerProfile.getPath();
+		Stats pathStats = playerPath.getStats();
+		
+		playerPath.setLevel(playerData.getInt("GeneralPath.level"));
+		playerPath.setCurrentXP((Double) playerData.get("GeneralPath.xp"));
+		playerPath.setMaxXP((Double) playerData.get("GeneralPath.MaxXp"));
+		playerPath.setPrestige(playerData.getInt("GeneralPath.prestige"));
+		pathStats.setHealth(playerData.getInt("GeneralPath.Health"));
+		pathStats.setArmor(playerData.getInt("GeneralPath.Armor"));
+		pathStats.setMagicResist(playerData.getInt("GeneralPath.MagicResist"));
+		pathStats.setPhysicalDamage(playerData.getInt("GeneralPath.PhysicalDamage"));
+		pathStats.setMagicDamage(playerData.getInt("GeneralPath.MagicDamage"));
+		pathStats.setMana(playerData.getInt("GeneralPath.Mana"));
+		pathStats.setTotalMana(playerData.getInt("GeneralPath.TotalMana"));
+		pathStats.setSpeed((double) playerData.getInt("GeneralPath.Speed"));
+		pathStats.setCriticalDamage((double) playerData.get("GeneralPath.Crit_Damage"));
+		pathStats.setCriticalChance((double) playerData.get("GeneralPath.Crit_Chance"));
+		pathStats.setBurstDamage((double) playerData.get("GeneralPath.Burst_Damage"));
+		pathStats.setBurstChance((double) playerData.get("GeneralPath.Burst_Chance"));
+		pathStats.setCooldownReduction(playerData.getInt("GeneralPath.CooldownReduction"));
+		pathStats.setLifeSteal((double) playerData.get("GeneralPath.LifeSteal"));
+		pathStats.setManaRegen(playerData.getInt("GeneralPath.ManaRegen"));
+		
+		pathStats.setDefaultHealth(playerData.getInt("GeneralPath.DefaultHealth"));
+		pathStats.setDefaultArmor(playerData.getInt("GeneralPath.DefaultArmor"));
+		pathStats.setDefaultMR(playerData.getInt("GeneralPath.DefaultMagicResist"));
+		pathStats.setDefaultPhysicalDamage(playerData.getInt("GeneralPath.DefaultPhysicalDamage"));
+		pathStats.setDefaultMagicDamage(playerData.getInt("GeneralPath.DefaultMagicDamage"));
+		pathStats.setDefaultMana(playerData.getInt("GeneralPath.DefaultMana"));
+		pathStats.setDefaultSpeed(playerData.getInt("GeneralPath.DefaultSpeed"));
+		pathStats.setDefaultCritDmg((double) playerData.get("GeneralPath.DefaultCrit_Damage"));
+		pathStats.setDefaultCritChance((double) playerData.get("GeneralPath.DefaultCrit_Chance"));
+		pathStats.setDefaultBurstDmg((double) playerData.get("GeneralPath.DefaultBurst_Damage"));
+		pathStats.setDefaultBurstChance((double) playerData.get("GeneralPath.DefaultBurst_Chance"));
+		pathStats.setDefaultCDR(playerData.getInt("GeneralPath.DefaultCooldownReduction"));
+		pathStats.setDefaultLifeSteal((double) playerData.get("GeneralPath.DefaultLifeSteal"));
+		pathStats.setDefaultManaRegen(playerData.getInt("GeneralPath.DefaultManaRegen"));
+
+		//TANK PATH
+		Path tankPath = playerProfile.getPaths().get("tank");
+		Stats tankStats = tankPath.getStats();
+		
+		tankPath.setLevel(playerData.getInt("TankPath.level"));
+		tankPath.setCurrentXP((Double) playerData.get("TankPath.xp"));
+		tankPath.setMaxXP((Double) playerData.get("TankPath.MaxXp"));
+		tankPath.setPrestige(playerData.getInt("TankPath.prestige"));
+		tankStats.setHealth(playerData.getInt("TankPath.Health"));
+		tankStats.setArmor(playerData.getInt("TankPath.Armor"));
+		tankStats.setMagicResist(playerData.getInt("TankPath.MagicResist"));
+		tankStats.setPhysicalDamage(playerData.getInt("TankPath.PhysicalDamage"));
+		tankStats.setMagicDamage(playerData.getInt("TankPath.MagicDamage"));
+		tankStats.setMana(playerData.getInt("TankPath.Mana"));
+		tankStats.setTotalMana(playerData.getInt("TankPath.TotalMana"));
+		tankStats.setSpeed((double) playerData.getInt("TankPath.Speed"));
+		tankStats.setCriticalDamage((double) playerData.get("TankPath.Crit_Damage"));
+		tankStats.setCriticalChance((double) playerData.get("TankPath.Crit_Chance"));
+		tankStats.setBurstDamage((double) playerData.get("TankPath.Burst_Damage"));
+		tankStats.setBurstChance((double) playerData.get("TankPath.Burst_Chance"));
+		tankStats.setCooldownReduction(playerData.getInt("TankPath.CooldownReduction"));
+		tankStats.setLifeSteal((double) playerData.get("TankPath.LifeSteal"));
+		tankStats.setManaRegen(playerData.getInt("TankPath.ManaRegen"));
+		
+		tankStats.setDefaultHealth(playerData.getInt("TankPath.DefaultHealth"));
+		tankStats.setDefaultArmor(playerData.getInt("TankPath.DefaultArmor"));
+		tankStats.setDefaultMR(playerData.getInt("TankPath.DefaultMagicResist"));
+		tankStats.setDefaultPhysicalDamage(playerData.getInt("TankPath.DefaultPhysicalDamage"));
+		tankStats.setDefaultMagicDamage(playerData.getInt("TankPath.DefaultMagicDamage"));
+		tankStats.setDefaultMana(playerData.getInt("TankPath.DefaultMana"));
+		tankStats.setDefaultSpeed(playerData.getInt("TankPath.DefaultSpeed"));
+		tankStats.setDefaultCritDmg((double) playerData.get("TankPath.DefaultCrit_Damage"));
+		tankStats.setDefaultCritChance((double) playerData.get("TankPath.DefaultCrit_Chance"));
+		tankStats.setDefaultBurstDmg((double) playerData.get("TankPath.DefaultBurst_Damage"));
+		tankStats.setDefaultBurstChance((double) playerData.get("TankPath.DefaultBurst_Chance"));
+		tankStats.setDefaultCDR(playerData.getInt("TankPath.DefaultCooldownReduction"));
+		tankStats.setDefaultLifeSteal((double) playerData.get("TankPath.DefaultLifeSteal"));
+		tankStats.setDefaultManaRegen(playerData.getInt("TankPath.DefaultManaRegen"));
+		
+		//ARCHER PATH
+		Path archerPath = playerProfile.getPaths().get("archer");
+		Stats archerStats = archerPath.getStats();
+		
+		archerPath.setLevel(playerData.getInt("ArcherPath.level"));
+		archerPath.setCurrentXP((Double) playerData.get("ArcherPath.xp"));
+		archerPath.setMaxXP((Double) playerData.get("ArcherPath.MaxXp"));
+		archerPath.setPrestige(playerData.getInt("ArcherPath.prestige"));
+		archerStats.setHealth(playerData.getInt("ArcherPath.Health"));
+		archerStats.setArmor(playerData.getInt("ArcherPath.Armor"));
+		archerStats.setMagicResist(playerData.getInt("ArcherPath.MagicResist"));
+		archerStats.setPhysicalDamage(playerData.getInt("ArcherPath.PhysicalDamage"));
+		archerStats.setMagicDamage(playerData.getInt("ArcherPath.MagicDamage"));
+		archerStats.setMana(playerData.getInt("ArcherPath.Mana"));
+		archerStats.setTotalMana(playerData.getInt("ArcherPath.TotalMana"));
+		archerStats.setSpeed((double) playerData.getInt("ArcherPath.Speed"));
+		archerStats.setCriticalDamage((double) playerData.get("ArcherPath.Crit_Damage"));
+		archerStats.setCriticalChance((double) playerData.get("ArcherPath.Crit_Chance"));
+		archerStats.setBurstDamage((double) playerData.get("ArcherPath.Burst_Damage"));
+		archerStats.setBurstChance((double) playerData.get("ArcherPath.Burst_Chance"));
+		archerStats.setCooldownReduction(playerData.getInt("ArcherPath.CooldownReduction"));
+		archerStats.setLifeSteal((double) playerData.get("ArcherPath.LifeSteal"));
+		archerStats.setManaRegen(playerData.getInt("ArcherPath.ManaRegen"));
+		
+		archerStats.setDefaultHealth(playerData.getInt("ArcherPath.DefaultHealth"));
+		archerStats.setDefaultArmor(playerData.getInt("ArcherPath.DefaultArmor"));
+		archerStats.setDefaultMR(playerData.getInt("ArcherPath.DefaultMagicResist"));
+		archerStats.setDefaultPhysicalDamage(playerData.getInt("ArcherPath.DefaultPhysicalDamage"));
+		archerStats.setDefaultMagicDamage(playerData.getInt("ArcherPath.DefaultMagicDamage"));
+		archerStats.setDefaultMana(playerData.getInt("ArcherPath.DefaultMana"));
+		archerStats.setDefaultSpeed(playerData.getInt("ArcherPath.DefaultSpeed"));
+		archerStats.setDefaultCritDmg((double) playerData.get("ArcherPath.DefaultCrit_Damage"));
+		archerStats.setDefaultCritChance((double) playerData.get("ArcherPath.DefaultCrit_Chance"));
+		archerStats.setDefaultBurstDmg((double) playerData.get("ArcherPath.DefaultBurst_Damage"));
+		archerStats.setDefaultBurstChance((double) playerData.get("ArcherPath.DefaultBurst_Chance"));
+		archerStats.setDefaultCDR(playerData.getInt("ArcherPath.DefaultCooldownReduction"));
+		archerStats.setDefaultLifeSteal((double) playerData.get("ArcherPath.DefaultLifeSteal"));
+		archerStats.setDefaultManaRegen(playerData.getInt("ArcherPath.DefaultManaRegen"));
+		
+		//ASSASSIN PATH
+		Path assassinPath = playerProfile.getPaths().get("assassin");
+		Stats assassinStats = assassinPath.getStats();
+		
+		assassinPath.setLevel(playerData.getInt("AssassinPath.level"));
+		assassinPath.setCurrentXP((Double) playerData.get("AssassinPath.xp"));
+		assassinPath.setMaxXP((Double) playerData.get("AssassinPath.MaxXp"));
+		assassinPath.setPrestige(playerData.getInt("AssassinPath.prestige"));
+		assassinStats.setHealth(playerData.getInt("AssassinPath.Health"));
+		assassinStats.setArmor(playerData.getInt("AssassinPath.Armor"));
+		assassinStats.setMagicResist(playerData.getInt("AssassinPath.MagicResist"));
+		assassinStats.setPhysicalDamage(playerData.getInt("AssassinPath.PhysicalDamage"));
+		assassinStats.setMagicDamage(playerData.getInt("AssassinPath.MagicDamage"));
+		assassinStats.setMana(playerData.getInt("AssassinPath.Mana"));
+		assassinStats.setTotalMana(playerData.getInt("AssassinPath.TotalMana"));
+		assassinStats.setSpeed((double) playerData.getInt("AssassinPath.Speed"));
+		assassinStats.setCriticalDamage((double) playerData.get("AssassinPath.Crit_Damage"));
+		assassinStats.setCriticalChance((double) playerData.get("AssassinPath.Crit_Chance"));
+		assassinStats.setBurstDamage((double) playerData.get("AssassinPath.Burst_Damage"));
+		assassinStats.setBurstChance((double) playerData.get("AssassinPath.Burst_Chance"));
+		assassinStats.setCooldownReduction(playerData.getInt("AssassinPath.CooldownReduction"));
+		assassinStats.setLifeSteal((double) playerData.get("AssassinPath.LifeSteal"));
+		assassinStats.setManaRegen(playerData.getInt("AssassinPath.ManaRegen"));
+		
+		assassinStats.setDefaultHealth(playerData.getInt("AssassinPath.DefaultHealth"));
+		assassinStats.setDefaultArmor(playerData.getInt("AssassinPath.DefaultArmor"));
+		assassinStats.setDefaultMR(playerData.getInt("AssassinPath.DefaultMagicResist"));
+		assassinStats.setDefaultPhysicalDamage(playerData.getInt("AssassinPath.DefaultPhysicalDamage"));
+		assassinStats.setDefaultMagicDamage(playerData.getInt("AssassinPath.DefaultMagicDamage"));
+		assassinStats.setDefaultMana(playerData.getInt("AssassinPath.DefaultMana"));
+		assassinStats.setDefaultSpeed(playerData.getInt("AssassinPath.DefaultSpeed"));
+		assassinStats.setDefaultCritDmg((double) playerData.get("AssassinPath.DefaultCrit_Damage"));
+		assassinStats.setDefaultCritChance((double) playerData.get("AssassinPath.DefaultCrit_Chance"));
+		assassinStats.setDefaultBurstDmg((double) playerData.get("AssassinPath.DefaultBurst_Damage"));
+		assassinStats.setDefaultBurstChance((double) playerData.get("AssassinPath.DefaultBurst_Chance"));
+		assassinStats.setDefaultCDR(playerData.getInt("AssassinPath.DefaultCooldownReduction"));
+		assassinStats.setDefaultLifeSteal((double) playerData.get("AssassinPath.DefaultLifeSteal"));
+		assassinStats.setDefaultManaRegen(playerData.getInt("AssassinPath.DefaultManaRegen"));
+		
+		
 	}
 	
 	public File getFolderLocation() {

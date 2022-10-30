@@ -119,17 +119,17 @@ public class EventsClass implements Listener{
 			ItemStack assassin = e.getInventory().getItem(22);
 			
 			if (e.getCurrentItem().isSimilar(tank) && (!(profile.getPath() instanceof Tank))) {
-				profile.setPath(new Tank());
+				profile.setPath(profile.getPaths().get("tank"));
 				p.sendMessage(Utils.chat("&7&lYou have chosen the &a&lTank &7&lPath."));
 			}
 			
 			if (e.getCurrentItem().isSimilar(archer) && (!(profile.getPath() instanceof Archer))) {
-				profile.setPath(new Archer());
+				profile.setPath(profile.getPaths().get("archer"));
 				p.sendMessage(Utils.chat("&7&lYou have chosen the &6&lArcher &7&lPath."));
 			}
 			
 			if (e.getCurrentItem().isSimilar(assassin) && (!(profile.getPath() instanceof Assassin))) {
-				profile.setPath(new Assassin());
+				profile.setPath(profile.getPaths().get("assassin"));
 				p.sendMessage(Utils.chat("&7&lYou have chosen the &4&lAssassin &7&lPath."));
 			}
 						

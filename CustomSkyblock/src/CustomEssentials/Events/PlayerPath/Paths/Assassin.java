@@ -9,6 +9,7 @@ public class Assassin extends Path{
 		Stats stats = this.getStats();
 		stats.setDefaultPhysicalDamage(300);
 		stats.setDefaultMana(300);
+		this.setName("assassin");
 		
 	}
 		

@@ -3,6 +3,7 @@ package CustomEssentials.Events.PlayerPath.Paths;
 import CustomEssentials.Events.PlayerStats.Stats;
 
 public class Tank extends Path{
+	
 
 	public Tank() {
 		super();
@@ -11,6 +12,7 @@ public class Tank extends Path{
 		stats.setDefaultArmor(50);
 		stats.setDefaultMR(35);
 		stats.setDefaultMana(300);
+		this.setName("tank");
 		
 	}
 		

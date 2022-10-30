@@ -9,6 +9,7 @@ public abstract class Path {
 	private Double maxXP;
 	private int prestige;
 	private Stats stats;
+	private String name = "path";
 	
 	public Path() {
 		
@@ -79,6 +80,14 @@ public abstract class Path {
 
 	public void setPrestige(int prestige) {
 		this.prestige = prestige;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

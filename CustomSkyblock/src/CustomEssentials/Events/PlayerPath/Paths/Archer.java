@@ -11,8 +11,8 @@ public class Archer extends Path{
 		stats.setDefaultHealth(100);
 		stats.setDefaultArmor(10);
 		stats.setDefaultMR(10);
-		stats.setDefaultMana(300);
-		
+		stats.setDefaultMana(350);
+		this.setName("archer");
 	}
 		
 	public void levelUpStats() {

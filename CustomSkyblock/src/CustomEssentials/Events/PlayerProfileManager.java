@@ -29,7 +29,7 @@ public class PlayerProfileManager {
 	
 	public void createPlayerProfile(Player p) {
 		
-		Profile newProfile = new Profile(new Stats(), new MiningSkill(), new CombatSkill(), new FarmingSkill(), new FishingSkill(), new ForagingSkill(),0, new Default());
+		Profile newProfile = new Profile(new Stats(), new MiningSkill(), new CombatSkill(), new FarmingSkill(), new FishingSkill(), new ForagingSkill(),0);
 		UUID playerID = p.getUniqueId();
 		
 		
