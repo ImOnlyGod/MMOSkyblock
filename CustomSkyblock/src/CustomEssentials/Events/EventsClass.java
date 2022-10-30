@@ -1,13 +1,16 @@
 package CustomEssentials.Events;
 
 import java.io.File;
+
 import java.util.Random;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.v1_17_R1.entity.CraftArmorStand;
 import org.bukkit.craftbukkit.v1_17_R1.entity.CraftFireball;
 import org.bukkit.craftbukkit.v1_17_R1.entity.CraftProjectile;
@@ -21,6 +24,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -34,6 +38,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.metadata.FixedMetadataValue;
 
 import CustomEssentials.Main;
 import CustomEssentials.Events.Items.ItemStats;
@@ -154,11 +159,20 @@ public class EventsClass implements Listener{
 	}
 	
 	@EventHandler
+	public void onBlockPlace(BlockPlaceEvent e) {
+		e.getBlock().setMetadata("placed", new FixedMetadataValue(this.plugin,"something"));
+	}
+	
+	@EventHandler
 	public void onBlockBreak(BlockBreakEvent e) {
+		
 		
 		Material block = e.getBlock().getType();
 		Player p = e.getPlayer();
 		Profile profile = plugin.getProfileManager().getPlayerProfile(p);
+		
+		if (e.getBlock().hasMetadata("placed")) return;
+		
 		
 		if (block == Material.STONE
 			|| block == Material.COBBLESTONE
@@ -199,13 +213,31 @@ public class EventsClass implements Listener{
 				|| block == Material.COCOA_BEANS
 				) {
 			
+			int multiplier = 1;
+			
+			if (block == Material.SUGAR_CANE 
+					|| block == Material.CACTUS) {
+				multiplier = getPlantHeight(e.getBlock());
+	
+			}
+				
 			plugin.setDisplayStats(3);
 			Double xpAmount = profile.getFarming().getXPamount(block);
 			
-			profile.getFarming().addCurrentXP(xpAmount);
+			p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 2, 1);
+			
+			profile.getFarming().addCurrentXP(xpAmount*multiplier);
 		}
 		
 		
+	}
+	
+	public int getPlantHeight(Block block) {
+		Location currentLoc = block.getLocation();	
+		Block blockAbove = currentLoc.add(0, 1, 0).getBlock();
+		if (!(blockAbove.getType() == block.getType()) || (blockAbove.hasMetadata("placed"))) return 1;
+			
+		return 1 + getPlantHeight(blockAbove);
 	}
 	
 	
