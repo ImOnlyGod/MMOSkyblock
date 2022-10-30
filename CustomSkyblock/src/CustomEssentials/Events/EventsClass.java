@@ -190,6 +190,7 @@ public class EventsClass implements Listener{
 			
 			if (xpAmount == 0.0) {
 				e.setCancelled(true);
+				p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_DESTROY, 2, 1);
 				p.sendMessage(Utils.chat("&4You require a higher farming level to place that block!"));
 				return;
 			}			
@@ -264,6 +265,7 @@ public class EventsClass implements Listener{
 			
 			if (xpAmount == 0.0) {
 				e.setCancelled(true);
+				p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_DESTROY, 2, 1);
 				p.sendMessage(Utils.chat("&4You require a higher farming level to gain any farming experience from that block!"));
 				return;
 			}
