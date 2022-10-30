@@ -6,13 +6,14 @@ public class FarmingSkill extends Skills{
 
 	public double getXPamount(Material block) {
 		
+		//ADD LEVEL REQUIREMENT PUT IN HASHMAP FOR ALL CROPS WHEAT LV 1-10 EXAMPLE
 		if (block == Material.WHEAT) {
 			return 1.0;
 		}
-		else if (block == Material.CARROT) {
+		else if (block == Material.CARROTS) {
 			return 2.0;
 		}
-		else if (block == Material.POTATO) {
+		else if (block == Material.POTATOES) {
 			return 2.5;
 		}
 		else if (block == Material.PUMPKIN) {
@@ -27,7 +28,7 @@ public class FarmingSkill extends Skills{
 		else if (block == Material.CACTUS) {
 			return 10.0;
 		}
-		else if (block == Material.BEETROOT) {
+		else if (block == Material.BEETROOTS) {
 			return 3.0;
 		}
 		else if (block == Material.COCOA_BEANS) {

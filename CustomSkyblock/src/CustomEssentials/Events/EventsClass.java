@@ -6,11 +6,13 @@ import java.util.Random;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.CropState;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Block;
+import org.bukkit.block.data.Ageable;
 import org.bukkit.craftbukkit.v1_17_R1.entity.CraftArmorStand;
 import org.bukkit.craftbukkit.v1_17_R1.entity.CraftFireball;
 import org.bukkit.craftbukkit.v1_17_R1.entity.CraftProjectile;
@@ -38,6 +40,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.material.Crops;
 import org.bukkit.metadata.FixedMetadataValue;
 
 import CustomEssentials.Main;
@@ -160,6 +163,14 @@ public class EventsClass implements Listener{
 	
 	@EventHandler
 	public void onBlockPlace(BlockPlaceEvent e) {
+		Block block = e.getBlock();
+		
+		if (block.getType() == Material.FARMLAND) return;
+		
+		if ((block.getBlockData() instanceof Ageable) &&
+				!(block.getType() == Material.CACTUS) &&
+				!(block.getType() == Material.SUGAR_CANE)) return;
+
 		e.getBlock().setMetadata("placed", new FixedMetadataValue(this.plugin,"something"));
 	}
 	
@@ -203,15 +214,16 @@ public class EventsClass implements Listener{
 			
 		}
 		else if (block == Material.WHEAT
-				|| block == Material.CARROT
-				|| block == Material.POTATO
+				|| block == Material.CARROTS
+				|| block == Material.POTATOES
 				|| block == Material.PUMPKIN
-				|| block == Material.BEETROOT
+				|| block == Material.BEETROOTS
 				|| block == Material.SUGAR_CANE
 				|| block == Material.CACTUS
 				|| block == Material.MELON
 				|| block == Material.COCOA_BEANS
 				) {
+			
 			
 			int multiplier = 1;
 			
@@ -220,6 +232,14 @@ public class EventsClass implements Listener{
 				multiplier = getPlantHeight(e.getBlock());
 	
 			}
+			else {
+				if (e.getBlock().getBlockData() instanceof Ageable) {
+					Ageable age = (Ageable) e.getBlock().getBlockData();
+					if (age.getAge() != age.getMaximumAge()) return;
+				}
+				
+			}
+			
 				
 			plugin.setDisplayStats(3);
 			Double xpAmount = profile.getFarming().getXPamount(block);
