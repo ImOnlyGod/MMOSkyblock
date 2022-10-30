@@ -166,10 +166,39 @@ public class EventsClass implements Listener{
 		Block block = e.getBlock();
 		
 		if (block.getType() == Material.FARMLAND) return;
+				
+		Player p = e.getPlayer();
+		Profile profile = plugin.getProfileManager().getPlayerProfile(p);
+		profile.getFarming().generateCropXp();
+		
+		
+		
+		if (profile.getFarming().getCropXp().containsKey(block.getType()) || 
+				block.getType() == Material.BAMBOO_SAPLING || 
+				block.getType() == Material.BEETROOT_SEEDS ||
+				block.getType() == Material.PUMPKIN_STEM ||
+				block.getType() == Material.MELON_STEM) {
+			
+			Double xpAmount = 0.0; 
+			if (block.getType() == Material.BAMBOO_SAPLING) xpAmount = profile.getFarming().getXPamount(Material.BAMBOO);
+			else if (block.getType() == Material.BEETROOT_SEEDS) xpAmount = profile.getFarming().getXPamount(Material.BEETROOT);
+			else if	(block.getType() == Material.PUMPKIN_STEM) xpAmount = profile.getFarming().getXPamount(Material.PUMPKIN);
+			else if	(block.getType() == Material.MELON_STEM) xpAmount = profile.getFarming().getXPamount(Material.MELON);
+			else {
+				xpAmount = profile.getFarming().getXPamount(block.getType());
+			}
+			
+			if (xpAmount == 0.0) {
+				e.setCancelled(true);
+				p.sendMessage(Utils.chat("&4You require a higher farming level to place that block!"));
+				return;
+			}			
+		}
 		
 		if ((block.getBlockData() instanceof Ageable) &&
 				!(block.getType() == Material.CACTUS) &&
 				!(block.getType() == Material.SUGAR_CANE)) return;
+		
 
 		e.getBlock().setMetadata("placed", new FixedMetadataValue(this.plugin,"something"));
 	}
@@ -177,10 +206,10 @@ public class EventsClass implements Listener{
 	@EventHandler
 	public void onBlockBreak(BlockBreakEvent e) {
 		
-		
 		Material block = e.getBlock().getType();
 		Player p = e.getPlayer();
 		Profile profile = plugin.getProfileManager().getPlayerProfile(p);
+		profile.getFarming().generateCropXp();
 		
 		if (e.getBlock().hasMetadata("placed")) return;
 		
@@ -213,22 +242,11 @@ public class EventsClass implements Listener{
 			profile.getForaging().addCurrentXP(xpAmount);
 			
 		}
-		else if (block == Material.WHEAT
-				|| block == Material.CARROTS
-				|| block == Material.POTATOES
-				|| block == Material.PUMPKIN
-				|| block == Material.BEETROOTS
-				|| block == Material.SUGAR_CANE
-				|| block == Material.CACTUS
-				|| block == Material.MELON
-				|| block == Material.COCOA_BEANS
-				) {
-			
+		else if (profile.getFarming().getCropXp().containsKey(block)) {			
 			
 			int multiplier = 1;
 			
-			if (block == Material.SUGAR_CANE 
-					|| block == Material.CACTUS) {
+			if (profile.getFarming().getNonPlantingCrops().contains(block)) {
 				multiplier = getPlantHeight(e.getBlock());
 	
 			}
@@ -243,6 +261,12 @@ public class EventsClass implements Listener{
 				
 			plugin.setDisplayStats(3);
 			Double xpAmount = profile.getFarming().getXPamount(block);
+			
+			if (xpAmount == 0.0) {
+				e.setCancelled(true);
+				p.sendMessage(Utils.chat("&4You require a higher farming level to gain any farming experience from that block!"));
+				return;
+			}
 			
 			p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 2, 1);
 			
