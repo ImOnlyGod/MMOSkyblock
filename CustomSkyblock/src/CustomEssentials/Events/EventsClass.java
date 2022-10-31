@@ -294,21 +294,21 @@ public class EventsClass implements Listener{
 		LivingEntity mob = e.getEntity();
 		
 		if (!(mob.getKiller() instanceof Player)) return;
-			
-		if (!(mob.getType().equals(EntityType.CREEPER) ||
-			mob.getType().equals(EntityType.ZOMBIE) ||
-			mob.getType().equals(EntityType.SKELETON))) return;
-			
+						
 		Player p = mob.getKiller();	
 		Profile profile = plugin.getProfileManager().getPlayerProfile(p);
 				
 		plugin.setDisplayStats(4);
-		Double xpAmount = profile.getCombat().getXPamount(mob.getType());
-				
-		profile.getCombat().addCurrentXP(xpAmount);
+		Double xpAmount = profile.getCombat().getXPamount(mob);
 		
-			
 		
+		if (xpAmount == 0.0) {
+			p.sendMessage(Utils.chat("&4You require a higher combat level to gain any XP from killing that mob!"));
+		}
+		else {
+			p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 2, 1);
+			profile.getCombat().addCurrentXP(xpAmount);
+		}
 		
 	}
 	
