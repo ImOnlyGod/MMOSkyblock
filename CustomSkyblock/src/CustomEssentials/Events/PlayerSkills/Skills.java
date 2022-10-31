@@ -5,6 +5,7 @@ public abstract class Skills {
 	private int level; 
 	private Double currentXP;
 	private Double maxXP;
+	private double previousXpAmountGained;
 	
 	public Skills() {
 		
@@ -37,6 +38,7 @@ public abstract class Skills {
 	
 	public void addCurrentXP(Double amount) {
 		this.currentXP = this.currentXP + amount;
+		this.setPreviousXpAmountGained(amount);
 	}
 
 	public Double getMaxXP() {
@@ -45,6 +47,14 @@ public abstract class Skills {
 
 	public void setMaxXP(Double maxXP) {
 		this.maxXP = maxXP;
+	}
+
+	public double getPreviousXpAmountGained() {
+		return previousXpAmountGained;
+	}
+
+	public void setPreviousXpAmountGained(double previousXpAmountGained) {
+		this.previousXpAmountGained = previousXpAmountGained;
 	}
 	
 }

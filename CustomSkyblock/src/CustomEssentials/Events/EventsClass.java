@@ -212,24 +212,22 @@ public class EventsClass implements Listener{
 		Profile profile = plugin.getProfileManager().getPlayerProfile(p);
 		profile.getFarming().generateCropXp();
 		profile.getForaging().generateWoodXp();
+		profile.getMining().generateBlockXp();
 		
 		if (e.getBlock().hasMetadata("placed")) return;
 		
 		
-		if (block == Material.STONE
-			|| block == Material.COBBLESTONE
-			|| block == Material.COAL_ORE
-			|| block == Material.IRON_ORE
-			|| block == Material.LAPIS_ORE
-			|| block == Material.REDSTONE_ORE
-			|| block == Material.GOLD_ORE
-			|| block == Material.DIAMOND_ORE
-			|| block == Material.EMERALD_ORE) {
+		if (profile.getMining().getBlockXp().containsKey(block)) {
 			
 			plugin.setDisplayStats(1);
 			Double xpAmount = profile.getMining().getXPamount(block);
 			
-			profile.getMining().addCurrentXP(xpAmount);
+			if (xpAmount == 0.0) return;
+			else {
+				p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 2, 1);
+				profile.getMining().addCurrentXP(xpAmount);
+			}
+			
 		}				
 		else if (profile.getForaging().getWoodXp().containsKey(block)) {
 			

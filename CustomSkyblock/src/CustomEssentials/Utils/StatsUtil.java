@@ -9,7 +9,7 @@ public class StatsUtil {
 				Math.toIntExact(profile.getMining().getLevel()) + 
 				"&7&l) &8&l[&a&l" + 
 				Math.floor(profile.getMining().getCurrentXP()) + 
-				"&7&l/&a&l" + Math.floor(profile.getMining().getMaxXP()) + "&8&l]");
+				"&7&l/&a&l" + Math.floor(profile.getMining().getMaxXP()) + "&8&l] &a+" + (Math.floor(profile.getMining().getPreviousXpAmountGained()*1000)/1000));
 	}
 	
 	public static String miningActionBarLevelUp(Profile profile) {
@@ -22,7 +22,7 @@ public class StatsUtil {
 				Math.toIntExact(profile.getForaging().getLevel()) + 
 				"&7&l) &8&l[&a&l" + 
 				Math.floor(profile.getForaging().getCurrentXP()) + 
-				"&7&l/&a&l" + Math.floor(profile.getForaging().getMaxXP()) + "&8&l]");
+				"&7&l/&a&l" + Math.floor(profile.getForaging().getMaxXP()) + "&8&l] &a+" + (Math.floor(profile.getForaging().getPreviousXpAmountGained()*1000))/1000);
 	}
 	
 	public static String foragingActionBarLevelUp(Profile profile) {
@@ -35,7 +35,7 @@ public class StatsUtil {
 				Math.toIntExact(profile.getFarming().getLevel()) + 
 				"&7&l) &8&l[&a&l" + 
 				Math.floor(profile.getFarming().getCurrentXP()) + 
-				"&7&l/&a&l" + Math.floor(profile.getFarming().getMaxXP()) + "&8&l]");
+				"&7&l/&a&l" + Math.floor(profile.getFarming().getMaxXP()) + "&8&l] &a+" + (Math.floor(profile.getFarming().getPreviousXpAmountGained()*1000))/1000);
 	}
 	
 	public static String farmingActionBarLevelUp(Profile profile) {
@@ -48,7 +48,7 @@ public class StatsUtil {
 				Math.toIntExact(profile.getCombat().getLevel()) + 
 				"&7&l) &8&l[&a&l" + 
 				Math.floor(profile.getCombat().getCurrentXP()) + 
-				"&7&l/&a&l" + Math.floor(profile.getCombat().getMaxXP()) + "&8&l]");
+				"&7&l/&a&l" + Math.floor(profile.getCombat().getMaxXP()) + "&8&l] &a+" + (Math.floor(profile.getCombat().getPreviousXpAmountGained()*1000))/1000);
 	}
 	
 	public static String combatActionBarLevelUp(Profile profile) {
@@ -61,7 +61,7 @@ public class StatsUtil {
 				Math.toIntExact(profile.getFishing().getLevel()) + 
 				"&7&l) &8&l[&a&l" + 
 				Math.floor(profile.getFishing().getCurrentXP()) + 
-				"&7&l/&a&l" + Math.floor(profile.getFishing().getMaxXP()) + "&8&l]");
+				"&7&l/&a&l" + Math.floor(profile.getFishing().getMaxXP()) + "&8&l] &a+" + (Math.round(profile.getFishing().getPreviousXpAmountGained()*100))/100);
 	}
 	
 	public static String fishingActionBarLevelUp(Profile profile) {

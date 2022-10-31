@@ -3,7 +3,7 @@ package CustomEssentials.Events.PlayerSkills;
 import org.bukkit.entity.EntityType;
 
 public class CombatSkill extends Skills {
-
+	//DO WITH MOB SAME SO NO CONFUSION FOR CUSTOM MOBS
 	public Double getXPamount(EntityType mob) {
 		
 		if (mob.equals(EntityType.CREEPER)) {
