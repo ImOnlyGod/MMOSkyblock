@@ -211,6 +211,7 @@ public class EventsClass implements Listener{
 		Player p = e.getPlayer();
 		Profile profile = plugin.getProfileManager().getPlayerProfile(p);
 		profile.getFarming().generateCropXp();
+		profile.getForaging().generateWoodXp();
 		
 		if (e.getBlock().hasMetadata("placed")) return;
 		
@@ -230,17 +231,17 @@ public class EventsClass implements Listener{
 			
 			profile.getMining().addCurrentXP(xpAmount);
 		}				
-		else if (block == Material.OAK_LOG
-				|| block == Material.BIRCH_LOG
-				|| block == Material.SPRUCE_LOG
-				|| block == Material.ACACIA_LOG
-				|| block == Material.DARK_OAK_LOG
-				|| block == Material.JUNGLE_LOG) {
+		else if (profile.getForaging().getWoodXp().containsKey(block)) {
 			
 			plugin.setDisplayStats(2);
 			Double xpAmount = profile.getForaging().getXPamount(block);
 			
-			profile.getForaging().addCurrentXP(xpAmount);
+			if (xpAmount == 0.0) return;
+			else {
+				p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 2, 1);
+				profile.getForaging().addCurrentXP(xpAmount);
+			}
+			
 			
 		}
 		else if (profile.getFarming().getCropXp().containsKey(block)) {			
@@ -266,7 +267,7 @@ public class EventsClass implements Listener{
 			if (xpAmount == 0.0) {
 				e.setCancelled(true);
 				p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_DESTROY, 2, 1);
-				p.sendMessage(Utils.chat("&4You require a higher farming level to gain any farming experience from that block!"));
+				p.sendMessage(Utils.chat("&4You require a higher farming level to interact with that crop!"));
 				return;
 			}
 			
