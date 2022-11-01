@@ -146,6 +146,11 @@ public class EventsClass implements Listener{
 			return;
 		}
 		
+		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&a&lShop")))) {
+			e.setCancelled(true);
+			return;
+		}
+		
 	}
 	
 	@EventHandler
@@ -218,24 +223,24 @@ public class EventsClass implements Listener{
 		
 		
 		if (profile.getMining().getBlockXp().containsKey(block)) {
-			
-			plugin.setDisplayStats(1);
+				
 			Double xpAmount = profile.getMining().getXPamount(block);
 			
 			if (xpAmount == 0.0) return;
 			else {
+				plugin.setDisplayStats(1);
 				p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 2, 1);
 				profile.getMining().addCurrentXP(xpAmount);
 			}
 			
 		}				
 		else if (profile.getForaging().getWoodXp().containsKey(block)) {
-			
-			plugin.setDisplayStats(2);
+
 			Double xpAmount = profile.getForaging().getXPamount(block);
 			
 			if (xpAmount == 0.0) return;
 			else {
+				plugin.setDisplayStats(2);
 				p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 2, 1);
 				profile.getForaging().addCurrentXP(xpAmount);
 			}
@@ -257,9 +262,7 @@ public class EventsClass implements Listener{
 				}
 				
 			}
-			
-				
-			plugin.setDisplayStats(3);
+
 			Double xpAmount = profile.getFarming().getXPamount(block);
 			
 			if (xpAmount == 0.0) {
@@ -268,7 +271,7 @@ public class EventsClass implements Listener{
 				p.sendMessage(Utils.chat("&4You require a higher farming level to interact with that crop!"));
 				return;
 			}
-			
+			plugin.setDisplayStats(3);
 			p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 2, 1);
 			
 			profile.getFarming().addCurrentXP(xpAmount*multiplier);
@@ -298,14 +301,13 @@ public class EventsClass implements Listener{
 		Player p = mob.getKiller();	
 		Profile profile = plugin.getProfileManager().getPlayerProfile(p);
 				
-		plugin.setDisplayStats(4);
 		Double xpAmount = profile.getCombat().getXPamount(mob);
-		
 		
 		if (xpAmount == 0.0) {
 			p.sendMessage(Utils.chat("&4You require a higher combat level to gain any XP from killing that mob!"));
 		}
 		else {
+			plugin.setDisplayStats(4);
 			p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 2, 1);
 			profile.getCombat().addCurrentXP(xpAmount);
 		}

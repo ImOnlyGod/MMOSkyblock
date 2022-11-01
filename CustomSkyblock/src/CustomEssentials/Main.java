@@ -2,6 +2,7 @@ package CustomEssentials;
 
 import java.io.File;
 import java.io.IOException;
+
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -21,6 +22,7 @@ import CustomEssentials.Events.Profile;
 import CustomEssentials.Events.Gui.MenuGui;
 import CustomEssentials.Events.Gui.PathSelectionGui;
 import CustomEssentials.Events.Gui.SkillsGui;
+import CustomEssentials.Events.Gui.Shop.MainShopMenu;
 import CustomEssentials.Events.Items.ItemStats;
 import CustomEssentials.Events.PlayerPath.Paths.Path;
 import CustomEssentials.Events.PlayerSkills.Skills;
@@ -49,6 +51,7 @@ public class Main extends JavaPlugin{
 		new MenuGui(this);
 		new SkillsGui(this);
 		new PathSelectionGui(this);
+		new MainShopMenu(this);
 		getServer().getPluginManager().registerEvents(new EventsClass(this), this);
 		
 		loadConfig();

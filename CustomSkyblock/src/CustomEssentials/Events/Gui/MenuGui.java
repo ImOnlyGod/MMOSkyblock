@@ -16,6 +16,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
@@ -88,7 +89,6 @@ public class MenuGui implements TabExecutor{
 		statsLore.add(Utils.chat("&7LifeSteal: &f") + lifeSteal + Utils.chat("% &f| &b") );
 		statsLore.add(Utils.chat("&7Speed: &f") + speed + Utils.chat(" &f| &b") + CDR);
 		
-
 		statsMeta.setLore(statsLore);
 		stats.setItemMeta(statsMeta);
 		
