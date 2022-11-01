@@ -68,7 +68,8 @@ public class PayCommand implements CommandExecutor {
 		
 		if (!(sender instanceof Player)) {
 			targetProfile.addBalance(amount);
-			target.sendMessage(Utils.chat(plugin.getConfig().getString("BalanceCommand.reciever_pay_msg") + Math.floor(amount*100)/100 + "&7from &bConsole"));
+			target.sendMessage(Utils.chat(plugin.getConfig().getString("BalanceCommand.reciever_pay_msg") + Math.floor(amount*100)/100 + " &7from &bConsole"));
+			target.sendMessage(Utils.chat(plugin.getConfig().getString("BalanceCommand.reciever_new_bal_msg") + Math.floor(targetProfile.getBalance()*100)/100));
 			return false;
 		}
 		
@@ -83,9 +84,10 @@ public class PayCommand implements CommandExecutor {
 		senderProfile.removeBalance(amount);
 		targetProfile.addBalance(amount);
 
-		target.sendMessage(Utils.chat(plugin.getConfig().getString("BalanceCommand.reciever_pay_msg") + Math.floor(amount*100)/100 + " &7from &b" + s.getDisplayName()));	
+		target.sendMessage(Utils.chat(plugin.getConfig().getString("BalanceCommand.reciever_pay_msg") + Math.floor(amount*100)/100 + " &7from &b" + s.getDisplayName()));
+		target.sendMessage(Utils.chat(plugin.getConfig().getString("BalanceCommand.reciever_new_bal_msg") + Math.floor(targetProfile.getBalance()*100)/100));
 		s.sendMessage(Utils.chat(plugin.getConfig().getString("BalanceCommand.sender_pay_msg") + Math.floor(amount*100)/100 + " &7to &b" + target.getDisplayName()));	
-		
+		s.sendMessage(Utils.chat(plugin.getConfig().getString("BalanceCommand.reciever_new_bal_msg") + Math.floor(targetProfile.getBalance()*100)/100));
 		return false;
 	}
 	

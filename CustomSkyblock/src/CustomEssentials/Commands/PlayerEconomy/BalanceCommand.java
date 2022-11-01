@@ -76,8 +76,13 @@ public class BalanceCommand implements CommandExecutor {
 		Player p = target;
 		double bal = checkBalance(p);
 		
-		if ((sender == target)) {
+		if (sender == target) {
 			p.sendMessage(Utils.chat(plugin.getConfig().getString("BalanceCommand.reciever_bal_msg") + Math.round(bal*100)/100));
+			return true;
+		}
+		
+		if (!(sender instanceof Player)) {
+			System.out.println("The balance of " + target.getDisplayName() + "is $" + Math.round(bal*100)/100);
 			return true;
 		}
 					
