@@ -8,7 +8,7 @@ public class StatsUtil {
 		return Utils.chat("&b&lMining&7&l: (&c&l" + 
 				Math.toIntExact(profile.getMining().getLevel()) + 
 				"&7&l) &8&l[&a&l" + 
-				Math.floor(profile.getMining().getCurrentXP()) + 
+				Math.floor(profile.getMining().getCurrentXP()*10)/10 + 
 				"&7&l/&a&l" + Math.floor(profile.getMining().getMaxXP()) + "&8&l] &a+" + (Math.floor(profile.getMining().getPreviousXpAmountGained()*1000)/1000));
 	}
 	
@@ -21,7 +21,7 @@ public class StatsUtil {
 		return Utils.chat("&5&lForaging&7&l: (&c&l" + 
 				Math.toIntExact(profile.getForaging().getLevel()) + 
 				"&7&l) &8&l[&a&l" + 
-				Math.floor(profile.getForaging().getCurrentXP()) + 
+				Math.floor(profile.getForaging().getCurrentXP()*10)/10 + 
 				"&7&l/&a&l" + Math.floor(profile.getForaging().getMaxXP()) + "&8&l] &a+" + (Math.floor(profile.getForaging().getPreviousXpAmountGained()*1000))/1000);
 	}
 	
@@ -34,7 +34,7 @@ public class StatsUtil {
 		return Utils.chat("&a&lFarming&7&l: (&c&l" + 
 				Math.toIntExact(profile.getFarming().getLevel()) + 
 				"&7&l) &8&l[&a&l" + 
-				Math.floor(profile.getFarming().getCurrentXP()) + 
+				Math.floor(profile.getFarming().getCurrentXP()*10)/10 + 
 				"&7&l/&a&l" + Math.floor(profile.getFarming().getMaxXP()) + "&8&l] &a+" + (Math.floor(profile.getFarming().getPreviousXpAmountGained()*1000))/1000);
 	}
 	
@@ -47,7 +47,7 @@ public class StatsUtil {
 		return Utils.chat("&4&lCombat&7&l: (&c&l" + 
 				Math.toIntExact(profile.getCombat().getLevel()) + 
 				"&7&l) &8&l[&a&l" + 
-				Math.floor(profile.getCombat().getCurrentXP()) + 
+				Math.floor(profile.getCombat().getCurrentXP()*10)/10 + 
 				"&7&l/&a&l" + Math.floor(profile.getCombat().getMaxXP()) + "&8&l] &a+" + (Math.floor(profile.getCombat().getPreviousXpAmountGained()*1000))/1000);
 	}
 	
@@ -60,7 +60,7 @@ public class StatsUtil {
 		return Utils.chat("&d&lFishing&7&l: (&c&l" + 
 				Math.toIntExact(profile.getFishing().getLevel()) + 
 				"&7&l) &8&l[&a&l" + 
-				Math.floor(profile.getFishing().getCurrentXP()) + 
+				Math.floor(profile.getFishing().getCurrentXP()*10)/10 + 
 				"&7&l/&a&l" + Math.floor(profile.getFishing().getMaxXP()) + "&8&l] &a+" + (Math.round(profile.getFishing().getPreviousXpAmountGained()*100))/100);
 	}
 	

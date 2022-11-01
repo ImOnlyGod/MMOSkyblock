@@ -146,7 +146,7 @@ public class MenuGui implements TabExecutor{
 		}
 		
 		List<String> bankLore = new ArrayList<String>();
-		bankLore.add(Utils.chat("&7Current Balance: &a" + Math.round(profile.getBalance()*100)/100));
+		bankLore.add(Utils.chat("&7Current Balance: &a$" + Math.round(profile.getBalance()*100)/100));
 		
 		
 		bankMeta.setLore(bankLore);

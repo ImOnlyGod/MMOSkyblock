@@ -22,3 +22,9 @@ WeaponCommand:
 BalanceCommand:
   reciever_bal_msg: '&8[&c*&8] &7Your current balance is &a$'
   sender_bal_msg: '&8[&c*&8] &7This balance of &b'
+  reciever_pay_msg: '&8[&c*&8] &7Your have recieved &a$'
+  sender_pay_msg: '&8[&c*&8] &7Your have sent &4$'
+  invalid_payment_msg: '&8[&c*&8] &7Use /pay {player} {amount}'
+  invalid_payment_msg2: '&8[&c*&8] &7Amount must be a number!'
+  invalid_payment_msg3: '&8[&c*&8] &7Amount is too low!'
+  invalid_payment_msg4: '&8[&c*&8] &7You do not have sufficient funds!'

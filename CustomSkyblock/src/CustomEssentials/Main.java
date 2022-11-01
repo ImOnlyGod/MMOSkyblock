@@ -14,6 +14,7 @@ import CustomEssentials.Commands.EatCommand;
 import CustomEssentials.Commands.FlyCommand;
 import CustomEssentials.Commands.WeaponCommand;
 import CustomEssentials.Commands.PlayerEconomy.BalanceCommand;
+import CustomEssentials.Commands.PlayerEconomy.PayCommand;
 import CustomEssentials.Events.EventsClass;
 import CustomEssentials.Events.PlayerProfileManager;
 import CustomEssentials.Events.Profile;
@@ -56,6 +57,7 @@ public class Main extends JavaPlugin{
 		new EatCommand(this);
 		new WeaponCommand(this);
 		new BalanceCommand(this);
+		new PayCommand(this);
 		new CustomMobsCommand(this);
 		
 		for (Player p : Bukkit.getOnlinePlayers()) {

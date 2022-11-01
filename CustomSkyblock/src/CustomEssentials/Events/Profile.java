@@ -107,5 +107,13 @@ public class Profile {
 		this.balance = balance;
 	}
 	
+	public void addBalance(Double amount) {
+		this.balance += amount;
+	}
+	
+	public void removeBalance(Double amount) {
+		this.balance -= amount;
+	}
+	
 
 }
