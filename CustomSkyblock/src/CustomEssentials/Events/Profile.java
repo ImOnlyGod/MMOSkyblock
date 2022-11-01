@@ -23,6 +23,7 @@ public class Profile {
 	private FishingSkill fishing;
 	private ForagingSkill foraging;
 	private int playTime; //Seconds
+	private double balance;
 	private Path path;
 	private HashMap<String,Path> paths = new HashMap<String,Path>();
 	
@@ -34,6 +35,7 @@ public class Profile {
 		this.fishing = fishing;
 		this.foraging = foraging;
 		this.playTime = playTime;
+		this.balance = 0.0;
 		this.initialisePaths();
 		this.setPath(this.paths.get("default"));
 	}
@@ -95,6 +97,14 @@ public class Profile {
 		this.paths.put("tank", new Tank());
 		this.paths.put("archer", new Archer());
 		this.paths.put("assassin", new Assassin());
+	}
+
+	public double getBalance() {
+		return balance;
+	}
+
+	public void setBalance(double balance) {
+		this.balance = balance;
 	}
 	
 

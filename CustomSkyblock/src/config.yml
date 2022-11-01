@@ -18,3 +18,7 @@ EatCommand:
 WeaponCommand:
   invalid_amount_msg: '&8[&c*&8] &7Please enter integer amount &b'
   invalid_player_msg: '&8[&c*&8] &7Player not found &b'
+  
+BalanceCommand:
+  reciever_bal_msg: '&8[&c*&8] &7Your current balance is &a$'
+  sender_bal_msg: '&8[&c*&8] &7This balance of &b'

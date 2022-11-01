@@ -13,6 +13,7 @@ import CustomEssentials.Commands.CustomMobsCommand;
 import CustomEssentials.Commands.EatCommand;
 import CustomEssentials.Commands.FlyCommand;
 import CustomEssentials.Commands.WeaponCommand;
+import CustomEssentials.Commands.PlayerEconomy.BalanceCommand;
 import CustomEssentials.Events.EventsClass;
 import CustomEssentials.Events.PlayerProfileManager;
 import CustomEssentials.Events.Profile;
@@ -54,6 +55,7 @@ public class Main extends JavaPlugin{
 		new FlyCommand(this);
 		new EatCommand(this);
 		new WeaponCommand(this);
+		new BalanceCommand(this);
 		new CustomMobsCommand(this);
 		
 		for (Player p : Bukkit.getOnlinePlayers()) {
@@ -266,6 +268,7 @@ public class Main extends JavaPlugin{
 			playerData.createSection("AssassinPath");
 			
 			playerData.set("General.PlayTime", profile.getPlayTime());
+			playerData.set("General.Balance", profile.getBalance());
 			playerData.set("Stats.Health", stats.getHealth());
 			playerData.set("Stats.Armor", stats.getArmor());
 			playerData.set("Stats.MagicResist", stats.getMagicResist());
@@ -421,6 +424,7 @@ public class Main extends JavaPlugin{
 		FileConfiguration playerData = YamlConfiguration.loadConfiguration(PlayerFile);
 		
 		playerProfile.setPlayTime(playerData.getInt("General.PlayTime"));
+		playerProfile.setBalance(playerData.getInt("General.Balance"));
 		stats.setHealth(playerData.getInt("Stats.Health"));
 		stats.setArmor(playerData.getInt("Stats.Armor"));
 		stats.setMagicResist(playerData.getInt("Stats.MagicResist"));

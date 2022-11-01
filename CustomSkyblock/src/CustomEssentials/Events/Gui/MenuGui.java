@@ -1,11 +1,12 @@
 package CustomEssentials.Events.Gui;
 
+import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -18,6 +19,9 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
+
+import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.properties.Property;
 
 import CustomEssentials.Utils.Utils;
 import CustomEssentials.Main;
@@ -124,6 +128,30 @@ public class MenuGui implements TabExecutor{
 		skills.setItemMeta(skillsMeta);
 		menu.setItem(18, skills);
 		
+		//BANK/MONEY item
+		ItemStack bank = new ItemStack(Material.PLAYER_HEAD,1);		
+		SkullMeta bankMeta = (SkullMeta) bank.getItemMeta();
+		bankMeta.setDisplayName(Utils.chat("&a&lBalance"));
+		GameProfile gameProfile = new GameProfile(UUID.randomUUID(),"");
+		String bankValue = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTlkZGZiMDNjOGY3Zjc4MDA5YjgzNDRiNzgzMGY0YTg0MThmYTRiYzBlYjMzN2EzMzA1OGFiYjdhMDVlOTNlMSJ9fX0=";
+		gameProfile.getProperties().put("textures", new Property("texture",bankValue));
+		
+		try {
+			Field profileField = bankMeta.getClass().getDeclaredField("profile");
+			profileField.setAccessible(true);
+			profileField.set(bankMeta,gameProfile);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		List<String> bankLore = new ArrayList<String>();
+		bankLore.add(Utils.chat("&7Current Balance: &a" + Math.round(profile.getBalance()*100)/100));
+		
+		
+		bankMeta.setLore(bankLore);
+		bank.setItemMeta(bankMeta);
+		menu.setItem(22, bank);
 		
 		return menu;
 				
