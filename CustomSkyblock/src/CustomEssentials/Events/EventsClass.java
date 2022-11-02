@@ -147,9 +147,140 @@ public class EventsClass implements Listener{
 		}
 		
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&a&lShop")))) {
+			if (e.getSlot() == 19) p.performCommand("shopBlocks1");
+			if (e.getSlot() == 20) p.performCommand("shopColorBlocks1");
+			if (e.getSlot() == 21) p.performCommand("shopDecorativeBlocks1");
+			if (e.getSlot() == 22) p.performCommand("shopFarming1");
+			if (e.getSlot() == 23) p.performCommand("shopMob1");
+			if (e.getSlot() == 24) p.performCommand("shopFood1");
+			if (e.getSlot() == 25) p.performCommand("shopGems1");
+			if (e.getSlot() == 28) p.performCommand("shopRedstone1");
+			if (e.getSlot() == 29) p.performCommand("shopMisc1");
+			if (e.getSlot() == 30) p.performCommand("shopBrewing1");
 			e.setCancelled(true);
 			return;
 		}
+		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&8&lBlocks Shop &7(Page 1)")))) {
+			if (e.getSlot() == 0) p.performCommand("shop");
+			if (e.getSlot() == 51) p.performCommand("shopBlocks2");
+			e.setCancelled(true);
+			return;
+		}
+		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&8&lBlocks Shop &7(Page 2)")))) {
+			if (e.getSlot() == 0) p.performCommand("shop");
+			if (e.getSlot() == 47) p.performCommand("shopBlocks1");
+			e.setCancelled(true);
+			return;
+		}
+		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&2&lColor Blocks Shop &7(Page 1)")))) {
+			if (e.getSlot() == 0) p.performCommand("shop");
+			if (e.getSlot() == 51) p.performCommand("shopColorBlocks2");
+			e.setCancelled(true);
+			return;
+		}
+		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&2&lColor Blocks Shop &7(Page 2)")))) {
+			if (e.getSlot() == 0) p.performCommand("shop");
+			if (e.getSlot() == 47) p.performCommand("shopColorBlocks1");
+			e.setCancelled(true);
+			return;
+		}
+		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&2&lDecorative Blocks Shop &7(Page 1)")))) {
+			if (e.getSlot() == 0) p.performCommand("shop");
+			if (e.getSlot() == 51) p.performCommand("shopDecorativeBlocks2");
+			e.setCancelled(true);
+			return;
+		}
+		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&2&lDecorative Blocks Shop &7(Page 2)")))) {
+			if (e.getSlot() == 0) p.performCommand("shop");
+			if (e.getSlot() == 47) p.performCommand("shopDecorativeBlocks1");
+			e.setCancelled(true);
+			return;
+		}
+		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&a&lFarming Shop &7(Page 1)")))) {
+			if (e.getSlot() == 0) p.performCommand("shop");
+			if (e.getSlot() == 51) p.performCommand("shopFarming2");
+			e.setCancelled(true);
+			return;
+		}
+		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&a&lFarming Shop &7(Page 2)")))) {
+			if (e.getSlot() == 0) p.performCommand("shop");
+			if (e.getSlot() == 47) p.performCommand("shopFarming1");
+			e.setCancelled(true);
+			return;
+		}
+		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&6&lFood Shop &7(Page 1)")))) {
+			if (e.getSlot() == 0) p.performCommand("shop");
+			if (e.getSlot() == 51) p.performCommand("shopFood2");
+			e.setCancelled(true);
+			return;
+		}
+		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&6&lFood Shop &7(Page 2)")))) {
+			if (e.getSlot() == 0) p.performCommand("shop");
+			if (e.getSlot() == 47) p.performCommand("shopFood1");
+			e.setCancelled(true);
+			return;
+		}
+		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&b&lGems Shop &7(Page 1)")))) {
+			if (e.getSlot() == 0) p.performCommand("shop");
+			if (e.getSlot() == 51) p.performCommand("shopGems2");
+			e.setCancelled(true);
+			return;
+		}
+		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&b&lGems Shop &7(Page 2)")))) {
+			if (e.getSlot() == 0) p.performCommand("shop");
+			if (e.getSlot() == 47) p.performCommand("shopGems1");
+			e.setCancelled(true);
+			return;
+		}
+		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&f&lMiscellaneous Blocks Shop &7(Page 1)")))) {
+			if (e.getSlot() == 0) p.performCommand("shop");
+			if (e.getSlot() == 51) p.performCommand("shopMisc2");
+			e.setCancelled(true);
+			return;
+		}
+		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&f&lMiscellaneous Blocks Shop &7(Page 2)")))) {
+			if (e.getSlot() == 0) p.performCommand("shop");
+			if (e.getSlot() == 47) p.performCommand("shopMisc1");
+			e.setCancelled(true);
+			return;
+		}
+		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&c&lMob Drops Shop &7(Page 1)")))) {
+			if (e.getSlot() == 0) p.performCommand("shop");
+			if (e.getSlot() == 51) p.performCommand("shopMob2");
+			e.setCancelled(true);
+			return;
+		}
+		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&c&lMob Drops Shop &7(Page 2)")))) {
+			if (e.getSlot() == 0) p.performCommand("shop");
+			if (e.getSlot() == 47) p.performCommand("shopMob1");
+			e.setCancelled(true);
+			return;
+		}
+		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&4&lRedstone Shop &7(Page 1)")))) {
+			if (e.getSlot() == 0) p.performCommand("shop");
+			if (e.getSlot() == 51) p.performCommand("shopRedstone2");
+			e.setCancelled(true);
+			return;
+		}
+		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&4&lRedstone Shop &7(Page 2)")))) {
+			if (e.getSlot() == 0) p.performCommand("shop");
+			if (e.getSlot() == 47) p.performCommand("shopRedstone1");
+			e.setCancelled(true);
+			return;
+		}
+		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&5&lBrewing Shop &7(Page 1)")))) {
+			if (e.getSlot() == 0) p.performCommand("shop");
+			if (e.getSlot() == 51) p.performCommand("shopBrewing2");
+			e.setCancelled(true);
+			return;
+		}
+		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&5&lBrewing Shop &7(Page 2)")))) {
+			if (e.getSlot() == 0) p.performCommand("shop");
+			if (e.getSlot() == 47) p.performCommand("shopBrewing1");
+			e.setCancelled(true);
+			return;
+		}
+		
 		
 	}
 	

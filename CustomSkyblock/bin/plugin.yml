@@ -19,4 +19,26 @@ commands:
   pay:
   shop:
   market:
+  shopBlocks1:
+  shopBlocks2:
+  shopColorBlocks1:
+  shopColorBlocks2:
+  shopDecorativeBlocks1:
+  shopDecorativeBlocks2:
+  shopFarming1:
+  shopFarming2:
+  shopMob1:
+  shopMob2:
+  shopFood1:
+  shopFood2:
+  shopGems1:
+  shopGems2:
+  shopMisc1:
+  shopMisc2:
+  shopMobDrops1:
+  shopMobDrops2:
+  shopRedstone1:
+  shopRedstone2:
+  shopBrewing1:
+  shopBrewing2:
   
