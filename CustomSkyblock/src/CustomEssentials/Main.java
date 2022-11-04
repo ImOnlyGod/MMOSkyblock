@@ -16,9 +16,14 @@ import CustomEssentials.Commands.FlyCommand;
 import CustomEssentials.Commands.WeaponCommand;
 import CustomEssentials.Commands.PlayerEconomy.BalanceCommand;
 import CustomEssentials.Commands.PlayerEconomy.PayCommand;
-import CustomEssentials.Events.EventsClass;
 import CustomEssentials.Events.PlayerProfileManager;
 import CustomEssentials.Events.Profile;
+import CustomEssentials.Events.EventTasks.FishingEvents;
+import CustomEssentials.Events.EventTasks.FoodSaturation;
+import CustomEssentials.Events.EventTasks.GuiShops;
+import CustomEssentials.Events.EventTasks.MobEvents;
+import CustomEssentials.Events.EventTasks.PlayerJoinLeave;
+import CustomEssentials.Events.EventTasks.SkillsFunctioning;
 import CustomEssentials.Events.Gui.MenuGui;
 import CustomEssentials.Events.Gui.PathSelectionGui;
 import CustomEssentials.Events.Gui.SkillsGui;
@@ -72,7 +77,12 @@ public class Main extends JavaPlugin{
 		new SkillsGui(this);
 		new PathSelectionGui(this);
 		new MainShopMenu(this);
-		getServer().getPluginManager().registerEvents(new EventsClass(this), this);
+		getServer().getPluginManager().registerEvents(new MobEvents(this), this);
+		getServer().getPluginManager().registerEvents(new PlayerJoinLeave(this), this);
+		getServer().getPluginManager().registerEvents(new GuiShops(this), this);
+		getServer().getPluginManager().registerEvents(new SkillsFunctioning(this), this);
+		getServer().getPluginManager().registerEvents(new FoodSaturation(this), this);
+		getServer().getPluginManager().registerEvents(new FishingEvents(this), this);
 		
 		loadConfig();
 		

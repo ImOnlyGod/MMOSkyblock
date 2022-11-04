@@ -1,5 +1,10 @@
 eclipse.preferences.version=1
-encoding//src/CustomEssentials/Events/EventsClass.java=UTF-8
+encoding//src/CustomEssentials/Events/EventTasks/FishingEvents.java=UTF-8
+encoding//src/CustomEssentials/Events/EventTasks/FoodSaturation.java=UTF-8
+encoding//src/CustomEssentials/Events/EventTasks/GuiShops.java=UTF-8
+encoding//src/CustomEssentials/Events/EventTasks/MobEvents.java=UTF-8
+encoding//src/CustomEssentials/Events/EventTasks/PlayerJoinLeave.java=UTF-8
+encoding//src/CustomEssentials/Events/EventTasks/SkillsFunctioning.java=UTF-8
 encoding//src/CustomEssentials/Events/Gui/PathSelectionGui.java=UTF-8
 encoding//src/CustomEssentials/Events/Gui/Shop/BlockShop1.java=UTF-8
 encoding//src/CustomEssentials/Events/Gui/Shop/BlockShop2.java=UTF-8
