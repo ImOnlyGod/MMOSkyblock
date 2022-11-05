@@ -25,7 +25,7 @@ public class GuiItems {
 		this.blocks.add(Material.STONE);
 		this.blocks.add(Material.COBBLESTONE);
 		this.blocks.add(Material.DIRT);
-		this.blocks.add(Material.GRASS);
+		this.blocks.add(Material.GRASS_BLOCK);
 	}
 	
 	

@@ -12,7 +12,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
@@ -22,11 +21,8 @@ import com.mojang.authlib.properties.Property;
 
 import CustomEssentials.Main;
 import CustomEssentials.Events.Profile;
-import CustomEssentials.Events.PlayerSkills.CombatSkill;
-import CustomEssentials.Events.PlayerSkills.FarmingSkill;
-import CustomEssentials.Events.PlayerSkills.FishingSkill;
-import CustomEssentials.Events.PlayerSkills.ForagingSkill;
-import CustomEssentials.Events.PlayerSkills.MiningSkill;
+import CustomEssentials.Events.ShopInfo.GuiItems;
+import CustomEssentials.Events.ShopInfo.ItemPrices;
 import CustomEssentials.Utils.Utils;
 
 public class BlockShop1 implements TabExecutor{
@@ -101,10 +97,23 @@ public class BlockShop1 implements TabExecutor{
 		nextPage.setItemMeta(nextPageMeta);
 		menu.setItem(51, nextPage);
 		
-		
-		
 		//Vanilla items
+		ItemPrices prices = new ItemPrices();		
 		
+		int i = 10;
+		GuiItems blocks = new GuiItems();
+		for (Material material : blocks.getBlocks()) {
+			ItemStack item = new ItemStack(material);
+			ItemMeta meta = item.getItemMeta();
+			List<String> lore = new ArrayList<String>();
+			lore.add(Utils.chat("&cBuy Price&7: &8" + prices.getItemBuyPrice().get(item.getType())));
+			lore.add(Utils.chat("&aSell Price&7: &8" + prices.getItemSellPrice().get(item.getType())));
+			
+			meta.setLore(lore);
+			item.setItemMeta(meta);
+			menu.setItem(i, item);
+			i += 1;
+		}
 			
 		
 		return menu;

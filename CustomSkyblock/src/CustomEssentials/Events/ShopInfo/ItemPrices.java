@@ -19,14 +19,14 @@ public class ItemPrices {
 		this.itemBuyPrice.put(Material.STONE, (float) 10.0);
 		this.itemBuyPrice.put(Material.COBBLESTONE, (float) 7.5);
 		this.itemBuyPrice.put(Material.DIRT, (float) 50.0);
-		this.itemBuyPrice.put(Material.GRASS, (float) 100.0);
+		this.itemBuyPrice.put(Material.GRASS_BLOCK, (float) 100.0);
 	}
 	
 	public void setItemSellPrices() {
-		this.itemBuyPrice.put(Material.STONE, (float) 0.0);
-		this.itemBuyPrice.put(Material.COBBLESTONE, (float) 0.0);
-		this.itemBuyPrice.put(Material.DIRT, (float) 0.0);
-		this.itemBuyPrice.put(Material.GRASS, (float) 0.0);
+		this.itemSellPrice.put(Material.STONE, (float) 0.0);
+		this.itemSellPrice.put(Material.COBBLESTONE, (float) 0.0);
+		this.itemSellPrice.put(Material.DIRT, (float) 0.0);
+		this.itemSellPrice.put(Material.GRASS_BLOCK, (float) 0.0);
 	}
 
 	public HashMap<Material, Float> getItemBuyPrice() {
