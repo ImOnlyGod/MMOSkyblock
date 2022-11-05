@@ -37,47 +37,47 @@ public class ItemsBuySellGui {
 		this.buyGui.setItem(10, item1);
 		
 		ItemStack item4 = new ItemStack(item.getType(),4);
-		setItemBuyMeta(item4,4);
+		setItemBuyMeta(item4,8);
 		this.buyGui.setItem(11, item4);
 		
 		ItemStack item8 = new ItemStack(item.getType(),8);
-		setItemBuyMeta(item8,8);
+		setItemBuyMeta(item8,16);
 		this.buyGui.setItem(12, item8);
 		
 		ItemStack item16 = new ItemStack(item.getType(),16);
-		setItemBuyMeta(item16,16);
+		setItemBuyMeta(item16,32);
 		this.buyGui.setItem(13, item16);
 		
 		ItemStack item32 = new ItemStack(item.getType(),32);
-		setItemBuyMeta(item32,32);
+		setItemBuyMeta(item32,64);
 		this.buyGui.setItem(14, item32);
 		
 		ItemStack item64 = new ItemStack(item.getType(),64);
-		setItemBuyMeta(item64,64);
+		setItemBuyMeta(item64,128);
 		this.buyGui.setItem(15, item64);
 		
 		ItemStack item128 = new ItemStack(item.getType(),128);
-		setItemBuyMeta(item128,128);
+		setItemBuyMeta(item128,256);
 		this.buyGui.setItem(16, item128);
 		
 		ItemStack item256 = new ItemStack(item.getType(),256);
-		setItemBuyMeta(item256,256);
+		setItemBuyMeta(item256,512);
 		this.buyGui.setItem(20, item256);
 		
 		ItemStack item512 = new ItemStack(item.getType(),512);
-		setItemBuyMeta(item512,512);
+		setItemBuyMeta(item512,1024);
 		this.buyGui.setItem(21, item512);
 		
 		ItemStack item1024 = new ItemStack(item.getType(),1024);
-		setItemBuyMeta(item1024,1024);
+		setItemBuyMeta(item1024,1536);
 		this.buyGui.setItem(22, item1024);
 		
 		ItemStack item1536 = new ItemStack(item.getType(),1536);
-		setItemBuyMeta(item1536,1536);
+		setItemBuyMeta(item1536,2048);
 		this.buyGui.setItem(23, item1536);
 		
 		ItemStack item2048 = new ItemStack(item.getType(),2048);
-		setItemBuyMeta(item2048,2048);
+		setItemBuyMeta(item2048,2304);
 		this.buyGui.setItem(24, item2048);
 	}
 	
@@ -98,47 +98,47 @@ public class ItemsBuySellGui {
 		this.sellGui.setItem(10, item1);
 		
 		ItemStack item4 = new ItemStack(item.getType(),4);
-		setItemSellMeta(item4,4);
+		setItemSellMeta(item4,8);
 		this.sellGui.setItem(11, item4);
 		
 		ItemStack item8 = new ItemStack(item.getType(),8);
-		setItemSellMeta(item8,8);
+		setItemSellMeta(item8,16);
 		this.sellGui.setItem(12, item8);
 		
 		ItemStack item16 = new ItemStack(item.getType(),16);
-		setItemSellMeta(item16,16);
+		setItemSellMeta(item16,32);
 		this.sellGui.setItem(13, item16);
 		
 		ItemStack item32 = new ItemStack(item.getType(),32);
-		setItemSellMeta(item32,32);
+		setItemSellMeta(item32,64);
 		this.sellGui.setItem(14, item32);
 		
 		ItemStack item64 = new ItemStack(item.getType(),64);
-		setItemSellMeta(item64,64);
+		setItemSellMeta(item64,128);
 		this.sellGui.setItem(15, item64);
 		
 		ItemStack item128 = new ItemStack(item.getType(),128);
-		setItemSellMeta(item128,128);
+		setItemSellMeta(item128,256);
 		this.sellGui.setItem(16, item128);
 		
 		ItemStack item256 = new ItemStack(item.getType(),256);
-		setItemSellMeta(item256,256);
+		setItemSellMeta(item256,512);
 		this.sellGui.setItem(20, item256);
 		
 		ItemStack item512 = new ItemStack(item.getType(),512);
-		setItemSellMeta(item512,512);
+		setItemSellMeta(item512,1024);
 		this.sellGui.setItem(21, item512);
 		
 		ItemStack item1024 = new ItemStack(item.getType(),1024);
-		setItemSellMeta(item1024,1024);
+		setItemSellMeta(item1024,1536);
 		this.sellGui.setItem(22, item1024);
 		
 		ItemStack item1536 = new ItemStack(item.getType(),1536);
-		setItemSellMeta(item1536,1536);
+		setItemSellMeta(item1536,2048);
 		this.sellGui.setItem(23, item1536);
 		
 		ItemStack item2048 = new ItemStack(item.getType(),2048);
-		setItemSellMeta(item2048,2048);
+		setItemSellMeta(item2048,2304);
 		this.sellGui.setItem(24, item2048);
 	}
 	

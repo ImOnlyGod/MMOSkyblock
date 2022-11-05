@@ -33,18 +33,17 @@ public class ItemPrices {
 	
 	public void setItemSlotPrice() {
 		this.itemSlotPriceMultiplier.put(10, 1);
-		this.itemSlotPriceMultiplier.put(11, 4);
-		this.itemSlotPriceMultiplier.put(12, 8);
-		this.itemSlotPriceMultiplier.put(13, 16);
-		this.itemSlotPriceMultiplier.put(14, 32);
-		this.itemSlotPriceMultiplier.put(15, 48);
-		this.itemSlotPriceMultiplier.put(16, 64);
-		this.itemSlotPriceMultiplier.put(20, 128);
-		this.itemSlotPriceMultiplier.put(21, 256);
-		this.itemSlotPriceMultiplier.put(22, 512);
-		this.itemSlotPriceMultiplier.put(23, 1024);
-		this.itemSlotPriceMultiplier.put(24, 1536);
-		this.itemSlotPriceMultiplier.put(25, 2048);
+		this.itemSlotPriceMultiplier.put(11, 8);
+		this.itemSlotPriceMultiplier.put(12, 16);
+		this.itemSlotPriceMultiplier.put(13, 32);
+		this.itemSlotPriceMultiplier.put(14, 64);
+		this.itemSlotPriceMultiplier.put(15, 128);
+		this.itemSlotPriceMultiplier.put(16, 256);
+		this.itemSlotPriceMultiplier.put(20, 512);
+		this.itemSlotPriceMultiplier.put(21, 1024);
+		this.itemSlotPriceMultiplier.put(22, 1536);
+		this.itemSlotPriceMultiplier.put(23, 2048);
+		this.itemSlotPriceMultiplier.put(24, 2304);
 	}
 	
 	public HashMap<Integer, Integer> getItemSlotPriceMultiplier() {

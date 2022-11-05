@@ -7,6 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 
 import CustomEssentials.Main;
 import CustomEssentials.Events.Profile;
@@ -231,12 +232,15 @@ public class GuiShops implements Listener{
 			e.setCancelled(true);
 		}
 		else if ((e.getView().getTitle().contains(Utils.chat("&a&lSelling")))) {
-			
+			if (e.getSlot() != 4 && !(e.getInventory().getItem(e.getSlot()).getType().equals(Material.RED_STAINED_GLASS_PANE))) {
+				int amount = this.shopPrices.getItemSlotPriceMultiplier().get(e.getSlot());
+				PlayerSellItemEvent(p,e.getInventory().getItem(e.getSlot()),amount);
+			}
 			e.setCancelled(true);
 		}	
 	}
 	
-	//CHECK IF PLAYER HAS ENOUGH INVEN SLOTS
+	//ADD MEANINGFUL MSGS FOR PURCHASE
 	public void PlayerBuyItemEvent(Player p, ItemStack item, int amount) {
 		float itemPrice = this.shopPrices.getItemBuyPrice().get(item.getType());
 		double totalPrice = itemPrice * amount;
@@ -249,11 +253,56 @@ public class GuiShops implements Listener{
 			return;
 		}
 		
+		int freeSlots = InvenSpace(p.getInventory(),item.getMaxStackSize());
+		p.sendMessage(""+freeSlots);
+		if (freeSlots < amount) {
+			p.sendMessage("Not enough space");
+			return;
+		}
+		
+		
 		ItemStack itemForPlayer = new ItemStack(item.getType(),amount);
 		
+		p.sendMessage(Utils.chat("&7[&cShop&7]" + this.plugin.getConfig().getString("BalanceCommand.buy_item_msg") + amount + " &7of &b" + item.getType() + " &7for &c$" + totalPrice));
+		p.sendMessage(Utils.chat(this.plugin.getConfig().getString("BalanceCommand.reciever_new_bal_msg") + profile.getBalance()));
 		profile.removeBalance(totalPrice);		
-		p.getInventory().addItem(itemForPlayer);
+		p.getInventory().addItem(itemForPlayer);	
+	}
+	
+	public int InvenSpace(PlayerInventory inv, int maxStackSize) {
+		int count = 0;
 		
+		for (int i = 0; i < 36; i++) {
+			if (inv.getItem(i) == null) {
+				count += maxStackSize;
+			}
+		}
+		
+		return count;
+	}
+	
+	
+	public void PlayerSellItemEvent(Player p, ItemStack item, int amount) {
+		float itemPrice = this.shopPrices.getItemSellPrice().get(item.getType());
+		double totalPrice = itemPrice * amount;
+		
+		Profile profile = this.plugin.getProfileManager().getPlayerProfile(p);
+		
+		ItemStack itemPlayer = new ItemStack(item.getType());
+		
+		if (!p.getInventory().containsAtLeast(itemPlayer,amount)) {
+			p.sendMessage("Not enough items");
+			return;
+		}
+		itemPlayer = new ItemStack(item.getType(),amount);
+		p.getInventory().removeItem(itemPlayer);
+		p.sendMessage(Utils.chat("&7[&cShop&7]" + this.plugin.getConfig().getString("BalanceCommand.sell_item_msg") + amount + " &7of &b" + item.getType() + " &7for &a$" + totalPrice));
+		p.sendMessage(Utils.chat(this.plugin.getConfig().getString("BalanceCommand.reciever_new_bal_msg") + profile.getBalance()));
+		profile.addBalance(totalPrice);			
+	}
+	
+	//IMPLEMENT
+	public void PlayerSellAllEvent(Player p, ItemStack item) {
 		
 	}
 	

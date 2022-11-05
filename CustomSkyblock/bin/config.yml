@@ -29,3 +29,6 @@ BalanceCommand:
   invalid_payment_msg3: '&8[&c*&8] &7Amount is too low!'
   invalid_payment_msg4: '&8[&c*&8] &7You do not have sufficient funds!'
   reciever_new_bal_msg: '&8[&c*&8] &7Your new balance is &a$'
+  buy_item_msg: '&8[&c*&8] &7You have purchased &b'
+  sell_item_msg: '&8[&c*&8] &7You have sold &b'
+  
