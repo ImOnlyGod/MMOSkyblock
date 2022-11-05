@@ -8,10 +8,12 @@ public class ItemPrices {
 	
 	HashMap<Material,Float> itemBuyPrice = new HashMap<Material, Float>();
 	HashMap<Material,Float> itemSellPrice = new HashMap<Material, Float>();
+	HashMap<Integer,Integer> itemSlotPriceMultiplier = new HashMap<Integer, Integer>();
 
 	public ItemPrices() {
 		setItemBuyPrices();
 		setItemSellPrices();
+		setItemSlotPrice();
 		
 	}
 	
@@ -27,6 +29,30 @@ public class ItemPrices {
 		this.itemSellPrice.put(Material.COBBLESTONE, (float) 0.0);
 		this.itemSellPrice.put(Material.DIRT, (float) 0.0);
 		this.itemSellPrice.put(Material.GRASS_BLOCK, (float) 0.0);
+	}
+	
+	public void setItemSlotPrice() {
+		this.itemSlotPriceMultiplier.put(10, 1);
+		this.itemSlotPriceMultiplier.put(11, 4);
+		this.itemSlotPriceMultiplier.put(12, 8);
+		this.itemSlotPriceMultiplier.put(13, 16);
+		this.itemSlotPriceMultiplier.put(14, 32);
+		this.itemSlotPriceMultiplier.put(15, 48);
+		this.itemSlotPriceMultiplier.put(16, 64);
+		this.itemSlotPriceMultiplier.put(20, 128);
+		this.itemSlotPriceMultiplier.put(21, 256);
+		this.itemSlotPriceMultiplier.put(22, 512);
+		this.itemSlotPriceMultiplier.put(23, 1024);
+		this.itemSlotPriceMultiplier.put(24, 1536);
+		this.itemSlotPriceMultiplier.put(25, 2048);
+	}
+	
+	public HashMap<Integer, Integer> getItemSlotPriceMultiplier() {
+		return itemSlotPriceMultiplier;
+	}
+
+	public void setItemSlotPriceMultiplier(HashMap<Integer, Integer> itemSlotPriceMultiplier) {
+		this.itemSlotPriceMultiplier = itemSlotPriceMultiplier;
 	}
 
 	public HashMap<Material, Float> getItemBuyPrice() {

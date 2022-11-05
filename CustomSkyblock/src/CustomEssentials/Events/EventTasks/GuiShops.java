@@ -1,5 +1,6 @@
 package CustomEssentials.Events.EventTasks;
 
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -13,12 +14,14 @@ import CustomEssentials.Events.Gui.Shop.ItemsBuySellGui;
 import CustomEssentials.Events.PlayerPath.Paths.Archer;
 import CustomEssentials.Events.PlayerPath.Paths.Assassin;
 import CustomEssentials.Events.PlayerPath.Paths.Tank;
+import CustomEssentials.Events.ShopInfo.ItemPrices;
 import CustomEssentials.Utils.Utils;
 
 
 public class GuiShops implements Listener{
 	
 	private Main plugin;
+	private ItemPrices shopPrices;
 		
 	public GuiShops(Main plugin) {
 		this.plugin = plugin;
@@ -28,6 +31,8 @@ public class GuiShops implements Listener{
 	@EventHandler
 	public void OnClick(InventoryClickEvent e) {
 		Player p = (Player) e.getWhoClicked();
+		
+		if (this.shopPrices == null) this.shopPrices = new ItemPrices();
 		
 		if (e.getView().getTitle().equalsIgnoreCase(Utils.chat("&a&lMenu"))) {
 			
@@ -215,19 +220,43 @@ public class GuiShops implements Listener{
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&5&lBrewing Shop &7(Page 2)")))) {
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 47) p.performCommand("shopBrewing1");
-			
 			e.setCancelled(true);
 			return;
 		}
 		else if ((e.getView().getTitle().contains(Utils.chat("&c&lBuying")))) {
+			if (e.getSlot() != 4 && !(e.getInventory().getItem(e.getSlot()).getType().equals(Material.RED_STAINED_GLASS_PANE))) {
+				int amount = this.shopPrices.getItemSlotPriceMultiplier().get(e.getSlot());
+				PlayerBuyItemEvent(p,e.getInventory().getItem(e.getSlot()),amount);
+			}
 			e.setCancelled(true);
 		}
 		else if ((e.getView().getTitle().contains(Utils.chat("&a&lSelling")))) {
+			
 			e.setCancelled(true);
+		}	
+	}
+	
+	//CHECK IF PLAYER HAS ENOUGH INVEN SLOTS
+	public void PlayerBuyItemEvent(Player p, ItemStack item, int amount) {
+		float itemPrice = this.shopPrices.getItemBuyPrice().get(item.getType());
+		double totalPrice = itemPrice * amount;
+		
+		Profile profile = this.plugin.getProfileManager().getPlayerProfile(p);
+		double playerBalance = profile.getBalance();
+		
+		if (!(playerBalance-totalPrice > 0)) {
+			p.sendMessage(Utils.chat("&7[&cShop&7]" + this.plugin.getConfig().getString("BalanceCommand.invalid_payment_msg4")));
+			return;
 		}
+		
+		ItemStack itemForPlayer = new ItemStack(item.getType(),amount);
+		
+		profile.removeBalance(totalPrice);		
+		p.getInventory().addItem(itemForPlayer);
 		
 		
 	}
+	
 	
 	@EventHandler
 	public void OpenMenuEvent(InventoryOpenEvent e) {
