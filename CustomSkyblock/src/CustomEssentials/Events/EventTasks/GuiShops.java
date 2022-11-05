@@ -4,6 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.ItemStack;
@@ -103,6 +104,9 @@ public class GuiShops implements Listener{
 				}
 				else if (e.getClick().isRightClick()) {
 					p.openInventory(buySell.getSellGui());
+				}
+				else if (e.getClick().equals(ClickType.MIDDLE)) {
+					PlayerSellAllEvent(p,e.getCurrentItem());
 				}
 			
 			}
@@ -254,7 +258,8 @@ public class GuiShops implements Listener{
 		}
 		
 		int freeSlots = InvenSpace(p.getInventory(),item.getMaxStackSize());
-		p.sendMessage(""+freeSlots);
+		
+		//CHANGE MSG
 		if (freeSlots < amount) {
 			p.sendMessage("Not enough space");
 			return;
@@ -281,6 +286,19 @@ public class GuiShops implements Listener{
 		return count;
 	}
 	
+	public int CountItem(PlayerInventory inv, ItemStack item) {
+		int count = 0;
+		
+		for (int i = 0; i < 36; i++) {
+			if (inv.getItem(i) != null) {
+				if (inv.getItem(i).getType() == item.getType()) {
+					count += inv.getItem(i).getAmount();
+				}
+			}
+		}
+		
+		return count;
+	}	
 	
 	public void PlayerSellItemEvent(Player p, ItemStack item, int amount) {
 		float itemPrice = this.shopPrices.getItemSellPrice().get(item.getType());
@@ -304,6 +322,26 @@ public class GuiShops implements Listener{
 	//IMPLEMENT
 	public void PlayerSellAllEvent(Player p, ItemStack item) {
 		
+		
+		if (item == null || item.getType().equals(Material.AIR)) return;
+		
+		double itemPrice = this.shopPrices.getItemSellPrice().get(item.getType());
+		Profile profile = this.plugin.getProfileManager().getPlayerProfile(p);
+		ItemStack playerItem = new ItemStack(item.getType());
+		
+		int amount = CountItem(p.getInventory(),playerItem);
+		
+		if (amount == 0) {
+			p.sendMessage("You dont have any items");
+			return;
+		}
+		
+		ItemStack sellItem = new ItemStack(item.getType(),amount);
+		p.getInventory().removeItem(sellItem);
+		p.sendMessage(Utils.chat("&7[&cShop&7]" + this.plugin.getConfig().getString("BalanceCommand.sell_item_msg") + amount + " &7of &b" + item.getType() + " &7for &a$" + itemPrice*amount));
+		p.sendMessage(Utils.chat(this.plugin.getConfig().getString("BalanceCommand.reciever_new_bal_msg") + profile.getBalance()));
+		profile.addBalance(itemPrice*amount);			
+
 	}
 	
 	
