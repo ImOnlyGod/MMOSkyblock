@@ -353,6 +353,26 @@ public class GuiShops implements Listener{
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&b&lGems Shop &7(Page 1)")))) {
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 51) p.performCommand("shopGems2");
+			if ((e.getSlot() > 9 && e.getSlot() < 17) || (e.getSlot() > 18 && e.getSlot() < 26) || (e.getSlot() > 27 && e.getSlot() < 35) || (e.getSlot() > 36 && e.getSlot() < 44)) {
+				
+				if (e.getCurrentItem() == null) {
+					return;
+				}
+				
+				ItemsBuySellGui buySell = new ItemsBuySellGui(e.getInventory().getItem(e.getSlot()),p);
+				if (e.getClick().isLeftClick()) {
+					if (!this.shopPrices.getItemBuyPrice().containsKey(e.getCurrentItem().getType())) return;
+					p.openInventory(buySell.getBuyGui());
+				}
+				else if (e.getClick().isRightClick()) {
+					if (!this.shopPrices.getItemSellPrice().containsKey(e.getCurrentItem().getType())) return;
+					p.openInventory(buySell.getSellGui());
+				}
+				else if (e.getClick().equals(ClickType.MIDDLE)) {
+					PlayerSellAllEvent(p,e.getCurrentItem());
+				}
+			
+			}
 			e.setCancelled(true);
 			return;
 		}

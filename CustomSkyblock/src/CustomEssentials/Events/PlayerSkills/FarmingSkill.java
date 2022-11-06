@@ -48,14 +48,14 @@ public class FarmingSkill extends Skills{
 		this.cropXp.put(Material.KELP_PLANT, (float) 5.5);
 		this.cropXp.put(Material.KELP, (float) 5.5);
 		this.cropXp.put(Material.VINE, (float) 30.0);
-		this.cropXp.put(Material.CAVE_VINES, (float) 35.0);
+		this.cropXp.put(Material.GLOW_LICHEN, (float) 35.0);
 		this.cropXp.put(Material.RED_MUSHROOM, (float) 40.0);
 		this.cropXp.put(Material.BROWN_MUSHROOM, (float) 40.0);
 		this.cropXp.put(Material.RED_MUSHROOM_BLOCK, (float) 10.0);
 		this.cropXp.put(Material.BROWN_MUSHROOM_BLOCK, (float) 10.0);
 		this.cropXp.put(Material.MUSHROOM_STEM, (float) 10.0);
-		this.cropXp.put(Material.TWISTING_VINES_PLANT, (float) 8.0);
-		this.cropXp.put(Material.WEEPING_VINES_PLANT, (float) 8.0);
+		this.cropXp.put(Material.TWISTING_VINES, (float) 8.0);
+		this.cropXp.put(Material.WEEPING_VINES, (float) 8.0);
 		this.cropXp.put(Material.CRIMSON_FUNGUS, (float) 50.0);
 		this.cropXp.put(Material.WARPED_FUNGUS, (float) 50.0);		
 		
@@ -84,7 +84,7 @@ public class FarmingSkill extends Skills{
 		this.levelRequirements.put(Material.KELP_PLANT,  35);
 		this.levelRequirements.put(Material.KELP,  35);
 		this.levelRequirements.put(Material.VINE,  40);
-		this.levelRequirements.put(Material.CAVE_VINES,  45);
+		this.levelRequirements.put(Material.GLOW_LICHEN,  45);
 		this.levelRequirements.put(Material.RED_MUSHROOM,  50);
 		this.levelRequirements.put(Material.BROWN_MUSHROOM,  50);
 		this.levelRequirements.put(Material.RED_MUSHROOM_BLOCK,  50);

@@ -20,6 +20,8 @@ public class GuiItems {
 	public GuiItems() {
 		setBlocksItems();
 		setColorBlocksItems();
+		setFarmingItems();
+		setGemsItems();
 	}
 	
 	public void setBlocksItems() {
@@ -205,6 +207,73 @@ public class GuiItems {
 		this.colorBlocks.add(Material.BROWN_CONCRETE);
 		this.colorBlocks.add(Material.GREEN_CONCRETE);
 		this.colorBlocks.add(Material.RED_CONCRETE);
+	}
+	
+	public void setDecorationItems() {
+		
+	}
+	
+	public void setFarmingItems() {
+		this.farming.add(Material.WHEAT_SEEDS);
+		this.farming.add(Material.WHEAT);
+		this.farming.add(Material.BEETROOT_SEEDS);
+		this.farming.add(Material.BEETROOT);
+		this.farming.add(Material.CARROT);
+		this.farming.add(Material.POTATO);
+		this.farming.add(Material.MELON_SEEDS);
+		this.farming.add(Material.MELON_SLICE);
+		this.farming.add(Material.PUMPKIN);
+		this.farming.add(Material.NETHER_WART);
+		this.farming.add(Material.SUGAR_CANE);
+		this.farming.add(Material.CACTUS);
+		this.farming.add(Material.BAMBOO);
+		this.farming.add(Material.COCOA_BEANS);
+		this.farming.add(Material.KELP);
+		this.farming.add(Material.VINE);
+		this.farming.add(Material.GLOW_LICHEN);
+		this.farming.add(Material.RED_MUSHROOM);
+		this.farming.add(Material.BROWN_MUSHROOM);
+		this.farming.add(Material.TWISTING_VINES);
+		this.farming.add(Material.WEEPING_VINES);
+		this.farming.add(Material.CRIMSON_FUNGUS);
+		this.farming.add(Material.WARPED_FUNGUS);
+		
+	}
+	
+	public void setFoodItems() {
+		
+	}
+	
+	public void setMobItems() {
+		
+	}
+	
+	public void setGemsItems() {
+		this.gems.add(Material.COAL);
+		this.gems.add(Material.RAW_IRON);
+		this.gems.add(Material.IRON_INGOT);
+		this.gems.add(Material.RAW_COPPER);
+		this.gems.add(Material.COPPER_INGOT);
+		this.gems.add(Material.LAPIS_LAZULI);
+		this.gems.add(Material.REDSTONE);
+		this.gems.add(Material.RAW_GOLD);
+		this.gems.add(Material.GOLD_INGOT);
+		this.gems.add(Material.DIAMOND);
+		this.gems.add(Material.EMERALD);
+		this.gems.add(Material.NETHERITE_SCRAP);
+		this.gems.add(Material.NETHERITE_INGOT);
+	}
+	
+	public void setRedstoneItems() {
+		
+	}
+	
+	public void setMiscItems() {
+		
+	}
+	
+	public void setBrewingItems() {
+		
 	}
 	
 	public ArrayList<Material> getBlocks() {
