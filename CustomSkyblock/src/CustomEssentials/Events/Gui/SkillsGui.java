@@ -1,7 +1,9 @@
 package CustomEssentials.Events.Gui;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -13,6 +15,10 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
+
+import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.properties.Property;
 
 import CustomEssentials.Main;
 import CustomEssentials.Events.Profile;
@@ -57,7 +63,7 @@ public class SkillsGui implements TabExecutor{
 		Inventory menu = Bukkit.createInventory(null, 54,Utils.chat("&a&lSkills"));
 		
 		//Glass Slots
-		for (int i = 0; i < menu.getSize(); i++) {
+		for (int i = 1; i < menu.getSize(); i++) {
 			if ((i < 19) || (i > 34) || (i == 26) || (i == 27)) {
 				ItemStack glassSlot = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
 				
@@ -274,6 +280,25 @@ public class SkillsGui implements TabExecutor{
 		fishingItem.setItemMeta(fishingItemMeta);
 		menu.setItem(23, fishingItem);
 		
+		
+		//Back to Main Menu Item
+		ItemStack mainMenu = new ItemStack(Material.PLAYER_HEAD,1);		
+		SkullMeta mainMenuMeta = (SkullMeta) mainMenu.getItemMeta();
+		mainMenuMeta.setDisplayName(Utils.chat("&a&lBack to Main Menu"));
+		GameProfile mainMenuGameProfile = new GameProfile(UUID.randomUUID(),"");
+		String mainMenuValue = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZmJlNTI5YWI2YjJlYTdjNTBkOTE5MmQ4OWY4OThmZDdkYThhOWU3NTBkMzc4Mjk1ZGY3MzIwNWU3YTdlZWFlMCJ9fX0=";
+		mainMenuGameProfile.getProperties().put("textures", new Property("texture",mainMenuValue));	
+		
+		try {
+			Field profileField = mainMenuMeta.getClass().getDeclaredField("profile");
+			profileField.setAccessible(true);
+			profileField.set(mainMenuMeta, mainMenuGameProfile);					
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		mainMenu.setItemMeta(mainMenuMeta);
+		menu.setItem(0, mainMenu);
 		
 		
 		return menu;

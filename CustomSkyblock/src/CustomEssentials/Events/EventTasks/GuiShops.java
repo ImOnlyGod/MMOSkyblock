@@ -52,6 +52,7 @@ public class GuiShops implements Listener{
 		}
 		
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&a&lSkills")))) {
+			if (e.getSlot() == 0) p.performCommand("menu");
 			e.setCancelled(true);
 			return;
 		}
