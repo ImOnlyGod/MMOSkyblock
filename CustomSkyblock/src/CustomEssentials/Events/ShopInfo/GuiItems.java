@@ -19,6 +19,7 @@ public class GuiItems {
 	
 	public GuiItems() {
 		setBlocksItems();
+		setColorBlocksItems();
 	}
 	
 	public void setBlocksItems() {
@@ -113,8 +114,97 @@ public class GuiItems {
 	}
 	
 	public void setColorBlocksItems() {
-		
-		
+		this.colorBlocks.add(Material.GLASS);
+		this.colorBlocks.add(Material.WHITE_STAINED_GLASS);
+		this.colorBlocks.add(Material.ORANGE_STAINED_GLASS);
+		this.colorBlocks.add(Material.MAGENTA_STAINED_GLASS);
+		this.colorBlocks.add(Material.LIGHT_BLUE_STAINED_GLASS);
+		this.colorBlocks.add(Material.YELLOW_STAINED_GLASS);
+		this.colorBlocks.add(Material.LIME_STAINED_GLASS);
+		this.colorBlocks.add(Material.PINK_STAINED_GLASS);
+		this.colorBlocks.add(Material.GRAY_STAINED_GLASS);
+		this.colorBlocks.add(Material.LIGHT_GRAY_STAINED_GLASS);
+		this.colorBlocks.add(Material.CYAN_STAINED_GLASS);
+		this.colorBlocks.add(Material.PURPLE_STAINED_GLASS);
+		this.colorBlocks.add(Material.BLUE_STAINED_GLASS);
+		this.colorBlocks.add(Material.BROWN_STAINED_GLASS);
+		this.colorBlocks.add(Material.GREEN_STAINED_GLASS);
+		this.colorBlocks.add(Material.RED_STAINED_GLASS);
+		this.colorBlocks.add(Material.TINTED_GLASS);
+		this.colorBlocks.add(Material.TERRACOTTA);
+		this.colorBlocks.add(Material.WHITE_WOOL);
+		this.colorBlocks.add(Material.ORANGE_WOOL);
+		this.colorBlocks.add(Material.MAGENTA_WOOL);
+		this.colorBlocks.add(Material.LIGHT_BLUE_WOOL);
+		this.colorBlocks.add(Material.YELLOW_WOOL);
+		this.colorBlocks.add(Material.LIME_WOOL);
+		this.colorBlocks.add(Material.PINK_WOOL);
+		this.colorBlocks.add(Material.GRAY_WOOL);
+		this.colorBlocks.add(Material.LIGHT_GRAY_WOOL);
+		this.colorBlocks.add(Material.CYAN_WOOL);
+		this.colorBlocks.add(Material.PURPLE_WOOL);
+		this.colorBlocks.add(Material.BLUE_WOOL);
+		this.colorBlocks.add(Material.BROWN_WOOL);
+		this.colorBlocks.add(Material.GREEN_WOOL);
+		this.colorBlocks.add(Material.RED_WOOL);
+		this.colorBlocks.add(Material.WHITE_TERRACOTTA);
+		this.colorBlocks.add(Material.ORANGE_TERRACOTTA);
+		this.colorBlocks.add(Material.MAGENTA_TERRACOTTA);
+		this.colorBlocks.add(Material.LIGHT_BLUE_TERRACOTTA);
+		this.colorBlocks.add(Material.YELLOW_TERRACOTTA);
+		this.colorBlocks.add(Material.LIME_TERRACOTTA);
+		this.colorBlocks.add(Material.PINK_TERRACOTTA);
+		this.colorBlocks.add(Material.GRAY_TERRACOTTA);
+		this.colorBlocks.add(Material.LIGHT_GRAY_TERRACOTTA);
+		this.colorBlocks.add(Material.CYAN_TERRACOTTA);
+		this.colorBlocks.add(Material.PURPLE_TERRACOTTA);
+		this.colorBlocks.add(Material.BLUE_TERRACOTTA);
+		this.colorBlocks.add(Material.BROWN_TERRACOTTA);
+		this.colorBlocks.add(Material.GREEN_TERRACOTTA);
+		this.colorBlocks.add(Material.RED_TERRACOTTA);
+		this.colorBlocks.add(Material.WHITE_GLAZED_TERRACOTTA);
+		this.colorBlocks.add(Material.ORANGE_GLAZED_TERRACOTTA);
+		this.colorBlocks.add(Material.MAGENTA_GLAZED_TERRACOTTA);
+		this.colorBlocks.add(Material.YELLOW_GLAZED_TERRACOTTA);
+		this.colorBlocks.add(Material.LIME_GLAZED_TERRACOTTA);
+		this.colorBlocks.add(Material.PINK_GLAZED_TERRACOTTA);
+		this.colorBlocks.add(Material.GRAY_GLAZED_TERRACOTTA);
+		this.colorBlocks.add(Material.CYAN_GLAZED_TERRACOTTA);
+		this.colorBlocks.add(Material.PURPLE_GLAZED_TERRACOTTA);
+		this.colorBlocks.add(Material.BLUE_GLAZED_TERRACOTTA);
+		this.colorBlocks.add(Material.BROWN_GLAZED_TERRACOTTA);
+		this.colorBlocks.add(Material.GREEN_GLAZED_TERRACOTTA);
+		this.colorBlocks.add(Material.RED_GLAZED_TERRACOTTA);
+		this.colorBlocks.add(Material.WHITE_CONCRETE_POWDER);
+		this.colorBlocks.add(Material.ORANGE_CONCRETE_POWDER);
+		this.colorBlocks.add(Material.MAGENTA_CONCRETE_POWDER);
+		this.colorBlocks.add(Material.LIGHT_BLUE_CONCRETE_POWDER);
+		this.colorBlocks.add(Material.YELLOW_CONCRETE_POWDER);
+		this.colorBlocks.add(Material.LIME_CONCRETE_POWDER);
+		this.colorBlocks.add(Material.PINK_CONCRETE_POWDER);
+		this.colorBlocks.add(Material.GRAY_CONCRETE_POWDER);
+		this.colorBlocks.add(Material.LIGHT_GRAY_CONCRETE_POWDER);
+		this.colorBlocks.add(Material.CYAN_CONCRETE_POWDER);
+		this.colorBlocks.add(Material.PURPLE_CONCRETE_POWDER);
+		this.colorBlocks.add(Material.BLUE_CONCRETE_POWDER);
+		this.colorBlocks.add(Material.BROWN_CONCRETE_POWDER);
+		this.colorBlocks.add(Material.GREEN_CONCRETE_POWDER);
+		this.colorBlocks.add(Material.RED_CONCRETE_POWDER);
+		this.colorBlocks.add(Material.WHITE_CONCRETE);
+		this.colorBlocks.add(Material.ORANGE_CONCRETE);
+		this.colorBlocks.add(Material.MAGENTA_CONCRETE);
+		this.colorBlocks.add(Material.LIGHT_BLUE_CONCRETE);
+		this.colorBlocks.add(Material.YELLOW_CONCRETE);
+		this.colorBlocks.add(Material.LIME_CONCRETE);
+		this.colorBlocks.add(Material.PINK_CONCRETE);
+		this.colorBlocks.add(Material.GRAY_CONCRETE);
+		this.colorBlocks.add(Material.LIGHT_GRAY_CONCRETE);
+		this.colorBlocks.add(Material.CYAN_CONCRETE);
+		this.colorBlocks.add(Material.PURPLE_CONCRETE);
+		this.colorBlocks.add(Material.BLUE_CONCRETE);
+		this.colorBlocks.add(Material.BROWN_CONCRETE);
+		this.colorBlocks.add(Material.GREEN_CONCRETE);
+		this.colorBlocks.add(Material.RED_CONCRETE);
 	}
 	
 	public ArrayList<Material> getBlocks() {

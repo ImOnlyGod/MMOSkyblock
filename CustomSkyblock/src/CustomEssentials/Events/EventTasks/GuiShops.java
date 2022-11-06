@@ -110,9 +110,11 @@ public class GuiShops implements Listener{
 				
 				ItemsBuySellGui buySell = new ItemsBuySellGui(e.getInventory().getItem(e.getSlot()),p);
 				if (e.getClick().isLeftClick()) {
+					if (!this.shopPrices.getItemBuyPrice().containsKey(e.getCurrentItem().getType())) return;
 					p.openInventory(buySell.getBuyGui());
 				}
 				else if (e.getClick().isRightClick()) {
+					if (!this.shopPrices.getItemSellPrice().containsKey(e.getCurrentItem().getType())) return;
 					p.openInventory(buySell.getSellGui());
 				}
 				else if (e.getClick().equals(ClickType.MIDDLE)) {
@@ -135,9 +137,11 @@ public class GuiShops implements Listener{
 				
 				ItemsBuySellGui buySell = new ItemsBuySellGui(e.getInventory().getItem(e.getSlot()),p);
 				if (e.getClick().isLeftClick()) {
+					if (!this.shopPrices.getItemBuyPrice().containsKey(e.getCurrentItem().getType())) return;
 					p.openInventory(buySell.getBuyGui());
 				}
 				else if (e.getClick().isRightClick()) {
+					if (!this.shopPrices.getItemSellPrice().containsKey(e.getCurrentItem().getType())) return;
 					p.openInventory(buySell.getSellGui());
 				}
 				else if (e.getClick().equals(ClickType.MIDDLE)) {
@@ -160,9 +164,11 @@ public class GuiShops implements Listener{
 				
 				ItemsBuySellGui buySell = new ItemsBuySellGui(e.getInventory().getItem(e.getSlot()),p);
 				if (e.getClick().isLeftClick()) {
+					if (!this.shopPrices.getItemBuyPrice().containsKey(e.getCurrentItem().getType())) return;
 					p.openInventory(buySell.getBuyGui());
 				}
 				else if (e.getClick().isRightClick()) {
+					if (!this.shopPrices.getItemSellPrice().containsKey(e.getCurrentItem().getType())) return;
 					p.openInventory(buySell.getSellGui());
 				}
 				else if (e.getClick().equals(ClickType.MIDDLE)) {
@@ -184,9 +190,11 @@ public class GuiShops implements Listener{
 				
 				ItemsBuySellGui buySell = new ItemsBuySellGui(e.getInventory().getItem(e.getSlot()),p);
 				if (e.getClick().isLeftClick()) {
+					if (!this.shopPrices.getItemBuyPrice().containsKey(e.getCurrentItem().getType())) return;
 					p.openInventory(buySell.getBuyGui());
 				}
 				else if (e.getClick().isRightClick()) {
+					if (!this.shopPrices.getItemSellPrice().containsKey(e.getCurrentItem().getType())) return;
 					p.openInventory(buySell.getSellGui());
 				}
 				else if (e.getClick().equals(ClickType.MIDDLE)) {
@@ -197,15 +205,113 @@ public class GuiShops implements Listener{
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&2&lColor Blocks Shop &7(Page 1)")))) {
+			e.setCancelled(true);
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 51) p.performCommand("shopColorBlocks2");
-			e.setCancelled(true);
+			if ((e.getSlot() > 9 && e.getSlot() < 17) || (e.getSlot() > 18 && e.getSlot() < 26) || (e.getSlot() > 27 && e.getSlot() < 35) || (e.getSlot() > 36 && e.getSlot() < 44)) {
+				
+				if (e.getCurrentItem() == null) {
+					return;
+				}
+				
+				ItemsBuySellGui buySell = new ItemsBuySellGui(e.getInventory().getItem(e.getSlot()),p);
+				if (e.getClick().isLeftClick()) {
+					if (!this.shopPrices.getItemBuyPrice().containsKey(e.getCurrentItem().getType())) return;
+					p.openInventory(buySell.getBuyGui());
+				}
+				else if (e.getClick().isRightClick()) {
+					if (!this.shopPrices.getItemSellPrice().containsKey(e.getCurrentItem().getType())) return;
+					p.openInventory(buySell.getSellGui());
+				}
+				else if (e.getClick().equals(ClickType.MIDDLE)) {
+					PlayerSellAllEvent(p,e.getCurrentItem());
+				}
+			
+			}
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&2&lColor Blocks Shop &7(Page 2)")))) {
+			e.setCancelled(true);
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 47) p.performCommand("shopColorBlocks1");
+			if (e.getSlot() == 51) p.performCommand("shopColorBlocks3");
+			if ((e.getSlot() > 9 && e.getSlot() < 17) || (e.getSlot() > 18 && e.getSlot() < 26) || (e.getSlot() > 27 && e.getSlot() < 35) || (e.getSlot() > 36 && e.getSlot() < 44)) {
+				
+				if (e.getCurrentItem() == null) {
+					return;
+				}
+				
+				ItemsBuySellGui buySell = new ItemsBuySellGui(e.getInventory().getItem(e.getSlot()),p);
+				if (e.getClick().isLeftClick()) {
+					if (!this.shopPrices.getItemBuyPrice().containsKey(e.getCurrentItem().getType())) return;
+					p.openInventory(buySell.getBuyGui());
+				}
+				else if (e.getClick().isRightClick()) {
+					if (!this.shopPrices.getItemSellPrice().containsKey(e.getCurrentItem().getType())) return;
+					p.openInventory(buySell.getSellGui());
+				}
+				else if (e.getClick().equals(ClickType.MIDDLE)) {
+					PlayerSellAllEvent(p,e.getCurrentItem());
+				}
+			
+			}
+			
+			return;
+		}
+		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&2&lColor Blocks Shop &7(Page 3)")))) {
 			e.setCancelled(true);
+			if (e.getSlot() == 0) p.performCommand("shop");
+			if (e.getSlot() == 47) p.performCommand("shopColorBlocks2");
+			if (e.getSlot() == 51) p.performCommand("shopColorBlocks4");
+		
+			if ((e.getSlot() > 9 && e.getSlot() < 17) || (e.getSlot() > 18 && e.getSlot() < 26) || (e.getSlot() > 27 && e.getSlot() < 35) || (e.getSlot() > 36 && e.getSlot() < 44)) {
+				
+				if (e.getCurrentItem() == null) {
+					return;
+				}
+				
+				ItemsBuySellGui buySell = new ItemsBuySellGui(e.getInventory().getItem(e.getSlot()),p);
+				if (e.getClick().isLeftClick()) {
+					if (!this.shopPrices.getItemBuyPrice().containsKey(e.getCurrentItem().getType())) return;
+					p.openInventory(buySell.getBuyGui());
+				}
+				else if (e.getClick().isRightClick()) {
+					if (!this.shopPrices.getItemSellPrice().containsKey(e.getCurrentItem().getType())) return;
+					p.openInventory(buySell.getSellGui());
+				}
+				else if (e.getClick().equals(ClickType.MIDDLE)) {
+					PlayerSellAllEvent(p,e.getCurrentItem());
+				}
+			
+			}
+			
+			return;
+		}
+		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&2&lColor Blocks Shop &7(Page 4)")))) {
+			if (e.getSlot() == 0) p.performCommand("shop");
+			if (e.getSlot() == 47) p.performCommand("shopColorBlocks3");
+			e.setCancelled(true);
+			if ((e.getSlot() > 9 && e.getSlot() < 17) || (e.getSlot() > 18 && e.getSlot() < 26) || (e.getSlot() > 27 && e.getSlot() < 35) || (e.getSlot() > 36 && e.getSlot() < 44)) {
+				
+				if (e.getCurrentItem() == null) {
+					return;
+				}
+				
+				ItemsBuySellGui buySell = new ItemsBuySellGui(e.getInventory().getItem(e.getSlot()),p);
+				if (e.getClick().isLeftClick()) {
+					if (!this.shopPrices.getItemBuyPrice().containsKey(e.getCurrentItem().getType())) return;
+					p.openInventory(buySell.getBuyGui());
+				}
+				else if (e.getClick().isRightClick()) {
+					if (!this.shopPrices.getItemSellPrice().containsKey(e.getCurrentItem().getType())) return;
+					p.openInventory(buySell.getSellGui());
+				}
+				else if (e.getClick().equals(ClickType.MIDDLE)) {
+					PlayerSellAllEvent(p,e.getCurrentItem());
+				}
+			
+			}
+			
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&2&lDecorative Blocks Shop &7(Page 1)")))) {
