@@ -20,8 +20,16 @@ public class ItemPrices {
 	public void setItemBuyPrices() {
 		this.itemBuyPrice.put(Material.STONE, (float) 10.0);
 		this.itemBuyPrice.put(Material.COBBLESTONE, (float) 7.5);
+		this.itemBuyPrice.put(Material.GRANITE, (float) 20.0);
+		this.itemBuyPrice.put(Material.DIORITE, (float) 20.0);
+		this.itemBuyPrice.put(Material.ANDESITE, (float) 20.0);
+		this.itemBuyPrice.put(Material.POLISHED_GRANITE, (float) 25.0);
+		this.itemBuyPrice.put(Material.POLISHED_DIORITE, (float) 25.0);
+		this.itemBuyPrice.put(Material.POLISHED_ANDESITE, (float) 25.0);
 		this.itemBuyPrice.put(Material.DIRT, (float) 50.0);
 		this.itemBuyPrice.put(Material.GRASS_BLOCK, (float) 100.0);
+		this.itemBuyPrice.put(Material.PODZOL, (float) 110.0);
+		this.itemBuyPrice.put(Material.MYCELIUM, (float) 1500.0);
 	}
 	
 	public void setItemSellPrices() {

@@ -21,6 +21,8 @@ commands:
   market:
   shopBlocks1:
   shopBlocks2:
+  shopBlocks3:
+  shopBlocks4:
   shopColorBlocks1:
   shopColorBlocks2:
   shopDecorativeBlocks1:
@@ -41,4 +43,5 @@ commands:
   shopRedstone2:
   shopBrewing1:
   shopBrewing2:
+
   

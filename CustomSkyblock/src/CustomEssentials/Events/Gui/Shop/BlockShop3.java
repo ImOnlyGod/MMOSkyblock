@@ -12,6 +12,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
@@ -21,23 +22,28 @@ import com.mojang.authlib.properties.Property;
 
 import CustomEssentials.Main;
 import CustomEssentials.Events.Profile;
+import CustomEssentials.Events.PlayerSkills.CombatSkill;
+import CustomEssentials.Events.PlayerSkills.FarmingSkill;
+import CustomEssentials.Events.PlayerSkills.FishingSkill;
+import CustomEssentials.Events.PlayerSkills.ForagingSkill;
+import CustomEssentials.Events.PlayerSkills.MiningSkill;
 import CustomEssentials.Events.ShopInfo.GuiItems;
 import CustomEssentials.Events.ShopInfo.ItemPrices;
 import CustomEssentials.Utils.Utils;
 
-public class BlockShop1 implements TabExecutor{
+public class BlockShop3 implements TabExecutor{
 
 	private Main plugin;
 	
-	public BlockShop1(Main plugin) {
+	public BlockShop3(Main plugin) {
 		this.plugin = plugin;
-		plugin.getCommand("shopBlocks1").setExecutor(this);
+		plugin.getCommand("shopBlocks3").setExecutor(this);
 		
 	}
 	
 	public Inventory createGui(Player p, Profile playerProfile) {
 		
-		Inventory menu = Bukkit.createInventory(null, 54,Utils.chat("&8&lBlocks Shop &7(Page 1)"));
+		Inventory menu = Bukkit.createInventory(null, 54,Utils.chat("&8&lBlocks Shop &7(Page 3)"));
 		
 		//Glass Slots		
 		for (int i = 0; i < menu.getSize(); i++) {
@@ -80,10 +86,19 @@ public class BlockShop1 implements TabExecutor{
 		String nextPageValue = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDE1Y2U4NDQ4YWNiZDhlNjBjOWI2ZTkzZjQwNjJhMjAzYzQzNGFlYzUwNjgwZDlmMGQwMjhiN2MwOTEyNTczOCJ9fX0=";
 		nextPageGameProfile.getProperties().put("textures", new Property("texture",nextPageValue));		
 		
+		//Previous Page Item
+		ItemStack previousPage = new ItemStack(Material.PLAYER_HEAD,1);		
+		SkullMeta previousPageMeta = (SkullMeta) previousPage.getItemMeta();
+		previousPageMeta.setDisplayName(Utils.chat("&a&lBack"));
+		GameProfile previousPageGameProfile = new GameProfile(UUID.randomUUID(),"");
+		String previousPageValue = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzk2MTcwMjJjZjlhMWQ1YTg2MDZjMDZlMzg5NGMzMTA4NzRkZmFkMjc2OTA3OTNkNjc1NjkwMTY1OGM2ZTA2NCJ9fX0=";
+		previousPageGameProfile.getProperties().put("textures", new Property("texture",previousPageValue));	
+		
 		setGameProfiles(helpMeta, helpGameProfile);
 		setGameProfiles(bankMeta, bankGameProfile);
 		setGameProfiles(mainMenuMeta, mainMenuGameProfile);
 		setGameProfiles(nextPageMeta, nextPageGameProfile);
+		setGameProfiles(previousPageMeta, previousPageGameProfile);
 				
 		help.setItemMeta(helpMeta);
 		menu.setItem(4, help);
@@ -97,12 +112,16 @@ public class BlockShop1 implements TabExecutor{
 		nextPage.setItemMeta(nextPageMeta);
 		menu.setItem(51, nextPage);
 		
+		previousPage.setItemMeta(previousPageMeta);
+		menu.setItem(47, previousPage);
+		
 		//Vanilla items
 		ItemPrices prices = new ItemPrices();		
 		
 		int i = 10;
 		GuiItems blocks = new GuiItems();
-		for (Material material : blocks.getBlocks()) {
+		for (int j = 56; j < blocks.getBlocks().size(); j++) {
+			Material material = blocks.getBlocks().get(j);
 			if (i==17 || i== 26 || i == 35) {
 				i += 2;
 			}
@@ -118,8 +137,7 @@ public class BlockShop1 implements TabExecutor{
 			item.setItemMeta(meta);
 			menu.setItem(i, item);
 			i += 1;
-		}
-			
+		}		
 		
 		return menu;
 	}

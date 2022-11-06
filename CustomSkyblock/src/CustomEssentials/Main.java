@@ -29,6 +29,8 @@ import CustomEssentials.Events.Gui.PathSelectionGui;
 import CustomEssentials.Events.Gui.SkillsGui;
 import CustomEssentials.Events.Gui.Shop.BlockShop1;
 import CustomEssentials.Events.Gui.Shop.BlockShop2;
+import CustomEssentials.Events.Gui.Shop.BlockShop3;
+import CustomEssentials.Events.Gui.Shop.BlockShop4;
 import CustomEssentials.Events.Gui.Shop.BrewingShop1;
 import CustomEssentials.Events.Gui.Shop.BrewingShop2;
 import CustomEssentials.Events.Gui.Shop.ColorBlockShop1;
@@ -93,6 +95,8 @@ public class Main extends JavaPlugin{
 		new PayCommand(this);
 		new BlockShop1(this);
 		new BlockShop2(this);
+		new BlockShop3(this);
+		new BlockShop4(this);
 		new ColorBlockShop1(this);
 		new ColorBlockShop2(this);
 		new DecorativeBlockShop1(this);

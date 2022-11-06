@@ -123,9 +123,77 @@ public class GuiShops implements Listener{
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&8&lBlocks Shop &7(Page 2)")))) {
+			e.setCancelled(true);
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 47) p.performCommand("shopBlocks1");
+			if (e.getSlot() == 51) p.performCommand("shopBlocks3");
+			if ((e.getSlot() > 9 && e.getSlot() < 17) || (e.getSlot() > 18 && e.getSlot() < 26) || (e.getSlot() > 27 && e.getSlot() < 35) || (e.getSlot() > 36 && e.getSlot() < 44)) {
+				
+				if (e.getCurrentItem() == null) {
+					return;
+				}
+				
+				ItemsBuySellGui buySell = new ItemsBuySellGui(e.getInventory().getItem(e.getSlot()),p);
+				if (e.getClick().isLeftClick()) {
+					p.openInventory(buySell.getBuyGui());
+				}
+				else if (e.getClick().isRightClick()) {
+					p.openInventory(buySell.getSellGui());
+				}
+				else if (e.getClick().equals(ClickType.MIDDLE)) {
+					PlayerSellAllEvent(p,e.getCurrentItem());
+				}
+			
+			}
+			return;
+		}
+		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&8&lBlocks Shop &7(Page 3)")))) {
 			e.setCancelled(true);
+			if (e.getSlot() == 0) p.performCommand("shop");
+			if (e.getSlot() == 47) p.performCommand("shopBlocks2");
+			if (e.getSlot() == 51) p.performCommand("shopBlocks4");
+			if ((e.getSlot() > 9 && e.getSlot() < 17) || (e.getSlot() > 18 && e.getSlot() < 26) || (e.getSlot() > 27 && e.getSlot() < 35) || (e.getSlot() > 36 && e.getSlot() < 44)) {
+				
+				if (e.getCurrentItem() == null) {
+					return;
+				}
+				
+				ItemsBuySellGui buySell = new ItemsBuySellGui(e.getInventory().getItem(e.getSlot()),p);
+				if (e.getClick().isLeftClick()) {
+					p.openInventory(buySell.getBuyGui());
+				}
+				else if (e.getClick().isRightClick()) {
+					p.openInventory(buySell.getSellGui());
+				}
+				else if (e.getClick().equals(ClickType.MIDDLE)) {
+					PlayerSellAllEvent(p,e.getCurrentItem());
+				}
+			
+			}
+			return;
+		}
+		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&8&lBlocks Shop &7(Page 4)")))) {
+			e.setCancelled(true);
+			if (e.getSlot() == 0) p.performCommand("shop");
+			if (e.getSlot() == 47) p.performCommand("shopBlocks3");
+			if ((e.getSlot() > 9 && e.getSlot() < 17) || (e.getSlot() > 18 && e.getSlot() < 26) || (e.getSlot() > 27 && e.getSlot() < 35) || (e.getSlot() > 36 && e.getSlot() < 44)) {
+				
+				if (e.getCurrentItem() == null) {
+					return;
+				}
+				
+				ItemsBuySellGui buySell = new ItemsBuySellGui(e.getInventory().getItem(e.getSlot()),p);
+				if (e.getClick().isLeftClick()) {
+					p.openInventory(buySell.getBuyGui());
+				}
+				else if (e.getClick().isRightClick()) {
+					p.openInventory(buySell.getSellGui());
+				}
+				else if (e.getClick().equals(ClickType.MIDDLE)) {
+					PlayerSellAllEvent(p,e.getCurrentItem());
+				}
+			
+			}
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&2&lColor Blocks Shop &7(Page 1)")))) {
@@ -254,6 +322,8 @@ public class GuiShops implements Listener{
 	
 	//ADD MEANINGFUL MSGS FOR PURCHASE
 	public void PlayerBuyItemEvent(Player p, ItemStack item, int amount) {
+		
+		if (this.shopPrices.getItemBuyPrice().get(item.getType()) == null) return;
 		float itemPrice = this.shopPrices.getItemBuyPrice().get(item.getType());
 		double totalPrice = itemPrice * amount;
 		
@@ -309,6 +379,8 @@ public class GuiShops implements Listener{
 	}	
 	
 	public void PlayerSellItemEvent(Player p, ItemStack item, int amount) {
+		
+		if (this.shopPrices.getItemSellPrice().get(item.getType()) == null) return;
 		float itemPrice = this.shopPrices.getItemSellPrice().get(item.getType());
 		double totalPrice = itemPrice * amount;
 		
@@ -333,7 +405,11 @@ public class GuiShops implements Listener{
 		
 		if (item == null || item.getType().equals(Material.AIR)) return;
 		
+		if (this.shopPrices.getItemSellPrice().get(item.getType()) == null) return;
+		
 		double itemPrice = this.shopPrices.getItemSellPrice().get(item.getType());
+		
+		
 		Profile profile = this.plugin.getProfileManager().getPlayerProfile(p);
 		ItemStack playerItem = new ItemStack(item.getType());
 		
