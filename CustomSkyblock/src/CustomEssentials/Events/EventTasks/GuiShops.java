@@ -1,11 +1,13 @@
 package CustomEssentials.Events.EventTasks;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -16,6 +18,7 @@ import CustomEssentials.Events.Gui.Shop.ItemsBuySellGui;
 import CustomEssentials.Events.PlayerPath.Paths.Archer;
 import CustomEssentials.Events.PlayerPath.Paths.Assassin;
 import CustomEssentials.Events.PlayerPath.Paths.Tank;
+import CustomEssentials.Events.ShopInfo.GuiItems;
 import CustomEssentials.Events.ShopInfo.ItemPrices;
 import CustomEssentials.Utils.Utils;
 
@@ -95,9 +98,15 @@ public class GuiShops implements Listener{
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&8&lBlocks Shop &7(Page 1)")))) {
+			e.setCancelled(true);
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 51) p.performCommand("shopBlocks2");
 			if ((e.getSlot() > 9 && e.getSlot() < 17) || (e.getSlot() > 18 && e.getSlot() < 26) || (e.getSlot() > 27 && e.getSlot() < 35) || (e.getSlot() > 36 && e.getSlot() < 44)) {
+				
+				if (e.getCurrentItem() == null) {
+					return;
+				}
+				
 				ItemsBuySellGui buySell = new ItemsBuySellGui(e.getInventory().getItem(e.getSlot()),p);
 				if (e.getClick().isLeftClick()) {
 					p.openInventory(buySell.getBuyGui());
@@ -110,8 +119,6 @@ public class GuiShops implements Listener{
 				}
 			
 			}
-			
-			e.setCancelled(true);
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&8&lBlocks Shop &7(Page 2)")))) {
@@ -348,8 +355,95 @@ public class GuiShops implements Listener{
 	@EventHandler
 	public void OpenMenuEvent(InventoryOpenEvent e) {
 
-	}		
+	}
 	
+	@EventHandler
+	public void CloseMenuEvent(InventoryCloseEvent e) {
+		Player p = (Player) e.getPlayer();
+		
+		if ((e.getView().getTitle().contains(Utils.chat("&a&lSelling"))) || (e.getView().getTitle().contains(Utils.chat("&c&lBuying")))) {
+			
+			String menu = getPreviousMenu(e.getInventory().getItem(10));
+			if (menu == null) return;
+			
+			Bukkit.getScheduler().scheduleSyncDelayedTask(this.plugin, new Runnable() {
+				@Override
+				public void run() {
+					p.performCommand(menu);
+				}
+			},1);
+			return;
+		}		
+	}
+	
+	public String getPreviousMenu(ItemStack item) {
+		GuiItems items = new GuiItems();
+		Material itemType = item.getType();
+		
+		if (items.getBlocks().contains(itemType)) {
+			int index = items.getBlocks().indexOf(itemType);
+			int page = Math.floorDiv(index, 28) + 1;
+			String command = "ShopBlocks" + page;
+			return command;			
+		}
+		else if (items.getColorBlocks().contains(itemType)) {
+			int index = items.getColorBlocks().indexOf(itemType);
+			int page = Math.floorDiv(index, 28) + 1;
+			String command = "ShopColorBlocks" + page;
+			return command;			
+		}
+		else if (items.getDecorativeBlocks().contains(itemType)) {
+			int index = items.getDecorativeBlocks().indexOf(itemType);
+			int page = Math.floorDiv(index, 28) + 1;
+			String command = "ShopDecorativeBlocks" + page;
+			return command;			
+		}
+		else if (items.getFarming().contains(itemType)) {
+			int index = items.getFarming().indexOf(itemType);
+			int page = Math.floorDiv(index, 28) + 1;
+			String command = "ShopFarming" + page;
+			return command;			
+		}
+		else if (items.getMobDrops().contains(itemType)) {
+			int index = items.getMobDrops().indexOf(itemType);
+			int page = Math.floorDiv(index, 28) + 1;
+			String command = "ShopMob" + page;
+			return command;			
+		}
+		else if (items.getFoods().contains(itemType)) {
+			int index = items.getFoods().indexOf(itemType);
+			int page = Math.floorDiv(index, 28) + 1;
+			String command = "ShopFood" + page;
+			return command;			
+		}
+		else if (items.getGems().contains(itemType)) {
+			int index = items.getGems().indexOf(itemType);
+			int page = Math.floorDiv(index, 28) + 1;
+			String command = "ShopGems" + page;
+			return command;			
+		}
+		else if (items.getMisc().contains(itemType)) {
+			int index = items.getMisc().indexOf(itemType);
+			int page = Math.floorDiv(index, 28) + 1;
+			String command = "ShopMisc" + page;
+			return command;			
+		}
+		else if (items.getRedstone().contains(itemType)) {
+			int index = items.getRedstone().indexOf(itemType);
+			int page = Math.floorDiv(index, 28) + 1;
+			String command = "ShopRedstone" + page;
+			return command;			
+		}
+		else if (items.getBrewing().contains(itemType)) {
+			int index = items.getBrewing().indexOf(itemType);
+			int page = Math.floorDiv(index, 28) + 1;
+			String command = "ShopBrewing" + page;
+			return command;			
+		}
+
+		return null;
+	}
+		
 }
 	
 
