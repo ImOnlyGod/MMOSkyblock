@@ -27,6 +27,8 @@ import CustomEssentials.Events.PlayerSkills.FarmingSkill;
 import CustomEssentials.Events.PlayerSkills.FishingSkill;
 import CustomEssentials.Events.PlayerSkills.ForagingSkill;
 import CustomEssentials.Events.PlayerSkills.MiningSkill;
+import CustomEssentials.Events.ShopInfo.GuiItems;
+import CustomEssentials.Events.ShopInfo.ItemPrices;
 import CustomEssentials.Utils.Utils;
 
 public class RedstoneShop2 implements TabExecutor{
@@ -114,7 +116,28 @@ public class RedstoneShop2 implements TabExecutor{
 		menu.setItem(47, previousPage);
 		
 		//Vanilla items
+		ItemPrices prices = new ItemPrices();		
 		
+		int i = 10;
+		GuiItems blocks = new GuiItems();
+		for (int j = 28; j < blocks.getRedstone().size(); j++) {
+			Material material = blocks.getRedstone().get(j);
+			if (i==17 || i== 26 || i == 35) {
+				i += 2;
+			}
+			if (i > 43) break;
+			
+			ItemStack item = new ItemStack(material);
+			ItemMeta meta = item.getItemMeta();
+			List<String> lore = new ArrayList<String>();
+			lore.add(Utils.chat("&cBuy Price&7: &8" + prices.getItemBuyPrice().get(item.getType())));
+			lore.add(Utils.chat("&aSell Price&7: &8" + prices.getItemSellPrice().get(item.getType())));
+			
+			meta.setLore(lore);
+			item.setItemMeta(meta);
+			menu.setItem(i, item);
+			i += 1;
+		}
 			
 		
 		return menu;

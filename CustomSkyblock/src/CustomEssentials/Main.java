@@ -39,6 +39,7 @@ import CustomEssentials.Events.Gui.Shop.ColorBlockShop3;
 import CustomEssentials.Events.Gui.Shop.ColorBlockShop4;
 import CustomEssentials.Events.Gui.Shop.DecorativeBlockShop1;
 import CustomEssentials.Events.Gui.Shop.DecorativeBlockShop2;
+import CustomEssentials.Events.Gui.Shop.DecorativeBlockShop3;
 import CustomEssentials.Events.Gui.Shop.FarmingShop1;
 import CustomEssentials.Events.Gui.Shop.FarmingShop2;
 import CustomEssentials.Events.Gui.Shop.FoodShop1;
@@ -105,6 +106,7 @@ public class Main extends JavaPlugin{
 		new ColorBlockShop4(this);
 		new DecorativeBlockShop1(this);
 		new DecorativeBlockShop2(this);
+		new DecorativeBlockShop3(this);
 		new FarmingShop1(this);
 		new FarmingShop2(this);
 		new FoodShop1(this);

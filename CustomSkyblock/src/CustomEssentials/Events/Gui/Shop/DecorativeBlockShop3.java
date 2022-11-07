@@ -31,19 +31,19 @@ import CustomEssentials.Events.ShopInfo.GuiItems;
 import CustomEssentials.Events.ShopInfo.ItemPrices;
 import CustomEssentials.Utils.Utils;
 
-public class FoodShop2 implements TabExecutor{
+public class DecorativeBlockShop3 implements TabExecutor{
 
 	private Main plugin;
 	
-	public FoodShop2(Main plugin) {
+	public DecorativeBlockShop3(Main plugin) {
 		this.plugin = plugin;
-		plugin.getCommand("shopFood2").setExecutor(this);
+		plugin.getCommand("shopDecorativeBlocks3").setExecutor(this);
 		
 	}
 	
 	public Inventory createGui(Player p, Profile playerProfile) {
 		
-		Inventory menu = Bukkit.createInventory(null, 54,Utils.chat("&6&lFood Shop &7(Page 2)"));
+		Inventory menu = Bukkit.createInventory(null, 54,Utils.chat("&2&lDecorative Blocks Shop &7(Page 3)"));
 		
 		//Glass Slots		
 		for (int i = 0; i < menu.getSize(); i++) {
@@ -120,8 +120,8 @@ public class FoodShop2 implements TabExecutor{
 		
 		int i = 10;
 		GuiItems blocks = new GuiItems();
-		for (int j = 28; j < blocks.getFoods().size(); j++) {
-			Material material = blocks.getFoods().get(j);
+		for (int j = 56; j < blocks.getDecorativeBlocks().size(); j++) {
+			Material material = blocks.getDecorativeBlocks().get(j);
 			if (i==17 || i== 26 || i == 35) {
 				i += 2;
 			}

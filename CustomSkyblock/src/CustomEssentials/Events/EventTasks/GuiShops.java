@@ -318,41 +318,6 @@ public class GuiShops implements Listener{
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 51) p.performCommand("shopDecorativeBlocks2");
 			e.setCancelled(true);
-			return;
-		}
-		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&2&lDecorative Blocks Shop &7(Page 2)")))) {
-			if (e.getSlot() == 0) p.performCommand("shop");
-			if (e.getSlot() == 47) p.performCommand("shopDecorativeBlocks1");
-			e.setCancelled(true);
-			return;
-		}
-		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&a&lFarming Shop &7(Page 1)")))) {
-			if (e.getSlot() == 0) p.performCommand("shop");
-			if (e.getSlot() == 51) p.performCommand("shopFarming2");
-			e.setCancelled(true);
-			return;
-		}
-		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&a&lFarming Shop &7(Page 2)")))) {
-			if (e.getSlot() == 0) p.performCommand("shop");
-			if (e.getSlot() == 47) p.performCommand("shopFarming1");
-			e.setCancelled(true);
-			return;
-		}
-		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&6&lFood Shop &7(Page 1)")))) {
-			if (e.getSlot() == 0) p.performCommand("shop");
-			if (e.getSlot() == 51) p.performCommand("shopFood2");
-			e.setCancelled(true);
-			return;
-		}
-		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&6&lFood Shop &7(Page 2)")))) {
-			if (e.getSlot() == 0) p.performCommand("shop");
-			if (e.getSlot() == 47) p.performCommand("shopFood1");
-			e.setCancelled(true);
-			return;
-		}
-		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&b&lGems Shop &7(Page 1)")))) {
-			if (e.getSlot() == 0) p.performCommand("shop");
-			if (e.getSlot() == 51) p.performCommand("shopGems2");
 			if ((e.getSlot() > 9 && e.getSlot() < 17) || (e.getSlot() > 18 && e.getSlot() < 26) || (e.getSlot() > 27 && e.getSlot() < 35) || (e.getSlot() > 36 && e.getSlot() < 44)) {
 				
 				if (e.getCurrentItem() == null) {
@@ -373,61 +338,423 @@ public class GuiShops implements Listener{
 				}
 			
 			}
+			return;
+		}
+		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&2&lDecorative Blocks Shop &7(Page 2)")))) {
+			if (e.getSlot() == 0) p.performCommand("shop");
+			if (e.getSlot() == 47) p.performCommand("shopDecorativeBlocks1");
+			if (e.getSlot() == 51) p.performCommand("shopDecorativeBlocks3");
 			e.setCancelled(true);
+			if ((e.getSlot() > 9 && e.getSlot() < 17) || (e.getSlot() > 18 && e.getSlot() < 26) || (e.getSlot() > 27 && e.getSlot() < 35) || (e.getSlot() > 36 && e.getSlot() < 44)) {
+				
+				if (e.getCurrentItem() == null) {
+					return;
+				}
+				
+				ItemsBuySellGui buySell = new ItemsBuySellGui(e.getInventory().getItem(e.getSlot()),p);
+				if (e.getClick().isLeftClick()) {
+					if (!this.shopPrices.getItemBuyPrice().containsKey(e.getCurrentItem().getType())) return;
+					p.openInventory(buySell.getBuyGui());
+				}
+				else if (e.getClick().isRightClick()) {
+					if (!this.shopPrices.getItemSellPrice().containsKey(e.getCurrentItem().getType())) return;
+					p.openInventory(buySell.getSellGui());
+				}
+				else if (e.getClick().equals(ClickType.MIDDLE)) {
+					PlayerSellAllEvent(p,e.getCurrentItem());
+				}
+			
+			}
+			return;
+		}
+		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&2&lDecorative Blocks Shop &7(Page 3)")))) {
+			if (e.getSlot() == 0) p.performCommand("shop");
+			if (e.getSlot() == 47) p.performCommand("shopDecorativeBlocks2");
+			e.setCancelled(true);
+			if ((e.getSlot() > 9 && e.getSlot() < 17) || (e.getSlot() > 18 && e.getSlot() < 26) || (e.getSlot() > 27 && e.getSlot() < 35) || (e.getSlot() > 36 && e.getSlot() < 44)) {
+				
+				if (e.getCurrentItem() == null) {
+					return;
+				}
+				
+				ItemsBuySellGui buySell = new ItemsBuySellGui(e.getInventory().getItem(e.getSlot()),p);
+				if (e.getClick().isLeftClick()) {
+					if (!this.shopPrices.getItemBuyPrice().containsKey(e.getCurrentItem().getType())) return;
+					p.openInventory(buySell.getBuyGui());
+				}
+				else if (e.getClick().isRightClick()) {
+					if (!this.shopPrices.getItemSellPrice().containsKey(e.getCurrentItem().getType())) return;
+					p.openInventory(buySell.getSellGui());
+				}
+				else if (e.getClick().equals(ClickType.MIDDLE)) {
+					PlayerSellAllEvent(p,e.getCurrentItem());
+				}
+			
+			}
+			return;
+		}
+		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&a&lFarming Shop &7(Page 1)")))) {
+			if (e.getSlot() == 0) p.performCommand("shop");
+			if (e.getSlot() == 51) p.performCommand("shopFarming2");
+			e.setCancelled(true);
+			if ((e.getSlot() > 9 && e.getSlot() < 17) || (e.getSlot() > 18 && e.getSlot() < 26) || (e.getSlot() > 27 && e.getSlot() < 35) || (e.getSlot() > 36 && e.getSlot() < 44)) {
+				
+				if (e.getCurrentItem() == null) {
+					return;
+				}
+				
+				ItemsBuySellGui buySell = new ItemsBuySellGui(e.getInventory().getItem(e.getSlot()),p);
+				if (e.getClick().isLeftClick()) {
+					if (!this.shopPrices.getItemBuyPrice().containsKey(e.getCurrentItem().getType())) return;
+					p.openInventory(buySell.getBuyGui());
+				}
+				else if (e.getClick().isRightClick()) {
+					if (!this.shopPrices.getItemSellPrice().containsKey(e.getCurrentItem().getType())) return;
+					p.openInventory(buySell.getSellGui());
+				}
+				else if (e.getClick().equals(ClickType.MIDDLE)) {
+					PlayerSellAllEvent(p,e.getCurrentItem());
+				}
+			
+			}
+			return;
+		}
+		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&a&lFarming Shop &7(Page 2)")))) {
+			if (e.getSlot() == 0) p.performCommand("shop");
+			if (e.getSlot() == 47) p.performCommand("shopFarming1");
+			e.setCancelled(true);
+			if ((e.getSlot() > 9 && e.getSlot() < 17) || (e.getSlot() > 18 && e.getSlot() < 26) || (e.getSlot() > 27 && e.getSlot() < 35) || (e.getSlot() > 36 && e.getSlot() < 44)) {
+				
+				if (e.getCurrentItem() == null) {
+					return;
+				}
+				
+				ItemsBuySellGui buySell = new ItemsBuySellGui(e.getInventory().getItem(e.getSlot()),p);
+				if (e.getClick().isLeftClick()) {
+					if (!this.shopPrices.getItemBuyPrice().containsKey(e.getCurrentItem().getType())) return;
+					p.openInventory(buySell.getBuyGui());
+				}
+				else if (e.getClick().isRightClick()) {
+					if (!this.shopPrices.getItemSellPrice().containsKey(e.getCurrentItem().getType())) return;
+					p.openInventory(buySell.getSellGui());
+				}
+				else if (e.getClick().equals(ClickType.MIDDLE)) {
+					PlayerSellAllEvent(p,e.getCurrentItem());
+				}
+			
+			}
+			return;
+		}
+		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&6&lFood Shop &7(Page 1)")))) {
+			if (e.getSlot() == 0) p.performCommand("shop");
+			if (e.getSlot() == 51) p.performCommand("shopFood2");
+			e.setCancelled(true);
+			if ((e.getSlot() > 9 && e.getSlot() < 17) || (e.getSlot() > 18 && e.getSlot() < 26) || (e.getSlot() > 27 && e.getSlot() < 35) || (e.getSlot() > 36 && e.getSlot() < 44)) {
+				
+				if (e.getCurrentItem() == null) {
+					return;
+				}
+				
+				ItemsBuySellGui buySell = new ItemsBuySellGui(e.getInventory().getItem(e.getSlot()),p);
+				if (e.getClick().isLeftClick()) {
+					if (!this.shopPrices.getItemBuyPrice().containsKey(e.getCurrentItem().getType())) return;
+					p.openInventory(buySell.getBuyGui());
+				}
+				else if (e.getClick().isRightClick()) {
+					if (!this.shopPrices.getItemSellPrice().containsKey(e.getCurrentItem().getType())) return;
+					p.openInventory(buySell.getSellGui());
+				}
+				else if (e.getClick().equals(ClickType.MIDDLE)) {
+					PlayerSellAllEvent(p,e.getCurrentItem());
+				}
+			
+			}
+			return;
+		}
+		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&6&lFood Shop &7(Page 2)")))) {
+			if (e.getSlot() == 0) p.performCommand("shop");
+			if (e.getSlot() == 47) p.performCommand("shopFood1");
+			e.setCancelled(true);
+			if ((e.getSlot() > 9 && e.getSlot() < 17) || (e.getSlot() > 18 && e.getSlot() < 26) || (e.getSlot() > 27 && e.getSlot() < 35) || (e.getSlot() > 36 && e.getSlot() < 44)) {
+				
+				if (e.getCurrentItem() == null) {
+					return;
+				}
+				
+				ItemsBuySellGui buySell = new ItemsBuySellGui(e.getInventory().getItem(e.getSlot()),p);
+				if (e.getClick().isLeftClick()) {
+					if (!this.shopPrices.getItemBuyPrice().containsKey(e.getCurrentItem().getType())) return;
+					p.openInventory(buySell.getBuyGui());
+				}
+				else if (e.getClick().isRightClick()) {
+					if (!this.shopPrices.getItemSellPrice().containsKey(e.getCurrentItem().getType())) return;
+					p.openInventory(buySell.getSellGui());
+				}
+				else if (e.getClick().equals(ClickType.MIDDLE)) {
+					PlayerSellAllEvent(p,e.getCurrentItem());
+				}
+			
+			}
+			return;
+		}
+		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&b&lGems Shop &7(Page 1)")))) {
+			if (e.getSlot() == 0) p.performCommand("shop");
+			if (e.getSlot() == 51) p.performCommand("shopGems2");
+			e.setCancelled(true);
+			if ((e.getSlot() > 9 && e.getSlot() < 17) || (e.getSlot() > 18 && e.getSlot() < 26) || (e.getSlot() > 27 && e.getSlot() < 35) || (e.getSlot() > 36 && e.getSlot() < 44)) {
+				
+				if (e.getCurrentItem() == null) {
+					return;
+				}
+				
+				ItemsBuySellGui buySell = new ItemsBuySellGui(e.getInventory().getItem(e.getSlot()),p);
+				if (e.getClick().isLeftClick()) {
+					if (!this.shopPrices.getItemBuyPrice().containsKey(e.getCurrentItem().getType())) return;
+					p.openInventory(buySell.getBuyGui());
+				}
+				else if (e.getClick().isRightClick()) {
+					if (!this.shopPrices.getItemSellPrice().containsKey(e.getCurrentItem().getType())) return;
+					p.openInventory(buySell.getSellGui());
+				}
+				else if (e.getClick().equals(ClickType.MIDDLE)) {
+					PlayerSellAllEvent(p,e.getCurrentItem());
+				}
+			
+			}			
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&b&lGems Shop &7(Page 2)")))) {
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 47) p.performCommand("shopGems1");
 			e.setCancelled(true);
+			if ((e.getSlot() > 9 && e.getSlot() < 17) || (e.getSlot() > 18 && e.getSlot() < 26) || (e.getSlot() > 27 && e.getSlot() < 35) || (e.getSlot() > 36 && e.getSlot() < 44)) {
+				
+				if (e.getCurrentItem() == null) {
+					return;
+				}
+				
+				ItemsBuySellGui buySell = new ItemsBuySellGui(e.getInventory().getItem(e.getSlot()),p);
+				if (e.getClick().isLeftClick()) {
+					if (!this.shopPrices.getItemBuyPrice().containsKey(e.getCurrentItem().getType())) return;
+					p.openInventory(buySell.getBuyGui());
+				}
+				else if (e.getClick().isRightClick()) {
+					if (!this.shopPrices.getItemSellPrice().containsKey(e.getCurrentItem().getType())) return;
+					p.openInventory(buySell.getSellGui());
+				}
+				else if (e.getClick().equals(ClickType.MIDDLE)) {
+					PlayerSellAllEvent(p,e.getCurrentItem());
+				}
+			
+			}
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&f&lMiscellaneous Blocks Shop &7(Page 1)")))) {
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 51) p.performCommand("shopMisc2");
 			e.setCancelled(true);
+			if ((e.getSlot() > 9 && e.getSlot() < 17) || (e.getSlot() > 18 && e.getSlot() < 26) || (e.getSlot() > 27 && e.getSlot() < 35) || (e.getSlot() > 36 && e.getSlot() < 44)) {
+				
+				if (e.getCurrentItem() == null) {
+					return;
+				}
+				
+				ItemsBuySellGui buySell = new ItemsBuySellGui(e.getInventory().getItem(e.getSlot()),p);
+				if (e.getClick().isLeftClick()) {
+					if (!this.shopPrices.getItemBuyPrice().containsKey(e.getCurrentItem().getType())) return;
+					p.openInventory(buySell.getBuyGui());
+				}
+				else if (e.getClick().isRightClick()) {
+					if (!this.shopPrices.getItemSellPrice().containsKey(e.getCurrentItem().getType())) return;
+					p.openInventory(buySell.getSellGui());
+				}
+				else if (e.getClick().equals(ClickType.MIDDLE)) {
+					PlayerSellAllEvent(p,e.getCurrentItem());
+				}
+			
+			}
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&f&lMiscellaneous Blocks Shop &7(Page 2)")))) {
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 47) p.performCommand("shopMisc1");
 			e.setCancelled(true);
+			if ((e.getSlot() > 9 && e.getSlot() < 17) || (e.getSlot() > 18 && e.getSlot() < 26) || (e.getSlot() > 27 && e.getSlot() < 35) || (e.getSlot() > 36 && e.getSlot() < 44)) {
+				
+				if (e.getCurrentItem() == null) {
+					return;
+				}
+				
+				ItemsBuySellGui buySell = new ItemsBuySellGui(e.getInventory().getItem(e.getSlot()),p);
+				if (e.getClick().isLeftClick()) {
+					if (!this.shopPrices.getItemBuyPrice().containsKey(e.getCurrentItem().getType())) return;
+					p.openInventory(buySell.getBuyGui());
+				}
+				else if (e.getClick().isRightClick()) {
+					if (!this.shopPrices.getItemSellPrice().containsKey(e.getCurrentItem().getType())) return;
+					p.openInventory(buySell.getSellGui());
+				}
+				else if (e.getClick().equals(ClickType.MIDDLE)) {
+					PlayerSellAllEvent(p,e.getCurrentItem());
+				}
+			
+			}
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&c&lMob Drops Shop &7(Page 1)")))) {
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 51) p.performCommand("shopMob2");
 			e.setCancelled(true);
+			if ((e.getSlot() > 9 && e.getSlot() < 17) || (e.getSlot() > 18 && e.getSlot() < 26) || (e.getSlot() > 27 && e.getSlot() < 35) || (e.getSlot() > 36 && e.getSlot() < 44)) {
+				
+				if (e.getCurrentItem() == null) {
+					return;
+				}
+				
+				ItemsBuySellGui buySell = new ItemsBuySellGui(e.getInventory().getItem(e.getSlot()),p);
+				if (e.getClick().isLeftClick()) {
+					if (!this.shopPrices.getItemBuyPrice().containsKey(e.getCurrentItem().getType())) return;
+					p.openInventory(buySell.getBuyGui());
+				}
+				else if (e.getClick().isRightClick()) {
+					if (!this.shopPrices.getItemSellPrice().containsKey(e.getCurrentItem().getType())) return;
+					p.openInventory(buySell.getSellGui());
+				}
+				else if (e.getClick().equals(ClickType.MIDDLE)) {
+					PlayerSellAllEvent(p,e.getCurrentItem());
+				}
+			
+			}
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&c&lMob Drops Shop &7(Page 2)")))) {
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 47) p.performCommand("shopMob1");
 			e.setCancelled(true);
+			if ((e.getSlot() > 9 && e.getSlot() < 17) || (e.getSlot() > 18 && e.getSlot() < 26) || (e.getSlot() > 27 && e.getSlot() < 35) || (e.getSlot() > 36 && e.getSlot() < 44)) {
+				
+				if (e.getCurrentItem() == null) {
+					return;
+				}
+				
+				ItemsBuySellGui buySell = new ItemsBuySellGui(e.getInventory().getItem(e.getSlot()),p);
+				if (e.getClick().isLeftClick()) {
+					if (!this.shopPrices.getItemBuyPrice().containsKey(e.getCurrentItem().getType())) return;
+					p.openInventory(buySell.getBuyGui());
+				}
+				else if (e.getClick().isRightClick()) {
+					if (!this.shopPrices.getItemSellPrice().containsKey(e.getCurrentItem().getType())) return;
+					p.openInventory(buySell.getSellGui());
+				}
+				else if (e.getClick().equals(ClickType.MIDDLE)) {
+					PlayerSellAllEvent(p,e.getCurrentItem());
+				}
+			
+			}
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&4&lRedstone Shop &7(Page 1)")))) {
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 51) p.performCommand("shopRedstone2");
 			e.setCancelled(true);
+			if ((e.getSlot() > 9 && e.getSlot() < 17) || (e.getSlot() > 18 && e.getSlot() < 26) || (e.getSlot() > 27 && e.getSlot() < 35) || (e.getSlot() > 36 && e.getSlot() < 44)) {
+				
+				if (e.getCurrentItem() == null) {
+					return;
+				}
+				
+				ItemsBuySellGui buySell = new ItemsBuySellGui(e.getInventory().getItem(e.getSlot()),p);
+				if (e.getClick().isLeftClick()) {
+					if (!this.shopPrices.getItemBuyPrice().containsKey(e.getCurrentItem().getType())) return;
+					p.openInventory(buySell.getBuyGui());
+				}
+				else if (e.getClick().isRightClick()) {
+					if (!this.shopPrices.getItemSellPrice().containsKey(e.getCurrentItem().getType())) return;
+					p.openInventory(buySell.getSellGui());
+				}
+				else if (e.getClick().equals(ClickType.MIDDLE)) {
+					PlayerSellAllEvent(p,e.getCurrentItem());
+				}
+			
+			}
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&4&lRedstone Shop &7(Page 2)")))) {
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 47) p.performCommand("shopRedstone1");
 			e.setCancelled(true);
+			if ((e.getSlot() > 9 && e.getSlot() < 17) || (e.getSlot() > 18 && e.getSlot() < 26) || (e.getSlot() > 27 && e.getSlot() < 35) || (e.getSlot() > 36 && e.getSlot() < 44)) {
+				
+				if (e.getCurrentItem() == null) {
+					return;
+				}
+				
+				ItemsBuySellGui buySell = new ItemsBuySellGui(e.getInventory().getItem(e.getSlot()),p);
+				if (e.getClick().isLeftClick()) {
+					if (!this.shopPrices.getItemBuyPrice().containsKey(e.getCurrentItem().getType())) return;
+					p.openInventory(buySell.getBuyGui());
+				}
+				else if (e.getClick().isRightClick()) {
+					if (!this.shopPrices.getItemSellPrice().containsKey(e.getCurrentItem().getType())) return;
+					p.openInventory(buySell.getSellGui());
+				}
+				else if (e.getClick().equals(ClickType.MIDDLE)) {
+					PlayerSellAllEvent(p,e.getCurrentItem());
+				}
+			
+			}
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&5&lBrewing Shop &7(Page 1)")))) {
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 51) p.performCommand("shopBrewing2");
 			e.setCancelled(true);
+			if ((e.getSlot() > 9 && e.getSlot() < 17) || (e.getSlot() > 18 && e.getSlot() < 26) || (e.getSlot() > 27 && e.getSlot() < 35) || (e.getSlot() > 36 && e.getSlot() < 44)) {
+				
+				if (e.getCurrentItem() == null) {
+					return;
+				}
+				
+				ItemsBuySellGui buySell = new ItemsBuySellGui(e.getInventory().getItem(e.getSlot()),p);
+				if (e.getClick().isLeftClick()) {
+					if (!this.shopPrices.getItemBuyPrice().containsKey(e.getCurrentItem().getType())) return;
+					p.openInventory(buySell.getBuyGui());
+				}
+				else if (e.getClick().isRightClick()) {
+					if (!this.shopPrices.getItemSellPrice().containsKey(e.getCurrentItem().getType())) return;
+					p.openInventory(buySell.getSellGui());
+				}
+				else if (e.getClick().equals(ClickType.MIDDLE)) {
+					PlayerSellAllEvent(p,e.getCurrentItem());
+				}
+			
+			}
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&5&lBrewing Shop &7(Page 2)")))) {
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 47) p.performCommand("shopBrewing1");
 			e.setCancelled(true);
+			if ((e.getSlot() > 9 && e.getSlot() < 17) || (e.getSlot() > 18 && e.getSlot() < 26) || (e.getSlot() > 27 && e.getSlot() < 35) || (e.getSlot() > 36 && e.getSlot() < 44)) {
+				
+				if (e.getCurrentItem() == null) {
+					return;
+				}
+				
+				ItemsBuySellGui buySell = new ItemsBuySellGui(e.getInventory().getItem(e.getSlot()),p);
+				if (e.getClick().isLeftClick()) {
+					if (!this.shopPrices.getItemBuyPrice().containsKey(e.getCurrentItem().getType())) return;
+					p.openInventory(buySell.getBuyGui());
+				}
+				else if (e.getClick().isRightClick()) {
+					if (!this.shopPrices.getItemSellPrice().containsKey(e.getCurrentItem().getType())) return;
+					p.openInventory(buySell.getSellGui());
+				}
+				else if (e.getClick().equals(ClickType.MIDDLE)) {
+					PlayerSellAllEvent(p,e.getCurrentItem());
+				}
+			
+			}
 			return;
 		}
 		else if ((e.getView().getTitle().contains(Utils.chat("&c&lBuying")))) {
@@ -471,11 +798,10 @@ public class GuiShops implements Listener{
 		
 		
 		ItemStack itemForPlayer = new ItemStack(item.getType(),amount);
-		
-		p.sendMessage(Utils.chat("&7[&cShop&7]" + this.plugin.getConfig().getString("BalanceCommand.buy_item_msg") + amount + " &7of &b" + item.getType() + " &7for &c$" + totalPrice));
-		p.sendMessage(Utils.chat(this.plugin.getConfig().getString("BalanceCommand.reciever_new_bal_msg") + profile.getBalance()));
 		profile.removeBalance(totalPrice);		
 		p.getInventory().addItem(itemForPlayer);	
+		p.sendMessage(Utils.chat("&7[&cShop&7]" + this.plugin.getConfig().getString("BalanceCommand.buy_item_msg") + amount + " &7of &b" + item.getType() + " &7for &c$" + totalPrice));
+		p.sendMessage(Utils.chat(this.plugin.getConfig().getString("BalanceCommand.reciever_new_bal_msg") + profile.getBalance()));	
 	}
 	
 	public int InvenSpace(PlayerInventory inv, int maxStackSize) {
@@ -519,10 +845,11 @@ public class GuiShops implements Listener{
 			return;
 		}
 		itemPlayer = new ItemStack(item.getType(),amount);
+		
 		p.getInventory().removeItem(itemPlayer);
+		profile.addBalance(totalPrice);	
 		p.sendMessage(Utils.chat("&7[&cShop&7]" + this.plugin.getConfig().getString("BalanceCommand.sell_item_msg") + amount + " &7of &b" + item.getType() + " &7for &a$" + totalPrice));
 		p.sendMessage(Utils.chat(this.plugin.getConfig().getString("BalanceCommand.reciever_new_bal_msg") + profile.getBalance()));
-		profile.addBalance(totalPrice);			
 	}
 	
 	//IMPLEMENT
@@ -548,9 +875,10 @@ public class GuiShops implements Listener{
 		
 		ItemStack sellItem = new ItemStack(item.getType(),amount);
 		p.getInventory().removeItem(sellItem);
+		profile.addBalance(itemPrice*amount);
 		p.sendMessage(Utils.chat("&7[&cShop&7]" + this.plugin.getConfig().getString("BalanceCommand.sell_item_msg") + amount + " &7of &b" + item.getType() + " &7for &a$" + itemPrice*amount));
 		p.sendMessage(Utils.chat(this.plugin.getConfig().getString("BalanceCommand.reciever_new_bal_msg") + profile.getBalance()));
-		profile.addBalance(itemPrice*amount);			
+					
 
 	}
 	
