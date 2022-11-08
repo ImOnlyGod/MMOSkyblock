@@ -11,10 +11,11 @@ public class ItemPrices {
 	HashMap<Integer,Integer> itemSlotPriceMultiplier = new HashMap<Integer, Integer>();
 
 	public ItemPrices() {
-		setItemBuyPrices();
-		setItemSellPrices();
-		setItemSlotPrice();
-		
+		if (this.itemBuyPrice.isEmpty() || this.itemSellPrice.isEmpty()) {
+			setItemBuyPrices();
+			setItemSellPrices();
+			setItemSlotPrice();
+		}
 	}
 	
 	public void setItemBuyPrices() {
