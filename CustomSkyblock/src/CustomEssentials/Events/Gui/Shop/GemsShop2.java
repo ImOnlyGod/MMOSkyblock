@@ -27,14 +27,17 @@ import CustomEssentials.Events.PlayerSkills.FarmingSkill;
 import CustomEssentials.Events.PlayerSkills.FishingSkill;
 import CustomEssentials.Events.PlayerSkills.ForagingSkill;
 import CustomEssentials.Events.PlayerSkills.MiningSkill;
+import CustomEssentials.Events.ShopInfo.ItemPrices;
 import CustomEssentials.Utils.Utils;
 
 public class GemsShop2 implements TabExecutor{
 
 	private Main plugin;
+	private ItemPrices prices;
 	
-	public GemsShop2(Main plugin) {
+	public GemsShop2(Main plugin, ItemPrices prices) {
 		this.plugin = plugin;
+		this.prices = prices;
 		plugin.getCommand("shopGems2").setExecutor(this);
 		
 	}

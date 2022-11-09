@@ -27,14 +27,17 @@ import CustomEssentials.Events.PlayerSkills.FarmingSkill;
 import CustomEssentials.Events.PlayerSkills.FishingSkill;
 import CustomEssentials.Events.PlayerSkills.ForagingSkill;
 import CustomEssentials.Events.PlayerSkills.MiningSkill;
+import CustomEssentials.Events.ShopInfo.ItemPrices;
 import CustomEssentials.Utils.Utils;
 
 public class BrewingShop2 implements TabExecutor{
 
 	private Main plugin;
+	private ItemPrices prices;
 	
-	public BrewingShop2(Main plugin) {
+	public BrewingShop2(Main plugin, ItemPrices prices) {
 		this.plugin = plugin;
+		this.prices = prices;
 		plugin.getCommand("shopBrewing2").setExecutor(this);
 		
 	}
@@ -153,6 +156,14 @@ public class BrewingShop2 implements TabExecutor{
 		p.openInventory(menu);
 		
 		return true;
+	}
+
+	public ItemPrices getPrices() {
+		return prices;
+	}
+
+	public void setPrices(ItemPrices prices) {
+		this.prices = prices;
 	}
 	
 }

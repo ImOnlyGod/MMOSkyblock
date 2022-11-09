@@ -29,14 +29,17 @@ import CustomEssentials.Events.PlayerSkills.ForagingSkill;
 import CustomEssentials.Events.PlayerSkills.MiningSkill;
 import CustomEssentials.Events.ShopInfo.GuiItems;
 import CustomEssentials.Events.ShopInfo.ItemPrices;
+import CustomEssentials.Utils.CurrencyUtils;
 import CustomEssentials.Utils.Utils;
 
 public class RedstoneShop1 implements TabExecutor{
 
 	private Main plugin;
+	private ItemPrices prices;
 	
-	public RedstoneShop1(Main plugin) {
+	public RedstoneShop1(Main plugin, ItemPrices prices) {
 		this.plugin = plugin;
+		this.prices = prices;
 		plugin.getCommand("shopRedstone1").setExecutor(this);
 		
 	}
@@ -105,8 +108,7 @@ public class RedstoneShop1 implements TabExecutor{
 		
 		
 		
-		//Vanilla items
-		ItemPrices prices = new ItemPrices();		
+		//Vanilla items	
 		
 		int i = 10;
 		GuiItems blocks = new GuiItems();
@@ -119,8 +121,8 @@ public class RedstoneShop1 implements TabExecutor{
 			ItemStack item = new ItemStack(material);
 			ItemMeta meta = item.getItemMeta();
 			List<String> lore = new ArrayList<String>();
-			lore.add(Utils.chat("&cBuy Price&7: &8" + prices.getItemBuyPrice().get(item.getType())));
-			lore.add(Utils.chat("&aSell Price&7: &8" + prices.getItemSellPrice().get(item.getType())));
+			lore.add(Utils.chat("&cBuy Price&7: &8$" +  CurrencyUtils.currencyFormat(this.prices.getItemBuyPrice().get(item.getType()))));
+			lore.add(Utils.chat("&aSell Price&7: &8$" +  CurrencyUtils.currencyFormat(this.prices.getItemSellPrice().get(item.getType()))));
 			
 			meta.setLore(lore);
 			item.setItemMeta(meta);

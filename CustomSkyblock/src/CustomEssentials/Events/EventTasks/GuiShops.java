@@ -28,8 +28,9 @@ public class GuiShops implements Listener{
 	private Main plugin;
 	private ItemPrices shopPrices;
 		
-	public GuiShops(Main plugin) {
+	public GuiShops(Main plugin, ItemPrices shopPrices) {
 		this.plugin = plugin;
+		this.shopPrices = shopPrices;
 	}
 		
 	
@@ -344,6 +345,7 @@ public class GuiShops implements Listener{
 		ItemStack itemForPlayer = new ItemStack(item.getType(),amount);
 		profile.removeBalance(totalPrice);		
 		p.getInventory().addItem(itemForPlayer);	
+		this.shopPrices.shiftPricesOnBuy(item.getType(), amount);
 		p.sendMessage(Utils.chat("&7[&cShop&7]" + this.plugin.getConfig().getString("BalanceCommand.buy_item_msg") + amount + " &7of &b" + item.getType() + " &7for &c$" + totalPrice));
 		p.sendMessage(Utils.chat(this.plugin.getConfig().getString("BalanceCommand.reciever_new_bal_msg") + profile.getBalance()));	
 	}
@@ -392,6 +394,7 @@ public class GuiShops implements Listener{
 		
 		p.getInventory().removeItem(itemPlayer);
 		profile.addBalance(totalPrice);	
+		this.shopPrices.shiftPricesOnSell(item.getType(), amount);
 		p.sendMessage(Utils.chat("&7[&cShop&7]" + this.plugin.getConfig().getString("BalanceCommand.sell_item_msg") + amount + " &7of &b" + item.getType() + " &7for &a$" + totalPrice));
 		p.sendMessage(Utils.chat(this.plugin.getConfig().getString("BalanceCommand.reciever_new_bal_msg") + profile.getBalance()));
 	}
@@ -420,6 +423,7 @@ public class GuiShops implements Listener{
 		ItemStack sellItem = new ItemStack(item.getType(),amount);
 		p.getInventory().removeItem(sellItem);
 		profile.addBalance(itemPrice*amount);
+		this.shopPrices.shiftPricesOnSell(item.getType(), amount);
 		p.sendMessage(Utils.chat("&7[&cShop&7]" + this.plugin.getConfig().getString("BalanceCommand.sell_item_msg") + amount + " &7of &b" + item.getType() + " &7for &a$" + itemPrice*amount));
 		p.sendMessage(Utils.chat(this.plugin.getConfig().getString("BalanceCommand.reciever_new_bal_msg") + profile.getBalance()));
 					

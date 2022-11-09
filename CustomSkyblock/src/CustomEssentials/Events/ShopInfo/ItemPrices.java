@@ -714,29 +714,29 @@ public class ItemPrices {
 		this.itemSellPrice.put(Material.DEAD_HORN_CORAL_FAN, (float) ((float) 0.04 *  9500.0));
 		this.itemSellPrice.put(Material.SHROOMLIGHT, (float) ((float) 0.04 *  250.0));
 		
-		this.itemSellPrice.put(Material.WHEAT_SEEDS, (float) ((float) 0.04 *  15.0));
-		this.itemSellPrice.put(Material.WHEAT, (float) ((float) 0.04 *  35.0));
-		this.itemSellPrice.put(Material.BEETROOT_SEEDS, (float) ((float) 0.04 *  20.0));
-		this.itemSellPrice.put(Material.BEETROOT, (float) ((float) 0.04 *  50.0));
-		this.itemSellPrice.put(Material.CARROT, (float) ((float) 0.04 *  90.0));
-		this.itemSellPrice.put(Material.POTATO, (float) ((float) 0.04 *  180.0));
-		this.itemSellPrice.put(Material.MELON_SEEDS, (float) ((float) 0.04 *  50.0));
-		this.itemSellPrice.put(Material.MELON_SLICE, (float) ((float) 0.04 *  15.0));
-		this.itemSellPrice.put(Material.PUMPKIN, (float) ((float) 0.04 *  100.0));
-		this.itemSellPrice.put(Material.NETHER_WART, (float) ((float) 0.04 *  250.0));
-		this.itemSellPrice.put(Material.SUGAR_CANE, (float) ((float) 0.04 *  800.0));
-		this.itemSellPrice.put(Material.CACTUS, (float) ((float) 0.04 *  1950.0));
-		this.itemSellPrice.put(Material.BAMBOO, (float) ((float) 0.04 *  2670.0));
-		this.itemSellPrice.put(Material.COCOA_BEANS, (float) ((float) 0.04 *  3500.0));
-		this.itemSellPrice.put(Material.KELP, (float) ((float) 0.04 *  5125.0));
-		this.itemSellPrice.put(Material.VINE, (float) ((float) 0.04 *  7600.0));
-		this.itemSellPrice.put(Material.GLOW_LICHEN, (float) ((float) 0.04 *  9150.0));
-		this.itemSellPrice.put(Material.RED_MUSHROOM, (float) ((float) 0.04 *  11000.0));
-		this.itemSellPrice.put(Material.BROWN_MUSHROOM, (float) ((float) 0.04 *  12500.0));
-		this.itemSellPrice.put(Material.TWISTING_VINES, (float) ((float) 0.04 *  185000.0));
-		this.itemSellPrice.put(Material.WEEPING_VINES, (float) ((float) 0.04 *  256000.0));
-		this.itemSellPrice.put(Material.CRIMSON_FUNGUS, (float) ((float) 0.04 *  567000.0));
-		this.itemSellPrice.put(Material.WARPED_FUNGUS, (float) ((float) 0.04 *  765000.0));
+		this.itemSellPrice.put(Material.WHEAT_SEEDS, (float) ((float) 0.1));
+		this.itemSellPrice.put(Material.WHEAT, (float) ((float) 1.2));
+		this.itemSellPrice.put(Material.BEETROOT_SEEDS, (float) ((float) 0.2));
+		this.itemSellPrice.put(Material.BEETROOT, (float) ((float) 1.35));
+		this.itemSellPrice.put(Material.CARROT, (float) ((float) 0.95));
+		this.itemSellPrice.put(Material.POTATO, (float) ((float) 1.10));
+		this.itemSellPrice.put(Material.MELON_SEEDS, (float) ((float) 0.55));
+		this.itemSellPrice.put(Material.MELON_SLICE, (float) ((float) 0.35));
+		this.itemSellPrice.put(Material.PUMPKIN, (float) ((float) 1.7));
+		this.itemSellPrice.put(Material.NETHER_WART, (float) ((float) 2.1));
+		this.itemSellPrice.put(Material.SUGAR_CANE, (float) ((float) 0.7));
+		this.itemSellPrice.put(Material.CACTUS, (float) ((float) 0.25));
+		this.itemSellPrice.put(Material.BAMBOO, (float) ((float) 0.32));
+		this.itemSellPrice.put(Material.COCOA_BEANS, (float) ((float) 3.1));
+		this.itemSellPrice.put(Material.KELP, (float) ((float) 0.35));
+		this.itemSellPrice.put(Material.VINE, (float) ((float) 8.5));
+		this.itemSellPrice.put(Material.GLOW_LICHEN, (float) ((float) 9.1));
+		this.itemSellPrice.put(Material.RED_MUSHROOM, (float) ((float) 13.6));
+		this.itemSellPrice.put(Material.BROWN_MUSHROOM, (float) ((float) 16.1));
+		this.itemSellPrice.put(Material.TWISTING_VINES, (float) ((float) 5.3));
+		this.itemSellPrice.put(Material.WEEPING_VINES, (float) ((float) 6.5));
+		this.itemSellPrice.put(Material.CRIMSON_FUNGUS, (float) ((float) 34.2));
+		this.itemSellPrice.put(Material.WARPED_FUNGUS, (float) ((float) 43.4));
 		
 		this.itemSellPrice.put(Material.ROTTEN_FLESH, (float) ((float) 0.04 *  30.0));
 		this.itemSellPrice.put(Material.SPIDER_EYE, (float) ((float) 0.04 *  50.0));
@@ -773,7 +773,7 @@ public class ItemPrices {
 		this.itemSellPrice.put(Material.RABBIT_STEW, (float) ((float) 0.04 *  200.0));
 		this.itemSellPrice.put(Material.CAKE, (float) ((float) 0.04 *  650.0));
 		this.itemSellPrice.put(Material.HONEY_BOTTLE, (float) ((float) 0.04 *  150.0));
-		this.itemSellPrice.put(Material.CHORUS_FRUIT, (float) ((float) 0.04 *  1525.0));
+		this.itemSellPrice.put(Material.CHORUS_FRUIT, (float) ((float) 0.004 *  1525.0));
 		
 		this.itemSellPrice.put(Material.ARROW, (float) ((float) 0.04 *  25.0));
 		this.itemSellPrice.put(Material.BONE, (float) ((float) 0.04 *  50.0));
@@ -790,25 +790,25 @@ public class ItemPrices {
 		this.itemSellPrice.put(Material.ENDER_PEARL, (float) ((float) 0.04 *  500.0));
 		this.itemSellPrice.put(Material.BLAZE_ROD, (float) ((float) 0.04 *  300.0));
 		this.itemSellPrice.put(Material.GHAST_TEAR, (float) ((float) 0.04 *  1000.0));
-		this.itemSellPrice.put(Material.IRON_INGOT, (float) ((float) 0.04 *  500.0));
-		this.itemSellPrice.put(Material.GOLD_NUGGET, (float) ((float) 0.04 *  90.0));
-		this.itemSellPrice.put(Material.GOLD_INGOT, (float) ((float) 0.04 *  900.0));
-		this.itemSellPrice.put(Material.EMERALD, (float) ((float) 0.04 *  9500.0));
+		this.itemSellPrice.put(Material.IRON_INGOT, (float) ((float) 8.0));
+		this.itemSellPrice.put(Material.GOLD_NUGGET, (float) ((float) 1.83));
+		this.itemSellPrice.put(Material.GOLD_INGOT, (float) ((float) 16.5));
+		this.itemSellPrice.put(Material.EMERALD, (float) ((float) 31.0));
 		this.itemSellPrice.put(Material.PRISMARINE_CRYSTALS, (float) ((float) 0.04 *  930.0));
 		this.itemSellPrice.put(Material.PRISMARINE_SHARD, (float) ((float) 0.04 *  1100.0));
 		this.itemSellPrice.put(Material.PHANTOM_MEMBRANE, (float) ((float) 0.04 *  850.0));
 		this.itemSellPrice.put(Material.WITHER_SKELETON_SKULL, (float) ((float) 0.04 *  250000.0));	
 		
 		this.itemSellPrice.put(Material.COAL, (float) ((float) 0.04 *  35.0));
-		this.itemSellPrice.put(Material.RAW_IRON, (float) ((float) 0.04 *  350.0));
-		this.itemSellPrice.put(Material.RAW_COPPER, (float) ((float) 0.04 *  450.0));
-		this.itemSellPrice.put(Material.COPPER_INGOT, (float) ((float) 0.04 *  750.0));
-		this.itemSellPrice.put(Material.LAPIS_LAZULI, (float) ((float) 0.04 *  80.0));
-		this.itemSellPrice.put(Material.REDSTONE, (float) ((float) 0.04 *  100.0));
-		this.itemSellPrice.put(Material.RAW_GOLD, (float) ((float) 0.04 *  780.0));
-		this.itemSellPrice.put(Material.DIAMOND, (float) ((float) 0.04 *  7000.0));
-		this.itemSellPrice.put(Material.NETHERITE_SCRAP, (float) ((float) 0.04 *  10000.0));
-		this.itemSellPrice.put(Material.NETHERITE_INGOT, (float) ((float) 0.04 *  45000.0));
+		this.itemSellPrice.put(Material.RAW_IRON, (float) ((float) 4.5));
+		this.itemSellPrice.put(Material.RAW_COPPER, (float) ((float) 6.5));
+		this.itemSellPrice.put(Material.COPPER_INGOT, (float) ((float) 10.0));
+		this.itemSellPrice.put(Material.LAPIS_LAZULI, (float) ((float) 2.1));
+		this.itemSellPrice.put(Material.REDSTONE, (float) ((float) 2.6));
+		this.itemSellPrice.put(Material.RAW_GOLD, (float) ((float) 12.6));
+		this.itemSellPrice.put(Material.DIAMOND, (float) ((float) 26.0));
+		this.itemSellPrice.put(Material.NETHERITE_SCRAP, (float) ((float) 38.0));
+		this.itemSellPrice.put(Material.NETHERITE_INGOT, (float) ((float) 218.0));
 		
 		this.itemSellPrice.put(Material.REDSTONE_TORCH, (float) ((float) 0.04 *  110.0));
 		this.itemSellPrice.put(Material.REDSTONE_BLOCK, (float) ((float) 0.04 *  901.0));
@@ -900,6 +900,45 @@ public class ItemPrices {
 		this.itemSlotPriceMultiplier.put(22, 1536);
 		this.itemSlotPriceMultiplier.put(23, 2048);
 		this.itemSlotPriceMultiplier.put(24, 2304);
+	}
+	
+	public float computePriceShiftMultiplier(float currentBuyPrice, float currentSellPrice) {
+		//MODIFY THIS NUMBER IF NECESSARY
+		float multiplier = (1 - (((currentBuyPrice)/(currentBuyPrice + currentSellPrice))))/10;
+		
+		return multiplier;
+	}
+	
+	
+	public void shiftPricesOnBuy(Material item, int amount) {
+		for (int i=0;i<amount;i++) {
+			float currentBuyPrice = this.itemBuyPrice.get(item);
+			float currentSellPrice = this.itemSellPrice.get(item);
+			
+			
+			float multiplier = computePriceShiftMultiplier(currentBuyPrice,currentSellPrice);
+			float newBuyPrice = currentBuyPrice + (multiplier * currentBuyPrice);
+			float newSellPrice = currentSellPrice + (multiplier * currentSellPrice);
+			
+			this.itemBuyPrice.replace(item, newBuyPrice);
+			this.itemSellPrice.replace(item, newSellPrice);
+		}		
+	}
+	
+	public void shiftPricesOnSell(Material item, int amount) {
+		for (int i=0;i<amount;i++) {
+			float currentBuyPrice = this.itemBuyPrice.get(item);
+			float currentSellPrice = this.itemSellPrice.get(item);
+			
+			
+			float multiplier = computePriceShiftMultiplier(currentBuyPrice,currentSellPrice);
+			float newBuyPrice = currentBuyPrice - (multiplier * currentBuyPrice);
+			float newSellPrice = currentSellPrice - (multiplier * currentSellPrice);
+			
+			this.itemBuyPrice.replace(item, newBuyPrice);
+			this.itemSellPrice.replace(item, newSellPrice);
+		}
+		
 	}
 	
 	public HashMap<Integer, Integer> getItemSlotPriceMultiplier() {

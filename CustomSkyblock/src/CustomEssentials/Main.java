@@ -57,6 +57,7 @@ import CustomEssentials.Events.Items.ItemStats;
 import CustomEssentials.Events.PlayerPath.Paths.Path;
 import CustomEssentials.Events.PlayerSkills.Skills;
 import CustomEssentials.Events.PlayerStats.Stats;
+import CustomEssentials.Events.ShopInfo.ItemPrices;
 import CustomEssentials.Utils.ArmorUtils;
 import CustomEssentials.Utils.HealthUtils;
 import CustomEssentials.Utils.ManaUtils;
@@ -69,6 +70,7 @@ public class Main extends JavaPlugin{
 	private PlayerProfileManager profileManager;
 	private int displayStats = 0;
 	private File playerDataFolderLocation;
+	private ItemPrices shopPrices;
 
 	
 	@Override
@@ -78,13 +80,16 @@ public class Main extends JavaPlugin{
 		generatePlayerFolder();								
 		this.profileManager = new PlayerProfileManager(this);
 		
+		//ADD IMPORTING FROM FILE FOR SHOP PRICES
+		this.shopPrices = new ItemPrices();
+		
 		new MenuGui(this);
 		new SkillsGui(this);
 		new PathSelectionGui(this);
 		new MainShopMenu(this);
 		getServer().getPluginManager().registerEvents(new MobEvents(this), this);
 		getServer().getPluginManager().registerEvents(new PlayerJoinLeave(this), this);
-		getServer().getPluginManager().registerEvents(new GuiShops(this), this);
+		getServer().getPluginManager().registerEvents(new GuiShops(this, this.shopPrices), this);
 		getServer().getPluginManager().registerEvents(new SkillsFunctioning(this), this);
 		getServer().getPluginManager().registerEvents(new FoodSaturation(this), this);
 		getServer().getPluginManager().registerEvents(new FishingEvents(this), this);
@@ -96,31 +101,31 @@ public class Main extends JavaPlugin{
 		new WeaponCommand(this);
 		new BalanceCommand(this);
 		new PayCommand(this);
-		new BlockShop1(this);
-		new BlockShop2(this);
-		new BlockShop3(this);
-		new BlockShop4(this);
-		new ColorBlockShop1(this);
-		new ColorBlockShop2(this);
-		new ColorBlockShop3(this);
-		new ColorBlockShop4(this);
-		new DecorativeBlockShop1(this);
-		new DecorativeBlockShop2(this);
-		new DecorativeBlockShop3(this);
-		new FarmingShop1(this);
-		new FarmingShop2(this);
-		new FoodShop1(this);
-		new FoodShop2(this);
-		new GemsShop1(this);
-		new GemsShop2(this);
-		new MiscShop1(this);
-		new MiscShop2(this);
-		new MobDropsShop1(this);
-		new MobDropsShop2(this);
-		new RedstoneShop1(this);
-		new RedstoneShop2(this);
-		new BrewingShop1(this);
-		new BrewingShop2(this);
+		new BlockShop1(this, this.shopPrices);
+		new BlockShop2(this, this.shopPrices);
+		new BlockShop3(this, this.shopPrices);
+		new BlockShop4(this, this.shopPrices);
+		new ColorBlockShop1(this, this.shopPrices);
+		new ColorBlockShop2(this, this.shopPrices);
+		new ColorBlockShop3(this, this.shopPrices);
+		new ColorBlockShop4(this, this.shopPrices);
+		new DecorativeBlockShop1(this, this.shopPrices);
+		new DecorativeBlockShop2(this, this.shopPrices);
+		new DecorativeBlockShop3(this, this.shopPrices);
+		new FarmingShop1(this, this.shopPrices);
+		new FarmingShop2(this, this.shopPrices);
+		new FoodShop1(this, this.shopPrices);
+		new FoodShop2(this, this.shopPrices);
+		new GemsShop1(this, this.shopPrices);
+		new GemsShop2(this, this.shopPrices);
+		new MiscShop1(this, this.shopPrices);
+		new MiscShop2(this, this.shopPrices);
+		new MobDropsShop1(this, this.shopPrices);
+		new MobDropsShop2(this, this.shopPrices);
+		new RedstoneShop1(this, this.shopPrices);
+		new RedstoneShop2(this, this.shopPrices);
+		new BrewingShop1(this, this.shopPrices);
+		new BrewingShop2(this, this.shopPrices);
 		new CustomMobsCommand(this);
 		
 		for (Player p : Bukkit.getOnlinePlayers()) {
