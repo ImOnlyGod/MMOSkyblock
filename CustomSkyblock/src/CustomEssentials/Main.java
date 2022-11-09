@@ -71,6 +71,7 @@ public class Main extends JavaPlugin{
 	private int displayStats = 0;
 	private File playerDataFolderLocation;
 	private ItemPrices shopPrices;
+	private File shopPricesLocation;
 
 	
 	@Override
@@ -270,6 +271,11 @@ public class Main extends JavaPlugin{
 		getConfig().options().copyDefaults(true);
 		saveConfig();
 	}
+	
+	public void saveShopPrices() {
+		setShopPricesLocation(this.shopPricesLocation);
+		
+	}
 
 	public PlayerProfileManager getProfileManager() {
 		return profileManager;
@@ -308,7 +314,6 @@ public class Main extends JavaPlugin{
 			try {
 				PlayerFile.createNewFile();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -622,6 +627,16 @@ public class Main extends JavaPlugin{
 
 	public void setFolderLocation(File folderLocation) {
 		this.playerDataFolderLocation = folderLocation;
+	}
+
+
+	public File getShopPricesLocation() {
+		return shopPricesLocation;
+	}
+
+
+	public void setShopPricesLocation(File shopPricesLocation) {
+		this.shopPricesLocation = shopPricesLocation;
 	}
 	
 

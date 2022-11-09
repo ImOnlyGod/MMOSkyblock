@@ -904,7 +904,7 @@ public class ItemPrices {
 	
 	public float computePriceShiftMultiplier(float currentBuyPrice, float currentSellPrice) {
 		//MODIFY THIS NUMBER IF NECESSARY
-		float multiplier = (1 - (((currentBuyPrice)/(currentBuyPrice + currentSellPrice))))/10;
+		float multiplier = (1 - (((currentBuyPrice)/(currentBuyPrice + currentSellPrice))))/23;
 		
 		return multiplier;
 	}
