@@ -72,6 +72,18 @@ public class Main extends JavaPlugin{
 	private int displayStats = 0;
 	private File playerDataFolderLocation;
 	private ItemPrices shopPrices;
+	private ItemPrices shopPricesPrevious;
+	
+	public ItemPrices getShopPricesPrevious() {
+		return shopPricesPrevious;
+	}
+
+
+	public void setShopPricesPrevious(ItemPrices shopPricesPrevious) {
+		this.shopPricesPrevious = shopPricesPrevious;
+	}
+
+
 	private File shopPricesLocation;
 
 	
@@ -320,6 +332,7 @@ public class Main extends JavaPlugin{
 		String path = this.getShopPricesLocation().getPath();
 		File ShopFile = new File(path + "\\" + FileName + ".yml");
 		this.shopPrices = new ItemPrices();
+		this.shopPricesPrevious = new ItemPrices();
 		System.out.println(ShopFile);
 		if (!ShopFile.exists()) return;
 				
@@ -330,10 +343,9 @@ public class Main extends JavaPlugin{
 			double sell = (double) shopData.get("Sell." + itemName); 
 			this.shopPrices.getItemBuyPrice().replace(item, (float) buy);
 			this.shopPrices.getItemSellPrice().replace(item, (float) sell);
+			this.shopPricesPrevious.getItemBuyPrice().replace(item, (float) buy);
+			this.shopPricesPrevious.getItemSellPrice().replace(item, (float) sell);
 		}
-		
-	
-	
 	}
 
 	public PlayerProfileManager getProfileManager() {

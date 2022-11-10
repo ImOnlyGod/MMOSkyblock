@@ -36,10 +36,12 @@ public class MiscShop1 implements TabExecutor{
 
 	private Main plugin;
 	private ItemPrices prices;
+	private ItemPrices pricesPrevious;
 	
 	public MiscShop1(Main plugin, ItemPrices prices) {
 		this.plugin = plugin;
 		this.prices = prices;
+		this.pricesPrevious = this.plugin.getShopPricesPrevious();
 		plugin.getCommand("shopMisc1").setExecutor(this);
 		
 	}
@@ -109,7 +111,7 @@ public class MiscShop1 implements TabExecutor{
 		
 		
 		//Vanilla items	
-		
+		ItemPrices initialPrices = new ItemPrices();
 		int i = 10;
 		GuiItems blocks = new GuiItems();
 		for (Material material : blocks.getMisc()) {
@@ -120,9 +122,25 @@ public class MiscShop1 implements TabExecutor{
 			
 			ItemStack item = new ItemStack(material);
 			ItemMeta meta = item.getItemMeta();
+			meta.setDisplayName(Utils.chat("&7&l"+item.getType()));
 			List<String> lore = new ArrayList<String>();
-			lore.add(Utils.chat("&cBuy Price&7: &8$" +  CurrencyUtils.currencyFormat(this.prices.getItemBuyPrice().get(item.getType()))));
+			
+			double previousItemBuyPrice = this.pricesPrevious.getItemBuyPrice().get(item.getType());
+			double currentItemBuyPrice = this.prices.getItemBuyPrice().get(item.getType());
+			double initialItemBuyPrice = initialPrices.getItemBuyPrice().get(item.getType());
+			
+			Double changePercentRecent = (double) Math.round((Math.abs(previousItemBuyPrice - currentItemBuyPrice)/currentItemBuyPrice)*10000)/100;	
+			Double changePercentNet = (double) Math.round((Math.abs(initialItemBuyPrice - currentItemBuyPrice)/currentItemBuyPrice)*10000)/100;	
+			
+			String changeSign = "&2▲";
+			String changeSign2 = "&2▲";
+			if (previousItemBuyPrice > currentItemBuyPrice) changeSign = "&4▼";
+			if (initialItemBuyPrice > currentItemBuyPrice) changeSign2 = "&4▼";
+			
+			lore.add(Utils.chat("&cBuy Price&7: &8$" + CurrencyUtils.currencyFormat(this.prices.getItemBuyPrice().get(item.getType()))));
 			lore.add(Utils.chat("&aSell Price&7: &8$" +  CurrencyUtils.currencyFormat(this.prices.getItemSellPrice().get(item.getType()))));
+			lore.add(Utils.chat("&6Price Change (12 Hours)&7: &8" + changePercentRecent + "% " + changeSign));
+			lore.add(Utils.chat("&5Price Change (Net Total)&7: &8" + changePercentNet + "% " + changeSign2));
 			
 			meta.setLore(lore);
 			item.setItemMeta(meta);

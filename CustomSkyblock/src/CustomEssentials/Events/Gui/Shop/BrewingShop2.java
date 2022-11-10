@@ -34,10 +34,12 @@ public class BrewingShop2 implements TabExecutor{
 
 	private Main plugin;
 	private ItemPrices prices;
+	private ItemPrices pricesPrevious;
 	
 	public BrewingShop2(Main plugin, ItemPrices prices) {
 		this.plugin = plugin;
 		this.prices = prices;
+		this.pricesPrevious = this.plugin.getShopPricesPrevious();
 		plugin.getCommand("shopBrewing2").setExecutor(this);
 		
 	}
