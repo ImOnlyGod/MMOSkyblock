@@ -9,6 +9,7 @@ import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.craftbukkit.v1_17_R1.entity.CraftArmorStand;
 import org.bukkit.craftbukkit.v1_17_R1.entity.CraftFireball;
+import org.bukkit.craftbukkit.v1_17_R1.entity.CraftLightningStrike;
 import org.bukkit.craftbukkit.v1_17_R1.entity.CraftProjectile;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
@@ -172,6 +173,8 @@ public class MobEvents implements Listener{
 		if (!(e.getEntity() instanceof LivingEntity)) {
 			return;	
 		}
+		
+		if ((e.getEntity() instanceof CraftLightningStrike)) return;
 		
 		//ADD ARROW DMG SKELETON
 		if ((!(e.getDamager() instanceof Player)) && (e.getEntity() instanceof LivingEntity)) {

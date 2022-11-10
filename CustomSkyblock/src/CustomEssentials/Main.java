@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -78,16 +79,15 @@ public class Main extends JavaPlugin{
 	public void onEnable() {
 		
 		//getServer().getConsoleSender().sendMessage(Utils.chat("&aPlugin has been enabled!"));
-		generatePlayerFolder();								
+		generatePlayerFolder();	
+		generateShopFile();
 		this.profileManager = new PlayerProfileManager(this);
-		
-		//ADD IMPORTING FROM FILE FOR SHOP PRICES
-		this.shopPrices = new ItemPrices();
-		
+
 		new MenuGui(this);
 		new SkillsGui(this);
 		new PathSelectionGui(this);
 		new MainShopMenu(this);
+		readShopData();
 		getServer().getPluginManager().registerEvents(new MobEvents(this), this);
 		getServer().getPluginManager().registerEvents(new PlayerJoinLeave(this), this);
 		getServer().getPluginManager().registerEvents(new GuiShops(this, this.shopPrices), this);
@@ -96,7 +96,7 @@ public class Main extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new FishingEvents(this), this);
 		
 		loadConfig();
-		
+				
 		new FlyCommand(this);
 		new EatCommand(this);
 		new WeaponCommand(this);
@@ -132,6 +132,8 @@ public class Main extends JavaPlugin{
 		for (Player p : Bukkit.getOnlinePlayers()) {
 			readPlayerProfile(p);
 		}
+		
+		
 		
 		BukkitScheduler scheduler = getServer().getScheduler();
 		scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
@@ -261,7 +263,7 @@ public class Main extends JavaPlugin{
 	
 	
 	public void onDisable() {		
-		
+		saveShopPrices();
 		savePlayerData();
 		getServer().getConsoleSender().sendMessage("Plugin has been disabled!");
 		
@@ -272,9 +274,66 @@ public class Main extends JavaPlugin{
 		saveConfig();
 	}
 	
+	public void generateShopFile() {
+		setShopPricesLocation(this.getDataFolder());
+	}
+	
 	public void saveShopPrices() {
 		setShopPricesLocation(this.shopPricesLocation);
+		writeShopPrice(this.shopPricesLocation);
+	}
+	
+	public void writeShopPrice(File directory) {
+		String FileName = "shop_prices";
+		String path = directory.getPath();
+		File ShopFile = new File(path + "\\" + FileName + ".yml");
 		
+		if (!ShopFile.exists())
+			try {
+				ShopFile.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		
+		FileConfiguration shopData = YamlConfiguration.loadConfiguration(ShopFile);		
+		try {
+			shopData.createSection("Buy");
+			shopData.createSection("Sell");	
+			
+			for (Material item : this.shopPrices.getItemBuyPrice().keySet()) {
+				String itemName = item.toString();
+				shopData.set("Buy."+itemName, this.shopPrices.getItemBuyPrice().get(item));
+				shopData.set("Sell."+itemName, this.shopPrices.getItemSellPrice().get(item));
+			}
+			
+			shopData.save(ShopFile);
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void readShopData() {
+				
+		String FileName = "shop_prices";
+		String path = this.getShopPricesLocation().getPath();
+		File ShopFile = new File(path + "\\" + FileName + ".yml");
+		this.shopPrices = new ItemPrices();
+		System.out.println(ShopFile);
+		if (!ShopFile.exists()) return;
+				
+		FileConfiguration shopData = YamlConfiguration.loadConfiguration(ShopFile);
+		for (Material item : this.shopPrices.getItemBuyPrice().keySet()) {
+			String itemName = item.toString();
+			double buy = (double) shopData.get("Buy." + itemName);    
+			double sell = (double) shopData.get("Sell." + itemName); 
+			this.shopPrices.getItemBuyPrice().replace(item, (float) buy);
+			this.shopPrices.getItemSellPrice().replace(item, (float) sell);
+		}
+		
+	
+	
 	}
 
 	public PlayerProfileManager getProfileManager() {
