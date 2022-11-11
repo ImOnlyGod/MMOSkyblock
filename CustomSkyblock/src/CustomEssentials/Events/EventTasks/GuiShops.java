@@ -70,7 +70,7 @@ public class GuiShops implements Listener{
 					CustomShapelessRecipe recipe = new CustomShapelessRecipe();
 					recipe.setGrid(e.getView().getTopInventory());
 				}
-			},5);			
+			},1);			
 						
 			return;
 		}
