@@ -1,10 +1,6 @@
 package CustomEssentials.Events.Gui;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -12,21 +8,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.SkullMeta;
-
-import com.mojang.authlib.GameProfile;
-import com.mojang.authlib.properties.Property;
-
 import CustomEssentials.Main;
 import CustomEssentials.Events.Profile;
-import CustomEssentials.Events.PlayerSkills.CombatSkill;
-import CustomEssentials.Events.PlayerSkills.FarmingSkill;
-import CustomEssentials.Events.PlayerSkills.FishingSkill;
-import CustomEssentials.Events.PlayerSkills.ForagingSkill;
-import CustomEssentials.Events.PlayerSkills.MiningSkill;
 import CustomEssentials.Utils.Utils;
 
 public class CraftGui implements TabExecutor{
@@ -36,7 +20,6 @@ public class CraftGui implements TabExecutor{
 	public CraftGui(Main plugin) {
 		this.plugin = plugin;
 		plugin.getCommand("craft").setExecutor(this);
-		
 	}
 	
 	public Inventory createGui(Player p, Profile playerProfile) {

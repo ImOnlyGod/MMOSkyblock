@@ -19,6 +19,7 @@ import CustomEssentials.Commands.PlayerEconomy.BalanceCommand;
 import CustomEssentials.Commands.PlayerEconomy.PayCommand;
 import CustomEssentials.Events.PlayerProfileManager;
 import CustomEssentials.Events.Profile;
+import CustomEssentials.Events.EventTasks.CraftingEvents;
 import CustomEssentials.Events.EventTasks.FishingEvents;
 import CustomEssentials.Events.EventTasks.FoodSaturation;
 import CustomEssentials.Events.EventTasks.GuiShops;
@@ -108,6 +109,7 @@ public class Main extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new SkillsFunctioning(this), this);
 		getServer().getPluginManager().registerEvents(new FoodSaturation(this), this);
 		getServer().getPluginManager().registerEvents(new FishingEvents(this), this);
+		getServer().getPluginManager().registerEvents(new CraftingEvents(this), this);
 		
 		loadConfig();
 				
@@ -336,7 +338,6 @@ public class Main extends JavaPlugin{
 		File ShopFile = new File(path + "\\" + FileName + ".yml");
 		this.shopPrices = new ItemPrices();
 		this.shopPricesPrevious = new ItemPrices();
-		System.out.println(ShopFile);
 		if (!ShopFile.exists()) return;
 				
 		FileConfiguration shopData = YamlConfiguration.loadConfiguration(ShopFile);

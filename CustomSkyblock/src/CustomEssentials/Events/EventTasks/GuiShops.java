@@ -16,6 +16,7 @@ import org.bukkit.inventory.PlayerInventory;
 import CustomEssentials.Main;
 import CustomEssentials.Events.Profile;
 import CustomEssentials.Events.Gui.Shop.ItemsBuySellGui;
+import CustomEssentials.Events.Items.Crafting.CustomShapelessRecipe;
 import CustomEssentials.Events.PlayerPath.Paths.Archer;
 import CustomEssentials.Events.PlayerPath.Paths.Assassin;
 import CustomEssentials.Events.PlayerPath.Paths.Tank;
@@ -63,6 +64,14 @@ public class GuiShops implements Listener{
 			else if (e.getCurrentItem().getType() == Material.BLACK_STAINED_GLASS_PANE && !(e.getSlot() == 24 || e.getSlot() == 25 || e.getSlot() == 33 || e.getSlot() == 34)) 
 				e.setCancelled(true);
 			
+			Bukkit.getScheduler().scheduleSyncDelayedTask(this.plugin, new Runnable() {
+				@Override
+				public void run() {
+					CustomShapelessRecipe recipe = new CustomShapelessRecipe();
+					recipe.setGrid(e.getView().getTopInventory());
+				}
+			},5);			
+						
 			return;
 		}
 		
@@ -439,16 +448,7 @@ public class GuiShops implements Listener{
 
 	}
 	
-	
-	@EventHandler
-	public void OpenMenuEvent(InventoryOpenEvent e) {
-		if (e.getInventory().getType() == InventoryType.WORKBENCH) {
-			e.setCancelled(true);
-			Player p = (Player) e.getPlayer();
-			p.performCommand("craft");
-		}
-	}
-	
+		
 	@EventHandler
 	public void CloseMenuEvent(InventoryCloseEvent e) {
 		Player p = (Player) e.getPlayer();
