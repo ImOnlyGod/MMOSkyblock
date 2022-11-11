@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 
 import CustomEssentials.Main;
 import CustomEssentials.Events.Profile;
+import CustomEssentials.Utils.CurrencyUtils;
 import CustomEssentials.Utils.Utils;
 
 public class BalanceCommand implements CommandExecutor {
@@ -77,16 +78,16 @@ public class BalanceCommand implements CommandExecutor {
 		double bal = checkBalance(p);
 		
 		if (sender == target) {
-			p.sendMessage(Utils.chat(plugin.getConfig().getString("BalanceCommand.reciever_bal_msg") + Math.round(bal*100)/100));
+			p.sendMessage(Utils.chat(plugin.getConfig().getString("BalanceCommand.reciever_bal_msg") + CurrencyUtils.currencyFormat(bal)));
 			return true;
 		}
 		
 		if (!(sender instanceof Player)) {
-			System.out.println("The balance of " + target.getDisplayName() + "is $" + Math.round(bal*100)/100);
+			System.out.println("The balance of " + target.getDisplayName() + "is $" + CurrencyUtils.currencyFormat(bal));
 			return true;
 		}
 					
-		sender.sendMessage(Utils.chat(plugin.getConfig().getString("BalanceCommand.sender_bal_msg") + target.getDisplayName() + " &7is &a$" + Math.round(bal*100)/100));		
+		sender.sendMessage(Utils.chat(plugin.getConfig().getString("BalanceCommand.sender_bal_msg") + target.getDisplayName() + " &7is &a$" + CurrencyUtils.currencyFormat(bal)));		
 		
 		return true;
 

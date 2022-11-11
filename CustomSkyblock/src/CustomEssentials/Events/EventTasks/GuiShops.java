@@ -9,6 +9,7 @@ import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
@@ -55,6 +56,13 @@ public class GuiShops implements Listener{
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&a&lSkills")))) {
 			if (e.getSlot() == 0) p.performCommand("menu");
 			e.setCancelled(true);
+			return;
+		}
+		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&2&lCraft")))) {
+			if (e.getCurrentItem() == null);
+			else if (e.getCurrentItem().getType() == Material.BLACK_STAINED_GLASS_PANE && !(e.getSlot() == 24 || e.getSlot() == 25 || e.getSlot() == 33 || e.getSlot() == 34)) 
+				e.setCancelled(true);
+			
 			return;
 		}
 		
@@ -295,6 +303,7 @@ public class GuiShops implements Listener{
 		}	
 	}
 	
+	
 	public void generateItemActionSlots(int slot, ItemStack item, Player p, ClickType click) {
 		if ((slot > 9 && slot < 17) || (slot > 18 && slot < 26) || (slot > 27 && slot < 35) || (slot > 36 && slot < 44)) {
 			
@@ -433,7 +442,11 @@ public class GuiShops implements Listener{
 	
 	@EventHandler
 	public void OpenMenuEvent(InventoryOpenEvent e) {
-
+		if (e.getInventory().getType() == InventoryType.WORKBENCH) {
+			e.setCancelled(true);
+			Player p = (Player) e.getPlayer();
+			p.performCommand("craft");
+		}
 	}
 	
 	@EventHandler

@@ -25,6 +25,7 @@ import CustomEssentials.Events.EventTasks.GuiShops;
 import CustomEssentials.Events.EventTasks.MobEvents;
 import CustomEssentials.Events.EventTasks.PlayerJoinLeave;
 import CustomEssentials.Events.EventTasks.SkillsFunctioning;
+import CustomEssentials.Events.Gui.CraftGui;
 import CustomEssentials.Events.Gui.MenuGui;
 import CustomEssentials.Events.Gui.PathSelectionGui;
 import CustomEssentials.Events.Gui.SkillsGui;
@@ -99,6 +100,7 @@ public class Main extends JavaPlugin{
 		new SkillsGui(this);
 		new PathSelectionGui(this);
 		new MainShopMenu(this);
+		new CraftGui(this);
 		readShopData();
 		getServer().getPluginManager().registerEvents(new MobEvents(this), this);
 		getServer().getPluginManager().registerEvents(new PlayerJoinLeave(this), this);
@@ -114,6 +116,7 @@ public class Main extends JavaPlugin{
 		new WeaponCommand(this);
 		new BalanceCommand(this);
 		new PayCommand(this);
+
 		new BlockShop1(this, this.shopPrices);
 		new BlockShop2(this, this.shopPrices);
 		new BlockShop3(this, this.shopPrices);
