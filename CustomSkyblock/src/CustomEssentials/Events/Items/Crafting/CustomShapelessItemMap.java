@@ -12,19 +12,20 @@ public class CustomShapelessItemMap {
 		
 		for (int i=0;i<4;i++) {
 			for (int j=0;j<4;j++) {
-				System.out.println(j);
 				if (items[i][j] == null) {
 					
 				}
-				else if (items[i][j].getType() == Material.OAK_LOG) {
+				else {
+					
 					woodCounter++;
 				}
 			}
 		}
 		
 		if (woodCounter == 1) {
-			return new ItemStack(Material.OAK_PLANKS,amount);
+			return new ItemStack(Material.OAK_PLANKS,amount*4);
 		}
+		
 		
 		
 		return null;

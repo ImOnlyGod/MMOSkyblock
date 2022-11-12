@@ -16,7 +16,7 @@ import org.bukkit.inventory.PlayerInventory;
 import CustomEssentials.Main;
 import CustomEssentials.Events.Profile;
 import CustomEssentials.Events.Gui.Shop.ItemsBuySellGui;
-import CustomEssentials.Events.Items.Crafting.CustomShapelessRecipe;
+import CustomEssentials.Events.Items.Crafting.CustomCraft;
 import CustomEssentials.Events.PlayerPath.Paths.Archer;
 import CustomEssentials.Events.PlayerPath.Paths.Assassin;
 import CustomEssentials.Events.PlayerPath.Paths.Tank;
@@ -67,10 +67,9 @@ public class GuiShops implements Listener{
 			Bukkit.getScheduler().scheduleSyncDelayedTask(this.plugin, new Runnable() {
 				@Override
 				public void run() {
-					CustomShapelessRecipe recipe = new CustomShapelessRecipe();
-					recipe.setGrid(e.getView().getTopInventory());
+					CustomCraft recipe = new CustomCraft(e.getView().getTopInventory());
 				}
-			},1);			
+			},2);			
 						
 			return;
 		}
