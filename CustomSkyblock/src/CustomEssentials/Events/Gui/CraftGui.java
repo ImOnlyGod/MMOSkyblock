@@ -36,6 +36,13 @@ public class CraftGui implements TabExecutor{
 						
 		}
 		
+		ItemStack glassSlotRed = new ItemStack(Material.RED_STAINED_GLASS_PANE);
+		bench.setItem(24, glassSlotRed);
+		bench.setItem(25, glassSlotRed);
+		bench.setItem(33, glassSlotRed);
+		bench.setItem(34, glassSlotRed);
+		
+		
 		
 		return bench;
 				

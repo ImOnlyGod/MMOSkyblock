@@ -60,14 +60,18 @@ public class GuiShops implements Listener{
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&2&lCraft")))) {
-			if (e.getCurrentItem() == null);
-			else if (e.getCurrentItem().getType() == Material.BLACK_STAINED_GLASS_PANE && !(e.getSlot() == 24 || e.getSlot() == 25 || e.getSlot() == 33 || e.getSlot() == 34)) 
+			if (e.getCurrentItem().getType() == Material.BLACK_STAINED_GLASS_PANE || (e.getSlot() == 24 || e.getSlot() == 25 || e.getSlot() == 33 || e.getSlot() == 34)) 
 				e.setCancelled(true);
 			
 			Bukkit.getScheduler().scheduleSyncDelayedTask(this.plugin, new Runnable() {
 				@Override
 				public void run() {
 					CustomCraft recipe = new CustomCraft(e.getView().getTopInventory());
+					
+					if (e.getSlot() == 24 || e.getSlot() == 25 || e.getSlot() == 33 || e.getSlot() == 34) {
+						//ADD CODE HERE FOR GETTING ITEMS
+					}
+					
 				}
 			},2);			
 						
