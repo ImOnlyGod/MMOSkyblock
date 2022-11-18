@@ -8,8 +8,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
-import org.bukkit.event.inventory.InventoryOpenEvent;
-import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
@@ -60,20 +59,26 @@ public class GuiShops implements Listener{
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&2&lCraft")))) {
-			if (e.getCurrentItem().getType() == Material.BLACK_STAINED_GLASS_PANE || (e.getSlot() == 24 || e.getSlot() == 25 || e.getSlot() == 33 || e.getSlot() == 34)) 
+			if (e.getClick().isKeyboardClick()) {
 				e.setCancelled(true);
+				return;
+			}
+			if (e.getCurrentItem() == null);
+			else if ((e.getClickedInventory() == e.getView().getTopInventory()) && (e.getCurrentItem().getType() == Material.BLACK_STAINED_GLASS_PANE || (e.getSlot() == 24 || e.getSlot() == 25 || e.getSlot() == 33 || e.getSlot() == 34))) 
+				e.setCancelled(true);
+									
 			
 			Bukkit.getScheduler().scheduleSyncDelayedTask(this.plugin, new Runnable() {
 				@Override
 				public void run() {
-					CustomCraft recipe = new CustomCraft(e.getView().getTopInventory());
+					CustomCraft recipe = new CustomCraft(p, e.getView().getTopInventory());
 					
-					if (e.getSlot() == 24 || e.getSlot() == 25 || e.getSlot() == 33 || e.getSlot() == 34) {
-						//ADD CODE HERE FOR GETTING ITEMS
+					if ((e.getClickedInventory() == e.getView().getTopInventory()) && (e.getSlot() == 24 || e.getSlot() == 25 || e.getSlot() == 33 || e.getSlot() == 34)) {
+						recipe.processOutputClick(e.getView().getBottomInventory(), e.getView().getTopInventory(), e.getSlot(), e.getClick());
 					}
 					
 				}
-			},2);			
+			},1);			
 						
 			return;
 		}
@@ -468,7 +473,23 @@ public class GuiShops implements Listener{
 				}
 			},1);
 			return;
-		}		
+		}
+		
+		else if (e.getView().getTitle().contains(Utils.chat("&2&lCraft"))) {
+			Inventory craftingGUI = e.getView().getTopInventory();			
+			for (int i=10; i<14; i++) {
+				if (craftingGUI.getItem(i) != null)	p.getWorld().dropItem(p.getLocation(), craftingGUI.getItem(i));
+			}
+			for (int i=19; i<23; i++) {
+				if (craftingGUI.getItem(i) != null)	p.getWorld().dropItem(p.getLocation(), craftingGUI.getItem(i));
+			}
+			for (int i=28; i<32; i++) {
+				if (craftingGUI.getItem(i) != null)	p.getWorld().dropItem(p.getLocation(), craftingGUI.getItem(i));
+			}
+			for (int i=37; i<41; i++) {
+				if (craftingGUI.getItem(i) != null)	p.getWorld().dropItem(p.getLocation(), craftingGUI.getItem(i));
+			}
+		}
 	}
 	
 	public String getPreviousMenu(ItemStack item) {

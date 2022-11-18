@@ -15,13 +15,30 @@ public class VanillaShapelessRecipes {
 		
 	}
 	
+	public void addAllSlotInputSingleItem(ItemStack inputItem, ItemStack outputItem) {
+		
+		for (int i=0;i<4;i++) {
+			for (int j=0;j<4;j++) {
+				ItemStack[][] inputItems = new ItemStack[4][4];
+				ItemStack[][] resultItems = new ItemStack[2][2];
+				inputItems[i][j] = new ItemStack(inputItem.getType(),inputItem.getAmount());
+				resultItems[0][0] = new ItemStack(outputItem.getType(),outputItem.getAmount());
+				resultItems[0][1] = new ItemStack(Material.RED_STAINED_GLASS_PANE);
+				resultItems[1][0] = new ItemStack(Material.RED_STAINED_GLASS_PANE);
+				resultItems[1][1] = new ItemStack(Material.RED_STAINED_GLASS_PANE);
+				recipeOutput.put(inputItems, resultItems);
+			}
+		}
+	}
+	
 
 	private void addSingleItemRecipes() {
-		ItemStack[][] OAK_LOG = new ItemStack[4][4];
-		ItemStack[][] OAK_PLANKS = new ItemStack[2][2];
-		OAK_LOG[0][0] = new ItemStack(Material.OAK_LOG);				
-		OAK_PLANKS[0][0] = new ItemStack(Material.OAK_PLANKS,4);
-		recipeOutput.put(OAK_LOG, OAK_PLANKS);
+		addAllSlotInputSingleItem(new ItemStack(Material.OAK_LOG), new ItemStack(Material.OAK_PLANKS,4));
+		addAllSlotInputSingleItem(new ItemStack(Material.BIRCH_LOG), new ItemStack(Material.BIRCH_PLANKS,4));
+		addAllSlotInputSingleItem(new ItemStack(Material.SPRUCE_LOG), new ItemStack(Material.SPRUCE_PLANKS,4));
+		addAllSlotInputSingleItem(new ItemStack(Material.DARK_OAK_LOG), new ItemStack(Material.DARK_OAK_PLANKS,4));
+		addAllSlotInputSingleItem(new ItemStack(Material.ACACIA_LOG), new ItemStack(Material.ACACIA_PLANKS,4));
+		addAllSlotInputSingleItem(new ItemStack(Material.JUNGLE_LOG), new ItemStack(Material.JUNGLE_PLANKS,4));
 		
 	}
 

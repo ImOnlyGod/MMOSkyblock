@@ -3,6 +3,8 @@ package CustomEssentials.Events.Items.Crafting;
 import java.util.ArrayList;
 
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -15,8 +17,19 @@ public class CustomCraft {
 	private Inventory crafttingGUI;
 	private ArrayList<ItemStack> itemList = new ArrayList<ItemStack>();
 	private VanillaShapelessRecipes vanillaRecipes1 = new VanillaShapelessRecipes();
+	private ItemStack[][] matchingRecipe;
+	private ItemStack[][] outputRecipe;
+	private Player p;
 	
-	public CustomCraft(Inventory inv) {
+	public CustomCraft(Player p, Inventory inv) {
+		this.p = p;
+		setGrid(inv);
+		checkItemSlots();
+		getRecipeResult();
+		
+	}
+	
+	public void resetCraftingInventory(Inventory inv) {
 		setGrid(inv);
 		checkItemSlots();
 		getRecipeResult();
@@ -68,19 +81,155 @@ public class CustomCraft {
 					if (!(inven[i][j].isSimilar(this.inputGrid[i][j])) || !(inven[i][j].getAmount() <= this.inputGrid[i][j].getAmount())) {
 						matching = false;
 						break;
-					}					
-				}
-				
-				if (matching) {
-					return this.vanillaRecipes1.getRecipeOutput().get(inven);
-				}
-				
+					}	
+				}	
 			}
 			
-			
+			//clean up code
+			if (matching) {
+				this.matchingRecipe = inven;
+				this.setOutputRecipe(this.vanillaRecipes1.getRecipeOutput().get(inven));
+				return this.vanillaRecipes1.getRecipeOutput().get(inven);
+			}
 		}
 		return null;		
 	}
+	
+	public Boolean isEnoughMaterials() {
+		
+		for (int i=0;i<this.inputGrid.length;i++) {
+			for (int j=0;j<this.inputGrid.length;j++) {
+				if ((this.matchingRecipe[i][j] == null) && (this.inputGrid[i][j] == null)) {
+					continue;
+				}
+				else if ((this.matchingRecipe[i][j] == null) && !(this.inputGrid[i][j] == null)) {
+					return false;
+				}
+				else if (!(this.matchingRecipe[i][j] == null) && (this.inputGrid[i][j] == null)) {
+					return false;
+				}
+				
+				if ((this.inputGrid[i][j].getAmount() - this.matchingRecipe[i][j].getAmount()) < 0) {
+					return false;
+				}
+			}
+		}
+		
+		
+		
+		return true;
+	}
+	
+	public void reduceMaterials() {
+		for (int i=0;i<this.inputGrid.length;i++) {
+			for (int j=0;j<this.inputGrid.length;j++) {
+				if ((this.matchingRecipe[i][j] == null) && (this.inputGrid[i][j] == null)) continue;
+
+				int newAmount = this.inputGrid[i][j].getAmount() - this.matchingRecipe[i][j].getAmount();
+				this.inputGrid[i][j].setAmount(newAmount);				
+			
+			}
+		}
+	}
+	
+	public boolean checkInventorySpace(Inventory playerInven, ItemStack item, int minSpace) {
+		
+		int stackSize = item.getMaxStackSize();
+		int space = 0;
+				
+		for (int i = 0; i<36; i++) {
+			
+			ItemStack anItem = playerInven.getItem(i);
+			if (anItem == null) return true;
+			
+			if (anItem.isSimilar(item)) {
+				space += (stackSize - anItem.getAmount());
+			}
+			
+			if (space >= minSpace) return true;
+			
+		}
+		
+		
+		return false;
+	}
+	
+	public void convertMaterials(Inventory playerInven,Inventory craftingInven, int slot, int amount, Boolean isCursor) {
+		
+		int iteration = 0;
+		
+		while (iteration < amount) {
+			if (!isEnoughMaterials()) return;
+			
+			if (isCursor && (p.getItemOnCursor().getAmount() < 64) &&(p.getItemOnCursor().getType() == Material.AIR || p.getItemOnCursor().isSimilar(this.crafttingGUI.getItem(slot)))) {
+				
+				int amountAdded = 0;
+				if (p.getItemOnCursor().getType() != Material.AIR) {
+					amountAdded += p.getItemOnCursor().getAmount();
+				}
+				
+				ItemStack addItem = new ItemStack(this.crafttingGUI.getItem(slot).getType(),this.crafttingGUI.getItem(slot).getAmount()+amountAdded);
+				reduceMaterials();
+				p.setItemOnCursor(addItem);
+				
+			}
+			
+			else if (!isCursor) {
+		
+				if (!checkInventorySpace(playerInven,craftingInven.getItem(slot),this.crafttingGUI.getItem(slot).getAmount())) return;
+				reduceMaterials();
+				playerInven.addItem(this.crafttingGUI.getItem(slot));
+				
+				
+			}
+			else break;
+			iteration++;
+		}
+		
+	}
+	
+	public void processOutputClick(Inventory playerInven, Inventory craftingInven,  int slot,  ClickType click) {
+		//CHECK ALL OTHER SLOTS ARE NONE
+		if (craftingInven.getItem(slot) == null || craftingInven.getItem(slot).isSimilar(new ItemStack(Material.RED_STAINED_GLASS_PANE))) return;
+		
+		int freeInvenSpace = getInvenFreeSpace(playerInven, this.crafttingGUI.getItem(slot));
+		
+		if (freeInvenSpace == 0) return;
+		
+		if (click.isShiftClick()) {
+			convertMaterials(playerInven, craftingInven, slot, Math.min(64,freeInvenSpace),false);	
+		}
+		else {
+			convertMaterials(playerInven, craftingInven, slot, 1,true);
+			
+		}
+		resetCraftingInventory(craftingInven);				
+		
+	}
+	
+	public int getInvenFreeSpace(Inventory playerInven, ItemStack item) {
+		
+		
+		
+		int space = 0;
+		for (ItemStack anItem: playerInven.getContents()) {
+			if (anItem == null) space += item.getMaxStackSize()/(item.getAmount());
+		}
+		
+		return space;
+		
+		
+	}
+	
+	public void resetOutputGui() {
+		
+		this.crafttingGUI.setItem(24, new ItemStack(Material.RED_STAINED_GLASS_PANE));
+		this.crafttingGUI.setItem(25, new ItemStack(Material.RED_STAINED_GLASS_PANE));
+		this.crafttingGUI.setItem(33, new ItemStack(Material.RED_STAINED_GLASS_PANE));
+		this.crafttingGUI.setItem(34, new ItemStack(Material.RED_STAINED_GLASS_PANE));	
+	}
+	
+	
 	
 	public void setOutputGui(ItemStack[][] output) {
 		
@@ -114,9 +263,6 @@ public class CustomCraft {
 		setOutputGui(outputGrid);
 		
 		
-		System.out.println("PL");
-		
-		
 	}
 	
 
@@ -142,6 +288,22 @@ public class CustomCraft {
 
 	public void setItemList(ArrayList<ItemStack> itemList) {
 		this.itemList = itemList;
+	}
+
+	public ItemStack[][] getMatchingRecipe() {
+		return matchingRecipe;
+	}
+
+	public void setMatchingRecipe(ItemStack[][] matchingRecipe) {
+		this.matchingRecipe = matchingRecipe;
+	}
+
+	public ItemStack[][] getOutputRecipe() {
+		return outputRecipe;
+	}
+
+	public void setOutputRecipe(ItemStack[][] outputRecipe) {
+		this.outputRecipe = outputRecipe;
 	}	
 	
 	
