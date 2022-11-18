@@ -2,6 +2,7 @@ package CustomEssentials.Events.Items.Crafting;
 
 import java.util.ArrayList;
 
+
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
@@ -136,7 +137,7 @@ public class CustomCraft {
 		
 		int stackSize = item.getMaxStackSize();
 		int space = 0;
-				
+		
 		for (int i = 0; i<36; i++) {
 			
 			ItemStack anItem = playerInven.getItem(i);
@@ -157,11 +158,12 @@ public class CustomCraft {
 	public void convertMaterials(Inventory playerInven,Inventory craftingInven, int slot, int amount, Boolean isCursor) {
 		
 		int iteration = 0;
+		int itemAmount = this.outputRecipe[0][0].getAmount();
 		
 		while (iteration < amount) {
 			if (!isEnoughMaterials()) return;
 			
-			if (isCursor && (p.getItemOnCursor().getAmount() < 64) &&(p.getItemOnCursor().getType() == Material.AIR || p.getItemOnCursor().isSimilar(this.crafttingGUI.getItem(slot)))) {
+			if (isCursor && ((p.getItemOnCursor().getAmount() + craftingInven.getItem(slot).getAmount()) < 64) && (p.getItemOnCursor().getType() == Material.AIR || p.getItemOnCursor().isSimilar(this.crafttingGUI.getItem(slot)))) {
 				
 				int amountAdded = 0;
 				if (p.getItemOnCursor().getType() != Material.AIR) {
@@ -169,20 +171,19 @@ public class CustomCraft {
 				}
 				
 				ItemStack addItem = new ItemStack(this.crafttingGUI.getItem(slot).getType(),this.crafttingGUI.getItem(slot).getAmount()+amountAdded);
-				reduceMaterials();
 				p.setItemOnCursor(addItem);
+				reduceMaterials();
 				
 			}
 			
 			else if (!isCursor) {
-		
-				if (!checkInventorySpace(playerInven,craftingInven.getItem(slot),this.crafttingGUI.getItem(slot).getAmount())) return;
+				System.out.println(itemAmount);
+				if (!checkInventorySpace(playerInven,craftingInven.getItem(slot),itemAmount)) return;
+				playerInven.addItem(new ItemStack(this.crafttingGUI.getItem(slot).getType(),itemAmount));
 				reduceMaterials();
-				playerInven.addItem(this.crafttingGUI.getItem(slot));
-				
-				
 			}
 			else break;
+			
 			iteration++;
 		}
 		
@@ -197,7 +198,7 @@ public class CustomCraft {
 		if (freeInvenSpace == 0) return;
 		
 		if (click.isShiftClick()) {
-			convertMaterials(playerInven, craftingInven, slot, Math.min(64,freeInvenSpace),false);	
+			convertMaterials(playerInven, craftingInven, slot, Math.min(100,freeInvenSpace),false);	
 		}
 		else {
 			convertMaterials(playerInven, craftingInven, slot, 1,true);
@@ -208,12 +209,10 @@ public class CustomCraft {
 	}
 	
 	public int getInvenFreeSpace(Inventory playerInven, ItemStack item) {
-		
-		
-		
+
 		int space = 0;
 		for (ItemStack anItem: playerInven.getContents()) {
-			if (anItem == null) space += item.getMaxStackSize()/(item.getAmount());
+			if (anItem == null) space += item.getMaxStackSize();
 		}
 		
 		return space;

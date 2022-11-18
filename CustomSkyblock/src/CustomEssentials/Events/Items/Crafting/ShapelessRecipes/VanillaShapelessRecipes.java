@@ -39,6 +39,30 @@ public class VanillaShapelessRecipes {
 		addAllSlotInputSingleItem(new ItemStack(Material.DARK_OAK_LOG), new ItemStack(Material.DARK_OAK_PLANKS,4));
 		addAllSlotInputSingleItem(new ItemStack(Material.ACACIA_LOG), new ItemStack(Material.ACACIA_PLANKS,4));
 		addAllSlotInputSingleItem(new ItemStack(Material.JUNGLE_LOG), new ItemStack(Material.JUNGLE_PLANKS,4));
+		addAllSlotInputSingleItem(new ItemStack(Material.CRIMSON_STEM), new ItemStack(Material.CRIMSON_PLANKS,4));
+		addAllSlotInputSingleItem(new ItemStack(Material.WARPED_STEM), new ItemStack(Material.WARPED_PLANKS,4));
+		
+		addAllSlotInputSingleItem(new ItemStack(Material.OAK_PLANKS), new ItemStack(Material.OAK_BUTTON,1));
+		addAllSlotInputSingleItem(new ItemStack(Material.BIRCH_PLANKS), new ItemStack(Material.BIRCH_BUTTON,1));
+		addAllSlotInputSingleItem(new ItemStack(Material.SPRUCE_PLANKS), new ItemStack(Material.SPRUCE_BUTTON,1));
+		addAllSlotInputSingleItem(new ItemStack(Material.DARK_OAK_PLANKS), new ItemStack(Material.DARK_OAK_BUTTON,1));
+		addAllSlotInputSingleItem(new ItemStack(Material.ACACIA_PLANKS), new ItemStack(Material.ACACIA_BUTTON,1));
+		addAllSlotInputSingleItem(new ItemStack(Material.JUNGLE_PLANKS), new ItemStack(Material.JUNGLE_BUTTON,1));
+		addAllSlotInputSingleItem(new ItemStack(Material.CRIMSON_PLANKS), new ItemStack(Material.CRIMSON_BUTTON,1));
+		addAllSlotInputSingleItem(new ItemStack(Material.WARPED_PLANKS), new ItemStack(Material.WARPED_BUTTON,1));
+		addAllSlotInputSingleItem(new ItemStack(Material.STONE), new ItemStack(Material.STONE_BUTTON,1));
+		addAllSlotInputSingleItem(new ItemStack(Material.POLISHED_BLACKSTONE), new ItemStack(Material.POLISHED_BLACKSTONE_BUTTON,1));
+		
+		addAllSlotInputSingleItem(new ItemStack(Material.COAL_BLOCK), new ItemStack(Material.COAL,9));
+		addAllSlotInputSingleItem(new ItemStack(Material.IRON_BLOCK), new ItemStack(Material.IRON_INGOT,9));
+		addAllSlotInputSingleItem(new ItemStack(Material.COPPER_BLOCK), new ItemStack(Material.COPPER_INGOT,9));
+		addAllSlotInputSingleItem(new ItemStack(Material.LAPIS_BLOCK), new ItemStack(Material.LAPIS_LAZULI,9));
+		addAllSlotInputSingleItem(new ItemStack(Material.REDSTONE_BLOCK), new ItemStack(Material.REDSTONE,9));
+		addAllSlotInputSingleItem(new ItemStack(Material.GOLD_BLOCK), new ItemStack(Material.GOLD_INGOT,9));
+		addAllSlotInputSingleItem(new ItemStack(Material.DIAMOND_BLOCK), new ItemStack(Material.DIAMOND,9));
+		addAllSlotInputSingleItem(new ItemStack(Material.EMERALD_BLOCK), new ItemStack(Material.EMERALD,9));
+		addAllSlotInputSingleItem(new ItemStack(Material.NETHERITE_BLOCK), new ItemStack(Material.NETHERITE_INGOT,9));
+		
 		
 	}
 
