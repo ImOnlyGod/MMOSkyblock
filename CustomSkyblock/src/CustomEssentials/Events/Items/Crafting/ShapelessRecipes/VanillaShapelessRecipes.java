@@ -62,6 +62,18 @@ public class VanillaShapelessRecipes {
 		addAllSlotInputSingleItem(new ItemStack(Material.DIAMOND_BLOCK), new ItemStack(Material.DIAMOND,9));
 		addAllSlotInputSingleItem(new ItemStack(Material.EMERALD_BLOCK), new ItemStack(Material.EMERALD,9));
 		addAllSlotInputSingleItem(new ItemStack(Material.NETHERITE_BLOCK), new ItemStack(Material.NETHERITE_INGOT,9));
+		addAllSlotInputSingleItem(new ItemStack(Material.GOLD_INGOT), new ItemStack(Material.GOLD_NUGGET,9));
+		
+		addAllSlotInputSingleItem(new ItemStack(Material.PUMPKIN), new ItemStack(Material.PUMPKIN_SEEDS,4));
+		addAllSlotInputSingleItem(new ItemStack(Material.SUGAR_CANE), new ItemStack(Material.SUGAR,1));
+		addAllSlotInputSingleItem(new ItemStack(Material.BLAZE_ROD), new ItemStack(Material.BLAZE_POWDER,2));
+		addAllSlotInputSingleItem(new ItemStack(Material.BONE), new ItemStack(Material.BONE_MEAL,3));
+		
+		addAllSlotInputSingleItem(new ItemStack(Material.POPPY), new ItemStack(Material.RED_DYE,2));
+		addAllSlotInputSingleItem(new ItemStack(Material.RED_TULIP), new ItemStack(Material.RED_DYE,2));
+		addAllSlotInputSingleItem(new ItemStack(Material.ROSE_BUSH), new ItemStack(Material.RED_DYE,2));
+		addAllSlotInputSingleItem(new ItemStack(Material.BEETROOT), new ItemStack(Material.RED_DYE,1));
+		addAllSlotInputSingleItem(new ItemStack(Material.DANDELION), new ItemStack(Material.YELLOW_DYE,2));
 		
 		
 	}
