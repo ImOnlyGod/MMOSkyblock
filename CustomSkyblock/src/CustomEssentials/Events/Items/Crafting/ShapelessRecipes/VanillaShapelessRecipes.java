@@ -11,8 +11,9 @@ public class VanillaShapelessRecipes {
 	
 	public VanillaShapelessRecipes() {
 		addSingleItemRecipes();
-		
-		
+		addDoubleItemRecipes();		
+		addTripleItemRecipes();
+		addQuadItemRecipes();
 	}
 	
 	public void addAllSlotInputSingleItem(ItemStack inputItem, ItemStack outputItem) {
@@ -23,14 +24,110 @@ public class VanillaShapelessRecipes {
 				ItemStack[][] resultItems = new ItemStack[2][2];
 				inputItems[i][j] = new ItemStack(inputItem.getType(),inputItem.getAmount());
 				resultItems[0][0] = new ItemStack(outputItem.getType(),outputItem.getAmount());
-				resultItems[0][1] = new ItemStack(Material.RED_STAINED_GLASS_PANE);
-				resultItems[1][0] = new ItemStack(Material.RED_STAINED_GLASS_PANE);
-				resultItems[1][1] = new ItemStack(Material.RED_STAINED_GLASS_PANE);
+				resultItems[0][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][0] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
 				recipeOutput.put(inputItems, resultItems);
 			}
 		}
 	}
 	
+	public void addAllSlotInputDoubleItem(ItemStack inputItem1, ItemStack inputItem2, ItemStack outputItem) {
+		
+		for (int i=0;i<4;i++) {
+			for (int j=0;j<4;j++) {
+				for (int k=0;k<4;k++) {
+					for (int l=0;l<4;l++) {
+						
+						if (i==k && j==l) continue;
+						
+						ItemStack[][] inputItems = new ItemStack[4][4];
+						ItemStack[][] resultItems = new ItemStack[2][2];
+						inputItems[i][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+						inputItems[k][l] = new ItemStack(inputItem2.getType(),inputItem2.getAmount());
+						
+						resultItems[0][0] = new ItemStack(outputItem.getType(),outputItem.getAmount());
+						resultItems[0][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+						resultItems[1][0] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+						resultItems[1][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+						recipeOutput.put(inputItems, resultItems);
+						
+						
+					}					
+				}
+			}
+		}
+	}
+	
+public void addAllSlotInputTripleItem(ItemStack inputItem1, ItemStack inputItem2, ItemStack inputItem3, ItemStack outputItem) {
+		
+		for (int i=0;i<4;i++) {
+			for (int j=0;j<4;j++) {
+				for (int k=0;k<4;k++) {
+					for (int l=0;l<4;l++) {
+						for (int m=0;m<4;m++) {
+							for (int n=0;n<4;n++) {
+								
+								if ((i==k && j==l) || (i==m && j==n) || (k==m && l==n)) continue;
+								
+								ItemStack[][] inputItems = new ItemStack[4][4];
+								ItemStack[][] resultItems = new ItemStack[2][2];
+								inputItems[i][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+								inputItems[k][l] = new ItemStack(inputItem2.getType(),inputItem2.getAmount());
+								inputItems[m][n] = new ItemStack(inputItem3.getType(),inputItem3.getAmount());
+								
+								resultItems[0][0] = new ItemStack(outputItem.getType(),outputItem.getAmount());
+								resultItems[0][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+								resultItems[1][0] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+								resultItems[1][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+								recipeOutput.put(inputItems, resultItems);
+								
+								
+							}					
+						}
+					}					
+				}
+			}
+		}
+	}
+
+public void addAllSlotInputQuadItem(ItemStack inputItem1, ItemStack inputItem2, ItemStack inputItem3, ItemStack inputItem4, ItemStack outputItem) {
+	
+	for (int i=0;i<4;i++) {
+		for (int j=0;j<4;j++) {
+			for (int k=0;k<4;k++) {
+				for (int l=0;l<4;l++) {
+					for (int m=0;m<4;m++) {
+						for (int n=0;n<4;n++) {
+							for (int o=0;o<4;o++) {
+								for (int p=0;p<4;p++) {
+									
+									if ((i==k && j==l) || (i==m && j==n) || (i==o && j==p) || (k==m && l==n)
+											|| (k==o && l==p) || (m==o && n==p)) continue;
+									
+									ItemStack[][] inputItems = new ItemStack[4][4];
+									ItemStack[][] resultItems = new ItemStack[2][2];
+									inputItems[i][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+									inputItems[k][l] = new ItemStack(inputItem2.getType(),inputItem2.getAmount());
+									inputItems[m][n] = new ItemStack(inputItem3.getType(),inputItem3.getAmount());
+									inputItems[o][p] = new ItemStack(inputItem4.getType(),inputItem4.getAmount());
+									
+									resultItems[0][0] = new ItemStack(outputItem.getType(),outputItem.getAmount());
+									resultItems[0][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+									resultItems[1][0] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+									resultItems[1][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+									recipeOutput.put(inputItems, resultItems);
+									
+									
+								}					
+							}
+						}					
+					}
+				}					
+			}
+		}
+	}
+}
 
 	private void addSingleItemRecipes() {
 		addAllSlotInputSingleItem(new ItemStack(Material.OAK_LOG), new ItemStack(Material.OAK_PLANKS,4));
@@ -77,7 +174,105 @@ public class VanillaShapelessRecipes {
 		
 		
 	}
+	
+	private void addDoubleItemRecipes() {
+		addAllSlotInputDoubleItem(new ItemStack(Material.IRON_INGOT), new ItemStack(Material.FLINT),new ItemStack(Material.FLINT_AND_STEEL));
+		
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_WOOL), new ItemStack(Material.WHITE_DYE),new ItemStack(Material.WHITE_WOOL));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_WOOL), new ItemStack(Material.LIGHT_GRAY_DYE),new ItemStack(Material.LIGHT_GRAY_WOOL));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_WOOL), new ItemStack(Material.GRAY_DYE),new ItemStack(Material.GRAY_WOOL));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_WOOL), new ItemStack(Material.BLACK_DYE),new ItemStack(Material.BLACK_WOOL));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_WOOL), new ItemStack(Material.BROWN_DYE),new ItemStack(Material.BROWN_WOOL));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_WOOL), new ItemStack(Material.RED_DYE),new ItemStack(Material.RED_WOOL));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_WOOL), new ItemStack(Material.ORANGE_DYE),new ItemStack(Material.ORANGE_WOOL));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_WOOL), new ItemStack(Material.YELLOW_DYE),new ItemStack(Material.YELLOW_WOOL));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_WOOL), new ItemStack(Material.LIME_DYE),new ItemStack(Material.LIME_WOOL));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_WOOL), new ItemStack(Material.GREEN_DYE),new ItemStack(Material.GREEN_WOOL));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_WOOL), new ItemStack(Material.CYAN_DYE),new ItemStack(Material.CYAN_WOOL));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_WOOL), new ItemStack(Material.LIGHT_BLUE_DYE),new ItemStack(Material.LIGHT_BLUE_WOOL));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_WOOL), new ItemStack(Material.BLUE_DYE),new ItemStack(Material.BLUE_WOOL));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_WOOL), new ItemStack(Material.PURPLE_DYE),new ItemStack(Material.PURPLE_WOOL));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_WOOL), new ItemStack(Material.MAGENTA_DYE),new ItemStack(Material.MAGENTA_WOOL));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_WOOL), new ItemStack(Material.PINK_DYE),new ItemStack(Material.PINK_WOOL));
+		
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_CONCRETE), new ItemStack(Material.WHITE_DYE),new ItemStack(Material.WHITE_CONCRETE));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_CONCRETE), new ItemStack(Material.LIGHT_GRAY_DYE),new ItemStack(Material.LIGHT_GRAY_CONCRETE));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_CONCRETE), new ItemStack(Material.GRAY_DYE),new ItemStack(Material.GRAY_CONCRETE));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_CONCRETE), new ItemStack(Material.BLACK_DYE),new ItemStack(Material.BLACK_CONCRETE));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_CONCRETE), new ItemStack(Material.BROWN_DYE),new ItemStack(Material.BROWN_CONCRETE));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_CONCRETE), new ItemStack(Material.RED_DYE),new ItemStack(Material.RED_CONCRETE));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_CONCRETE), new ItemStack(Material.ORANGE_DYE),new ItemStack(Material.ORANGE_CONCRETE));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_CONCRETE), new ItemStack(Material.YELLOW_DYE),new ItemStack(Material.YELLOW_CONCRETE));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_CONCRETE), new ItemStack(Material.LIME_DYE),new ItemStack(Material.LIME_CONCRETE));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_CONCRETE), new ItemStack(Material.GREEN_DYE),new ItemStack(Material.GREEN_CONCRETE));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_CONCRETE), new ItemStack(Material.CYAN_DYE),new ItemStack(Material.CYAN_CONCRETE));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_CONCRETE), new ItemStack(Material.LIGHT_BLUE_DYE),new ItemStack(Material.LIGHT_BLUE_CONCRETE));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_CONCRETE), new ItemStack(Material.BLUE_DYE),new ItemStack(Material.BLUE_CONCRETE));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_CONCRETE), new ItemStack(Material.PURPLE_DYE),new ItemStack(Material.PURPLE_CONCRETE));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_CONCRETE), new ItemStack(Material.MAGENTA_DYE),new ItemStack(Material.MAGENTA_CONCRETE));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_CONCRETE), new ItemStack(Material.PINK_DYE),new ItemStack(Material.PINK_CONCRETE));
+		
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_CONCRETE_POWDER), new ItemStack(Material.WHITE_DYE),new ItemStack(Material.WHITE_CONCRETE_POWDER));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_CONCRETE_POWDER), new ItemStack(Material.LIGHT_GRAY_DYE),new ItemStack(Material.LIGHT_GRAY_CONCRETE_POWDER));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_CONCRETE_POWDER), new ItemStack(Material.GRAY_DYE),new ItemStack(Material.GRAY_CONCRETE_POWDER));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_CONCRETE_POWDER), new ItemStack(Material.BLACK_DYE),new ItemStack(Material.BLACK_CONCRETE_POWDER));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_CONCRETE_POWDER), new ItemStack(Material.BROWN_DYE),new ItemStack(Material.BROWN_CONCRETE_POWDER));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_CONCRETE_POWDER), new ItemStack(Material.RED_DYE),new ItemStack(Material.RED_CONCRETE_POWDER));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_CONCRETE_POWDER), new ItemStack(Material.ORANGE_DYE),new ItemStack(Material.ORANGE_CONCRETE_POWDER));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_CONCRETE_POWDER), new ItemStack(Material.YELLOW_DYE),new ItemStack(Material.YELLOW_CONCRETE_POWDER));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_CONCRETE_POWDER), new ItemStack(Material.LIME_DYE),new ItemStack(Material.LIME_CONCRETE_POWDER));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_CONCRETE_POWDER), new ItemStack(Material.GREEN_DYE),new ItemStack(Material.GREEN_CONCRETE_POWDER));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_CONCRETE_POWDER), new ItemStack(Material.CYAN_DYE),new ItemStack(Material.CYAN_CONCRETE_POWDER));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_CONCRETE_POWDER), new ItemStack(Material.LIGHT_BLUE_DYE),new ItemStack(Material.LIGHT_BLUE_CONCRETE_POWDER));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_CONCRETE_POWDER), new ItemStack(Material.BLUE_DYE),new ItemStack(Material.BLUE_CONCRETE_POWDER));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_CONCRETE_POWDER), new ItemStack(Material.PURPLE_DYE),new ItemStack(Material.PURPLE_CONCRETE_POWDER));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_CONCRETE_POWDER), new ItemStack(Material.MAGENTA_DYE),new ItemStack(Material.MAGENTA_CONCRETE_POWDER));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WHITE_CONCRETE_POWDER), new ItemStack(Material.PINK_DYE),new ItemStack(Material.PINK_CONCRETE_POWDER));
+		
+		addAllSlotInputDoubleItem(new ItemStack(Material.TERRACOTTA), new ItemStack(Material.WHITE_DYE),new ItemStack(Material.WHITE_TERRACOTTA));
+		addAllSlotInputDoubleItem(new ItemStack(Material.TERRACOTTA), new ItemStack(Material.LIGHT_GRAY_DYE),new ItemStack(Material.LIGHT_GRAY_TERRACOTTA));
+		addAllSlotInputDoubleItem(new ItemStack(Material.TERRACOTTA), new ItemStack(Material.GRAY_DYE),new ItemStack(Material.GRAY_TERRACOTTA));
+		addAllSlotInputDoubleItem(new ItemStack(Material.TERRACOTTA), new ItemStack(Material.BLACK_DYE),new ItemStack(Material.BLACK_TERRACOTTA));
+		addAllSlotInputDoubleItem(new ItemStack(Material.TERRACOTTA), new ItemStack(Material.BROWN_DYE),new ItemStack(Material.BROWN_TERRACOTTA));
+		addAllSlotInputDoubleItem(new ItemStack(Material.TERRACOTTA), new ItemStack(Material.RED_DYE),new ItemStack(Material.RED_TERRACOTTA));
+		addAllSlotInputDoubleItem(new ItemStack(Material.TERRACOTTA), new ItemStack(Material.ORANGE_DYE),new ItemStack(Material.ORANGE_TERRACOTTA));
+		addAllSlotInputDoubleItem(new ItemStack(Material.TERRACOTTA), new ItemStack(Material.YELLOW_DYE),new ItemStack(Material.YELLOW_TERRACOTTA));
+		addAllSlotInputDoubleItem(new ItemStack(Material.TERRACOTTA), new ItemStack(Material.LIME_DYE),new ItemStack(Material.LIME_TERRACOTTA));
+		addAllSlotInputDoubleItem(new ItemStack(Material.TERRACOTTA), new ItemStack(Material.GREEN_DYE),new ItemStack(Material.GREEN_TERRACOTTA));
+		addAllSlotInputDoubleItem(new ItemStack(Material.TERRACOTTA), new ItemStack(Material.CYAN_DYE),new ItemStack(Material.CYAN_TERRACOTTA));
+		addAllSlotInputDoubleItem(new ItemStack(Material.TERRACOTTA), new ItemStack(Material.LIGHT_BLUE_DYE),new ItemStack(Material.LIGHT_BLUE_TERRACOTTA));
+		addAllSlotInputDoubleItem(new ItemStack(Material.TERRACOTTA), new ItemStack(Material.BLUE_DYE),new ItemStack(Material.BLUE_TERRACOTTA));
+		addAllSlotInputDoubleItem(new ItemStack(Material.TERRACOTTA), new ItemStack(Material.PURPLE_DYE),new ItemStack(Material.PURPLE_TERRACOTTA));
+		addAllSlotInputDoubleItem(new ItemStack(Material.TERRACOTTA), new ItemStack(Material.MAGENTA_DYE),new ItemStack(Material.MAGENTA_TERRACOTTA));
+		addAllSlotInputDoubleItem(new ItemStack(Material.TERRACOTTA), new ItemStack(Material.PINK_DYE),new ItemStack(Material.PINK_TERRACOTTA));
+		
+		addAllSlotInputDoubleItem(new ItemStack(Material.GLASS), new ItemStack(Material.WHITE_DYE),new ItemStack(Material.WHITE_STAINED_GLASS));
+		addAllSlotInputDoubleItem(new ItemStack(Material.GLASS), new ItemStack(Material.LIGHT_GRAY_DYE),new ItemStack(Material.LIGHT_GRAY_STAINED_GLASS));
+		addAllSlotInputDoubleItem(new ItemStack(Material.GLASS), new ItemStack(Material.GRAY_DYE),new ItemStack(Material.GRAY_STAINED_GLASS));
+		addAllSlotInputDoubleItem(new ItemStack(Material.GLASS), new ItemStack(Material.BLACK_DYE),new ItemStack(Material.BLACK_STAINED_GLASS));
+		addAllSlotInputDoubleItem(new ItemStack(Material.GLASS), new ItemStack(Material.BROWN_DYE),new ItemStack(Material.BROWN_STAINED_GLASS));
+		addAllSlotInputDoubleItem(new ItemStack(Material.GLASS), new ItemStack(Material.RED_DYE),new ItemStack(Material.RED_STAINED_GLASS));
+		addAllSlotInputDoubleItem(new ItemStack(Material.GLASS), new ItemStack(Material.ORANGE_DYE),new ItemStack(Material.ORANGE_STAINED_GLASS));
+		addAllSlotInputDoubleItem(new ItemStack(Material.GLASS), new ItemStack(Material.YELLOW_DYE),new ItemStack(Material.YELLOW_STAINED_GLASS));
+		addAllSlotInputDoubleItem(new ItemStack(Material.GLASS), new ItemStack(Material.LIME_DYE),new ItemStack(Material.LIME_STAINED_GLASS));
+		addAllSlotInputDoubleItem(new ItemStack(Material.GLASS), new ItemStack(Material.GREEN_DYE),new ItemStack(Material.GREEN_STAINED_GLASS));
+		addAllSlotInputDoubleItem(new ItemStack(Material.GLASS), new ItemStack(Material.CYAN_DYE),new ItemStack(Material.CYAN_STAINED_GLASS));
+		addAllSlotInputDoubleItem(new ItemStack(Material.GLASS), new ItemStack(Material.LIGHT_BLUE_DYE),new ItemStack(Material.LIGHT_BLUE_STAINED_GLASS));
+		addAllSlotInputDoubleItem(new ItemStack(Material.GLASS), new ItemStack(Material.BLUE_DYE),new ItemStack(Material.BLUE_STAINED_GLASS));
+		addAllSlotInputDoubleItem(new ItemStack(Material.GLASS), new ItemStack(Material.PURPLE_DYE),new ItemStack(Material.PURPLE_STAINED_GLASS));
+		addAllSlotInputDoubleItem(new ItemStack(Material.GLASS), new ItemStack(Material.MAGENTA_DYE),new ItemStack(Material.MAGENTA_STAINED_GLASS));
+		addAllSlotInputDoubleItem(new ItemStack(Material.GLASS), new ItemStack(Material.PINK_DYE),new ItemStack(Material.PINK_STAINED_GLASS));
+		
+		
+	}
 
+	private void addTripleItemRecipes() {
+		addAllSlotInputTripleItem(new ItemStack(Material.BOOK), new ItemStack(Material.FEATHER),new ItemStack(Material.INK_SAC),new ItemStack(Material.WRITABLE_BOOK));
+	}
+	
+	private void addQuadItemRecipes() {
+		addAllSlotInputQuadItem(new ItemStack(Material.PAPER), new ItemStack(Material.PAPER),new ItemStack(Material.PAPER),new ItemStack(Material.LEATHER),new ItemStack(Material.BOOK));
+	}
 
 	public HashMap<ItemStack[][],ItemStack[][]> getRecipeOutput() {
 		return recipeOutput;

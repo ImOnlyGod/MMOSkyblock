@@ -17,13 +17,14 @@ public class CustomCraft {
 	private ItemStack[][] inputGrid = new ItemStack[4][4];
 	private Inventory crafttingGUI;
 	private ArrayList<ItemStack> itemList = new ArrayList<ItemStack>();
-	private VanillaShapelessRecipes vanillaRecipes1 = new VanillaShapelessRecipes();
+	private CustomCraftingItemSet craftingRecipeSet;
 	private ItemStack[][] matchingRecipe;
 	private ItemStack[][] outputRecipe;
 	private Player p;
 	
-	public CustomCraft(Player p, Inventory inv) {
+	public CustomCraft(Player p, Inventory inv, CustomCraftingItemSet craftingRecipeSet) {
 		this.p = p;
+		this.craftingRecipeSet = craftingRecipeSet;
 		setGrid(inv);
 		checkItemSlots();
 		getRecipeResult();
@@ -60,7 +61,7 @@ public class CustomCraft {
 	
 	public ItemStack[][] getVanillaMatchingGrid() {
 		
-		for (ItemStack[][] inven: this.vanillaRecipes1.getRecipeOutput().keySet()) {
+		for (ItemStack[][] inven: this.craftingRecipeSet.getVanillaShapelessRecipe().getRecipeOutput().keySet()) {
 			
 			Boolean matching = true;
 			for (int i=0;i<inven.length;i++) {
@@ -89,8 +90,8 @@ public class CustomCraft {
 			//clean up code
 			if (matching) {
 				this.matchingRecipe = inven;
-				this.setOutputRecipe(this.vanillaRecipes1.getRecipeOutput().get(inven));
-				return this.vanillaRecipes1.getRecipeOutput().get(inven);
+				this.setOutputRecipe(this.craftingRecipeSet.getVanillaShapelessRecipe().getRecipeOutput().get(inven));
+				return this.craftingRecipeSet.getVanillaShapelessRecipe().getRecipeOutput().get(inven);
 			}
 		}
 		return null;		
@@ -163,7 +164,7 @@ public class CustomCraft {
 		while (iteration < amount) {
 			if (!isEnoughMaterials()) return;
 			
-			if (isCursor && ((p.getItemOnCursor().getAmount() + craftingInven.getItem(slot).getAmount()) < 64) && (p.getItemOnCursor().getType() == Material.AIR || p.getItemOnCursor().isSimilar(this.crafttingGUI.getItem(slot)))) {
+			if (isCursor && ((p.getItemOnCursor().getAmount() + craftingInven.getItem(slot).getAmount()) <= craftingInven.getItem(slot).getMaxStackSize()) && (p.getItemOnCursor().getType() == Material.AIR || p.getItemOnCursor().isSimilar(this.crafttingGUI.getItem(slot)))) {
 				
 				int amountAdded = 0;
 				if (p.getItemOnCursor().getType() != Material.AIR) {
@@ -177,7 +178,7 @@ public class CustomCraft {
 			}
 			
 			else if (!isCursor) {
-				System.out.println(itemAmount);
+				
 				if (!checkInventorySpace(playerInven,craftingInven.getItem(slot),itemAmount)) return;
 				playerInven.addItem(new ItemStack(this.crafttingGUI.getItem(slot).getType(),itemAmount));
 				reduceMaterials();
@@ -303,6 +304,14 @@ public class CustomCraft {
 
 	public void setOutputRecipe(ItemStack[][] outputRecipe) {
 		this.outputRecipe = outputRecipe;
+	}
+
+	public CustomCraftingItemSet getCraftingRecipeSet() {
+		return craftingRecipeSet;
+	}
+
+	public void setCraftingRecipeSet(CustomCraftingItemSet craftingRecipeSet) {
+		this.craftingRecipeSet = craftingRecipeSet;
 	}	
 	
 	

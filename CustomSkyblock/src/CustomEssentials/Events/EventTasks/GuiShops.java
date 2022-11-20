@@ -16,6 +16,7 @@ import CustomEssentials.Main;
 import CustomEssentials.Events.Profile;
 import CustomEssentials.Events.Gui.Shop.ItemsBuySellGui;
 import CustomEssentials.Events.Items.Crafting.CustomCraft;
+import CustomEssentials.Events.Items.Crafting.CustomCraftingItemSet;
 import CustomEssentials.Events.PlayerPath.Paths.Archer;
 import CustomEssentials.Events.PlayerPath.Paths.Assassin;
 import CustomEssentials.Events.PlayerPath.Paths.Tank;
@@ -28,6 +29,7 @@ public class GuiShops implements Listener{
 	
 	private Main plugin;
 	private ItemPrices shopPrices;
+	private CustomCraftingItemSet craftingRecipeSet = new CustomCraftingItemSet();
 		
 	public GuiShops(Main plugin, ItemPrices shopPrices) {
 		this.plugin = plugin;
@@ -71,9 +73,9 @@ public class GuiShops implements Listener{
 			Bukkit.getScheduler().scheduleSyncDelayedTask(this.plugin, new Runnable() {
 				@Override
 				public void run() {
-					CustomCraft recipe = new CustomCraft(p, e.getView().getTopInventory());
+					CustomCraft recipe = new CustomCraft(p, e.getView().getTopInventory(), craftingRecipeSet);
 					
-					if ((e.getClickedInventory() == e.getView().getTopInventory()) && (e.getSlot() == 24 || e.getSlot() == 25 || e.getSlot() == 33 || e.getSlot() == 34)) {
+					if ((e.getClickedInventory() == e.getView().getTopInventory()) && (e.getSlot() == 24)) {
 						recipe.processOutputClick(e.getView().getBottomInventory(), e.getView().getTopInventory(), e.getSlot(), e.getClick());
 					}
 					
@@ -305,18 +307,24 @@ public class GuiShops implements Listener{
 			return;
 		}
 		else if ((e.getView().getTitle().contains(Utils.chat("&c&lBuying")))) {
-			if (e.getSlot() != 4 && !(e.getInventory().getItem(e.getSlot()).getType().equals(Material.RED_STAINED_GLASS_PANE))) {
+			
+			e.setCancelled(true);
+			
+			if (e.getSlot() != 4 && !(e.getView().getTopInventory().getItem(e.getSlot()).getType().equals(Material.RED_STAINED_GLASS_PANE))) {
 				int amount = this.shopPrices.getItemSlotPriceMultiplier().get(e.getSlot());
 				PlayerBuyItemEvent(p,e.getInventory().getItem(e.getSlot()),amount);
 			}
-			e.setCancelled(true);
+			
 		}
 		else if ((e.getView().getTitle().contains(Utils.chat("&a&lSelling")))) {
-			if (e.getSlot() != 4 && !(e.getInventory().getItem(e.getSlot()).getType().equals(Material.RED_STAINED_GLASS_PANE))) {
+			
+			e.setCancelled(true);
+			
+			if (e.getSlot() != 4 && !(e.getView().getTopInventory().getItem(e.getSlot()).getType().equals(Material.LIME_STAINED_GLASS_PANE))) {
 				int amount = this.shopPrices.getItemSlotPriceMultiplier().get(e.getSlot());
 				PlayerSellItemEvent(p,e.getInventory().getItem(e.getSlot()),amount);
 			}
-			e.setCancelled(true);
+			
 		}	
 	}
 	
@@ -558,6 +566,16 @@ public class GuiShops implements Listener{
 		}
 
 		return null;
+	}
+
+
+	public CustomCraftingItemSet getCraftingRecipeSet() {
+		return craftingRecipeSet;
+	}
+
+
+	public void setCraftingRecipeSet(CustomCraftingItemSet craftingRecipeSet) {
+		this.craftingRecipeSet = craftingRecipeSet;
 	}
 		
 }

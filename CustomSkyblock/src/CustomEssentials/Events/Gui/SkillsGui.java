@@ -139,7 +139,7 @@ public class SkillsGui implements TabExecutor{
 		miningSkillLore.add(Utils.chat("&7will provide more defensive"));
 		miningSkillLore.add(Utils.chat("&7stats."));
 		miningSkillLore.add(Utils.chat(""));
-		miningSkillLore.add(Utils.chat("&f&lUpcomming Perks:"));
+		miningSkillLore.add(Utils.chat("&f&lUpcoming Perks:"));
 		for (int i=0; i<miningLevelUpReward.size();i++) {
 			miningSkillLore.add(Utils.chat("&2+ " + miningLevelUpReward.get(i)));
 		}
@@ -172,7 +172,7 @@ public class SkillsGui implements TabExecutor{
 		farmingSkillLore.add(Utils.chat("&7will provide more health"));
 		farmingSkillLore.add(Utils.chat("&7stats."));
 		farmingSkillLore.add(Utils.chat(""));
-		farmingSkillLore.add(Utils.chat("&f&lUpcomming Perks:"));
+		farmingSkillLore.add(Utils.chat("&f&lUpcoming Perks:"));
 		for (int i=0; i<farmingLevelUpReward.size();i++) {
 			farmingSkillLore.add(Utils.chat("&2+ " + farmingLevelUpReward.get(i)));
 		}
@@ -205,7 +205,7 @@ public class SkillsGui implements TabExecutor{
 		combatSkillLore.add(Utils.chat("&7will provide more offensive"));
 		combatSkillLore.add(Utils.chat("&7stats."));
 		combatSkillLore.add(Utils.chat(""));
-		combatSkillLore.add(Utils.chat("&f&lUpcomming Perks:"));
+		combatSkillLore.add(Utils.chat("&f&lUpcoming Perks:"));
 		for (int i=0; i<combatLevelUpReward.size();i++) {
 			combatSkillLore.add(Utils.chat("&2+ " + combatLevelUpReward.get(i)));
 		}
@@ -238,7 +238,7 @@ public class SkillsGui implements TabExecutor{
 		foragingSkillLore.add(Utils.chat("&7will provide a mixture of"));
 		foragingSkillLore.add(Utils.chat("&7stats."));
 		foragingSkillLore.add(Utils.chat(""));
-		foragingSkillLore.add(Utils.chat("&f&lUpcomming Perks:"));
+		foragingSkillLore.add(Utils.chat("&f&lUpcoming Perks:"));
 		for (int i=0; i<foragingLevelUpReward.size();i++) {
 			foragingSkillLore.add(Utils.chat("&2+ " + foragingLevelUpReward.get(i)));
 		}
@@ -271,7 +271,7 @@ public class SkillsGui implements TabExecutor{
 		fishingSkillLore.add(Utils.chat("&7will provide more utility"));
 		fishingSkillLore.add(Utils.chat("&7stats."));
 		fishingSkillLore.add(Utils.chat(""));
-		fishingSkillLore.add(Utils.chat("&f&lUpcomming Perks:"));
+		fishingSkillLore.add(Utils.chat("&f&lUpcoming Perks:"));
 		for (int i=0; i<fishingLevelUpReward.size();i++) {
 			fishingSkillLore.add(Utils.chat("&2+ " + fishingLevelUpReward.get(i)));
 		}
