@@ -165,6 +165,7 @@ public void addAllSlotInputQuadItem(ItemStack inputItem1, ItemStack inputItem2, 
 		addAllSlotInputSingleItem(new ItemStack(Material.SUGAR_CANE), new ItemStack(Material.SUGAR,1));
 		addAllSlotInputSingleItem(new ItemStack(Material.BLAZE_ROD), new ItemStack(Material.BLAZE_POWDER,2));
 		addAllSlotInputSingleItem(new ItemStack(Material.BONE), new ItemStack(Material.BONE_MEAL,3));
+		addAllSlotInputSingleItem(new ItemStack(Material.MELON_SLICE), new ItemStack(Material.MELON_SEEDS));
 		
 		addAllSlotInputSingleItem(new ItemStack(Material.POPPY), new ItemStack(Material.RED_DYE,2));
 		addAllSlotInputSingleItem(new ItemStack(Material.RED_TULIP), new ItemStack(Material.RED_DYE,2));
@@ -287,7 +288,22 @@ public void addAllSlotInputQuadItem(ItemStack inputItem1, ItemStack inputItem2, 
 		addAllSlotInputDoubleItem(new ItemStack(Material.STONE_BRICKS), new ItemStack(Material.MOSS_BLOCK),new ItemStack(Material.MOSSY_STONE_BRICKS));
 		addAllSlotInputDoubleItem(new ItemStack(Material.STONE_BRICK_SLAB), new ItemStack(Material.STONE_BRICK_SLAB),new ItemStack(Material.CHISELED_STONE_BRICKS));
 		addAllSlotInputDoubleItem(new ItemStack(Material.COBBLED_DEEPSLATE_SLAB), new ItemStack(Material.COBBLED_DEEPSLATE_SLAB),new ItemStack(Material.CHISELED_DEEPSLATE));
+		addAllSlotInputDoubleItem(new ItemStack(Material.DIORITE), new ItemStack(Material.COBBLESTONE),new ItemStack(Material.ANDESITE,2));
+		addAllSlotInputDoubleItem(new ItemStack(Material.DIORITE), new ItemStack(Material.QUARTZ),new ItemStack(Material.GRANITE));
 		
+		addAllSlotInputDoubleItem(new ItemStack(Material.GREEN_DYE), new ItemStack(Material.LAPIS_LAZULI),new ItemStack(Material.CYAN_DYE,2));
+		addAllSlotInputDoubleItem(new ItemStack(Material.BONE_MEAL), new ItemStack(Material.INK_SAC),new ItemStack(Material.GRAY_DYE,2));
+		addAllSlotInputDoubleItem(new ItemStack(Material.BONE_MEAL), new ItemStack(Material.LAPIS_LAZULI),new ItemStack(Material.LIGHT_BLUE_DYE,2));
+		addAllSlotInputDoubleItem(new ItemStack(Material.GRAY_DYE), new ItemStack(Material.BONE_MEAL),new ItemStack(Material.LIGHT_GRAY_DYE,2));
+		addAllSlotInputDoubleItem(new ItemStack(Material.GREEN_DYE), new ItemStack(Material.BONE_MEAL),new ItemStack(Material.LIME_DYE,2));
+		addAllSlotInputDoubleItem(new ItemStack(Material.PURPLE_DYE), new ItemStack(Material.PINK_DYE),new ItemStack(Material.MAGENTA_DYE,2));
+		addAllSlotInputDoubleItem(new ItemStack(Material.YELLOW_DYE), new ItemStack(Material.RED_DYE),new ItemStack(Material.ORANGE_DYE,2));
+		addAllSlotInputDoubleItem(new ItemStack(Material.BONE_MEAL), new ItemStack(Material.RED_DYE),new ItemStack(Material.PINK_DYE,2));
+		addAllSlotInputDoubleItem(new ItemStack(Material.RED_DYE), new ItemStack(Material.LAPIS_LAZULI),new ItemStack(Material.PURPLE_DYE,2));
+		
+		addAllSlotInputDoubleItem(new ItemStack(Material.MELON_SLICE), new ItemStack(Material.GOLD_NUGGET),new ItemStack(Material.GLISTERING_MELON_SLICE));
+		addAllSlotInputDoubleItem(new ItemStack(Material.SLIME_BALL), new ItemStack(Material.BLAZE_POWDER),new ItemStack(Material.MAGMA_CREAM));
+		addAllSlotInputDoubleItem(new ItemStack(Material.ENDER_PEARL), new ItemStack(Material.BLAZE_POWDER),new ItemStack(Material.ENDER_EYE));
 		
 	}
 
