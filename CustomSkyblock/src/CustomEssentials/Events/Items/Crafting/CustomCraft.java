@@ -86,12 +86,44 @@ public class CustomCraft {
 					}	
 				}	
 			}
-			
 			//clean up code
 			if (matching) {
 				this.matchingRecipe = inven;
 				this.setOutputRecipe(this.craftingRecipeSet.getVanillaShapelessRecipe().getRecipeOutput().get(inven));
 				return this.craftingRecipeSet.getVanillaShapelessRecipe().getRecipeOutput().get(inven);
+			}
+		}
+
+		for (ItemStack[][] inven: this.craftingRecipeSet.getVanillaShapedRecipe().getRecipeOutput().keySet()) {
+			
+			Boolean matching = true;
+			for (int i=0;i<inven.length;i++) {
+				for (int j=0;j<inven.length;j++) {
+					
+					if ((inven[i][j] == null) && (this.inputGrid[i][j] == null)) {
+						continue;
+					}
+					else if ((inven[i][j] == null) && !(this.inputGrid[i][j] == null)) {
+						matching = false;
+						break;
+					}
+					else if (!(inven[i][j] == null) && (this.inputGrid[i][j] == null)) {
+						matching = false;
+						break;
+					}
+					
+					
+					if (!(inven[i][j].isSimilar(this.inputGrid[i][j])) || !(inven[i][j].getAmount() <= this.inputGrid[i][j].getAmount())) {
+						matching = false;
+						break;
+					}	
+				}	
+			}
+			//clean up code
+			if (matching) {
+				this.matchingRecipe = inven;
+				this.setOutputRecipe(this.craftingRecipeSet.getVanillaShapedRecipe().getRecipeOutput().get(inven));
+				return this.craftingRecipeSet.getVanillaShapedRecipe().getRecipeOutput().get(inven);
 			}
 		}
 		return null;		

@@ -264,6 +264,31 @@ public void addAllSlotInputQuadItem(ItemStack inputItem1, ItemStack inputItem2, 
 		addAllSlotInputDoubleItem(new ItemStack(Material.GLASS), new ItemStack(Material.PINK_DYE),new ItemStack(Material.PINK_STAINED_GLASS));
 		
 		
+		addAllSlotInputDoubleItem(new ItemStack(Material.COPPER_BLOCK), new ItemStack(Material.HONEYCOMB),new ItemStack(Material.WAXED_COPPER_BLOCK));
+		addAllSlotInputDoubleItem(new ItemStack(Material.EXPOSED_COPPER), new ItemStack(Material.HONEYCOMB),new ItemStack(Material.WAXED_EXPOSED_COPPER));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WEATHERED_COPPER), new ItemStack(Material.HONEYCOMB),new ItemStack(Material.WAXED_WEATHERED_COPPER));
+		addAllSlotInputDoubleItem(new ItemStack(Material.OXIDIZED_COPPER), new ItemStack(Material.HONEYCOMB),new ItemStack(Material.WAXED_OXIDIZED_COPPER));
+		addAllSlotInputDoubleItem(new ItemStack(Material.CUT_COPPER), new ItemStack(Material.HONEYCOMB),new ItemStack(Material.WAXED_CUT_COPPER));
+		addAllSlotInputDoubleItem(new ItemStack(Material.EXPOSED_CUT_COPPER), new ItemStack(Material.HONEYCOMB),new ItemStack(Material.WAXED_EXPOSED_CUT_COPPER));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WEATHERED_CUT_COPPER), new ItemStack(Material.HONEYCOMB),new ItemStack(Material.WAXED_WEATHERED_CUT_COPPER));
+		addAllSlotInputDoubleItem(new ItemStack(Material.OXIDIZED_CUT_COPPER), new ItemStack(Material.HONEYCOMB),new ItemStack(Material.WAXED_OXIDIZED_CUT_COPPER));
+		addAllSlotInputDoubleItem(new ItemStack(Material.CUT_COPPER_SLAB), new ItemStack(Material.HONEYCOMB),new ItemStack(Material.WAXED_CUT_COPPER_SLAB));
+		addAllSlotInputDoubleItem(new ItemStack(Material.EXPOSED_CUT_COPPER_SLAB), new ItemStack(Material.HONEYCOMB),new ItemStack(Material.WAXED_EXPOSED_CUT_COPPER_SLAB));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WEATHERED_CUT_COPPER_SLAB), new ItemStack(Material.HONEYCOMB),new ItemStack(Material.WAXED_WEATHERED_CUT_COPPER_SLAB));
+		addAllSlotInputDoubleItem(new ItemStack(Material.OXIDIZED_CUT_COPPER_SLAB), new ItemStack(Material.HONEYCOMB),new ItemStack(Material.WAXED_OXIDIZED_CUT_COPPER_SLAB));
+		addAllSlotInputDoubleItem(new ItemStack(Material.CUT_COPPER_STAIRS), new ItemStack(Material.HONEYCOMB),new ItemStack(Material.WAXED_CUT_COPPER_STAIRS));
+		addAllSlotInputDoubleItem(new ItemStack(Material.EXPOSED_CUT_COPPER_STAIRS), new ItemStack(Material.HONEYCOMB),new ItemStack(Material.WAXED_EXPOSED_CUT_COPPER_STAIRS));
+		addAllSlotInputDoubleItem(new ItemStack(Material.WEATHERED_CUT_COPPER_STAIRS), new ItemStack(Material.HONEYCOMB),new ItemStack(Material.WAXED_WEATHERED_CUT_COPPER_STAIRS));
+		addAllSlotInputDoubleItem(new ItemStack(Material.OXIDIZED_CUT_COPPER_STAIRS), new ItemStack(Material.HONEYCOMB),new ItemStack(Material.WAXED_OXIDIZED_CUT_COPPER_STAIRS));
+		
+		addAllSlotInputDoubleItem(new ItemStack(Material.COBBLESTONE), new ItemStack(Material.VINE),new ItemStack(Material.MOSSY_COBBLESTONE));
+		addAllSlotInputDoubleItem(new ItemStack(Material.COBBLESTONE), new ItemStack(Material.MOSS_BLOCK),new ItemStack(Material.MOSSY_COBBLESTONE));
+		addAllSlotInputDoubleItem(new ItemStack(Material.STONE_BRICKS), new ItemStack(Material.VINE),new ItemStack(Material.MOSSY_STONE_BRICKS));
+		addAllSlotInputDoubleItem(new ItemStack(Material.STONE_BRICKS), new ItemStack(Material.MOSS_BLOCK),new ItemStack(Material.MOSSY_STONE_BRICKS));
+		addAllSlotInputDoubleItem(new ItemStack(Material.STONE_BRICK_SLAB), new ItemStack(Material.STONE_BRICK_SLAB),new ItemStack(Material.CHISELED_STONE_BRICKS));
+		addAllSlotInputDoubleItem(new ItemStack(Material.COBBLED_DEEPSLATE_SLAB), new ItemStack(Material.COBBLED_DEEPSLATE_SLAB),new ItemStack(Material.CHISELED_DEEPSLATE));
+		
+		
 	}
 
 	private void addTripleItemRecipes() {
