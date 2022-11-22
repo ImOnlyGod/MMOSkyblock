@@ -15,6 +15,7 @@ public class VanillaShapedRecipes {
 		addQuadItemRecipes();
 		addToolsItemRecipes();
 		addArmorItemRecipes();
+		addStairsItemRecipes();
 	}
 	
 	
@@ -103,6 +104,47 @@ public class VanillaShapedRecipes {
 				inputItems[i+1][j] = new ItemStack(inputItem2.getType(),inputItem2.getAmount());
 				inputItems[i+1][j+1] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
 				
+				
+				resultItems[0][0] = new ItemStack(outputItem.getType(),outputItem.getAmount());
+				resultItems[0][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][0] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				recipeOutput.put(inputItems, resultItems);
+			}
+		}
+	}
+	
+	public void addAllSixInputStairsItem(ItemStack inputItem1, ItemStack outputItem) {
+		
+		for (int i=0;i<2;i++) {
+			for (int j=0;j<2;j++) {
+				ItemStack[][] inputItems = new ItemStack[4][4];
+				ItemStack[][] resultItems = new ItemStack[2][2];
+				inputItems[i][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+1][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+2][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+1][j+1] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+2][j+1] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+2][j+2] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());				
+				
+				resultItems[0][0] = new ItemStack(outputItem.getType(),outputItem.getAmount());
+				resultItems[0][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][0] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				recipeOutput.put(inputItems, resultItems);
+			}
+		}
+		
+		for (int i=2;i<4;i++) {
+			for (int j=0;j<2;j++) {
+				ItemStack[][] inputItems = new ItemStack[4][4];
+				ItemStack[][] resultItems = new ItemStack[2][2];
+				inputItems[i][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i][j+1] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i][j+2] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i-1][j+1] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i-1][j+2] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i-2][j+2] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());				
 				
 				resultItems[0][0] = new ItemStack(outputItem.getType(),outputItem.getAmount());
 				resultItems[0][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
@@ -603,6 +645,58 @@ public class VanillaShapedRecipes {
 		addAllArmorInputBootsItem(new ItemStack(Material.DIAMOND),new ItemStack(Material.DIAMOND_BOOTS));
 	}
 	
+	private void addStairsItemRecipes() {
+		addAllSixInputStairsItem(new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.OAK_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.BIRCH_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.SPRUCE_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.DARK_OAK_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.JUNGLE_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.ACACIA_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.CRIMSON_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.WARPED_STAIRS,4));
+		
+		addAllSixInputStairsItem(new ItemStack(Material.COBBLESTONE),new ItemStack(Material.COBBLESTONE_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.STONE),new ItemStack(Material.STONE_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.SANDSTONE),new ItemStack(Material.SANDSTONE_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.BRICKS),new ItemStack(Material.BRICK_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.STONE_BRICKS),new ItemStack(Material.STONE_BRICK_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.NETHER_BRICKS),new ItemStack(Material.NETHER_BRICK_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.QUARTZ_BLOCK),new ItemStack(Material.QUARTZ_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.SMOOTH_QUARTZ),new ItemStack(Material.SMOOTH_QUARTZ_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.RED_SANDSTONE),new ItemStack(Material.RED_SANDSTONE_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.ANDESITE),new ItemStack(Material.ANDESITE_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.DIORITE),new ItemStack(Material.DIORITE_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.GRANITE),new ItemStack(Material.GRANITE_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.POLISHED_ANDESITE),new ItemStack(Material.POLISHED_ANDESITE_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.POLISHED_DIORITE),new ItemStack(Material.POLISHED_DIORITE_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.POLISHED_GRANITE),new ItemStack(Material.POLISHED_GRANITE_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.BLACKSTONE),new ItemStack(Material.BLACKSTONE_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.POLISHED_BLACKSTONE),new ItemStack(Material.POLISHED_BLACKSTONE_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.POLISHED_BLACKSTONE_BRICKS),new ItemStack(Material.POLISHED_BLACKSTONE_BRICK_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.MOSSY_COBBLESTONE),new ItemStack(Material.MOSSY_COBBLESTONE_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.MOSSY_STONE_BRICKS),new ItemStack(Material.MOSSY_STONE_BRICK_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.SMOOTH_SANDSTONE),new ItemStack(Material.SMOOTH_SANDSTONE_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.SMOOTH_RED_SANDSTONE),new ItemStack(Material.SMOOTH_RED_SANDSTONE_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.PRISMARINE),new ItemStack(Material.PRISMARINE_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.PRISMARINE_BRICKS),new ItemStack(Material.PRISMARINE_BRICK_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.DARK_PRISMARINE),new ItemStack(Material.DARK_PRISMARINE_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.NETHER_BRICKS),new ItemStack(Material.NETHER_BRICK_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.RED_NETHER_BRICKS),new ItemStack(Material.RED_NETHER_BRICK_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.PURPUR_BLOCK),new ItemStack(Material.PURPUR_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.END_STONE_BRICKS),new ItemStack(Material.END_STONE_BRICK_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.CUT_COPPER),new ItemStack(Material.CUT_COPPER_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.EXPOSED_CUT_COPPER),new ItemStack(Material.EXPOSED_CUT_COPPER_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.WEATHERED_CUT_COPPER),new ItemStack(Material.WEATHERED_CUT_COPPER_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.OXIDIZED_CUT_COPPER),new ItemStack(Material.OXIDIZED_CUT_COPPER_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.WAXED_CUT_COPPER),new ItemStack(Material.WAXED_CUT_COPPER_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.WAXED_EXPOSED_CUT_COPPER),new ItemStack(Material.WAXED_EXPOSED_CUT_COPPER_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.WAXED_WEATHERED_CUT_COPPER),new ItemStack(Material.WAXED_WEATHERED_CUT_COPPER_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.WAXED_OXIDIZED_CUT_COPPER),new ItemStack(Material.WAXED_OXIDIZED_CUT_COPPER_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.COBBLED_DEEPSLATE),new ItemStack(Material.COBBLED_DEEPSLATE_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.POLISHED_DEEPSLATE),new ItemStack(Material.POLISHED_DEEPSLATE_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.DEEPSLATE_BRICKS),new ItemStack(Material.DEEPSLATE_BRICK_STAIRS,4));
+		addAllSixInputStairsItem(new ItemStack(Material.DEEPSLATE_TILES),new ItemStack(Material.DEEPSLATE_TILE_STAIRS,4));
+	}
 	
 
 	public HashMap<ItemStack[][],ItemStack[][]> getRecipeOutput() {
