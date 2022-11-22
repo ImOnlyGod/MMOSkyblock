@@ -304,15 +304,21 @@ public void addAllSlotInputQuadItem(ItemStack inputItem1, ItemStack inputItem2, 
 		addAllSlotInputDoubleItem(new ItemStack(Material.MELON_SLICE), new ItemStack(Material.GOLD_NUGGET),new ItemStack(Material.GLISTERING_MELON_SLICE));
 		addAllSlotInputDoubleItem(new ItemStack(Material.SLIME_BALL), new ItemStack(Material.BLAZE_POWDER),new ItemStack(Material.MAGMA_CREAM));
 		addAllSlotInputDoubleItem(new ItemStack(Material.ENDER_PEARL), new ItemStack(Material.BLAZE_POWDER),new ItemStack(Material.ENDER_EYE));
+		addAllSlotInputDoubleItem(new ItemStack(Material.TRIPWIRE_HOOK), new ItemStack(Material.CHEST),new ItemStack(Material.TRAPPED_CHEST));
 		
 	}
 
 	private void addTripleItemRecipes() {
 		addAllSlotInputTripleItem(new ItemStack(Material.BOOK), new ItemStack(Material.FEATHER),new ItemStack(Material.INK_SAC),new ItemStack(Material.WRITABLE_BOOK));
+		addAllSlotInputTripleItem(new ItemStack(Material.PUMPKIN), new ItemStack(Material.SUGAR),new ItemStack(Material.EGG),new ItemStack(Material.PUMPKIN_PIE));
+		addAllSlotInputTripleItem(new ItemStack(Material.RED_MUSHROOM), new ItemStack(Material.BROWN_MUSHROOM),new ItemStack(Material.BOWL),new ItemStack(Material.MUSHROOM_STEW));
+		addAllSlotInputTripleItem(new ItemStack(Material.SPIDER_EYE), new ItemStack(Material.BROWN_MUSHROOM),new ItemStack(Material.SUGAR),new ItemStack(Material.FERMENTED_SPIDER_EYE));
 	}
 	
 	private void addQuadItemRecipes() {
 		addAllSlotInputQuadItem(new ItemStack(Material.PAPER), new ItemStack(Material.PAPER),new ItemStack(Material.PAPER),new ItemStack(Material.LEATHER),new ItemStack(Material.BOOK));
+		addAllSlotInputQuadItem(new ItemStack(Material.RED_MUSHROOM), new ItemStack(Material.BROWN_MUSHROOM),new ItemStack(Material.BOWL),new ItemStack(Material.POPPY),new ItemStack(Material.SUSPICIOUS_STEW));
+		addAllSlotInputQuadItem(new ItemStack(Material.GLASS_BOTTLE), new ItemStack(Material.GLASS_BOTTLE),new ItemStack(Material.GLASS_BOTTLE),new ItemStack(Material.HONEY_BLOCK),new ItemStack(Material.HONEY_BOTTLE,3));
 	}
 
 	public HashMap<ItemStack[][],ItemStack[][]> getRecipeOutput() {

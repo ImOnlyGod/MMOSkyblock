@@ -13,6 +13,8 @@ public class VanillaShapedRecipes {
 		addDoubleItemRecipes();
 		addTripleItemRecipes();
 		addQuadItemRecipes();
+		addToolsItemRecipes();
+		addArmorItemRecipes();
 	}
 	
 	
@@ -71,6 +73,25 @@ public class VanillaShapedRecipes {
 		}
 	}
 	
+	public void addAllTripleInputVerticalItem(ItemStack inputItem1,ItemStack inputItem2,ItemStack inputItem3, ItemStack outputItem) {
+		
+		for (int i=0;i<2;i++) {
+			for (int j=0;j<4;j++) {
+				ItemStack[][] inputItems = new ItemStack[4][4];
+				ItemStack[][] resultItems = new ItemStack[2][2];
+				inputItems[i][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+1][j] = new ItemStack(inputItem2.getType(),inputItem2.getAmount());
+				inputItems[i+2][j] = new ItemStack(inputItem3.getType(),inputItem3.getAmount());
+				
+				resultItems[0][0] = new ItemStack(outputItem.getType(),outputItem.getAmount());
+				resultItems[0][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][0] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				recipeOutput.put(inputItems, resultItems);
+			}
+		}
+	}
+	
 	public void addAllQuadInputCubeItem(ItemStack inputItem1,ItemStack inputItem2, ItemStack outputItem) {
 		
 		for (int i=0;i<3;i++) {
@@ -91,6 +112,201 @@ public class VanillaShapedRecipes {
 			}
 		}
 	}
+	
+	public void addAllTInputPickItem(ItemStack inputItem1,ItemStack inputItem2, ItemStack outputItem) {
+		
+		for (int i=0;i<2;i++) {
+			for (int j=0;j<2;j++) {
+				ItemStack[][] inputItems = new ItemStack[4][4];
+				ItemStack[][] resultItems = new ItemStack[2][2];
+				inputItems[i][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i][j+1] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i][j+2] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+1][j+1] = new ItemStack(inputItem2.getType(),inputItem2.getAmount());
+				inputItems[i+2][j+1] = new ItemStack(inputItem2.getType(),inputItem2.getAmount());
+				
+				
+				resultItems[0][0] = new ItemStack(outputItem.getType(),outputItem.getAmount());
+				resultItems[0][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][0] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				recipeOutput.put(inputItems, resultItems);
+			}
+		}
+	}
+	
+	public void addAllTInputAxeItem(ItemStack inputItem1,ItemStack inputItem2, ItemStack outputItem) {
+		
+		for (int i=0;i<2;i++) {
+			for (int j=0;j<3;j++) {
+				ItemStack[][] inputItems = new ItemStack[4][4];
+				ItemStack[][] resultItems = new ItemStack[2][2];
+				inputItems[i][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i][j+1] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+1][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+1][j+1] = new ItemStack(inputItem2.getType(),inputItem2.getAmount());
+				inputItems[i+2][j+1] = new ItemStack(inputItem2.getType(),inputItem2.getAmount());
+				
+				
+				resultItems[0][0] = new ItemStack(outputItem.getType(),outputItem.getAmount());
+				resultItems[0][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][0] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				recipeOutput.put(inputItems, resultItems);
+			}
+		}
+		
+		for (int i=0;i<2;i++) {
+			for (int j=0;j<3;j++) {
+				ItemStack[][] inputItems = new ItemStack[4][4];
+				ItemStack[][] resultItems = new ItemStack[2][2];
+				inputItems[i][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i][j+1] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+1][j+1] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+1][j] = new ItemStack(inputItem2.getType(),inputItem2.getAmount());
+				inputItems[i+2][j] = new ItemStack(inputItem2.getType(),inputItem2.getAmount());
+				
+				
+				resultItems[0][0] = new ItemStack(outputItem.getType(),outputItem.getAmount());
+				resultItems[0][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][0] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				recipeOutput.put(inputItems, resultItems);
+			}
+		}
+	}
+	
+	public void addAllTInputHoeItem(ItemStack inputItem1,ItemStack inputItem2, ItemStack outputItem) {
+		
+		for (int i=0;i<2;i++) {
+			for (int j=0;j<3;j++) {
+				ItemStack[][] inputItems = new ItemStack[4][4];
+				ItemStack[][] resultItems = new ItemStack[2][2];
+				inputItems[i][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i][j+1] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				
+				inputItems[i+1][j+1] = new ItemStack(inputItem2.getType(),inputItem2.getAmount());
+				inputItems[i+2][j+1] = new ItemStack(inputItem2.getType(),inputItem2.getAmount());
+				
+				
+				resultItems[0][0] = new ItemStack(outputItem.getType(),outputItem.getAmount());
+				resultItems[0][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][0] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				recipeOutput.put(inputItems, resultItems);
+			}
+		}
+		
+		for (int i=0;i<2;i++) {
+			for (int j=0;j<3;j++) {
+				ItemStack[][] inputItems = new ItemStack[4][4];
+				ItemStack[][] resultItems = new ItemStack[2][2];
+				inputItems[i][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i][j+1] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+1][j] = new ItemStack(inputItem2.getType(),inputItem2.getAmount());
+				inputItems[i+2][j] = new ItemStack(inputItem2.getType(),inputItem2.getAmount());
+				
+				
+				resultItems[0][0] = new ItemStack(outputItem.getType(),outputItem.getAmount());
+				resultItems[0][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][0] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				recipeOutput.put(inputItems, resultItems);
+			}
+		}
+	}
+	
+	public void addAllArmorInputHelmetItem(ItemStack inputItem1,ItemStack outputItem) {
+
+		for (int i=0;i<3;i++) {
+			for (int j=0;j<2;j++) {
+				ItemStack[][] inputItems = new ItemStack[4][4];
+				ItemStack[][] resultItems = new ItemStack[2][2];
+				inputItems[i][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+1][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i][j+1] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i][j+2] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+1][j+2] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				
+				
+				resultItems[0][0] = new ItemStack(outputItem.getType(),outputItem.getAmount());
+				resultItems[0][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][0] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				recipeOutput.put(inputItems, resultItems);
+			}
+		}		
+	}
+	
+	public void addAllArmorInputChestplateItem(ItemStack inputItem1,ItemStack outputItem) {
+
+		for (int i=0;i<2;i++) {
+			for (int j=0;j<2;j++) {
+				ItemStack[][] inputItems = new ItemStack[4][4];
+				ItemStack[][] resultItems = new ItemStack[2][2];
+				inputItems[i][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+1][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+2][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i][j+2] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+1][j+1] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+2][j+1] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+1][j+2] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+2][j+2] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				
+				resultItems[0][0] = new ItemStack(outputItem.getType(),outputItem.getAmount());
+				resultItems[0][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][0] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				recipeOutput.put(inputItems, resultItems);
+			}
+		}		
+	}
+	
+	public void addAllArmorInputLeggingsItem(ItemStack inputItem1,ItemStack outputItem) {
+
+		for (int i=0;i<2;i++) {
+			for (int j=0;j<2;j++) {
+				ItemStack[][] inputItems = new ItemStack[4][4];
+				ItemStack[][] resultItems = new ItemStack[2][2];
+				inputItems[i][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+1][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i][j+1] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i][j+2] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+1][j+2] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+2][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+2][j+2] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				
+				resultItems[0][0] = new ItemStack(outputItem.getType(),outputItem.getAmount());
+				resultItems[0][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][0] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				recipeOutput.put(inputItems, resultItems);
+			}
+		}		
+	}
+	
+	public void addAllArmorInputBootsItem(ItemStack inputItem1,ItemStack outputItem) {
+
+		for (int i=0;i<3;i++) {
+			for (int j=0;j<2;j++) {
+				ItemStack[][] inputItems = new ItemStack[4][4];
+				ItemStack[][] resultItems = new ItemStack[2][2];
+				inputItems[i][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+1][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i][j+2] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+1][j+2] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				
+				
+				resultItems[0][0] = new ItemStack(outputItem.getType(),outputItem.getAmount());
+				resultItems[0][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][0] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				recipeOutput.put(inputItems, resultItems);
+			}
+		}		
+	}
+	
+	
 	
 	private void addDoubleItemRecipes() {
 		addAllDoubleInputHorizontalItem(new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.OAK_PLANKS), new ItemStack(Material.OAK_PRESSURE_PLATE));
@@ -122,6 +338,7 @@ public class VanillaShapedRecipes {
 		addAllDoubleInputHorizontalItem(new ItemStack(Material.PURPLE_WOOL), new ItemStack(Material.PURPLE_WOOL),new ItemStack(Material.PURPLE_CARPET,3));
 		addAllDoubleInputHorizontalItem(new ItemStack(Material.MAGENTA_WOOL), new ItemStack(Material.MAGENTA_WOOL),new ItemStack(Material.MAGENTA_CARPET,3));
 		addAllDoubleInputHorizontalItem(new ItemStack(Material.PINK_WOOL), new ItemStack(Material.PINK_WOOL),new ItemStack(Material.PINK_CARPET,3));
+		addAllDoubleInputHorizontalItem(new ItemStack(Material.MOSS_BLOCK), new ItemStack(Material.MOSS_BLOCK),new ItemStack(Material.MOSS_CARPET,3));
 		
 		addAllDoubleInputVerticalItem(new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.OAK_PLANKS), new ItemStack(Material.STICK,4));
 		addAllDoubleInputVerticalItem(new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.BIRCH_PLANKS), new ItemStack(Material.STICK,4));
@@ -143,6 +360,12 @@ public class VanillaShapedRecipes {
 		addAllDoubleInputVerticalItem(new ItemStack(Material.QUARTZ_SLAB),new ItemStack(Material.QUARTZ_SLAB), new ItemStack(Material.CHISELED_QUARTZ_BLOCK));
 		addAllDoubleInputVerticalItem(new ItemStack(Material.QUARTZ_BLOCK),new ItemStack(Material.QUARTZ_BLOCK), new ItemStack(Material.QUARTZ_PILLAR,2));
 		addAllDoubleInputVerticalItem(new ItemStack(Material.NETHER_BRICK_SLAB),new ItemStack(Material.NETHER_BRICK_SLAB), new ItemStack(Material.CHISELED_NETHER_BRICKS));
+		addAllDoubleInputVerticalItem(new ItemStack(Material.POLISHED_BLACKSTONE_SLAB),new ItemStack(Material.POLISHED_BLACKSTONE_SLAB), new ItemStack(Material.CHISELED_POLISHED_BLACKSTONE));
+		addAllDoubleInputVerticalItem(new ItemStack(Material.SLIME_BALL),new ItemStack(Material.PISTON), new ItemStack(Material.STICKY_PISTON));
+		addAllDoubleInputVerticalItem(new ItemStack(Material.FURNACE),new ItemStack(Material.MINECART), new ItemStack(Material.FURNACE_MINECART));
+		addAllDoubleInputVerticalItem(new ItemStack(Material.CHEST),new ItemStack(Material.MINECART), new ItemStack(Material.CHEST_MINECART));
+		addAllDoubleInputVerticalItem(new ItemStack(Material.HOPPER),new ItemStack(Material.MINECART), new ItemStack(Material.HOPPER_MINECART));
+		addAllDoubleInputVerticalItem(new ItemStack(Material.TNT),new ItemStack(Material.MINECART), new ItemStack(Material.TNT_MINECART));
 		
 	}
 	
@@ -199,6 +422,27 @@ public class VanillaShapedRecipes {
 		addAllTripleInputSlabItem(new ItemStack(Material.POLISHED_DEEPSLATE),new ItemStack(Material.POLISHED_DEEPSLATE),new ItemStack(Material.POLISHED_DEEPSLATE),new ItemStack(Material.POLISHED_DEEPSLATE_SLAB,6));
 		addAllTripleInputSlabItem(new ItemStack(Material.DEEPSLATE_BRICKS),new ItemStack(Material.DEEPSLATE_BRICKS),new ItemStack(Material.DEEPSLATE_BRICKS),new ItemStack(Material.DEEPSLATE_BRICK_SLAB,6));
 		addAllTripleInputSlabItem(new ItemStack(Material.DEEPSLATE_TILES),new ItemStack(Material.DEEPSLATE_TILES),new ItemStack(Material.DEEPSLATE_TILES),new ItemStack(Material.DEEPSLATE_TILE_SLAB,6));
+		addAllTripleInputSlabItem(new ItemStack(Material.WHEAT),new ItemStack(Material.WHEAT),new ItemStack(Material.WHEAT),new ItemStack(Material.BREAD));
+		addAllTripleInputSlabItem(new ItemStack(Material.WHEAT),new ItemStack(Material.COCOA_BEANS),new ItemStack(Material.WHEAT),new ItemStack(Material.COOKIE,8));
+		addAllTripleInputSlabItem(new ItemStack(Material.SUGAR_CANE),new ItemStack(Material.SUGAR_CANE),new ItemStack(Material.SUGAR_CANE),new ItemStack(Material.PAPER,3));
+				
+		
+		addAllTripleInputVerticalItem(new ItemStack(Material.SHULKER_SHELL),new ItemStack(Material.CHEST),new ItemStack(Material.SHULKER_SHELL), new ItemStack(Material.SHULKER_BOX));
+		addAllTripleInputVerticalItem(new ItemStack(Material.AMETHYST_SHARD),new ItemStack(Material.COPPER_INGOT),new ItemStack(Material.COPPER_INGOT), new ItemStack(Material.SPYGLASS));
+		addAllTripleInputVerticalItem(new ItemStack(Material.FLINT),new ItemStack(Material.STICK),new ItemStack(Material.FEATHER), new ItemStack(Material.ARROW,4));
+		addAllTripleInputVerticalItem(new ItemStack(Material.IRON_INGOT),new ItemStack(Material.STICK),new ItemStack(Material.OAK_PLANKS), new ItemStack(Material.TRIPWIRE_HOOK,2));
+		addAllTripleInputVerticalItem(new ItemStack(Material.IRON_INGOT),new ItemStack(Material.STICK),new ItemStack(Material.BIRCH_PLANKS), new ItemStack(Material.TRIPWIRE_HOOK,2));
+		addAllTripleInputVerticalItem(new ItemStack(Material.IRON_INGOT),new ItemStack(Material.STICK),new ItemStack(Material.SPRUCE_PLANKS), new ItemStack(Material.TRIPWIRE_HOOK,2));
+		addAllTripleInputVerticalItem(new ItemStack(Material.IRON_INGOT),new ItemStack(Material.STICK),new ItemStack(Material.DARK_OAK_PLANKS), new ItemStack(Material.TRIPWIRE_HOOK,2));
+		addAllTripleInputVerticalItem(new ItemStack(Material.IRON_INGOT),new ItemStack(Material.STICK),new ItemStack(Material.JUNGLE_PLANKS), new ItemStack(Material.TRIPWIRE_HOOK,2));
+		addAllTripleInputVerticalItem(new ItemStack(Material.IRON_INGOT),new ItemStack(Material.STICK),new ItemStack(Material.ACACIA_PLANKS), new ItemStack(Material.TRIPWIRE_HOOK,2));
+		addAllTripleInputVerticalItem(new ItemStack(Material.IRON_INGOT),new ItemStack(Material.STICK),new ItemStack(Material.CRIMSON_PLANKS), new ItemStack(Material.TRIPWIRE_HOOK,2));
+		addAllTripleInputVerticalItem(new ItemStack(Material.IRON_INGOT),new ItemStack(Material.STICK),new ItemStack(Material.WARPED_PLANKS), new ItemStack(Material.TRIPWIRE_HOOK,2));
+		addAllTripleInputVerticalItem(new ItemStack(Material.BLAZE_POWDER),new ItemStack(Material.COAL),new ItemStack(Material.GUNPOWDER), new ItemStack(Material.FIRE_CHARGE,3));
+		addAllTripleInputVerticalItem(new ItemStack(Material.IRON_NUGGET),new ItemStack(Material.IRON_INGOT),new ItemStack(Material.IRON_NUGGET), new ItemStack(Material.CHAIN));
+		addAllTripleInputVerticalItem(new ItemStack(Material.COAL),new ItemStack(Material.STICK),new ItemStack(Material.SOUL_SAND), new ItemStack(Material.SOUL_TORCH,4));
+		addAllTripleInputVerticalItem(new ItemStack(Material.COAL),new ItemStack(Material.STICK),new ItemStack(Material.SOUL_SOIL), new ItemStack(Material.SOUL_TORCH,4));
+		addAllTripleInputVerticalItem(new ItemStack(Material.COPPER_INGOT),new ItemStack(Material.COPPER_INGOT),new ItemStack(Material.COPPER_INGOT), new ItemStack(Material.LIGHTNING_ROD));
 		
 	}
 	
@@ -252,9 +496,111 @@ public class VanillaShapedRecipes {
 		addAllQuadInputCubeItem(new ItemStack(Material.STRIPPED_ACACIA_LOG),new ItemStack(Material.STRIPPED_ACACIA_LOG), new ItemStack(Material.STRIPPED_ACACIA_WOOD,3));
 		addAllQuadInputCubeItem(new ItemStack(Material.STRIPPED_CRIMSON_STEM),new ItemStack(Material.STRIPPED_CRIMSON_STEM), new ItemStack(Material.STRIPPED_CRIMSON_HYPHAE,3));
 		addAllQuadInputCubeItem(new ItemStack(Material.STRIPPED_WARPED_STEM),new ItemStack(Material.STRIPPED_WARPED_STEM), new ItemStack(Material.STRIPPED_WARPED_HYPHAE,3));
+		addAllQuadInputCubeItem(new ItemStack(Material.BASALT),new ItemStack(Material.BASALT), new ItemStack(Material.POLISHED_BASALT,4));
+		addAllQuadInputCubeItem(new ItemStack(Material.BLACKSTONE),new ItemStack(Material.BLACKSTONE), new ItemStack(Material.POLISHED_BLACKSTONE,4));
+		addAllQuadInputCubeItem(new ItemStack(Material.POLISHED_BLACKSTONE),new ItemStack(Material.POLISHED_BLACKSTONE), new ItemStack(Material.POLISHED_BLACKSTONE_BRICKS,4));
+		addAllQuadInputCubeItem(new ItemStack(Material.AMETHYST_SHARD),new ItemStack(Material.AMETHYST_SHARD), new ItemStack(Material.AMETHYST_BLOCK));
+		addAllQuadInputCubeItem(new ItemStack(Material.COPPER_BLOCK),new ItemStack(Material.COPPER_BLOCK), new ItemStack(Material.CUT_COPPER,4));
+		addAllQuadInputCubeItem(new ItemStack(Material.POINTED_DRIPSTONE),new ItemStack(Material.POINTED_DRIPSTONE), new ItemStack(Material.DRIPSTONE_BLOCK,4));
+		addAllQuadInputCubeItem(new ItemStack(Material.IRON_INGOT),new ItemStack(Material.IRON_INGOT), new ItemStack(Material.IRON_TRAPDOOR));
+		addAllQuadInputCubeItem(new ItemStack(Material.RABBIT_HIDE),new ItemStack(Material.RABBIT_HIDE), new ItemStack(Material.LEATHER));
+		addAllQuadInputCubeItem(new ItemStack(Material.STRING),new ItemStack(Material.STRING), new ItemStack(Material.WHITE_WOOL));
+	}
+	
+	private void addToolsItemRecipes() {
+		addAllTInputPickItem(new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_PICKAXE));
+		addAllTInputPickItem(new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_PICKAXE));
+		addAllTInputPickItem(new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_PICKAXE));
+		addAllTInputPickItem(new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_PICKAXE));
+		addAllTInputPickItem(new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_PICKAXE));
+		addAllTInputPickItem(new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_PICKAXE));
+		addAllTInputPickItem(new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_PICKAXE));
+		addAllTInputPickItem(new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_PICKAXE));
+		addAllTInputPickItem(new ItemStack(Material.COBBLESTONE),new ItemStack(Material.STICK), new ItemStack(Material.STONE_PICKAXE));
+		addAllTInputPickItem(new ItemStack(Material.DEEPSLATE),new ItemStack(Material.STICK), new ItemStack(Material.STONE_PICKAXE));
+		addAllTInputPickItem(new ItemStack(Material.IRON_INGOT),new ItemStack(Material.STICK), new ItemStack(Material.IRON_PICKAXE));
+		addAllTInputPickItem(new ItemStack(Material.GOLD_INGOT),new ItemStack(Material.STICK), new ItemStack(Material.GOLDEN_PICKAXE));
+		addAllTInputPickItem(new ItemStack(Material.DIAMOND),new ItemStack(Material.STICK), new ItemStack(Material.DIAMOND_PICKAXE));	
 		
+		addAllTInputAxeItem(new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_AXE));
+		addAllTInputAxeItem(new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_AXE));
+		addAllTInputAxeItem(new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_AXE));
+		addAllTInputAxeItem(new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_AXE));
+		addAllTInputAxeItem(new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_AXE));
+		addAllTInputAxeItem(new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_AXE));
+		addAllTInputAxeItem(new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_AXE));
+		addAllTInputAxeItem(new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_AXE));
+		addAllTInputAxeItem(new ItemStack(Material.COBBLESTONE),new ItemStack(Material.STICK), new ItemStack(Material.STONE_AXE));
+		addAllTInputAxeItem(new ItemStack(Material.DEEPSLATE),new ItemStack(Material.STICK), new ItemStack(Material.STONE_AXE));
+		addAllTInputAxeItem(new ItemStack(Material.IRON_INGOT),new ItemStack(Material.STICK), new ItemStack(Material.IRON_AXE));
+		addAllTInputAxeItem(new ItemStack(Material.GOLD_INGOT),new ItemStack(Material.STICK), new ItemStack(Material.GOLDEN_AXE));
+		addAllTInputAxeItem(new ItemStack(Material.DIAMOND),new ItemStack(Material.STICK), new ItemStack(Material.DIAMOND_AXE));
 		
+		addAllTInputHoeItem(new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_HOE));
+		addAllTInputHoeItem(new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_HOE));
+		addAllTInputHoeItem(new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_HOE));
+		addAllTInputHoeItem(new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_HOE));
+		addAllTInputHoeItem(new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_HOE));
+		addAllTInputHoeItem(new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_HOE));
+		addAllTInputHoeItem(new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_HOE));
+		addAllTInputHoeItem(new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_HOE));
+		addAllTInputHoeItem(new ItemStack(Material.COBBLESTONE),new ItemStack(Material.STICK), new ItemStack(Material.STONE_HOE));
+		addAllTInputHoeItem(new ItemStack(Material.DEEPSLATE),new ItemStack(Material.STICK), new ItemStack(Material.STONE_HOE));
+		addAllTInputHoeItem(new ItemStack(Material.IRON_INGOT),new ItemStack(Material.STICK), new ItemStack(Material.IRON_HOE));
+		addAllTInputHoeItem(new ItemStack(Material.GOLD_INGOT),new ItemStack(Material.STICK), new ItemStack(Material.GOLDEN_HOE));
+		addAllTInputHoeItem(new ItemStack(Material.DIAMOND),new ItemStack(Material.STICK), new ItemStack(Material.DIAMOND_HOE));
 		
+		addAllTripleInputVerticalItem(new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_SWORD));
+		addAllTripleInputVerticalItem(new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_SWORD));
+		addAllTripleInputVerticalItem(new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_SWORD));
+		addAllTripleInputVerticalItem(new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_SWORD));
+		addAllTripleInputVerticalItem(new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_SWORD));
+		addAllTripleInputVerticalItem(new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_SWORD));
+		addAllTripleInputVerticalItem(new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_SWORD));
+		addAllTripleInputVerticalItem(new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_SWORD));
+		addAllTripleInputVerticalItem(new ItemStack(Material.COBBLESTONE),new ItemStack(Material.COBBLESTONE),new ItemStack(Material.STICK), new ItemStack(Material.STONE_SWORD));
+		addAllTripleInputVerticalItem(new ItemStack(Material.DEEPSLATE),new ItemStack(Material.DEEPSLATE),new ItemStack(Material.STICK), new ItemStack(Material.STONE_SWORD));
+		addAllTripleInputVerticalItem(new ItemStack(Material.IRON_INGOT),new ItemStack(Material.IRON_INGOT),new ItemStack(Material.STICK), new ItemStack(Material.IRON_SWORD));
+		addAllTripleInputVerticalItem(new ItemStack(Material.GOLD_INGOT),new ItemStack(Material.GOLD_INGOT),new ItemStack(Material.STICK), new ItemStack(Material.GOLDEN_SWORD));
+		addAllTripleInputVerticalItem(new ItemStack(Material.DIAMOND),new ItemStack(Material.DIAMOND),new ItemStack(Material.STICK), new ItemStack(Material.DIAMOND_SWORD));
+		
+		addAllTripleInputVerticalItem(new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.STICK),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_SHOVEL));
+		addAllTripleInputVerticalItem(new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.STICK),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_SHOVEL));
+		addAllTripleInputVerticalItem(new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.STICK),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_SHOVEL));
+		addAllTripleInputVerticalItem(new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.STICK),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_SHOVEL));
+		addAllTripleInputVerticalItem(new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.STICK),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_SHOVEL));
+		addAllTripleInputVerticalItem(new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.STICK),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_SHOVEL));
+		addAllTripleInputVerticalItem(new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.STICK),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_SHOVEL));
+		addAllTripleInputVerticalItem(new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.STICK),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_SHOVEL));
+		addAllTripleInputVerticalItem(new ItemStack(Material.COBBLESTONE),new ItemStack(Material.STICK),new ItemStack(Material.STICK), new ItemStack(Material.STONE_SHOVEL));
+		addAllTripleInputVerticalItem(new ItemStack(Material.DEEPSLATE),new ItemStack(Material.STICK),new ItemStack(Material.STICK), new ItemStack(Material.STONE_SHOVEL));
+		addAllTripleInputVerticalItem(new ItemStack(Material.IRON_INGOT),new ItemStack(Material.STICK),new ItemStack(Material.STICK), new ItemStack(Material.IRON_SHOVEL));
+		addAllTripleInputVerticalItem(new ItemStack(Material.GOLD_INGOT),new ItemStack(Material.STICK),new ItemStack(Material.STICK), new ItemStack(Material.GOLDEN_SHOVEL));
+		addAllTripleInputVerticalItem(new ItemStack(Material.DIAMOND),new ItemStack(Material.STICK),new ItemStack(Material.STICK), new ItemStack(Material.DIAMOND_SHOVEL));
+			
+	}
+	
+	private void addArmorItemRecipes() {
+		addAllArmorInputHelmetItem(new ItemStack(Material.LEATHER),new ItemStack(Material.LEATHER_HELMET));
+		addAllArmorInputHelmetItem(new ItemStack(Material.IRON_INGOT),new ItemStack(Material.IRON_HELMET));
+		addAllArmorInputHelmetItem(new ItemStack(Material.GOLD_INGOT),new ItemStack(Material.GOLDEN_HELMET));
+		addAllArmorInputHelmetItem(new ItemStack(Material.DIAMOND),new ItemStack(Material.DIAMOND_HELMET));
+		addAllArmorInputHelmetItem(new ItemStack(Material.SCUTE),new ItemStack(Material.TURTLE_HELMET));
+		
+		addAllArmorInputChestplateItem(new ItemStack(Material.LEATHER),new ItemStack(Material.LEATHER_CHESTPLATE));
+		addAllArmorInputChestplateItem(new ItemStack(Material.IRON_INGOT),new ItemStack(Material.IRON_CHESTPLATE));
+		addAllArmorInputChestplateItem(new ItemStack(Material.GOLD_INGOT),new ItemStack(Material.GOLDEN_CHESTPLATE));
+		addAllArmorInputChestplateItem(new ItemStack(Material.DIAMOND),new ItemStack(Material.DIAMOND_CHESTPLATE));
+		
+		addAllArmorInputLeggingsItem(new ItemStack(Material.LEATHER),new ItemStack(Material.LEATHER_LEGGINGS));
+		addAllArmorInputLeggingsItem(new ItemStack(Material.IRON_INGOT),new ItemStack(Material.IRON_LEGGINGS));
+		addAllArmorInputLeggingsItem(new ItemStack(Material.GOLD_INGOT),new ItemStack(Material.GOLDEN_LEGGINGS));
+		addAllArmorInputLeggingsItem(new ItemStack(Material.DIAMOND),new ItemStack(Material.DIAMOND_LEGGINGS));
+		
+		addAllArmorInputBootsItem(new ItemStack(Material.LEATHER),new ItemStack(Material.LEATHER_BOOTS));
+		addAllArmorInputBootsItem(new ItemStack(Material.IRON_INGOT),new ItemStack(Material.IRON_BOOTS));
+		addAllArmorInputBootsItem(new ItemStack(Material.GOLD_INGOT),new ItemStack(Material.GOLDEN_BOOTS));
+		addAllArmorInputBootsItem(new ItemStack(Material.DIAMOND),new ItemStack(Material.DIAMOND_BOOTS));
 	}
 	
 	
