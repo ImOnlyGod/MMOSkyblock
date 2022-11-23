@@ -173,7 +173,26 @@ public void addAllSlotInputQuadItem(ItemStack inputItem1, ItemStack inputItem2, 
 		addAllSlotInputSingleItem(new ItemStack(Material.BEETROOT), new ItemStack(Material.RED_DYE,1));
 		addAllSlotInputSingleItem(new ItemStack(Material.DANDELION), new ItemStack(Material.YELLOW_DYE,2));
 		
+		addAllSlotInputSingleItem(new ItemStack(Material.AZURE_BLUET), new ItemStack(Material.LIGHT_GRAY_DYE));
+		addAllSlotInputSingleItem(new ItemStack(Material.OXEYE_DAISY), new ItemStack(Material.LIGHT_GRAY_DYE));
+		addAllSlotInputSingleItem(new ItemStack(Material.WHITE_TULIP), new ItemStack(Material.LIGHT_GRAY_DYE));
 		
+		addAllSlotInputSingleItem(new ItemStack(Material.ORANGE_TULIP), new ItemStack(Material.ORANGE_DYE));
+		addAllSlotInputSingleItem(new ItemStack(Material.SUNFLOWER), new ItemStack(Material.YELLOW_DYE));
+		addAllSlotInputSingleItem(new ItemStack(Material.BLUE_ORCHID), new ItemStack(Material.LIGHT_BLUE_DYE));
+		addAllSlotInputSingleItem(new ItemStack(Material.ALLIUM), new ItemStack(Material.PURPLE_DYE));
+		addAllSlotInputSingleItem(new ItemStack(Material.LILAC), new ItemStack(Material.PURPLE_DYE));
+		
+		addAllSlotInputSingleItem(new ItemStack(Material.PINK_TULIP), new ItemStack(Material.PINK_DYE));
+		addAllSlotInputSingleItem(new ItemStack(Material.PEONY), new ItemStack(Material.PINK_DYE));
+		
+		addAllSlotInputSingleItem(new ItemStack(Material.LILY_OF_THE_VALLEY), new ItemStack(Material.WHITE_DYE));
+		addAllSlotInputSingleItem(new ItemStack(Material.CORNFLOWER), new ItemStack(Material.BLUE_DYE));
+		addAllSlotInputSingleItem(new ItemStack(Material.LAPIS_LAZULI), new ItemStack(Material.BLUE_DYE));
+		addAllSlotInputSingleItem(new ItemStack(Material.COCOA_BEANS), new ItemStack(Material.BROWN_DYE));
+		addAllSlotInputSingleItem(new ItemStack(Material.BONE_MEAL), new ItemStack(Material.WHITE_DYE));
+		addAllSlotInputSingleItem(new ItemStack(Material.WITHER_ROSE), new ItemStack(Material.BLACK_DYE));
+		addAllSlotInputSingleItem(new ItemStack(Material.INK_SAC), new ItemStack(Material.BLACK_DYE));
 	}
 	
 	private void addDoubleItemRecipes() {
