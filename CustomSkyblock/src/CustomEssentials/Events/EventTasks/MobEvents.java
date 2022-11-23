@@ -285,6 +285,7 @@ public class MobEvents implements Listener{
 	public void playerRightClickEvent(PlayerInteractEvent e) {
 		
 		Player p = e.getPlayer();
+		
 		PlayerProfileManager profiles = this.plugin.getProfileManager();
 				
 		ItemStats checkItem = new ItemStats(p,profiles);
@@ -354,6 +355,7 @@ public class MobEvents implements Listener{
 		}, 10L);
 		
 	}
+	
 		
 	
 }
