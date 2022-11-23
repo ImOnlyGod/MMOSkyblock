@@ -16,6 +16,8 @@ public class VanillaShapedRecipes {
 		addToolsItemRecipes();
 		addArmorItemRecipes();
 		addStairsItemRecipes();
+		addMiscItemsRecipes();
+		addFillItemsRecipes();
 	}
 	
 	
@@ -348,6 +350,168 @@ public class VanillaShapedRecipes {
 		}		
 	}
 	
+	public void addAll8InputRoundItem(ItemStack inputItem1,ItemStack inputItem2,ItemStack outputItem) {
+
+		for (int i=0;i<2;i++) {
+			for (int j=0;j<2;j++) {
+				ItemStack[][] inputItems = new ItemStack[4][4];
+				ItemStack[][] resultItems = new ItemStack[2][2];
+				inputItems[i][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i][j+1] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i][j+2] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+1][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+2][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+1][j+2] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+2][j+2] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+2][j+1] = new ItemStack(inputItem2.getType(),inputItem2.getAmount());
+				
+				
+				
+				resultItems[0][0] = new ItemStack(outputItem.getType(),outputItem.getAmount());
+				resultItems[0][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][0] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				recipeOutput.put(inputItems, resultItems);
+			}
+		}		
+	}
+	
+	public void addAll5InputBoatItem(ItemStack inputItem1,ItemStack outputItem) {
+
+		for (int i=0;i<3;i++) {
+			for (int j=0;j<2;j++) {
+				ItemStack[][] inputItems = new ItemStack[4][4];
+				ItemStack[][] resultItems = new ItemStack[2][2];
+				inputItems[i][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+1][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+1][j+1] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i][j+2] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+1][j+2] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				
+				resultItems[0][0] = new ItemStack(outputItem.getType(),outputItem.getAmount());
+				resultItems[0][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][0] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				recipeOutput.put(inputItems, resultItems);
+			}
+		}		
+	}
+	
+	public void addAll7InputLadderItem(ItemStack inputItem1,ItemStack inputItem2,ItemStack outputItem) {
+
+		for (int i=0;i<2;i++) {
+			for (int j=0;j<2;j++) {
+				ItemStack[][] inputItems = new ItemStack[4][4];
+				ItemStack[][] resultItems = new ItemStack[2][2];
+				inputItems[i][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+1][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+2][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+1][j+1] = new ItemStack(inputItem2.getType(),inputItem2.getAmount());
+				inputItems[i][j+2] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+1][j+2] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+2][j+2] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				
+				resultItems[0][0] = new ItemStack(outputItem.getType(),outputItem.getAmount());
+				resultItems[0][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][0] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				recipeOutput.put(inputItems, resultItems);
+			}
+		}		
+	}
+	
+	public void addAll3InputBowlItem(ItemStack inputItem1,ItemStack outputItem) {
+
+		for (int i=0;i<3;i++) {
+			for (int j=0;j<2;j++) {
+				ItemStack[][] inputItems = new ItemStack[4][4];
+				ItemStack[][] resultItems = new ItemStack[2][2];
+				inputItems[i][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+1][j+1] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i][j+2] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				
+				
+				resultItems[0][0] = new ItemStack(outputItem.getType(),outputItem.getAmount());
+				resultItems[0][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][0] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				recipeOutput.put(inputItems, resultItems);
+			}
+		}		
+	}
+	
+	public void addAll6InputsItem(ItemStack inputItem1,ItemStack inputItem2,ItemStack inputItem3,ItemStack inputItem4,ItemStack inputItem5,ItemStack inputItem6,ItemStack outputItem) {
+
+		for (int i=0;i<3;i++) {
+			for (int j=0;j<2;j++) {
+				ItemStack[][] inputItems = new ItemStack[4][4];
+				ItemStack[][] resultItems = new ItemStack[2][2];
+				inputItems[i][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+1][j] = new ItemStack(inputItem2.getType(),inputItem2.getAmount());
+				inputItems[i][j+1] = new ItemStack(inputItem3.getType(),inputItem3.getAmount());
+				inputItems[i+1][j+1] = new ItemStack(inputItem4.getType(),inputItem4.getAmount());
+				inputItems[i][j+2] = new ItemStack(inputItem5.getType(),inputItem5.getAmount());
+				inputItems[i+1][j+2] = new ItemStack(inputItem6.getType(),inputItem6.getAmount());
+				
+				
+				
+				resultItems[0][0] = new ItemStack(outputItem.getType(),outputItem.getAmount());
+				resultItems[0][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][0] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				recipeOutput.put(inputItems, resultItems);
+			}
+		}		
+	}
+	public void addAll6InputBedItem(ItemStack inputItem1,ItemStack inputItem2,ItemStack outputItem) {
+
+		for (int i=0;i<3;i++) {
+			for (int j=0;j<2;j++) {
+				ItemStack[][] inputItems = new ItemStack[4][4];
+				ItemStack[][] resultItems = new ItemStack[2][2];
+				inputItems[i][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i][j+1] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i][j+2] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+1][j] = new ItemStack(inputItem2.getType(),inputItem2.getAmount());
+				inputItems[i+1][j+1] = new ItemStack(inputItem2.getType(),inputItem2.getAmount());
+				inputItems[i+1][j+2] = new ItemStack(inputItem2.getType(),inputItem2.getAmount());
+				
+				
+				
+				
+				resultItems[0][0] = new ItemStack(outputItem.getType(),outputItem.getAmount());
+				resultItems[0][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][0] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				recipeOutput.put(inputItems, resultItems);
+			}
+		}		
+	}
+	
+	public void addAll9InputSingleItem(ItemStack inputItem1,ItemStack outputItem) {
+
+		for (int i=0;i<2;i++) {
+			for (int j=0;j<2;j++) {
+				ItemStack[][] inputItems = new ItemStack[4][4];
+				ItemStack[][] resultItems = new ItemStack[2][2];
+				inputItems[i][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+1][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+2][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i][j+1] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i][j+2] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+1][j+1] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+1][j+2] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+2][j+1] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+2][j+2] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+
+				resultItems[0][0] = new ItemStack(outputItem.getType(),outputItem.getAmount());
+				resultItems[0][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][0] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				recipeOutput.put(inputItems, resultItems);
+			}
+		}		
+	}
 	
 	
 	private void addDoubleItemRecipes() {
@@ -696,6 +860,264 @@ public class VanillaShapedRecipes {
 		addAllSixInputStairsItem(new ItemStack(Material.POLISHED_DEEPSLATE),new ItemStack(Material.POLISHED_DEEPSLATE_STAIRS,4));
 		addAllSixInputStairsItem(new ItemStack(Material.DEEPSLATE_BRICKS),new ItemStack(Material.DEEPSLATE_BRICK_STAIRS,4));
 		addAllSixInputStairsItem(new ItemStack(Material.DEEPSLATE_TILES),new ItemStack(Material.DEEPSLATE_TILE_STAIRS,4));
+	}
+	
+	public void addMiscItemsRecipes() {
+		addAll3InputBowlItem(new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.BOWL,4));
+		addAll3InputBowlItem(new ItemStack(Material.GLASS),new ItemStack(Material.GLASS_BOTTLE,3));
+		addAll3InputBowlItem(new ItemStack(Material.IRON_INGOT),new ItemStack(Material.BUCKET));
+		
+		addAll5InputBoatItem(new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.OAK_BOAT));
+		addAll5InputBoatItem(new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.BIRCH_BOAT));
+		addAll5InputBoatItem(new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.SPRUCE_BOAT));
+		addAll5InputBoatItem(new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.DARK_OAK_BOAT));
+		addAll5InputBoatItem(new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.JUNGLE_BOAT));
+		addAll5InputBoatItem(new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.ACACIA_BOAT));
+		addAll5InputBoatItem(new ItemStack(Material.IRON_INGOT),new ItemStack(Material.MINECART));
+		
+		addAll6InputsItem(new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.STICK),new ItemStack(Material.STICK),new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.OAK_FENCE,3));
+		addAll6InputsItem(new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.STICK),new ItemStack(Material.STICK),new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.BIRCH_FENCE,3));
+		addAll6InputsItem(new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.STICK),new ItemStack(Material.STICK),new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.SPRUCE_FENCE,3));
+		addAll6InputsItem(new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.STICK),new ItemStack(Material.STICK),new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.DARK_OAK_FENCE,3));
+		addAll6InputsItem(new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.STICK),new ItemStack(Material.STICK),new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.JUNGLE_FENCE,3));
+		addAll6InputsItem(new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.STICK),new ItemStack(Material.STICK),new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.ACACIA_FENCE,3));
+		addAll6InputsItem(new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.STICK),new ItemStack(Material.STICK),new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.CRIMSON_FENCE,3));
+		addAll6InputsItem(new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.STICK),new ItemStack(Material.STICK),new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.WARPED_FENCE,3));
+		
+		addAll6InputsItem(new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.OAK_TRAPDOOR,2));
+		addAll6InputsItem(new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.BIRCH_TRAPDOOR,2));
+		addAll6InputsItem(new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.SPRUCE_TRAPDOOR,2));
+		addAll6InputsItem(new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.DARK_OAK_TRAPDOOR,2));
+		addAll6InputsItem(new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.JUNGLE_TRAPDOOR,2));
+		addAll6InputsItem(new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.ACACIA_TRAPDOOR,2));
+		addAll6InputsItem(new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.CRIMSON_TRAPDOOR,2));
+		addAll6InputsItem(new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.WARPED_TRAPDOOR,2));
+		
+		addAll6InputBedItem(new ItemStack(Material.WHITE_WOOL),new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.WHITE_BED));
+		addAll6InputBedItem(new ItemStack(Material.WHITE_WOOL),new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.WHITE_BED));
+		addAll6InputBedItem(new ItemStack(Material.WHITE_WOOL),new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.WHITE_BED));
+		addAll6InputBedItem(new ItemStack(Material.WHITE_WOOL),new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.WHITE_BED));
+		addAll6InputBedItem(new ItemStack(Material.WHITE_WOOL),new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.WHITE_BED));
+		addAll6InputBedItem(new ItemStack(Material.WHITE_WOOL),new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.WHITE_BED));
+		addAll6InputBedItem(new ItemStack(Material.WHITE_WOOL),new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.WHITE_BED));
+		addAll6InputBedItem(new ItemStack(Material.WHITE_WOOL),new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.WHITE_BED));
+		
+		addAll6InputBedItem(new ItemStack(Material.ORANGE_WOOL),new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.ORANGE_BED));
+		addAll6InputBedItem(new ItemStack(Material.ORANGE_WOOL),new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.ORANGE_BED));
+		addAll6InputBedItem(new ItemStack(Material.ORANGE_WOOL),new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.ORANGE_BED));
+		addAll6InputBedItem(new ItemStack(Material.ORANGE_WOOL),new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.ORANGE_BED));
+		addAll6InputBedItem(new ItemStack(Material.ORANGE_WOOL),new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.ORANGE_BED));
+		addAll6InputBedItem(new ItemStack(Material.ORANGE_WOOL),new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.ORANGE_BED));
+		addAll6InputBedItem(new ItemStack(Material.ORANGE_WOOL),new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.ORANGE_BED));
+		addAll6InputBedItem(new ItemStack(Material.ORANGE_WOOL),new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.ORANGE_BED));
+		
+		addAll6InputBedItem(new ItemStack(Material.MAGENTA_WOOL),new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.MAGENTA_BED));
+		addAll6InputBedItem(new ItemStack(Material.MAGENTA_WOOL),new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.MAGENTA_BED));
+		addAll6InputBedItem(new ItemStack(Material.MAGENTA_WOOL),new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.MAGENTA_BED));
+		addAll6InputBedItem(new ItemStack(Material.MAGENTA_WOOL),new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.MAGENTA_BED));
+		addAll6InputBedItem(new ItemStack(Material.MAGENTA_WOOL),new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.MAGENTA_BED));
+		addAll6InputBedItem(new ItemStack(Material.MAGENTA_WOOL),new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.MAGENTA_BED));
+		addAll6InputBedItem(new ItemStack(Material.MAGENTA_WOOL),new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.MAGENTA_BED));
+		addAll6InputBedItem(new ItemStack(Material.MAGENTA_WOOL),new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.MAGENTA_BED));
+		
+		addAll6InputBedItem(new ItemStack(Material.LIGHT_BLUE_WOOL),new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.LIGHT_BLUE_BED));
+		addAll6InputBedItem(new ItemStack(Material.LIGHT_BLUE_WOOL),new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.LIGHT_BLUE_BED));
+		addAll6InputBedItem(new ItemStack(Material.LIGHT_BLUE_WOOL),new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.LIGHT_BLUE_BED));
+		addAll6InputBedItem(new ItemStack(Material.LIGHT_BLUE_WOOL),new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.LIGHT_BLUE_BED));
+		addAll6InputBedItem(new ItemStack(Material.LIGHT_BLUE_WOOL),new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.LIGHT_BLUE_BED));
+		addAll6InputBedItem(new ItemStack(Material.LIGHT_BLUE_WOOL),new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.LIGHT_BLUE_BED));
+		addAll6InputBedItem(new ItemStack(Material.LIGHT_BLUE_WOOL),new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.LIGHT_BLUE_BED));
+		addAll6InputBedItem(new ItemStack(Material.LIGHT_BLUE_WOOL),new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.LIGHT_BLUE_BED));
+		
+		addAll6InputBedItem(new ItemStack(Material.YELLOW_WOOL),new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.YELLOW_BED));
+		addAll6InputBedItem(new ItemStack(Material.YELLOW_WOOL),new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.YELLOW_BED));
+		addAll6InputBedItem(new ItemStack(Material.YELLOW_WOOL),new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.YELLOW_BED));
+		addAll6InputBedItem(new ItemStack(Material.YELLOW_WOOL),new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.YELLOW_BED));
+		addAll6InputBedItem(new ItemStack(Material.YELLOW_WOOL),new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.YELLOW_BED));
+		addAll6InputBedItem(new ItemStack(Material.YELLOW_WOOL),new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.YELLOW_BED));
+		addAll6InputBedItem(new ItemStack(Material.YELLOW_WOOL),new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.YELLOW_BED));
+		addAll6InputBedItem(new ItemStack(Material.YELLOW_WOOL),new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.YELLOW_BED));
+		
+		addAll6InputBedItem(new ItemStack(Material.LIME_WOOL),new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.LIME_BED));
+		addAll6InputBedItem(new ItemStack(Material.LIME_WOOL),new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.LIME_BED));
+		addAll6InputBedItem(new ItemStack(Material.LIME_WOOL),new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.LIME_BED));
+		addAll6InputBedItem(new ItemStack(Material.LIME_WOOL),new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.LIME_BED));
+		addAll6InputBedItem(new ItemStack(Material.LIME_WOOL),new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.LIME_BED));
+		addAll6InputBedItem(new ItemStack(Material.LIME_WOOL),new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.LIME_BED));
+		addAll6InputBedItem(new ItemStack(Material.LIME_WOOL),new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.LIME_BED));
+		addAll6InputBedItem(new ItemStack(Material.LIME_WOOL),new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.LIME_BED));
+		
+		addAll6InputBedItem(new ItemStack(Material.PINK_WOOL),new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.PINK_BED));
+		addAll6InputBedItem(new ItemStack(Material.PINK_WOOL),new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.PINK_BED));
+		addAll6InputBedItem(new ItemStack(Material.PINK_WOOL),new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.PINK_BED));
+		addAll6InputBedItem(new ItemStack(Material.PINK_WOOL),new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.PINK_BED));
+		addAll6InputBedItem(new ItemStack(Material.PINK_WOOL),new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.PINK_BED));
+		addAll6InputBedItem(new ItemStack(Material.PINK_WOOL),new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.PINK_BED));
+		addAll6InputBedItem(new ItemStack(Material.PINK_WOOL),new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.PINK_BED));
+		addAll6InputBedItem(new ItemStack(Material.PINK_WOOL),new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.PINK_BED));
+		
+		addAll6InputBedItem(new ItemStack(Material.GRAY_WOOL),new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.GRAY_BED));
+		addAll6InputBedItem(new ItemStack(Material.GRAY_WOOL),new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.GRAY_BED));
+		addAll6InputBedItem(new ItemStack(Material.GRAY_WOOL),new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.GRAY_BED));
+		addAll6InputBedItem(new ItemStack(Material.GRAY_WOOL),new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.GRAY_BED));
+		addAll6InputBedItem(new ItemStack(Material.GRAY_WOOL),new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.GRAY_BED));
+		addAll6InputBedItem(new ItemStack(Material.GRAY_WOOL),new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.GRAY_BED));
+		addAll6InputBedItem(new ItemStack(Material.GRAY_WOOL),new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.GRAY_BED));
+		addAll6InputBedItem(new ItemStack(Material.GRAY_WOOL),new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.GRAY_BED));
+		
+		addAll6InputBedItem(new ItemStack(Material.LIGHT_GRAY_WOOL),new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.LIGHT_GRAY_BED));
+		addAll6InputBedItem(new ItemStack(Material.LIGHT_GRAY_WOOL),new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.LIGHT_GRAY_BED));
+		addAll6InputBedItem(new ItemStack(Material.LIGHT_GRAY_WOOL),new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.LIGHT_GRAY_BED));
+		addAll6InputBedItem(new ItemStack(Material.LIGHT_GRAY_WOOL),new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.LIGHT_GRAY_BED));
+		addAll6InputBedItem(new ItemStack(Material.LIGHT_GRAY_WOOL),new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.LIGHT_GRAY_BED));
+		addAll6InputBedItem(new ItemStack(Material.LIGHT_GRAY_WOOL),new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.LIGHT_GRAY_BED));
+		addAll6InputBedItem(new ItemStack(Material.LIGHT_GRAY_WOOL),new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.LIGHT_GRAY_BED));
+		addAll6InputBedItem(new ItemStack(Material.LIGHT_GRAY_WOOL),new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.LIGHT_GRAY_BED));
+		
+		addAll6InputBedItem(new ItemStack(Material.CYAN_WOOL),new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.CYAN_BED));
+		addAll6InputBedItem(new ItemStack(Material.CYAN_WOOL),new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.CYAN_BED));
+		addAll6InputBedItem(new ItemStack(Material.CYAN_WOOL),new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.CYAN_BED));
+		addAll6InputBedItem(new ItemStack(Material.CYAN_WOOL),new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.CYAN_BED));
+		addAll6InputBedItem(new ItemStack(Material.CYAN_WOOL),new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.CYAN_BED));
+		addAll6InputBedItem(new ItemStack(Material.CYAN_WOOL),new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.CYAN_BED));
+		addAll6InputBedItem(new ItemStack(Material.CYAN_WOOL),new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.CYAN_BED));
+		addAll6InputBedItem(new ItemStack(Material.CYAN_WOOL),new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.CYAN_BED));
+		
+		addAll6InputBedItem(new ItemStack(Material.PURPLE_WOOL),new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.PURPLE_BED));
+		addAll6InputBedItem(new ItemStack(Material.PURPLE_WOOL),new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.PURPLE_BED));
+		addAll6InputBedItem(new ItemStack(Material.PURPLE_WOOL),new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.PURPLE_BED));
+		addAll6InputBedItem(new ItemStack(Material.PURPLE_WOOL),new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.PURPLE_BED));
+		addAll6InputBedItem(new ItemStack(Material.PURPLE_WOOL),new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.PURPLE_BED));
+		addAll6InputBedItem(new ItemStack(Material.PURPLE_WOOL),new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.PURPLE_BED));
+		addAll6InputBedItem(new ItemStack(Material.PURPLE_WOOL),new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.PURPLE_BED));
+		addAll6InputBedItem(new ItemStack(Material.PURPLE_WOOL),new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.PURPLE_BED));
+		
+		addAll6InputBedItem(new ItemStack(Material.BLUE_WOOL),new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.BLUE_BED));
+		addAll6InputBedItem(new ItemStack(Material.BLUE_WOOL),new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.BLUE_BED));
+		addAll6InputBedItem(new ItemStack(Material.BLUE_WOOL),new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.BLUE_BED));
+		addAll6InputBedItem(new ItemStack(Material.BLUE_WOOL),new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.BLUE_BED));
+		addAll6InputBedItem(new ItemStack(Material.BLUE_WOOL),new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.BLUE_BED));
+		addAll6InputBedItem(new ItemStack(Material.BLUE_WOOL),new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.BLUE_BED));
+		addAll6InputBedItem(new ItemStack(Material.BLUE_WOOL),new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.BLUE_BED));
+		addAll6InputBedItem(new ItemStack(Material.BLUE_WOOL),new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.BLUE_BED));
+		
+		addAll6InputBedItem(new ItemStack(Material.BROWN_WOOL),new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.BROWN_BED));
+		addAll6InputBedItem(new ItemStack(Material.BROWN_WOOL),new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.BROWN_BED));
+		addAll6InputBedItem(new ItemStack(Material.BROWN_WOOL),new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.BROWN_BED));
+		addAll6InputBedItem(new ItemStack(Material.BROWN_WOOL),new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.BROWN_BED));
+		addAll6InputBedItem(new ItemStack(Material.BROWN_WOOL),new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.BROWN_BED));
+		addAll6InputBedItem(new ItemStack(Material.BROWN_WOOL),new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.BROWN_BED));
+		addAll6InputBedItem(new ItemStack(Material.BROWN_WOOL),new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.BROWN_BED));
+		addAll6InputBedItem(new ItemStack(Material.BROWN_WOOL),new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.BROWN_BED));
+		
+		addAll6InputBedItem(new ItemStack(Material.GREEN_WOOL),new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.GREEN_BED));
+		addAll6InputBedItem(new ItemStack(Material.GREEN_WOOL),new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.GREEN_BED));
+		addAll6InputBedItem(new ItemStack(Material.GREEN_WOOL),new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.GREEN_BED));
+		addAll6InputBedItem(new ItemStack(Material.GREEN_WOOL),new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.GREEN_BED));
+		addAll6InputBedItem(new ItemStack(Material.GREEN_WOOL),new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.GREEN_BED));
+		addAll6InputBedItem(new ItemStack(Material.GREEN_WOOL),new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.GREEN_BED));
+		addAll6InputBedItem(new ItemStack(Material.GREEN_WOOL),new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.GREEN_BED));
+		addAll6InputBedItem(new ItemStack(Material.GREEN_WOOL),new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.GREEN_BED));
+		
+		addAll6InputBedItem(new ItemStack(Material.RED_WOOL),new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.RED_BED));
+		addAll6InputBedItem(new ItemStack(Material.RED_WOOL),new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.RED_BED));
+		addAll6InputBedItem(new ItemStack(Material.RED_WOOL),new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.RED_BED));
+		addAll6InputBedItem(new ItemStack(Material.RED_WOOL),new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.RED_BED));
+		addAll6InputBedItem(new ItemStack(Material.RED_WOOL),new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.RED_BED));
+		addAll6InputBedItem(new ItemStack(Material.RED_WOOL),new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.RED_BED));
+		addAll6InputBedItem(new ItemStack(Material.RED_WOOL),new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.RED_BED));
+		addAll6InputBedItem(new ItemStack(Material.RED_WOOL),new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.RED_BED));
+		
+		addAll6InputBedItem(new ItemStack(Material.BLACK_WOOL),new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.BLACK_BED));
+		addAll6InputBedItem(new ItemStack(Material.BLACK_WOOL),new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.BLACK_BED));
+		addAll6InputBedItem(new ItemStack(Material.BLACK_WOOL),new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.BLACK_BED));
+		addAll6InputBedItem(new ItemStack(Material.BLACK_WOOL),new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.BLACK_BED));
+		addAll6InputBedItem(new ItemStack(Material.BLACK_WOOL),new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.BLACK_BED));
+		addAll6InputBedItem(new ItemStack(Material.BLACK_WOOL),new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.BLACK_BED));
+		addAll6InputBedItem(new ItemStack(Material.BLACK_WOOL),new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.BLACK_BED));
+		addAll6InputBedItem(new ItemStack(Material.BLACK_WOOL),new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.BLACK_BED));
+		
+		
+		addAll6InputsItem(new ItemStack(Material.COBBLESTONE),new ItemStack(Material.COBBLESTONE),new ItemStack(Material.COBBLESTONE),new ItemStack(Material.COBBLESTONE),new ItemStack(Material.COBBLESTONE),new ItemStack(Material.COBBLESTONE),new ItemStack(Material.COBBLESTONE_WALL,6));
+		addAll6InputsItem(new ItemStack(Material.MOSSY_COBBLESTONE),new ItemStack(Material.MOSSY_COBBLESTONE),new ItemStack(Material.MOSSY_COBBLESTONE),new ItemStack(Material.MOSSY_COBBLESTONE),new ItemStack(Material.MOSSY_COBBLESTONE),new ItemStack(Material.MOSSY_COBBLESTONE),new ItemStack(Material.MOSSY_COBBLESTONE_WALL,6));
+		addAll6InputsItem(new ItemStack(Material.STONE_BRICKS),new ItemStack(Material.STONE_BRICKS),new ItemStack(Material.STONE_BRICKS),new ItemStack(Material.STONE_BRICKS),new ItemStack(Material.STONE_BRICKS),new ItemStack(Material.STONE_BRICKS),new ItemStack(Material.STONE_BRICK_WALL,6));
+		addAll6InputsItem(new ItemStack(Material.MOSSY_STONE_BRICKS),new ItemStack(Material.MOSSY_STONE_BRICKS),new ItemStack(Material.MOSSY_STONE_BRICKS),new ItemStack(Material.MOSSY_STONE_BRICKS),new ItemStack(Material.MOSSY_STONE_BRICKS),new ItemStack(Material.MOSSY_STONE_BRICKS),new ItemStack(Material.MOSSY_STONE_BRICK_WALL,6));
+		addAll6InputsItem(new ItemStack(Material.ANDESITE),new ItemStack(Material.ANDESITE),new ItemStack(Material.ANDESITE),new ItemStack(Material.ANDESITE),new ItemStack(Material.ANDESITE),new ItemStack(Material.ANDESITE),new ItemStack(Material.ANDESITE_WALL,6));
+		addAll6InputsItem(new ItemStack(Material.DIORITE),new ItemStack(Material.DIORITE),new ItemStack(Material.DIORITE),new ItemStack(Material.DIORITE),new ItemStack(Material.DIORITE),new ItemStack(Material.DIORITE),new ItemStack(Material.DIORITE_WALL,6));
+		addAll6InputsItem(new ItemStack(Material.GRANITE),new ItemStack(Material.GRANITE),new ItemStack(Material.GRANITE),new ItemStack(Material.GRANITE),new ItemStack(Material.GRANITE),new ItemStack(Material.GRANITE),new ItemStack(Material.GRANITE_WALL,6));
+		addAll6InputsItem(new ItemStack(Material.SANDSTONE),new ItemStack(Material.SANDSTONE),new ItemStack(Material.SANDSTONE),new ItemStack(Material.SANDSTONE),new ItemStack(Material.SANDSTONE),new ItemStack(Material.SANDSTONE),new ItemStack(Material.SANDSTONE_WALL,6));
+		addAll6InputsItem(new ItemStack(Material.RED_SANDSTONE),new ItemStack(Material.RED_SANDSTONE),new ItemStack(Material.RED_SANDSTONE),new ItemStack(Material.RED_SANDSTONE),new ItemStack(Material.RED_SANDSTONE),new ItemStack(Material.RED_SANDSTONE),new ItemStack(Material.RED_SANDSTONE_WALL,6));
+		addAll6InputsItem(new ItemStack(Material.BRICKS),new ItemStack(Material.BRICKS),new ItemStack(Material.BRICKS),new ItemStack(Material.BRICKS),new ItemStack(Material.BRICKS),new ItemStack(Material.BRICKS),new ItemStack(Material.BRICK_WALL,6));
+		addAll6InputsItem(new ItemStack(Material.PRISMARINE),new ItemStack(Material.PRISMARINE),new ItemStack(Material.PRISMARINE),new ItemStack(Material.PRISMARINE),new ItemStack(Material.PRISMARINE),new ItemStack(Material.PRISMARINE),new ItemStack(Material.PRISMARINE_WALL,6));
+		addAll6InputsItem(new ItemStack(Material.NETHER_BRICKS),new ItemStack(Material.NETHER_BRICKS),new ItemStack(Material.NETHER_BRICKS),new ItemStack(Material.NETHER_BRICKS),new ItemStack(Material.NETHER_BRICKS),new ItemStack(Material.NETHER_BRICKS),new ItemStack(Material.NETHER_BRICK_WALL,6));
+		addAll6InputsItem(new ItemStack(Material.RED_NETHER_BRICKS),new ItemStack(Material.RED_NETHER_BRICKS),new ItemStack(Material.RED_NETHER_BRICKS),new ItemStack(Material.RED_NETHER_BRICKS),new ItemStack(Material.RED_NETHER_BRICKS),new ItemStack(Material.RED_NETHER_BRICKS),new ItemStack(Material.RED_NETHER_BRICK_WALL,6));
+		addAll6InputsItem(new ItemStack(Material.END_STONE_BRICKS),new ItemStack(Material.END_STONE_BRICKS),new ItemStack(Material.END_STONE_BRICKS),new ItemStack(Material.END_STONE_BRICKS),new ItemStack(Material.END_STONE_BRICKS),new ItemStack(Material.END_STONE_BRICKS),new ItemStack(Material.END_STONE_BRICK_WALL,6));
+		addAll6InputsItem(new ItemStack(Material.BLACKSTONE),new ItemStack(Material.BLACKSTONE),new ItemStack(Material.BLACKSTONE),new ItemStack(Material.BLACKSTONE),new ItemStack(Material.BLACKSTONE),new ItemStack(Material.BLACKSTONE),new ItemStack(Material.BLACKSTONE_WALL,6));
+		addAll6InputsItem(new ItemStack(Material.POLISHED_BLACKSTONE),new ItemStack(Material.POLISHED_BLACKSTONE),new ItemStack(Material.POLISHED_BLACKSTONE),new ItemStack(Material.POLISHED_BLACKSTONE),new ItemStack(Material.POLISHED_BLACKSTONE),new ItemStack(Material.POLISHED_BLACKSTONE),new ItemStack(Material.POLISHED_BLACKSTONE_WALL,6));
+		addAll6InputsItem(new ItemStack(Material.POLISHED_BLACKSTONE_BRICKS),new ItemStack(Material.POLISHED_BLACKSTONE_BRICKS),new ItemStack(Material.POLISHED_BLACKSTONE_BRICKS),new ItemStack(Material.POLISHED_BLACKSTONE_BRICKS),new ItemStack(Material.POLISHED_BLACKSTONE_BRICKS),new ItemStack(Material.POLISHED_BLACKSTONE_BRICKS),new ItemStack(Material.POLISHED_BLACKSTONE_BRICK_WALL,6));
+		addAll6InputsItem(new ItemStack(Material.COBBLED_DEEPSLATE),new ItemStack(Material.COBBLED_DEEPSLATE),new ItemStack(Material.COBBLED_DEEPSLATE),new ItemStack(Material.COBBLED_DEEPSLATE),new ItemStack(Material.COBBLED_DEEPSLATE),new ItemStack(Material.COBBLED_DEEPSLATE),new ItemStack(Material.COBBLED_DEEPSLATE_WALL,6));
+		addAll6InputsItem(new ItemStack(Material.POLISHED_DEEPSLATE),new ItemStack(Material.POLISHED_DEEPSLATE),new ItemStack(Material.POLISHED_DEEPSLATE),new ItemStack(Material.POLISHED_DEEPSLATE),new ItemStack(Material.POLISHED_DEEPSLATE),new ItemStack(Material.POLISHED_DEEPSLATE),new ItemStack(Material.POLISHED_DEEPSLATE_WALL,6));
+		addAll6InputsItem(new ItemStack(Material.DEEPSLATE_BRICKS),new ItemStack(Material.DEEPSLATE_BRICKS),new ItemStack(Material.DEEPSLATE_BRICKS),new ItemStack(Material.DEEPSLATE_BRICKS),new ItemStack(Material.DEEPSLATE_BRICKS),new ItemStack(Material.DEEPSLATE_BRICKS),new ItemStack(Material.DEEPSLATE_BRICK_WALL,6));
+		addAll6InputsItem(new ItemStack(Material.DEEPSLATE_TILES),new ItemStack(Material.DEEPSLATE_TILES),new ItemStack(Material.DEEPSLATE_TILES),new ItemStack(Material.DEEPSLATE_TILES),new ItemStack(Material.DEEPSLATE_TILES),new ItemStack(Material.DEEPSLATE_TILES),new ItemStack(Material.DEEPSLATE_TILE_WALL,6));
+		addAll6InputsItem(new ItemStack(Material.IRON_INGOT),new ItemStack(Material.IRON_INGOT),new ItemStack(Material.IRON_INGOT),new ItemStack(Material.IRON_INGOT),new ItemStack(Material.IRON_INGOT),new ItemStack(Material.IRON_INGOT),new ItemStack(Material.IRON_BARS,16));
+		addAll6InputsItem(new ItemStack(Material.NETHER_BRICKS),new ItemStack(Material.NETHER_BRICKS),new ItemStack(Material.NETHER_BRICK),new ItemStack(Material.NETHER_BRICK),new ItemStack(Material.NETHER_BRICKS),new ItemStack(Material.NETHER_BRICKS),new ItemStack(Material.NETHER_BRICK_FENCE,6));
+		
+		
+		addAll6InputsItem(new ItemStack(Material.STICK),new ItemStack(Material.STICK),new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.STICK),new ItemStack(Material.STICK),new ItemStack(Material.OAK_FENCE_GATE));
+		addAll6InputsItem(new ItemStack(Material.STICK),new ItemStack(Material.STICK),new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.STICK),new ItemStack(Material.STICK),new ItemStack(Material.BIRCH_FENCE_GATE));
+		addAll6InputsItem(new ItemStack(Material.STICK),new ItemStack(Material.STICK),new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.STICK),new ItemStack(Material.STICK),new ItemStack(Material.SPRUCE_FENCE_GATE));
+		addAll6InputsItem(new ItemStack(Material.STICK),new ItemStack(Material.STICK),new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.STICK),new ItemStack(Material.STICK),new ItemStack(Material.DARK_OAK_FENCE_GATE));
+		addAll6InputsItem(new ItemStack(Material.STICK),new ItemStack(Material.STICK),new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.STICK),new ItemStack(Material.STICK),new ItemStack(Material.JUNGLE_FENCE_GATE));
+		addAll6InputsItem(new ItemStack(Material.STICK),new ItemStack(Material.STICK),new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.STICK),new ItemStack(Material.STICK),new ItemStack(Material.ACACIA_FENCE_GATE));
+		addAll6InputsItem(new ItemStack(Material.STICK),new ItemStack(Material.STICK),new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.STICK),new ItemStack(Material.STICK),new ItemStack(Material.CRIMSON_FENCE_GATE));
+		addAll6InputsItem(new ItemStack(Material.STICK),new ItemStack(Material.STICK),new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.STICK),new ItemStack(Material.STICK),new ItemStack(Material.WARPED_FENCE_GATE));
+		
+		
+		
+		addAll7InputLadderItem(new ItemStack(Material.STICK),new ItemStack(Material.STICK),new ItemStack(Material.LADDER,3));
+		addAll7InputLadderItem(new ItemStack(Material.LEATHER),new ItemStack(Material.LEATHER),new ItemStack(Material.LEATHER_HORSE_ARMOR));
+		addAll7InputLadderItem(new ItemStack(Material.IRON_INGOT),new ItemStack(Material.STICK),new ItemStack(Material.RAIL,16));
+		
+		
+	}
+	
+	public void addFillItemsRecipes() {
+	
+		addAll8InputRoundItem(new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.CHEST));
+		addAll8InputRoundItem(new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.CHEST));
+		addAll8InputRoundItem(new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.CHEST));
+		addAll8InputRoundItem(new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.CHEST));
+		addAll8InputRoundItem(new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.CHEST));
+		addAll8InputRoundItem(new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.CHEST));
+		addAll8InputRoundItem(new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.CHEST));
+		addAll8InputRoundItem(new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.CHEST));
+		
+		addAll8InputRoundItem(new ItemStack(Material.COBBLESTONE),new ItemStack(Material.COBBLESTONE),new ItemStack(Material.FURNACE));
+		addAll8InputRoundItem(new ItemStack(Material.BLACKSTONE),new ItemStack(Material.BLACKSTONE),new ItemStack(Material.FURNACE));
+		addAll8InputRoundItem(new ItemStack(Material.COBBLESTONE),new ItemStack(Material.REDSTONE),new ItemStack(Material.DROPPER)); 
+		
+		addAll9InputSingleItem(new ItemStack(Material.IRON_NUGGET),new ItemStack(Material.IRON_INGOT));
+		addAll9InputSingleItem(new ItemStack(Material.GOLD_NUGGET),new ItemStack(Material.GOLD_BLOCK));
+		addAll9InputSingleItem(new ItemStack(Material.COAL),new ItemStack(Material.COAL_BLOCK));
+		addAll9InputSingleItem(new ItemStack(Material.IRON_INGOT),new ItemStack(Material.IRON_BLOCK));
+		addAll9InputSingleItem(new ItemStack(Material.COPPER_INGOT),new ItemStack(Material.COPPER_BLOCK));
+		addAll9InputSingleItem(new ItemStack(Material.LAPIS_LAZULI),new ItemStack(Material.LAPIS_BLOCK));
+		addAll9InputSingleItem(new ItemStack(Material.REDSTONE),new ItemStack(Material.REDSTONE_BLOCK));
+		addAll9InputSingleItem(new ItemStack(Material.GOLD_INGOT),new ItemStack(Material.GOLD_BLOCK));
+		addAll9InputSingleItem(new ItemStack(Material.DIAMOND),new ItemStack(Material.DIAMOND_BLOCK));
+		addAll9InputSingleItem(new ItemStack(Material.EMERALD),new ItemStack(Material.EMERALD_BLOCK));
+		addAll9InputSingleItem(new ItemStack(Material.NETHERITE_INGOT),new ItemStack(Material.NETHERITE_BLOCK));
+		addAll9InputSingleItem(new ItemStack(Material.WHEAT),new ItemStack(Material.HAY_BLOCK));
+		addAll9InputSingleItem(new ItemStack(Material.PRISMARINE_SHARD),new ItemStack(Material.PRISMARINE_BRICKS));
+		addAll9InputSingleItem(new ItemStack(Material.SLIME_BALL),new ItemStack(Material.SLIME_BLOCK));
+		addAll9InputSingleItem(new ItemStack(Material.NETHER_WART),new ItemStack(Material.NETHER_WART_BLOCK));
+		addAll9InputSingleItem(new ItemStack(Material.BONE_MEAL),new ItemStack(Material.BONE_BLOCK));
+		addAll9InputSingleItem(new ItemStack(Material.DRIED_KELP),new ItemStack(Material.DRIED_KELP_BLOCK));
+		addAll9InputSingleItem(new ItemStack(Material.ICE),new ItemStack(Material.PACKED_ICE));
+		addAll9InputSingleItem(new ItemStack(Material.PACKED_ICE),new ItemStack(Material.BLUE_ICE));
+		addAll9InputSingleItem(new ItemStack(Material.MELON_SLICE),new ItemStack(Material.MELON));
+		
+		
 	}
 	
 
