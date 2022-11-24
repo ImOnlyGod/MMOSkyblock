@@ -32,7 +32,25 @@ public class CraftingEvents implements Listener{
 	@EventHandler
 	public void PlayerDragEvent(InventoryDragEvent e) {
 		
-		if (e.getInventory() == e.getView().getTopInventory()) {
+		if (!(e.getView().getTitle().equals("Crafting") || 
+				e.getView().getTitle().equals("Chest") || 
+				e.getView().getTitle().equals("Inventory") ||
+				e.getView().getTitle().equals("Furnace") || 
+				e.getView().getTitle().equals("Trapped Chest") || 
+				e.getView().getTitle().equals("Repair & Name") || 
+				e.getView().getTitle().equals("Enchant") || 
+				e.getView().getTitle().equals("Loom") || 
+				e.getView().getTitle().equals("Barrel") || 
+				e.getView().getTitle().equals("Smoker") || 
+				e.getView().getTitle().equals("Blast Furnace") || 
+				e.getView().getTitle().equals("Cartography Table") || 
+				e.getView().getTitle().equals("Repair & Disenchant") || 
+				e.getView().getTitle().equals("Upgrade Gear") || 
+				e.getView().getTitle().equals("Stonecutter") || 
+				e.getView().getTitle().equals("Item Hopper") || 
+				e.getView().getTitle().equals("Dropper") || 
+				e.getView().getTitle().equals("Dispenser") || 
+				e.getView().getTitle().equals("Minecart with Chest"))) {
 			e.setCancelled(true);
 		}
 

@@ -139,6 +139,33 @@ public void addAllSlotInputQuadItem(ItemStack inputItem1, ItemStack inputItem2, 
 		addAllSlotInputSingleItem(new ItemStack(Material.CRIMSON_STEM), new ItemStack(Material.CRIMSON_PLANKS,4));
 		addAllSlotInputSingleItem(new ItemStack(Material.WARPED_STEM), new ItemStack(Material.WARPED_PLANKS,4));
 		
+		addAllSlotInputSingleItem(new ItemStack(Material.STRIPPED_OAK_LOG), new ItemStack(Material.OAK_PLANKS,4));
+		addAllSlotInputSingleItem(new ItemStack(Material.STRIPPED_BIRCH_LOG), new ItemStack(Material.BIRCH_PLANKS,4));
+		addAllSlotInputSingleItem(new ItemStack(Material.STRIPPED_SPRUCE_LOG), new ItemStack(Material.SPRUCE_PLANKS,4));
+		addAllSlotInputSingleItem(new ItemStack(Material.STRIPPED_DARK_OAK_LOG), new ItemStack(Material.DARK_OAK_PLANKS,4));
+		addAllSlotInputSingleItem(new ItemStack(Material.STRIPPED_ACACIA_LOG), new ItemStack(Material.ACACIA_PLANKS,4));
+		addAllSlotInputSingleItem(new ItemStack(Material.STRIPPED_JUNGLE_LOG), new ItemStack(Material.JUNGLE_PLANKS,4));
+		addAllSlotInputSingleItem(new ItemStack(Material.STRIPPED_CRIMSON_STEM), new ItemStack(Material.CRIMSON_PLANKS,4));
+		addAllSlotInputSingleItem(new ItemStack(Material.STRIPPED_WARPED_STEM), new ItemStack(Material.WARPED_PLANKS,4));
+		
+		addAllSlotInputSingleItem(new ItemStack(Material.OAK_WOOD), new ItemStack(Material.OAK_PLANKS,4));
+		addAllSlotInputSingleItem(new ItemStack(Material.BIRCH_WOOD), new ItemStack(Material.BIRCH_PLANKS,4));
+		addAllSlotInputSingleItem(new ItemStack(Material.SPRUCE_WOOD), new ItemStack(Material.SPRUCE_PLANKS,4));
+		addAllSlotInputSingleItem(new ItemStack(Material.DARK_OAK_WOOD), new ItemStack(Material.DARK_OAK_PLANKS,4));
+		addAllSlotInputSingleItem(new ItemStack(Material.ACACIA_WOOD), new ItemStack(Material.ACACIA_PLANKS,4));
+		addAllSlotInputSingleItem(new ItemStack(Material.JUNGLE_WOOD), new ItemStack(Material.JUNGLE_PLANKS,4));
+		addAllSlotInputSingleItem(new ItemStack(Material.CRIMSON_STEM), new ItemStack(Material.CRIMSON_PLANKS,4));
+		addAllSlotInputSingleItem(new ItemStack(Material.WARPED_STEM), new ItemStack(Material.WARPED_PLANKS,4));
+		
+		addAllSlotInputSingleItem(new ItemStack(Material.STRIPPED_OAK_WOOD), new ItemStack(Material.OAK_PLANKS,4));
+		addAllSlotInputSingleItem(new ItemStack(Material.STRIPPED_BIRCH_WOOD), new ItemStack(Material.BIRCH_PLANKS,4));
+		addAllSlotInputSingleItem(new ItemStack(Material.STRIPPED_SPRUCE_WOOD), new ItemStack(Material.SPRUCE_PLANKS,4));
+		addAllSlotInputSingleItem(new ItemStack(Material.STRIPPED_DARK_OAK_WOOD), new ItemStack(Material.DARK_OAK_PLANKS,4));
+		addAllSlotInputSingleItem(new ItemStack(Material.STRIPPED_ACACIA_WOOD), new ItemStack(Material.ACACIA_PLANKS,4));
+		addAllSlotInputSingleItem(new ItemStack(Material.STRIPPED_JUNGLE_WOOD), new ItemStack(Material.JUNGLE_PLANKS,4));
+		addAllSlotInputSingleItem(new ItemStack(Material.STRIPPED_CRIMSON_STEM), new ItemStack(Material.CRIMSON_PLANKS,4));
+		addAllSlotInputSingleItem(new ItemStack(Material.STRIPPED_WARPED_STEM), new ItemStack(Material.WARPED_PLANKS,4));
+		
 		addAllSlotInputSingleItem(new ItemStack(Material.OAK_PLANKS), new ItemStack(Material.OAK_BUTTON,1));
 		addAllSlotInputSingleItem(new ItemStack(Material.BIRCH_PLANKS), new ItemStack(Material.BIRCH_BUTTON,1));
 		addAllSlotInputSingleItem(new ItemStack(Material.SPRUCE_PLANKS), new ItemStack(Material.SPRUCE_BUTTON,1));

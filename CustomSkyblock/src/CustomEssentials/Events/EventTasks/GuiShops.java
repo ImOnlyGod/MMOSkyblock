@@ -44,20 +44,21 @@ public class GuiShops implements Listener{
 		if (this.shopPrices == null) this.shopPrices = new ItemPrices();
 		
 		if (e.getView().getTitle().equalsIgnoreCase(Utils.chat("&a&lMenu"))) {
-			
+			e.setCancelled(true);
+			if (e.getClickedInventory() != e.getView().getTopInventory()) return;
 			ItemStack skills = e.getInventory().getItem(18);
 	
 			if (e.getCurrentItem().isSimilar(skills)) {
 				p.performCommand("skills");
-			}
+			}			
 			
-			e.setCancelled(true);
 			return;
 		}
 		
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&a&lSkills")))) {
-			if (e.getSlot() == 0) p.performCommand("menu");
 			e.setCancelled(true);
+			if (e.getSlot() == 0) p.performCommand("menu");
+			
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&2&lCraft")))) {
@@ -87,7 +88,8 @@ public class GuiShops implements Listener{
 		}
 		
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&5&lChoose a Path")))) {
-			
+			e.setCancelled(true);
+			if (e.getClickedInventory() != e.getView().getTopInventory()) return;
 			Profile profile = this.plugin.getProfileManager().getPlayerProfile(p);
 			ItemStack tank = e.getInventory().getItem(20);
 			ItemStack archer = e.getInventory().getItem(21);
@@ -108,12 +110,12 @@ public class GuiShops implements Listener{
 				p.sendMessage(Utils.chat("&7&lYou have chosen the &4&lAssassin &7&lPath."));
 			}
 						
-			
-			e.setCancelled(true);
 			return;
 		}
 		
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&a&lShop")))) {
+			e.setCancelled(true);
+			if (e.getClickedInventory() != e.getView().getTopInventory()) return;		
 			if (e.getSlot() == 19) p.performCommand("shopBlocks1");
 			if (e.getSlot() == 20) p.performCommand("shopColorBlocks1");
 			if (e.getSlot() == 21) p.performCommand("shopDecorativeBlocks1");
@@ -124,7 +126,6 @@ public class GuiShops implements Listener{
 			if (e.getSlot() == 28) p.performCommand("shopRedstone1");
 			if (e.getSlot() == 29) p.performCommand("shopMisc1");
 			if (e.getSlot() == 30) p.performCommand("shopBrewing1");
-			e.setCancelled(true);
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&8&lBlocks Shop &7(Page 1)")))) {			
