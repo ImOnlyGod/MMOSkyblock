@@ -15,7 +15,7 @@ public class CraftingEvents implements Listener{
 	private Main plugin;
 		
 	public CraftingEvents(Main plugin) {
-		this.plugin = plugin;
+		this.setPlugin(plugin);
 	}
 	
 	@EventHandler
@@ -49,11 +49,21 @@ public class CraftingEvents implements Listener{
 				e.getView().getTitle().equals("Stonecutter") || 
 				e.getView().getTitle().equals("Item Hopper") || 
 				e.getView().getTitle().equals("Dropper") || 
-				e.getView().getTitle().equals("Dispenser") || 
+				e.getView().getTitle().equals("Dispenser") ||
+				e.getView().getTitle().equals("Ender Chest") ||
+				e.getView().getTitle().equals("Shulker Box") ||
 				e.getView().getTitle().equals("Minecart with Chest"))) {
 			e.setCancelled(true);
 		}
 
+	}
+
+	public Main getPlugin() {
+		return plugin;
+	}
+
+	public void setPlugin(Main plugin) {
+		this.plugin = plugin;
 	}
 			
 	

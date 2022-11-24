@@ -34,6 +34,13 @@ public class SkillsFunctioning implements Listener{
 		
 		if (block.getType() == Material.FARMLAND) return;
 				
+		if (e.getItemInHand().getItemMeta().hasDisplayName()) {
+			if (e.getItemInHand().getItemMeta().getDisplayName().contains(Utils.chat("&7&lCompressed"))) {
+				e.setCancelled(true);
+				return;
+			}			
+		}
+	
 		Player p = e.getPlayer();
 		Profile profile = plugin.getProfileManager().getPlayerProfile(p);
 		profile.getFarming().generateCropXp();

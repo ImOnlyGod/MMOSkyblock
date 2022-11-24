@@ -68,8 +68,10 @@ public class ItemStats {
 		ItemStorageTable itemTable = new ItemStorageTable();
 		
 		for (int i = 0; i < items.size(); i++) {
+			
 			int ID = getItemCustomID(items.get(i));
 			ItemsCore item = itemTable.getIDtoItemsCore().get(ID);
+			if (item == null) continue;
 			item.createItem(1);
 			int mana= item.getItemManaStat();
 			totalMana = totalMana + mana;
@@ -89,6 +91,7 @@ public class ItemStats {
 		for (int i = 0; i < items.size(); i++) {
 			int ID = getItemCustomID(items.get(i));
 			ItemsCore item = itemTable.getIDtoItemsCore().get(ID);
+			if (item == null) continue;
 			item.createItem(1);
 			int dmg= item.getItemPhysicalDamage();
 			totalDmg = totalDmg + dmg;
@@ -108,6 +111,7 @@ public class ItemStats {
 		for (int i = 0; i < items.size(); i++) {
 			int ID = getItemCustomID(items.get(i));
 			ItemsCore item = itemTable.getIDtoItemsCore().get(ID);
+			if (item == null) continue;
 			item.createItem(1);
 			double critChance = item.getItemCritChance();
 			totalCritChance = totalCritChance + critChance;
@@ -127,6 +131,7 @@ public class ItemStats {
 		for (int i = 0; i < items.size(); i++) {
 			int ID = getItemCustomID(items.get(i));
 			ItemsCore item = itemTable.getIDtoItemsCore().get(ID);
+			if (item == null) continue;
 			item.createItem(1);
 			double critDmg = item.getItemCritDamage();
 			totalCritDmg = totalCritDmg + critDmg;
@@ -146,6 +151,7 @@ public class ItemStats {
 		for (int i = 0; i < items.size(); i++) {
 			int ID = getItemCustomID(items.get(i));
 			ItemsCore item = itemTable.getIDtoItemsCore().get(ID);
+			if (item == null) continue;
 			item.createItem(1);
 			int health= item.getItemHeathStat();
 			totalHealth = totalHealth + health;
@@ -165,6 +171,7 @@ public class ItemStats {
 		for (int i = 0; i < items.size(); i++) {
 			int ID = getItemCustomID(items.get(i));
 			ItemsCore item = itemTable.getIDtoItemsCore().get(ID);
+			if (item == null) continue;
 			item.createItem(1);
 			int armor = item.getItemArmor();
 			totalArmor = totalArmor + armor;
@@ -183,6 +190,7 @@ public class ItemStats {
 		for (int i = 0; i < items.size(); i++) {
 			int ID = getItemCustomID(items.get(i));
 			ItemsCore item = itemTable.getIDtoItemsCore().get(ID);
+			if (item == null) continue;
 			item.createItem(1);
 			int mr= item.getItemMagicResist();
 			totalMR = totalMR + mr;

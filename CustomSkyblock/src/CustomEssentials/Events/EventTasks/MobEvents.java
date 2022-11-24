@@ -295,6 +295,8 @@ public class MobEvents implements Listener{
 		ItemStorageTable table = new ItemStorageTable();
 		ItemsCore item = table.getIDtoItemsCore().get(ID);
 		
+		if (item == null) return;
+		
 		if (!(e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK))) return;
 		
 		item.itemAbility(p, profiles.getPlayerProfile(p));

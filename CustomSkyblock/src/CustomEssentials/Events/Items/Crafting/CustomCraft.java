@@ -126,6 +126,72 @@ public class CustomCraft {
 				return this.craftingRecipeSet.getVanillaShapedRecipe().getRecipeOutput().get(inven);
 			}
 		}
+		
+		for (ItemStack[][] inven: this.craftingRecipeSet.getCustomShapelessRecipes().getRecipeOutput().keySet()) {
+			
+			Boolean matching = true;
+			for (int i=0;i<inven.length;i++) {
+				for (int j=0;j<inven.length;j++) {
+					
+					if ((inven[i][j] == null) && (this.inputGrid[i][j] == null)) {
+						continue;
+					}
+					else if ((inven[i][j] == null) && !(this.inputGrid[i][j] == null)) {
+						matching = false;
+						break;
+					}
+					else if (!(inven[i][j] == null) && (this.inputGrid[i][j] == null)) {
+						matching = false;
+						break;
+					}
+					
+					
+					if (!(inven[i][j].isSimilar(this.inputGrid[i][j])) || !(inven[i][j].getAmount() <= this.inputGrid[i][j].getAmount())) {
+						matching = false;
+						break;
+					}	
+				}	
+			}
+			//clean up code
+			if (matching) {
+				this.matchingRecipe = inven;
+				this.setOutputRecipe(this.craftingRecipeSet.getCustomShapelessRecipes().getRecipeOutput().get(inven));
+				return this.craftingRecipeSet.getCustomShapelessRecipes().getRecipeOutput().get(inven);
+			}
+		}
+		
+		for (ItemStack[][] inven: this.craftingRecipeSet.getCustomShapedRecipes().getRecipeOutput().keySet()) {
+			
+			Boolean matching = true;
+			for (int i=0;i<inven.length;i++) {
+				for (int j=0;j<inven.length;j++) {
+					
+					if ((inven[i][j] == null) && (this.inputGrid[i][j] == null)) {
+						continue;
+					}
+					else if ((inven[i][j] == null) && !(this.inputGrid[i][j] == null)) {
+						matching = false;
+						break;
+					}
+					else if (!(inven[i][j] == null) && (this.inputGrid[i][j] == null)) {
+						matching = false;
+						break;
+					}
+					
+					
+					if (!(inven[i][j].isSimilar(this.inputGrid[i][j])) || !(inven[i][j].getAmount() <= this.inputGrid[i][j].getAmount())) {
+						matching = false;
+						break;
+					}	
+				}	
+			}
+			//clean up code
+			if (matching) {
+				this.matchingRecipe = inven;
+				this.setOutputRecipe(this.craftingRecipeSet.getCustomShapedRecipes().getRecipeOutput().get(inven));
+				return this.craftingRecipeSet.getCustomShapedRecipes().getRecipeOutput().get(inven);
+			}
+		}
 		return null;		
 	}
 	
@@ -204,6 +270,7 @@ public class CustomCraft {
 				}
 				
 				ItemStack addItem = new ItemStack(this.crafttingGUI.getItem(slot).getType(),this.crafttingGUI.getItem(slot).getAmount()+amountAdded);
+				addItem.setItemMeta(this.crafttingGUI.getItem(slot).getItemMeta());
 				p.setItemOnCursor(addItem);
 				reduceMaterials();
 				
@@ -212,7 +279,7 @@ public class CustomCraft {
 			else if (!isCursor) {
 				
 				if (!checkInventorySpace(playerInven,craftingInven.getItem(slot),itemAmount)) return;
-				playerInven.addItem(new ItemStack(this.crafttingGUI.getItem(slot).getType(),itemAmount));
+				playerInven.addItem(this.crafttingGUI.getItem(slot));
 				reduceMaterials();
 			}
 			else break;
