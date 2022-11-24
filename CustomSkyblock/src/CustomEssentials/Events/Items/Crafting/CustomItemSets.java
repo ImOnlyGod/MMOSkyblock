@@ -7,6 +7,7 @@ import org.bukkit.Material;
 public class CustomItemSets {
 	
 	private ArrayList<Material> vanillaToCustomItems = new ArrayList<Material>();
+	private ArrayList<Material> ItemsToWeapons = new ArrayList<Material>();
 	
 	public CustomItemSets() {
 		generateVanillaToCustomItems();
@@ -85,6 +86,10 @@ public class CustomItemSets {
 		this.vanillaToCustomItems.add(Material.PHANTOM_MEMBRANE);
 		
 	}
+	
+	public void generateItemsToWeapons() {
+		
+	}
 
 	public ArrayList<Material> getVanillaToCustomItems() {
 		return vanillaToCustomItems;
@@ -92,6 +97,14 @@ public class CustomItemSets {
 
 	public void setVanillaToCustomItems(ArrayList<Material> vanillaToCustomItems) {
 		this.vanillaToCustomItems = vanillaToCustomItems;
+	}
+
+	public ArrayList<Material> getItemsToWeapons() {
+		return ItemsToWeapons;
+	}
+
+	public void setItemsToWeapons(ArrayList<Material> itemsToWeapons) {
+		ItemsToWeapons = itemsToWeapons;
 	}
 	
 	

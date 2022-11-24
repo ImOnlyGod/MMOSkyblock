@@ -57,6 +57,7 @@ public class ItemStats {
 		setItemCritDamageStat();
 		setItemDamageStat();
 		setItemMRStat();
+		setItemSpeedStat();
 		
 	}
 
@@ -197,6 +198,25 @@ public class ItemStats {
 			
 		}
 		stats.setMagicResist(totalMR);	
+	}
+	
+	public void setItemSpeedStat() {
+		Stats stats = profileManager.getPlayerProfile(p).getStats();
+		Stats pathStats = profileManager.getPlayerProfile(p).getPath().getStats();
+		int totalSpeed = (int) (stats.getDefaultSpeed() + pathStats.getDefaultSpeed() + pathStats.getSpeed());
+		ItemStorageTable itemTable = new ItemStorageTable();
+		
+		for (int i = 0; i < items.size(); i++) {
+			int ID = getItemCustomID(items.get(i));
+			ItemsCore item = itemTable.getIDtoItemsCore().get(ID);
+			if (item == null) continue;
+			item.createItem(1);
+			int speed= item.getItemSpeed();
+			totalSpeed = totalSpeed + speed;
+			
+		}
+		stats.setSpeed(totalSpeed);
+		p.setWalkSpeed((float) ((stats.getSpeed() + pathStats.getSpeed())/500f));
 	}
 	
 	public Boolean isValidItem(ItemStack item) {

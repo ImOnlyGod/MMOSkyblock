@@ -2,8 +2,9 @@ package CustomEssentials.Events.Items;
 
 import java.util.HashMap;
 
-import CustomEssentials.Events.Items.Weapons.BasicSword;
 import CustomEssentials.Events.Items.Weapons.HadesBlade;
+import CustomEssentials.Events.Items.Weapons.ThickWoodenSword;
+import CustomEssentials.Events.Items.Weapons.Armor.HardStoneArmor.HardStoneHelmet;
 
 public class ItemStorageTable {
 	
@@ -16,11 +17,14 @@ public class ItemStorageTable {
 	}
 	
 	private void putItems() {
-		this.IDtoItemsCore.put(0, new BasicSword());
-		this.CmdtoItemsCore.put("basicsword", new BasicSword());
+		this.IDtoItemsCore.put(0, new ThickWoodenSword());
+		this.CmdtoItemsCore.put("basicsword", new ThickWoodenSword());
 		
 		this.IDtoItemsCore.put(1, new HadesBlade());
 		this.CmdtoItemsCore.put("hadesblade", new HadesBlade());
+		
+		this.IDtoItemsCore.put(2, new HardStoneHelmet());
+		this.CmdtoItemsCore.put("hardstonehelmet", new HardStoneHelmet());
 	}
 
 	@SuppressWarnings("unchecked")

@@ -11,7 +11,7 @@ import org.bukkit.entity.Player;
 import CustomEssentials.Main;
 import CustomEssentials.Events.Items.ItemStorageTable;
 import CustomEssentials.Events.Items.ItemsCore;
-import CustomEssentials.Events.Items.Weapons.BasicSword;
+import CustomEssentials.Events.Items.Weapons.ThickWoodenSword;
 import CustomEssentials.Utils.Utils;
 
 public class WeaponCommand implements CommandExecutor{
@@ -40,7 +40,7 @@ public class WeaponCommand implements CommandExecutor{
 		if (args.length == 0) {
 			
 			Player p = (Player) sender;
-			BasicSword s = new BasicSword();
+			ThickWoodenSword s = new ThickWoodenSword();
 			s.giveItems(p,1);
 			return true;
 		}

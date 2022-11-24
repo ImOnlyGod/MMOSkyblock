@@ -13,7 +13,7 @@ import CustomEssentials.Events.Items.ItemsCore;
 import CustomEssentials.Utils.Utils;
 
 
-public class BasicSword extends ItemsCore{
+public class ThickWoodenSword extends ItemsCore{
 		
 	public ItemStack createItem(int amount) {
 		
@@ -28,7 +28,7 @@ public class BasicSword extends ItemsCore{
 		setItemFlags(meta);
 		
 		//Set name and lore
-		setItemName(Utils.chat("&7Basic Sword &8[&5Tier: &7F&8]"));
+		setItemName(Utils.chat("&7Thick Wooden Sword &8[&5Tier: &7F&8]"));
 		meta.setDisplayName(getItemName());	
 		meta.setCustomModelData(0);
 		
@@ -46,7 +46,8 @@ public class BasicSword extends ItemsCore{
 		lore.add(Utils.chat("                          "));
 		lore.add(Utils.chat("&cDamage:&6 "+ getItemPhysicalDamage() +"⚔"));
 		lore.add(Utils.chat("                          "));
-		lore.add(Utils.chat("&6&lDescription: &7A simple and common weapon."));
+		lore.add(Utils.chat("&6&lDescription: &7Forged by Compressed Wood,"));
+		lore.add(Utils.chat("&7to be an upgraded Wooden Sword!"));
 		lore.add(Utils.chat("&6&lAbility: &7None"));
 		lore.add(Utils.chat("                          "));
 		lore.add(Utils.chat("&f&l&oCommon Weapon"));
