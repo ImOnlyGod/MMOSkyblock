@@ -14,7 +14,7 @@ import org.bukkit.scheduler.BukkitScheduler;
 import CustomEssentials.Commands.CustomMobsCommand;
 import CustomEssentials.Commands.EatCommand;
 import CustomEssentials.Commands.FlyCommand;
-import CustomEssentials.Commands.WeaponCommand;
+import CustomEssentials.Commands.WeaponTabCommand;
 import CustomEssentials.Commands.PlayerEconomy.BalanceCommand;
 import CustomEssentials.Commands.PlayerEconomy.PayCommand;
 import CustomEssentials.Events.PlayerProfileManager;
@@ -102,6 +102,8 @@ public class Main extends JavaPlugin{
 		new PathSelectionGui(this);
 		new MainShopMenu(this);
 		new CraftGui(this);
+		new WeaponTabCommand(this);
+		new CustomMobsCommand(this);
 		readShopData();
 		getServer().getPluginManager().registerEvents(new MobEvents(this), this);
 		getServer().getPluginManager().registerEvents(new PlayerJoinLeave(this), this);
@@ -115,7 +117,6 @@ public class Main extends JavaPlugin{
 				
 		new FlyCommand(this);
 		new EatCommand(this);
-		new WeaponCommand(this);
 		new BalanceCommand(this);
 		new PayCommand(this);
 
@@ -144,7 +145,7 @@ public class Main extends JavaPlugin{
 		new RedstoneShop2(this, this.shopPrices);
 		new BrewingShop1(this, this.shopPrices);
 		new BrewingShop2(this, this.shopPrices);
-		new CustomMobsCommand(this);
+		
 		
 		for (Player p : Bukkit.getOnlinePlayers()) {
 			readPlayerProfile(p);

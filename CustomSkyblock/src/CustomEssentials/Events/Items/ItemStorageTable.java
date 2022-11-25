@@ -4,7 +4,10 @@ import java.util.HashMap;
 
 import CustomEssentials.Events.Items.Weapons.HadesBlade;
 import CustomEssentials.Events.Items.Weapons.ThickWoodenSword;
+import CustomEssentials.Events.Items.Weapons.Armor.HardStoneArmor.HardStoneBoots;
+import CustomEssentials.Events.Items.Weapons.Armor.HardStoneArmor.HardStoneChestplate;
 import CustomEssentials.Events.Items.Weapons.Armor.HardStoneArmor.HardStoneHelmet;
+import CustomEssentials.Events.Items.Weapons.Armor.HardStoneArmor.HardStoneLeggings;
 
 public class ItemStorageTable {
 	
@@ -25,6 +28,15 @@ public class ItemStorageTable {
 		
 		this.IDtoItemsCore.put(2, new HardStoneHelmet());
 		this.CmdtoItemsCore.put("hardstonehelmet", new HardStoneHelmet());
+
+		this.IDtoItemsCore.put(3, new HardStoneChestplate());
+		this.CmdtoItemsCore.put("hardstonechestplate", new HardStoneChestplate());
+
+		this.IDtoItemsCore.put(4, new HardStoneLeggings());
+		this.CmdtoItemsCore.put("hardstoneleggings", new HardStoneLeggings());
+		
+		this.IDtoItemsCore.put(5, new HardStoneBoots());
+		this.CmdtoItemsCore.put("hardstoneboots", new HardStoneBoots());
 	}
 
 	@SuppressWarnings("unchecked")

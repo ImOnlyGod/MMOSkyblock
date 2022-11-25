@@ -45,7 +45,6 @@ public class CompressedItems extends ItemsCore{
 	
 	private ArrayList<String> createLore(ItemMeta meta) {
 		ArrayList<String> lore = new ArrayList<String>();	
-		lore.add(Utils.chat("                          "));
 		lore.add(Utils.chat("&a&l&oUnCommon Item"));
 		
 		return lore;
