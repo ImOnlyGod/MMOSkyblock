@@ -34,9 +34,11 @@ public class CraftingEvents implements Listener{
 		
 		if (!(e.getView().getTitle().equals("Crafting") || 
 				e.getView().getTitle().equals("Chest") || 
+				e.getView().getTitle().equals("Large Chest") || 
 				e.getView().getTitle().equals("Inventory") ||
 				e.getView().getTitle().equals("Furnace") || 
 				e.getView().getTitle().equals("Trapped Chest") || 
+				e.getView().getTitle().equals("Large Trapped Chest") || 
 				e.getView().getTitle().equals("Repair & Name") || 
 				e.getView().getTitle().equals("Enchant") || 
 				e.getView().getTitle().equals("Loom") || 

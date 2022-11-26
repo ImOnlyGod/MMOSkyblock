@@ -1,4 +1,4 @@
-package CustomEssentials.Events.Gui;
+package CustomEssentials.Events.Gui.Skills;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;

@@ -50,7 +50,6 @@ public class CustomMobsCommand implements TabExecutor{
 		
 		if (args.length == 1) {
 			String key = args[0].toLowerCase();
-			System.out.println(key);
 			if (this.MobsCommandList.contains(key)) {
 				performMobSpawn(key,loc);								
 			}

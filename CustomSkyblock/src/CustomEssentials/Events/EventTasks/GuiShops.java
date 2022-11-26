@@ -15,6 +15,7 @@ import org.bukkit.inventory.PlayerInventory;
 import CustomEssentials.Main;
 import CustomEssentials.Events.Profile;
 import CustomEssentials.Events.Gui.Shop.ItemsBuySellGui;
+import CustomEssentials.Events.Gui.Skills.SkillProgression;
 import CustomEssentials.Events.Items.Crafting.CustomCraft;
 import CustomEssentials.Events.Items.Crafting.CustomCraftingItemSet;
 import CustomEssentials.Events.PlayerPath.Paths.Archer;
@@ -57,7 +58,34 @@ public class GuiShops implements Listener{
 		
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&a&lSkills")))) {
 			e.setCancelled(true);
+			Profile playerProfile = this.plugin.getProfileManager().getPlayerProfile(p);
+			
 			if (e.getSlot() == 0) p.performCommand("menu");
+			else if (e.getSlot() == 19) {
+				SkillProgression progressionMenu = new SkillProgression(this.plugin,p,playerProfile.getMining(),"&8&lMining");
+				progressionMenu.createSkillGui();
+			}
+			else if (e.getSlot() == 20) {
+				SkillProgression progressionMenu = new SkillProgression(this.plugin,p,playerProfile.getFarming(),"&a&lFarming");
+				progressionMenu.createSkillGui();
+			}
+			else if (e.getSlot() == 21) {
+				SkillProgression progressionMenu = new SkillProgression(this.plugin,p,playerProfile.getCombat(),"&c&lCombat");
+				progressionMenu.createSkillGui();
+			}
+			else if (e.getSlot() == 22) {
+				SkillProgression progressionMenu = new SkillProgression(this.plugin,p,playerProfile.getForaging(),"&6&lForaging");
+				progressionMenu.createSkillGui();
+			}
+			else if (e.getSlot() == 23) {
+				SkillProgression progressionMenu = new SkillProgression(this.plugin,p,playerProfile.getFishing(),"&b&lFishing");
+				progressionMenu.createSkillGui();
+			}
+			
+			return;
+		}
+		else if ((e.getView().getTitle().contains(Utils.chat("&7&lProgression")))) {		
+			e.setCancelled(true);
 			
 			return;
 		}
@@ -535,6 +563,16 @@ public class GuiShops implements Listener{
 				@Override
 				public void run() {
 					p.performCommand(menu);
+				}
+			},1);
+			return;
+		}
+		else if (e.getView().getTitle().contains(Utils.chat("&7&lProgression"))) {
+			
+			Bukkit.getScheduler().scheduleSyncDelayedTask(this.plugin, new Runnable() {
+				@Override
+				public void run() {
+					p.performCommand("skills");
 				}
 			},1);
 			return;
