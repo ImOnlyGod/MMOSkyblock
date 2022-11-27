@@ -9,6 +9,7 @@ import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
@@ -36,7 +37,47 @@ public class GuiShops implements Listener{
 		this.plugin = plugin;
 		this.shopPrices = shopPrices;
 	}
+	
+	public Boolean isValidClick(ClickType click) {
+		if (click.isShiftClick() || click.isKeyboardClick() || click == ClickType.DOUBLE_CLICK) {
+			return false;				
+		}
+		return true;
+	}
+	
+	public Boolean isValidCraftingClick(ClickType click, InventoryView invenView, Inventory clickedInven, ItemStack clickedItem, int clickedSlot, ItemStack hoveredItem) {
 		
+		if (click.isKeyboardClick()) {
+			if (clickedInven == invenView.getBottomInventory()) return true;		
+			if ((clickedSlot > 9 && clickedSlot < 14) || (clickedSlot > 18 && clickedSlot < 23) || (clickedSlot > 27 && clickedSlot < 32) || (clickedSlot > 36 && clickedSlot < 41)) return true;			
+			
+			return false;				
+		}
+		else if (click.isShiftClick())  {	
+			if (clickedItem == null) return true;
+			if (clickedItem.isSimilar(new ItemStack(Material.BLACK_STAINED_GLASS_PANE)) || 
+					clickedItem.isSimilar(new ItemStack(Material.RED_STAINED_GLASS_PANE)) || clickedItem.isSimilar(invenView.getTopInventory().getItem(24))) return false;
+			
+			if (clickedInven == invenView.getBottomInventory()) return true;
+			
+			if ((clickedSlot > 9 && clickedSlot < 14) || (clickedSlot > 18 && clickedSlot < 23) || (clickedSlot > 27 && clickedSlot < 32) 
+					|| (clickedSlot > 36 && clickedSlot < 41) || clickedSlot == 24) return true;
+			
+			return false;			
+		}
+		else if (click == ClickType.DOUBLE_CLICK) {
+						
+			return false;
+		}
+		if (clickedItem == null) return true;
+		if (clickedInven == invenView.getBottomInventory()) return true;
+		if (clickedInven == invenView.getTopInventory() && ((clickedSlot > 9 && clickedSlot < 14) || (clickedSlot > 18 && clickedSlot < 23) || (clickedSlot > 27 && clickedSlot < 32) 
+				|| (clickedSlot > 36 && clickedSlot < 41) || (clickedSlot == 24 && !clickedItem.isSimilar(new ItemStack(Material.BLACK_STAINED_GLASS_PANE)) 
+						&& !clickedItem.isSimilar(new ItemStack(Material.RED_STAINED_GLASS_PANE))))) return true;
+		
+		return false;
+	}
+	
 	
 	@EventHandler
 	public void OnClick(InventoryClickEvent e) {
@@ -45,10 +86,17 @@ public class GuiShops implements Listener{
 		if (this.shopPrices == null) this.shopPrices = new ItemPrices();
 		
 		if (e.getView().getTitle().equalsIgnoreCase(Utils.chat("&a&lMenu"))) {
+			ClickType click = e.getClick();
+			if (!isValidClick(click)) {
+				e.setCancelled(true);				
+			}
+			if (e.getClickedInventory() != e.getView().getTopInventory()) {
+				return;
+			}			
 			e.setCancelled(true);
-			if (e.getClickedInventory() != e.getView().getTopInventory()) return;
 			ItemStack skills = e.getInventory().getItem(18);
-	
+			
+			if (e.getCurrentItem() == null) return;
 			if (e.getCurrentItem().isSimilar(skills)) {
 				p.performCommand("skills");
 			}			
@@ -57,6 +105,13 @@ public class GuiShops implements Listener{
 		}
 		
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&a&lSkills")))) {
+			ClickType click = e.getClick();
+			if (!isValidClick(click)) {
+				e.setCancelled(true);				
+			}
+			if (e.getClickedInventory() != e.getView().getTopInventory()) {
+				return;
+			}
 			e.setCancelled(true);
 			Profile playerProfile = this.plugin.getProfileManager().getPlayerProfile(p);
 			
@@ -84,21 +139,23 @@ public class GuiShops implements Listener{
 			
 			return;
 		}
-		else if ((e.getView().getTitle().contains(Utils.chat("&7&lProgression")))) {		
+		else if ((e.getView().getTitle().contains(Utils.chat("&7&lProgression")))) {	
+			ClickType click = e.getClick();
+			if (!isValidClick(click)) {
+				e.setCancelled(true);				
+			}
+			if (e.getClickedInventory() != e.getView().getTopInventory()) {
+				return;
+			}
 			e.setCancelled(true);
+			if (e.getSlot() == 0) p.performCommand("skills");
 			
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&2&lCraft")))) {
-			if (e.getClick().isKeyboardClick()) {
-				e.setCancelled(true);
-				return;
-			}
-			if (e.getCurrentItem() == null);
-			else if ((e.getClickedInventory() == e.getView().getTopInventory()) && (e.getCurrentItem().getType() == Material.BLACK_STAINED_GLASS_PANE || (e.getSlot() == 24 || e.getSlot() == 25 || e.getSlot() == 33 || e.getSlot() == 34))) 
-				e.setCancelled(true);
 			
-									
+			if (!isValidCraftingClick(e.getClick(),e.getView(),e.getClickedInventory(),e.getCurrentItem(),e.getSlot(),e.getCursor())) e.setCancelled(true);
+										
 			
 			Bukkit.getScheduler().scheduleSyncDelayedTask(this.plugin, new Runnable() {
 				@Override
@@ -116,8 +173,14 @@ public class GuiShops implements Listener{
 		}
 		
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&5&lChoose a Path")))) {
+			ClickType click = e.getClick();
+			if (!isValidClick(click)) {
+				e.setCancelled(true);				
+			}
+			if (e.getClickedInventory() != e.getView().getTopInventory()) {
+				return;
+			}
 			e.setCancelled(true);
-			if (e.getClickedInventory() != e.getView().getTopInventory()) return;
 			Profile profile = this.plugin.getProfileManager().getPlayerProfile(p);
 			ItemStack tank = e.getInventory().getItem(20);
 			ItemStack archer = e.getInventory().getItem(21);
@@ -142,8 +205,14 @@ public class GuiShops implements Listener{
 		}
 		
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&a&lShop")))) {
-			e.setCancelled(true);
-			if (e.getClickedInventory() != e.getView().getTopInventory()) return;		
+			ClickType click = e.getClick();
+			if (!isValidClick(click)) {
+				e.setCancelled(true);				
+			}
+			if (e.getClickedInventory() != e.getView().getTopInventory()) {
+				return;
+			}
+			e.setCancelled(true);		
 			if (e.getSlot() == 19) p.performCommand("shopBlocks1");
 			if (e.getSlot() == 20) p.performCommand("shopColorBlocks1");
 			if (e.getSlot() == 21) p.performCommand("shopDecorativeBlocks1");
@@ -156,10 +225,16 @@ public class GuiShops implements Listener{
 			if (e.getSlot() == 30) p.performCommand("shopBrewing1");
 			return;
 		}
-		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&8&lBlocks Shop &7(Page 1)")))) {			
+		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&8&lBlocks Shop &7(Page 1)")))) {		
+			ClickType click = e.getClick();
+			if (!isValidClick(click)) {
+				e.setCancelled(true);				
+			}
+			if (e.getClickedInventory() != e.getView().getTopInventory()) {
+				return;
+			}
 			e.setCancelled(true);
 			
-			if (e.getClickedInventory() != e.getView().getTopInventory()) return;
 			
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 51) p.performCommand("shopBlocks2");
@@ -167,9 +242,15 @@ public class GuiShops implements Listener{
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&8&lBlocks Shop &7(Page 2)")))) {
+			ClickType click = e.getClick();
+			if (!isValidClick(click)) {
+				e.setCancelled(true);				
+			}
+			if (e.getClickedInventory() != e.getView().getTopInventory()) {
+				return;
+			}
 			e.setCancelled(true);
 			
-			if (e.getClickedInventory() != e.getView().getTopInventory()) return;
 			
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 47) p.performCommand("shopBlocks1");
@@ -178,8 +259,14 @@ public class GuiShops implements Listener{
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&8&lBlocks Shop &7(Page 3)")))) {
+			ClickType click = e.getClick();
+			if (!isValidClick(click)) {
+				e.setCancelled(true);				
+			}
+			if (e.getClickedInventory() != e.getView().getTopInventory()) {
+				return;
+			}
 			e.setCancelled(true);
-			if (e.getClickedInventory() != e.getView().getTopInventory()) return;
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 47) p.performCommand("shopBlocks2");
 			if (e.getSlot() == 51) p.performCommand("shopBlocks4");
@@ -187,24 +274,43 @@ public class GuiShops implements Listener{
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&8&lBlocks Shop &7(Page 4)")))) {
+			ClickType click = e.getClick();
+			if (!isValidClick(click)) {
+				e.setCancelled(true);				
+			}
+			if (e.getClickedInventory() != e.getView().getTopInventory()) {
+				return;
+			}
 			e.setCancelled(true);
-			if (e.getClickedInventory() != e.getView().getTopInventory()) return;
+
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 47) p.performCommand("shopBlocks3");
 			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick());
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&2&lColor Blocks Shop &7(Page 1)")))) {
+			ClickType click = e.getClick();
+			if (!isValidClick(click)) {
+				e.setCancelled(true);				
+			}
+			if (e.getClickedInventory() != e.getView().getTopInventory()) {
+				return;
+			}
 			e.setCancelled(true);
-			if (e.getClickedInventory() != e.getView().getTopInventory()) return;
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 51) p.performCommand("shopColorBlocks2");
 			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick());
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&2&lColor Blocks Shop &7(Page 2)")))) {
+			ClickType click = e.getClick();
+			if (!isValidClick(click)) {
+				e.setCancelled(true);				
+			}
+			if (e.getClickedInventory() != e.getView().getTopInventory()) {
+				return;
+			}
 			e.setCancelled(true);
-			if (e.getClickedInventory() != e.getView().getTopInventory()) return;
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 47) p.performCommand("shopColorBlocks1");
 			if (e.getSlot() == 51) p.performCommand("shopColorBlocks3");
@@ -212,8 +318,14 @@ public class GuiShops implements Listener{
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&2&lColor Blocks Shop &7(Page 3)")))) {
+			ClickType click = e.getClick();
+			if (!isValidClick(click)) {
+				e.setCancelled(true);				
+			}
+			if (e.getClickedInventory() != e.getView().getTopInventory()) {
+				return;
+			}
 			e.setCancelled(true);
-			if (e.getClickedInventory() != e.getView().getTopInventory()) return;
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 47) p.performCommand("shopColorBlocks2");
 			if (e.getSlot() == 51) p.performCommand("shopColorBlocks4");
@@ -221,8 +333,14 @@ public class GuiShops implements Listener{
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&2&lColor Blocks Shop &7(Page 4)")))) {
+			ClickType click = e.getClick();
+			if (!isValidClick(click)) {
+				e.setCancelled(true);				
+			}
+			if (e.getClickedInventory() != e.getView().getTopInventory()) {
+				return;
+			}
 			e.setCancelled(true);
-			if (e.getClickedInventory() != e.getView().getTopInventory()) return;
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 47) p.performCommand("shopColorBlocks3");
 			
@@ -230,8 +348,14 @@ public class GuiShops implements Listener{
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&2&lDecorative Blocks Shop &7(Page 1)")))) {
+			ClickType click = e.getClick();
+			if (!isValidClick(click)) {
+				e.setCancelled(true);				
+			}
+			if (e.getClickedInventory() != e.getView().getTopInventory()) {
+				return;
+			}
 			e.setCancelled(true);
-			if (e.getClickedInventory() != e.getView().getTopInventory()) return;
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 51) p.performCommand("shopDecorativeBlocks2");
 			
@@ -239,8 +363,14 @@ public class GuiShops implements Listener{
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&2&lDecorative Blocks Shop &7(Page 2)")))) {
+			ClickType click = e.getClick();
+			if (!isValidClick(click)) {
+				e.setCancelled(true);				
+			}
+			if (e.getClickedInventory() != e.getView().getTopInventory()) {
+				return;
+			}
 			e.setCancelled(true);
-			if (e.getClickedInventory() != e.getView().getTopInventory()) return;
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 47) p.performCommand("shopDecorativeBlocks1");
 			if (e.getSlot() == 51) p.performCommand("shopDecorativeBlocks3");
@@ -249,8 +379,14 @@ public class GuiShops implements Listener{
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&2&lDecorative Blocks Shop &7(Page 3)")))) {
+			ClickType click = e.getClick();
+			if (!isValidClick(click)) {
+				e.setCancelled(true);				
+			}
+			if (e.getClickedInventory() != e.getView().getTopInventory()) {
+				return;
+			}
 			e.setCancelled(true);
-			if (e.getClickedInventory() != e.getView().getTopInventory()) return;
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 47) p.performCommand("shopDecorativeBlocks2");
 			
@@ -258,8 +394,14 @@ public class GuiShops implements Listener{
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&a&lFarming Shop &7(Page 1)")))) {
+			ClickType click = e.getClick();
+			if (!isValidClick(click)) {
+				e.setCancelled(true);				
+			}
+			if (e.getClickedInventory() != e.getView().getTopInventory()) {
+				return;
+			}
 			e.setCancelled(true);
-			if (e.getClickedInventory() != e.getView().getTopInventory()) return;
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 51) p.performCommand("shopFarming2");
 			
@@ -267,8 +409,14 @@ public class GuiShops implements Listener{
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&a&lFarming Shop &7(Page 2)")))) {
+			ClickType click = e.getClick();
+			if (!isValidClick(click)) {
+				e.setCancelled(true);				
+			}
+			if (e.getClickedInventory() != e.getView().getTopInventory()) {
+				return;
+			}
 			e.setCancelled(true);
-			if (e.getClickedInventory() != e.getView().getTopInventory()) return;
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 47) p.performCommand("shopFarming1");
 		
@@ -277,8 +425,14 @@ public class GuiShops implements Listener{
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&6&lFood Shop &7(Page 1)")))) {
+			ClickType click = e.getClick();
+			if (!isValidClick(click)) {
+				e.setCancelled(true);				
+			}
+			if (e.getClickedInventory() != e.getView().getTopInventory()) {
+				return;
+			}
 			e.setCancelled(true);
-			if (e.getClickedInventory() != e.getView().getTopInventory()) return;
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 51) p.performCommand("shopFood2");
 			
@@ -287,9 +441,14 @@ public class GuiShops implements Listener{
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&6&lFood Shop &7(Page 2)")))) {
+			ClickType click = e.getClick();
+			if (!isValidClick(click)) {
+				e.setCancelled(true);				
+			}
+			if (e.getClickedInventory() != e.getView().getTopInventory()) {
+				return;
+			}
 			e.setCancelled(true);
-			if (e.getClickedInventory() != e.getView().getTopInventory()) return;
-			if (e.getClickedInventory() != e.getView().getTopInventory()) return;
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 47) p.performCommand("shopFood1");
 		
@@ -298,9 +457,14 @@ public class GuiShops implements Listener{
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&b&lGems Shop &7(Page 1)")))) {
+			ClickType click = e.getClick();
+			if (!isValidClick(click)) {
+				e.setCancelled(true);				
+			}
+			if (e.getClickedInventory() != e.getView().getTopInventory()) {
+				return;
+			}
 			e.setCancelled(true);
-			if (e.getClickedInventory() != e.getView().getTopInventory()) return;
-			if (e.getClickedInventory() != e.getView().getTopInventory()) return;
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 51) p.performCommand("shopGems2");
 			
@@ -309,9 +473,14 @@ public class GuiShops implements Listener{
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&b&lGems Shop &7(Page 2)")))) {
+			ClickType click = e.getClick();
+			if (!isValidClick(click)) {
+				e.setCancelled(true);				
+			}
+			if (e.getClickedInventory() != e.getView().getTopInventory()) {
+				return;
+			}
 			e.setCancelled(true);
-			if (e.getClickedInventory() != e.getView().getTopInventory()) return;
-			if (e.getClickedInventory() != e.getView().getTopInventory()) return;
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 47) p.performCommand("shopGems1");
 		
@@ -319,8 +488,14 @@ public class GuiShops implements Listener{
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&f&lMiscellaneous Blocks Shop &7(Page 1)")))) {
+			ClickType click = e.getClick();
+			if (!isValidClick(click)) {
+				e.setCancelled(true);				
+			}
+			if (e.getClickedInventory() != e.getView().getTopInventory()) {
+				return;
+			}
 			e.setCancelled(true);
-			if (e.getClickedInventory() != e.getView().getTopInventory()) return;
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 51) p.performCommand("shopMisc2");
 			
@@ -328,8 +503,14 @@ public class GuiShops implements Listener{
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&f&lMiscellaneous Blocks Shop &7(Page 2)")))) {
+			ClickType click = e.getClick();
+			if (!isValidClick(click)) {
+				e.setCancelled(true);				
+			}
+			if (e.getClickedInventory() != e.getView().getTopInventory()) {
+				return;
+			}
 			e.setCancelled(true);
-			if (e.getClickedInventory() != e.getView().getTopInventory()) return;
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 47) p.performCommand("shopMisc1");
 			
@@ -337,8 +518,14 @@ public class GuiShops implements Listener{
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&c&lMob Drops Shop &7(Page 1)")))) {
+			ClickType click = e.getClick();
+			if (!isValidClick(click)) {
+				e.setCancelled(true);				
+			}
+			if (e.getClickedInventory() != e.getView().getTopInventory()) {
+				return;
+			}
 			e.setCancelled(true);
-			if (e.getClickedInventory() != e.getView().getTopInventory()) return;
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 51) p.performCommand("shopMob2");
 		
@@ -346,8 +533,14 @@ public class GuiShops implements Listener{
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&c&lMob Drops Shop &7(Page 2)")))) {
+			ClickType click = e.getClick();
+			if (!isValidClick(click)) {
+				e.setCancelled(true);				
+			}
+			if (e.getClickedInventory() != e.getView().getTopInventory()) {
+				return;
+			}
 			e.setCancelled(true);
-			if (e.getClickedInventory() != e.getView().getTopInventory()) return;
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 47) p.performCommand("shopMob1");
 			
@@ -355,8 +548,14 @@ public class GuiShops implements Listener{
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&4&lRedstone Shop &7(Page 1)")))) {
+			ClickType click = e.getClick();
+			if (!isValidClick(click)) {
+				e.setCancelled(true);				
+			}
+			if (e.getClickedInventory() != e.getView().getTopInventory()) {
+				return;
+			}
 			e.setCancelled(true);
-			if (e.getClickedInventory() != e.getView().getTopInventory()) return;
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 51) p.performCommand("shopRedstone2");
 			
@@ -364,8 +563,14 @@ public class GuiShops implements Listener{
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&4&lRedstone Shop &7(Page 2)")))) {
+			ClickType click = e.getClick();
+			if (!isValidClick(click)) {
+				e.setCancelled(true);				
+			}
+			if (e.getClickedInventory() != e.getView().getTopInventory()) {
+				return;
+			}
 			e.setCancelled(true);
-			if (e.getClickedInventory() != e.getView().getTopInventory()) return;
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 47) p.performCommand("shopRedstone1");
 			
@@ -373,8 +578,14 @@ public class GuiShops implements Listener{
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&5&lBrewing Shop &7(Page 1)")))) {
+			ClickType click = e.getClick();
+			if (!isValidClick(click)) {
+				e.setCancelled(true);				
+			}
+			if (e.getClickedInventory() != e.getView().getTopInventory()) {
+				return;
+			}
 			e.setCancelled(true);
-			if (e.getClickedInventory() != e.getView().getTopInventory()) return;
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 51) p.performCommand("shopBrewing2");
 			
@@ -382,8 +593,14 @@ public class GuiShops implements Listener{
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&5&lBrewing Shop &7(Page 2)")))) {
+			ClickType click = e.getClick();
+			if (!isValidClick(click)) {
+				e.setCancelled(true);				
+			}
+			if (e.getClickedInventory() != e.getView().getTopInventory()) {
+				return;
+			}
 			e.setCancelled(true);
-			if (e.getClickedInventory() != e.getView().getTopInventory()) return;
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 47) p.performCommand("shopBrewing1");
 			
@@ -391,9 +608,14 @@ public class GuiShops implements Listener{
 			return;
 		}
 		else if ((e.getView().getTitle().contains(Utils.chat("&c&lBuying")))) {
-			
+			ClickType click = e.getClick();
+			if (!isValidClick(click)) {
+				e.setCancelled(true);				
+			}
+			if (e.getClickedInventory() != e.getView().getTopInventory()) {
+				return;
+			}			
 			e.setCancelled(true);
-			if (e.getClickedInventory() != e.getView().getTopInventory()) return;
 			
 			if (e.getSlot() != 4 && !(e.getView().getTopInventory().getItem(e.getSlot()).getType().equals(Material.RED_STAINED_GLASS_PANE))) {
 				int amount = this.shopPrices.getItemSlotPriceMultiplier().get(e.getSlot());
@@ -402,9 +624,14 @@ public class GuiShops implements Listener{
 			
 		}
 		else if ((e.getView().getTitle().contains(Utils.chat("&a&lSelling")))) {
-			
+			ClickType click = e.getClick();
+			if (!isValidClick(click)) {
+				e.setCancelled(true);				
+			}
+			if (e.getClickedInventory() != e.getView().getTopInventory()) {
+				return;
+			}
 			e.setCancelled(true);
-			if (e.getClickedInventory() != e.getView().getTopInventory()) return;
 			
 			if (e.getSlot() != 4 && !(e.getView().getTopInventory().getItem(e.getSlot()).getType().equals(Material.LIME_STAINED_GLASS_PANE))) {
 				int amount = this.shopPrices.getItemSlotPriceMultiplier().get(e.getSlot());
@@ -577,7 +804,32 @@ public class GuiShops implements Listener{
 			},1);
 			return;
 		}
-		
+		else if (e.getView().getTitle().equalsIgnoreCase(Utils.chat("&a&lSkills"))) {
+			
+			Bukkit.getScheduler().scheduleSyncDelayedTask(this.plugin, new Runnable() {
+				@Override
+				public void run() {
+					
+					if (p.getOpenInventory().getTitle().equalsIgnoreCase("Crafting")) {
+						p.performCommand("menu");
+					}					
+				}
+			},1);
+			return;
+		}
+		else if (e.getView().getTitle().contains(Utils.chat("Shop &7(Page"))) {
+			
+			Bukkit.getScheduler().scheduleSyncDelayedTask(this.plugin, new Runnable() {
+				@Override
+				public void run() {
+					
+					if (p.getOpenInventory().getTitle().equalsIgnoreCase("Crafting")) {
+						p.performCommand("shop");
+					}					
+				}
+			},1);
+			return;
+		}		
 		else if (e.getView().getTitle().contains(Utils.chat("&2&lCraft"))) {
 			Inventory craftingGUI = e.getView().getTopInventory();			
 			for (int i=10; i<14; i++) {

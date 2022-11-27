@@ -1,6 +1,8 @@
 package CustomEssentials.Events.Gui.Skills;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -8,11 +10,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
+
+import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.properties.Property;
 
 import CustomEssentials.Main;
 import CustomEssentials.Events.Profile;
 import CustomEssentials.Events.PlayerSkills.Skills;
-import CustomEssentials.Events.PlayerStats.Stats;
 import CustomEssentials.Utils.Utils;
 
 public class SkillProgression {
@@ -36,7 +41,7 @@ public class SkillProgression {
 		Inventory gui = Bukkit.createInventory(null, 45,Utils.chat(this.skillName+" &7&lProgression"));
 		
 		//Generate Glass
-		for (int i=0;i<45;i++) {
+		for (int i=1;i<45;i++) {
 			if (i<10 || i == 17 || i == 27 || i > 34) {
 				gui.setItem(i, new ItemStack(Material.BLACK_STAINED_GLASS_PANE));
 			}
@@ -120,7 +125,31 @@ public class SkillProgression {
 				gui.setItem(i, upcommingLevel);
 			}			
 		}
-		//ADD ITEM FOR TOP AND GOING BACK + ADD CLOSING MENU 
+		//ADD ITEM FOR TOP AND GOING BACK
+		ItemStack mainMenu = new ItemStack(Material.PLAYER_HEAD,1);		
+		SkullMeta mainMenuMeta = (SkullMeta) mainMenu.getItemMeta();
+		mainMenuMeta.setDisplayName(Utils.chat("&a&lBack to Main Menu"));
+		GameProfile mainMenuGameProfile = new GameProfile(UUID.randomUUID(),"");
+		String mainMenuValue = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZmJlNTI5YWI2YjJlYTdjNTBkOTE5MmQ4OWY4OThmZDdkYThhOWU3NTBkMzc4Mjk1ZGY3MzIwNWU3YTdlZWFlMCJ9fX0=";
+		mainMenuGameProfile.getProperties().put("textures", new Property("texture",mainMenuValue));	
+		
+		try {
+			Field profileField = mainMenuMeta.getClass().getDeclaredField("profile");
+			profileField.setAccessible(true);
+			profileField.set(mainMenuMeta, mainMenuGameProfile);					
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		mainMenu.setItemMeta(mainMenuMeta);
+		gui.setItem(0, mainMenu);
+		
+		//ADD INFORMATION
+		ItemStack info = new ItemStack(Material.BOOK);
+		ItemMeta infoMeta = info.getItemMeta();
+		infoMeta.setDisplayName(Utils.chat("&a&lSkill Information"));
+		info.setItemMeta(infoMeta);
+		gui.setItem(4, info);
 		
 		
 		this.p.openInventory(gui);
