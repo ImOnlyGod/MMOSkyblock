@@ -55,7 +55,7 @@ public class GuiShops implements Listener{
 		}
 		else if (click.isShiftClick())  {	
 			if (clickedItem == null) return true;
-			if (clickedItem.isSimilar(new ItemStack(Material.BLACK_STAINED_GLASS_PANE)) || 
+			if (clickedItem.isSimilar(new ItemStack(Material.BLACK_STAINED_GLASS_PANE)) || clickedItem.isSimilar(new ItemStack(Material.GREEN_STAINED_GLASS_PANE)) ||
 					clickedItem.isSimilar(new ItemStack(Material.RED_STAINED_GLASS_PANE)) || clickedItem.isSimilar(invenView.getTopInventory().getItem(24))) return false;
 			
 			if (clickedInven == invenView.getBottomInventory()) return true;
@@ -66,14 +66,17 @@ public class GuiShops implements Listener{
 			return false;			
 		}
 		else if (click == ClickType.DOUBLE_CLICK) {
-						
-			return false;
+			if (hoveredItem == null) return false;
+			if (hoveredItem.isSimilar(new ItemStack(Material.BLACK_STAINED_GLASS_PANE)) || hoveredItem.isSimilar(new ItemStack(Material.GREEN_STAINED_GLASS_PANE)) ||
+					hoveredItem.isSimilar(new ItemStack(Material.RED_STAINED_GLASS_PANE)) || hoveredItem.isSimilar(invenView.getTopInventory().getItem(24))) return false;
+			
+			
+			return true;
 		}
 		if (clickedItem == null) return true;
 		if (clickedInven == invenView.getBottomInventory()) return true;
 		if (clickedInven == invenView.getTopInventory() && ((clickedSlot > 9 && clickedSlot < 14) || (clickedSlot > 18 && clickedSlot < 23) || (clickedSlot > 27 && clickedSlot < 32) 
-				|| (clickedSlot > 36 && clickedSlot < 41) || (clickedSlot == 24 && !clickedItem.isSimilar(new ItemStack(Material.BLACK_STAINED_GLASS_PANE)) 
-						&& !clickedItem.isSimilar(new ItemStack(Material.RED_STAINED_GLASS_PANE))))) return true;
+				|| (clickedSlot > 36 && clickedSlot < 41)) && (clickedSlot != 24) && (clickedSlot != 25) && (clickedSlot != 33) && (clickedSlot != 34)) return true;
 		
 		return false;
 	}
@@ -156,6 +159,8 @@ public class GuiShops implements Listener{
 			
 			if (!isValidCraftingClick(e.getClick(),e.getView(),e.getClickedInventory(),e.getCurrentItem(),e.getSlot(),e.getCursor())) e.setCancelled(true);
 										
+			if (e.getCurrentItem() == null);
+			
 			
 			Bukkit.getScheduler().scheduleSyncDelayedTask(this.plugin, new Runnable() {
 				@Override
