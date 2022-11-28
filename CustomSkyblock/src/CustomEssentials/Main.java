@@ -28,7 +28,7 @@ import CustomEssentials.Events.EventTasks.PlayerJoinLeave;
 import CustomEssentials.Events.EventTasks.SkillsFunctioning;
 import CustomEssentials.Events.Gui.CraftGui;
 import CustomEssentials.Events.Gui.MenuGui;
-import CustomEssentials.Events.Gui.PathSelectionGui;
+import CustomEssentials.Events.Gui.Path.PathSelectionGui;
 import CustomEssentials.Events.Gui.Shop.BlockShop1;
 import CustomEssentials.Events.Gui.Shop.BlockShop2;
 import CustomEssentials.Events.Gui.Shop.BlockShop3;

@@ -1,5 +1,6 @@
 package CustomEssentials.Events.EventTasks;
 
+import java.util.HashMap;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
@@ -28,6 +29,7 @@ import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.event.player.PlayerFishEvent.State;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+
 import CustomEssentials.Main;
 import CustomEssentials.Events.PlayerProfileManager;
 import CustomEssentials.Events.Profile;
@@ -35,6 +37,7 @@ import CustomEssentials.Events.Items.ItemStats;
 import CustomEssentials.Events.Items.ItemStorageTable;
 import CustomEssentials.Events.Items.ItemsCore;
 import CustomEssentials.Events.Misc.ProjectileCreator;
+import CustomEssentials.Events.Mobs.Basic_Zombie;
 import CustomEssentials.Events.Mobs.MobLevel;
 import CustomEssentials.Events.PlayerStats.Stats;
 import CustomEssentials.Utils.Utils;
@@ -44,9 +47,14 @@ public class MobEvents implements Listener{
 	
 	private Main plugin;
 	private String hasPlayerCrit = "&c&l";
+	private HashMap<EntityType,String> mobNames = new HashMap<EntityType,String>();
 		
 	public MobEvents(Main plugin) {
 		this.plugin = plugin;
+	}
+	
+	public void generateMobNames() {
+		//this.mobNames.put(Entity, hasPlayerCrit)
 	}
 					
 	
@@ -99,24 +107,26 @@ public class MobEvents implements Listener{
 		if (!(e.getEntity() instanceof LivingEntity)) return;
 		if (e.getEntity() instanceof ArmorStand) return;
 		
-		if (e.getEntity().getCustomName() == null) {
-					
-		String mobName = e.getEntity().getName();
-		
 		MobLevel level = new MobLevel();
 		
 		//Get the bigger value between x and z where mob spawned
 		int distance = Math.max(Math.abs(e.getEntity().getLocation().getBlockX()),Math.abs(e.getEntity().getLocation().getBlockZ()));
 		
-	
-		e.getEntity().resetMaxHealth();
-		e.getEntity().setMaxHealth(level.getHealth(distance));
-		e.getEntity().setHealth(level.getHealth(distance));
+		String mobName;
+		if (e.getEntity().getCustomName() == null) {
+			mobName = e.getEntity().getName();
+			e.getEntity().resetMaxHealth();
+			e.getEntity().setMaxHealth(level.getHealth(distance));
+			e.getEntity().setHealth(level.getHealth(distance));
+		}
+		else {
+			mobName = e.getEntity().getCustomName();
+		}
 		
-		String customName = Utils.chat("&7&l[&a&l" + level.getLevel() + "&7&l] &6&l" + mobName + " &7&l(&a&l" + e.getEntity().getHealth() + "&4♥&7&l)");	
+		String customName = Utils.chat("&7&l[&a&l" + level.getLevel() + "&7&l] &6&l" + mobName + " &7&l(&a&l" +  Math.floor(e.getEntity().getHealth()) + "&4♥&7&l)");
 		e.getEntity().setCustomName(customName);
 		e.getEntity().setCustomNameVisible(true);
-		}
+		
 	}
 	
 	//ADD FALL DMG CAUSE!!
@@ -136,31 +146,15 @@ public class MobEvents implements Listener{
 			if (e.getEntity().isCustomNameVisible() && e.getEntity().getCustomName().length() > 30) {
 				
 				String mobName = entity.getCustomName();
-				StringBuilder level = new StringBuilder();
-				boolean continueStr = true;
+				String customName = mobName.replace(""+Math.floor(entity.getHealth()),""+Math.max(0.0,Math.floor(entity.getHealth()-e.getFinalDamage())));
 				
-				for (int i=9;i < 20;i++) {
-					if (mobName.charAt(i) == ']') {
-						continueStr = false;
-						break;
-					}
-					if (continueStr == true) {
-						level.append(mobName.charAt(i));	
-					}
-					
-				}
 				e.getEntity().setCustomName("");
-				
-				String customName = Utils.chat("&7&l[&a&l" + level + "&7&l] &6&l" + entity.getName() + " &7&l(&a&l" + Math.floor(Math.max(0,entity.getHealth()-e.getFinalDamage())) + "&4♥&7&l)");
-				
 				e.getEntity().setCustomName(customName);				
 				
 												
 			}
-		}
-		
-	}
-	
+		}	
+	}	
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void playerDamageEntityEvent(EntityDamageByEntityEvent e) {
@@ -209,9 +203,11 @@ public class MobEvents implements Listener{
 				float lvl = Float.parseFloat(levelAmount);
 				
 				//CHANGE THE ARMOR DEFENCE RATIO!
+				
 				if (e.getEntity() instanceof Player) {
 					Player p = (Player) e.getEntity();
-					e.setDamage(lvl*10/p.getAttribute(Attribute.GENERIC_ARMOR).getBaseValue());	
+					double armor = this.plugin.getProfileManager().getPlayerProfile(p).getStats().getArmor();
+					e.setDamage(lvl*10/armor);	
 				}
 				else e.setDamage(lvl*10);
 				
@@ -252,22 +248,10 @@ public class MobEvents implements Listener{
 			if (e.getEntity().isCustomNameVisible() && e.getEntity().getCustomName().length() > 30) {
 				LivingEntity entity = (LivingEntity) e.getEntity();	
 				String mobName = entity.getCustomName();
-				StringBuilder level = new StringBuilder();
-				boolean continueStr = true;
-				
-				for (int i=9;i < 20;i++) {
-					if (mobName.charAt(i) == ']') {
-						continueStr = false;
-						break;
-					}
-					if (continueStr == true) {
-						level.append(mobName.charAt(i));	
-					}
-					
-				}
+				String customName = mobName.replace(""+Math.floor(entity.getHealth()),""+Math.max(0.0,Math.floor(entity.getHealth()-e.getFinalDamage())));
 				e.getEntity().setCustomName("");
 				
-				String customName = Utils.chat("&7&l[&a&l" + level + "&7&l] &6&l" + entity.getName() + " &7&l(&a&l" + Math.floor(Math.max(0,entity.getHealth()-e.getFinalDamage())) + "&4♥&7&l)");
+				//String customName = Utils.chat("&7&l[&a&l" + level + "&7&l] &6&l" + entity.getName() + " &7&l(&a&l" + Math.floor(Math.max(0,entity.getHealth()-e.getFinalDamage())) + "&4♥&7&l)");
 				
 				e.getEntity().setCustomName(customName);				
 				

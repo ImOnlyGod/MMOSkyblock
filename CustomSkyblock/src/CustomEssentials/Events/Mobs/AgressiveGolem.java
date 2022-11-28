@@ -19,8 +19,6 @@ public class AgressiveGolem extends EntityIronGolem{
 		super(EntityTypes.P,((CraftWorld) loc.getWorld()).getHandle());
 		this.setPosition(loc.getX(),loc.getY(),loc.getZ());
 		
-				
-		this.setCustomName(null);
 		this.setCustomName(new ChatComponentText(Utils.chat("&c&lAgressive Golem")));
 		this.setCustomNameVisible(true);
 		this.setCanPickupLoot(false);

@@ -47,7 +47,6 @@ public class WildPig extends EntityPig{
 		super(EntityTypes.an,((CraftWorld) loc.getWorld()).getHandle());
 		this.setPosition(loc.getX(),loc.getY(),loc.getZ());
 				
-		this.setCustomName(null);
 		this.setCustomName(new ChatComponentText(Utils.chat("&5&lWild Pig")));
 		this.setCustomNameVisible(true);
 		this.setCanPickupLoot(false);		

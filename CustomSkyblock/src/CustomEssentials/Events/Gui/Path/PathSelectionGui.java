@@ -1,4 +1,4 @@
-package CustomEssentials.Events.Gui;
+package CustomEssentials.Events.Gui.Path;
 
 import java.util.ArrayList;
 import java.util.List;
