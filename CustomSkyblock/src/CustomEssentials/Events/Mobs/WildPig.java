@@ -22,11 +22,7 @@ import net.minecraft.world.entity.ai.goal.PathfinderGoalLookAtPlayer;
 import net.minecraft.world.entity.ai.goal.PathfinderGoalMeleeAttack;
 import net.minecraft.world.entity.ai.goal.target.PathfinderGoalNearestAttackableTarget;
 import net.minecraft.world.entity.animal.EntityPig;
-import net.minecraft.world.entity.monster.EntityCreeper;
-import net.minecraft.world.entity.monster.EntitySkeleton;
-import net.minecraft.world.entity.monster.EntitySpider;
 import net.minecraft.world.entity.monster.EntityZombie;
-import net.minecraft.world.entity.npc.EntityVillager;
 import net.minecraft.world.entity.player.EntityHuman;
 
 
@@ -43,11 +39,20 @@ public class WildPig extends EntityPig{
         }
     }
 	
-	public WildPig(Location loc) {
+	public WildPig(Location loc,int level) {
 		super(EntityTypes.an,((CraftWorld) loc.getWorld()).getHandle());
 		this.setPosition(loc.getX(),loc.getY(),loc.getZ());
+		
+		try {
+            registerGenericAttribute(this.getBukkitEntity(), Attribute.GENERIC_ATTACK_DAMAGE);
+            registerGenericAttribute(this.getBukkitEntity(), Attribute.GENERIC_FOLLOW_RANGE);
+        } catch (IllegalAccessException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 				
-		this.setCustomName(new ChatComponentText(Utils.chat("&5&lWild Pig")));
+		this.setCustomName(null);
+		this.setCustomName(new ChatComponentText(Utils.chat("&7&l[&a&l" + level + "&7&l] &6&l" +"&5&lWild Pig")));
 		this.setCustomNameVisible(true);
 		this.setCanPickupLoot(false);		
 		
@@ -65,25 +70,16 @@ public class WildPig extends EntityPig{
 	
 	@Override
     public void initPathfinder() {
-        try {
-            registerGenericAttribute(this.getBukkitEntity(), Attribute.GENERIC_ATTACK_DAMAGE);
-            registerGenericAttribute(this.getBukkitEntity(), Attribute.GENERIC_FOLLOW_RANGE);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
+		super.initPathfinder(); 
 
-        this.getAttributeMap().b().add(new AttributeModifiable(GenericAttributes.f, (a) -> a.setValue(1.0))); //attack damage
-        this.getAttributeMap().b().add(new AttributeModifiable(GenericAttributes.b, (a) -> a.setValue(1.0))); //follow range
-
+        //  current attributes            add an attribute       the attribute to add            |lambda|        attribute value(acts very weird)
+        this.getAttributeMap().b().add(new AttributeModifiable(GenericAttributes.f, (a) -> {a.setValue(1.0);}));
+        this.getAttributeMap().b().add(new AttributeModifiable(GenericAttributes.a, (a) -> {a.setValue(1.0);}));
+        // Adds attack goal to pig
         this.bP.a(0, new PathfinderGoalMeleeAttack(this, 1.0D, false));
 
-        this.bP.a(0, new PathfinderGoalNearestAttackableTarget<>(this, EntityHuman.class, true));
-        this.bP.a(1, new PathfinderGoalNearestAttackableTarget<>(this, EntityZombie.class, true));
-        this.bP.a(1, new PathfinderGoalNearestAttackableTarget<>(this, EntitySkeleton.class, true));
-        this.bP.a(1, new PathfinderGoalNearestAttackableTarget<>(this, EntityCreeper.class, true));
-        this.bP.a(1, new PathfinderGoalNearestAttackableTarget<>(this, EntitySpider.class, true));
-        this.bP.a(1, new PathfinderGoalNearestAttackableTarget<>(this, EntityVillager.class, true));
-        
+        this.bP.a(0, new PathfinderGoalNearestAttackableTarget<EntityHuman>(this, EntityHuman.class, true));
+        this.bP.a(0, new PathfinderGoalNearestAttackableTarget<EntityZombie>(this, EntityZombie.class, true));
         this.bP.a(0, new PathfinderGoalFloat(this));
         this.bP.a(2, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
     }

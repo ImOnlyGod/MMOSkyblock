@@ -113,17 +113,20 @@ public class MobEvents implements Listener{
 		int distance = Math.max(Math.abs(e.getEntity().getLocation().getBlockX()),Math.abs(e.getEntity().getLocation().getBlockZ()));
 		
 		String mobName;
+		String customName;
 		if (e.getEntity().getCustomName() == null) {
 			mobName = e.getEntity().getName();
 			e.getEntity().resetMaxHealth();
 			e.getEntity().setMaxHealth(level.getHealth(distance));
 			e.getEntity().setHealth(level.getHealth(distance));
+			customName = Utils.chat("&7&l[&a&l" + level.getLevel() + "&7&l] &6&l" + mobName + " &7&l(&a&l" +  Math.floor(e.getEntity().getHealth()) + "&4♥&7&l)");
 		}
 		else {
 			mobName = e.getEntity().getCustomName();
+			customName = Utils.chat(mobName + " &7&l(&a&l" +  Math.floor(e.getEntity().getHealth()) + "&4♥&7&l)");
 		}
 		
-		String customName = Utils.chat("&7&l[&a&l" + level.getLevel() + "&7&l] &6&l" + mobName + " &7&l(&a&l" +  Math.floor(e.getEntity().getHealth()) + "&4♥&7&l)");
+		
 		e.getEntity().setCustomName(customName);
 		e.getEntity().setCustomNameVisible(true);
 		
@@ -207,9 +210,9 @@ public class MobEvents implements Listener{
 				if (e.getEntity() instanceof Player) {
 					Player p = (Player) e.getEntity();
 					double armor = this.plugin.getProfileManager().getPlayerProfile(p).getStats().getArmor();
-					e.setDamage(lvl*10/armor);	
+					e.setDamage(e.getDamage()*lvl*10/armor);	
 				}
-				else e.setDamage(lvl*10);
+				else e.setDamage(lvl*10*e.getDamage());
 				
 			}
 		}

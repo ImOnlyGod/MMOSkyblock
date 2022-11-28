@@ -1,6 +1,7 @@
 package CustomEssentials.Commands;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import org.bukkit.Location;
@@ -51,11 +52,23 @@ public class CustomMobsCommand implements TabExecutor{
 		if (args.length == 1) {
 			String key = args[0].toLowerCase();
 			if (this.MobsCommandList.contains(key)) {
-				performMobSpawn(key,loc);								
+				performMobSpawn(key,loc,1);								
 			}
 		}
+		else if (args.length > 1) {
+			String key = args[0].toLowerCase();
+			if (this.MobsCommandList.contains(key)) {
+				try {
+					int level = Integer.parseInt(args[1]);
+					performMobSpawn(key,loc,level);
+				}
+				catch (Exception e) {
+					p.sendMessage("Please add valid level number");									
+			}
+		}
+		}
 		else {
-			performMobSpawn("basiczombie", loc);
+			performMobSpawn("basiczombie", loc,1);
 		}
 		
 		return true;
@@ -68,10 +81,10 @@ public class CustomMobsCommand implements TabExecutor{
 		
 	}
 	
-	public void performMobSpawn(String arg, Location loc) {
-		if (arg.equals("basiczombie")) new Basic_Zombie(loc);
-		else if (arg.equals("agressivegolem")) new AgressiveGolem(loc);
-		else if (arg.equals("wildpig")) new WildPig(loc);
+	public void performMobSpawn(String arg, Location loc, int level) {
+		if (arg.equals("basiczombie")) new Basic_Zombie(loc,level);
+		else if (arg.equals("agressivegolem")) new AgressiveGolem(loc,level);
+		else if (arg.equals("wildpig")) new WildPig(loc,level);
 		
 	}
 	

@@ -4,6 +4,7 @@ import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.craftbukkit.v1_17_R1.CraftWorld;
 import org.bukkit.entity.IronGolem;
+import org.bukkit.event.entity.CreatureSpawnEvent;
 
 import CustomEssentials.Utils.Utils;
 import net.minecraft.network.chat.ChatComponentText;
@@ -15,11 +16,11 @@ import net.minecraft.world.entity.animal.EntityIronGolem;
 
 public class AgressiveGolem extends EntityIronGolem{
 
-	public AgressiveGolem(Location loc) {
+	public AgressiveGolem(Location loc,int level) {
 		super(EntityTypes.P,((CraftWorld) loc.getWorld()).getHandle());
 		this.setPosition(loc.getX(),loc.getY(),loc.getZ());
 		
-		this.setCustomName(new ChatComponentText(Utils.chat("&c&lAgressive Golem")));
+		this.setCustomName(new ChatComponentText(Utils.chat("&7&l[&a&l" + level + "&7&l] &6&l" +"&c&lAgressive Golem")));
 		this.setCustomNameVisible(true);
 		this.setCanPickupLoot(false);
 		
@@ -29,7 +30,7 @@ public class AgressiveGolem extends EntityIronGolem{
 		IG.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(500f);;
 		IG.setHealth(500);
 		IG.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(1200f);
-		this.getWorld().addEntity(this);
+		this.getWorld().addEntity(this,CreatureSpawnEvent.SpawnReason.NATURAL);
 		}
 		
 }
