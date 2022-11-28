@@ -78,8 +78,8 @@ public class WildPig extends EntityPig{
         // Adds attack goal to pig
         this.bP.a(0, new PathfinderGoalMeleeAttack(this, 1.0D, false));
 
-        this.bP.a(0, new PathfinderGoalNearestAttackableTarget<EntityHuman>(this, EntityHuman.class, true));
-        this.bP.a(0, new PathfinderGoalNearestAttackableTarget<EntityZombie>(this, EntityZombie.class, true));
+        this.bQ.a(0, new PathfinderGoalNearestAttackableTarget<EntityHuman>(this, EntityHuman.class, true));
+        this.bQ.a(0, new PathfinderGoalNearestAttackableTarget<EntityZombie>(this, EntityZombie.class, true));
         this.bP.a(0, new PathfinderGoalFloat(this));
         this.bP.a(2, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
     }
