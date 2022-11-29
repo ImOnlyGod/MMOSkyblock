@@ -7,7 +7,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
-import org.bukkit.attribute.Attribute;
 import org.bukkit.craftbukkit.v1_17_R1.entity.CraftArmorStand;
 import org.bukkit.craftbukkit.v1_17_R1.entity.CraftFireball;
 import org.bukkit.craftbukkit.v1_17_R1.entity.CraftLightningStrike;
@@ -36,8 +35,8 @@ import CustomEssentials.Events.Profile;
 import CustomEssentials.Events.Items.ItemStats;
 import CustomEssentials.Events.Items.ItemStorageTable;
 import CustomEssentials.Events.Items.ItemsCore;
+import CustomEssentials.Events.Items.Weapons.StormAxe;
 import CustomEssentials.Events.Misc.ProjectileCreator;
-import CustomEssentials.Events.Mobs.Basic_Zombie;
 import CustomEssentials.Events.Mobs.MobLevel;
 import CustomEssentials.Events.PlayerStats.Stats;
 import CustomEssentials.Utils.Utils;
@@ -171,7 +170,30 @@ public class MobEvents implements Listener{
 			return;	
 		}
 		
-		if ((e.getEntity() instanceof CraftLightningStrike)) return;
+		if (e.getDamager() instanceof CraftLightningStrike) {
+			
+			//POTENTIALLY ADD PLAYER NAMES SO WE CAN PVP!!!!
+			//ADD WAYS TO GIVE COMBAT XP
+			if (e.getDamager().getCustomName().equalsIgnoreCase("thorsAxe")) {
+				ItemStorageTable table = new ItemStorageTable();
+				ItemsCore axe = table.getIDtoItemsCore().get(6);
+				axe.createItem(1);
+				double damage =  axe.getItemBurstDamage();
+				
+				e.setDamage(damage);
+				if (!(e.getEntity() instanceof Player)) return;
+				
+				Player p = (Player) e.getEntity();
+				
+				if (p.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() != 6 && p.getInventory().getItemInOffHand().getItemMeta().getCustomModelData() != 6) return;
+				e.setCancelled(true);
+				p.setFireTicks(0);
+				return;
+			}
+			
+			e.setDamage(10);
+			return;
+		}
 		
 		//ADD ARROW DMG SKELETON
 		if ((!(e.getDamager() instanceof Player)) && (e.getEntity() instanceof LivingEntity)) {
@@ -268,6 +290,7 @@ public class MobEvents implements Listener{
 				
 	}
 	
+	
 	@EventHandler
 	public void playerRightClickEvent(PlayerInteractEvent e) {
 		
@@ -286,7 +309,17 @@ public class MobEvents implements Listener{
 		
 		if (!(e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK))) return;
 		
-		item.itemAbility(p, profiles.getPlayerProfile(p));
+		if (p.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1) item.itemAbility(p, profiles.getPlayerProfile(p));
+		else if (p.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 6) {
+			if ((e.getAction().equals(Action.RIGHT_CLICK_AIR))) {
+				((StormAxe) item).axeAbility(p,  profiles.getPlayerProfile(p), p.getLocation());
+			}
+			else {
+				((StormAxe) item).axeAbility(p,  profiles.getPlayerProfile(p), e.getClickedBlock().getLocation());
+			}
+			
+		}
+		
 		
 	}
 	
@@ -300,9 +333,8 @@ public class MobEvents implements Listener{
 			return entity;
 			
 		}
-		
 		LivingEntity entity = (LivingEntity) damager;
-		return (Entity) entity;
+		return entity;
 	}
 	
 	

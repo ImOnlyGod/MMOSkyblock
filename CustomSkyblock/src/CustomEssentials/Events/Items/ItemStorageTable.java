@@ -3,6 +3,7 @@ package CustomEssentials.Events.Items;
 import java.util.HashMap;
 
 import CustomEssentials.Events.Items.Weapons.HadesBlade;
+import CustomEssentials.Events.Items.Weapons.StormAxe;
 import CustomEssentials.Events.Items.Weapons.ThickWoodenSword;
 import CustomEssentials.Events.Items.Weapons.Armor.HardStoneArmor.HardStoneBoots;
 import CustomEssentials.Events.Items.Weapons.Armor.HardStoneArmor.HardStoneChestplate;
@@ -37,6 +38,9 @@ public class ItemStorageTable {
 		
 		this.IDtoItemsCore.put(5, new HardStoneBoots());
 		this.CmdtoItemsCore.put("hardstoneboots", new HardStoneBoots());
+		
+		this.IDtoItemsCore.put(6, new StormAxe());
+		this.CmdtoItemsCore.put("stormaxe", new StormAxe());
 	}
 
 	@SuppressWarnings("unchecked")

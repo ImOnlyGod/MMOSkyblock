@@ -28,6 +28,7 @@ import CustomEssentials.Events.EventTasks.PlayerJoinLeave;
 import CustomEssentials.Events.EventTasks.SkillsFunctioning;
 import CustomEssentials.Events.Gui.CraftGui;
 import CustomEssentials.Events.Gui.MenuGui;
+import CustomEssentials.Events.Gui.Path.PathGui;
 import CustomEssentials.Events.Gui.Path.PathSelectionGui;
 import CustomEssentials.Events.Gui.Shop.BlockShop1;
 import CustomEssentials.Events.Gui.Shop.BlockShop2;
@@ -100,6 +101,7 @@ public class Main extends JavaPlugin{
 		new MenuGui(this);
 		new SkillsGui(this);
 		new PathSelectionGui(this);
+		new PathGui(this);
 		new MainShopMenu(this);
 		new CraftGui(this);
 		new WeaponTabCommand(this);

@@ -47,4 +47,5 @@ commands:
   shopBrewing1:
   shopBrewing2:
   craft:
+  path:
   
