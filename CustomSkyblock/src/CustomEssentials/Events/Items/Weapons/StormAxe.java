@@ -61,7 +61,7 @@ public class StormAxe extends ItemsCore{
 		lore.add(Utils.chat("&7core of thunder!"));
 		lore.add(Utils.chat("&6&lAbility: &6Right Click"));
 		lore.add(Utils.chat("&7Creates a ThunderStorm "));
-		lore.add(Utils.chat("&7near theUser (&b55 Mana&7)"));
+		lore.add(Utils.chat("&7near the User (&b55 Mana&7)"));
 		lore.add(Utils.chat("                          "));
 		lore.add(Utils.chat("&c&l&oEpic Weapon"));
 		
@@ -76,19 +76,19 @@ public class StormAxe extends ItemsCore{
 		
 		Location playerLoc = p.getLocation();
 		
-
+		String name = p.getName().toLowerCase() + "stormaxedamage";
 		LightningStrike lightning1 = p.getWorld().strikeLightning(loc.add(2, 0, 0));
-		lightning1.setCustomName("thorsAxe");
+		lightning1.setCustomName(name);
 		LightningStrike lightning2 = p.getWorld().strikeLightning(loc.add(2, 0, 2));
-		lightning2.setCustomName("thorsAxe");
+		lightning2.setCustomName(name);
 		LightningStrike lightning3 = p.getWorld().strikeLightning(loc.add(0, 0, 2));
-		lightning3.setCustomName("thorsAxe");
+		lightning3.setCustomName(name);
 		LightningStrike lightning4 = p.getWorld().strikeLightning(loc.add(-2, 0, 0));
-		lightning4.setCustomName("thorsAxe");
+		lightning4.setCustomName(name);
 		LightningStrike lightning5 = p.getWorld().strikeLightning(loc.add(-2, 0, -2));
-		lightning5.setCustomName("thorsAxe");
+		lightning5.setCustomName(name);
 		LightningStrike lightning6 = p.getWorld().strikeLightning(loc.add(0, 0, -2));
-		lightning6.setCustomName("thorsAxe");
+		lightning6.setCustomName(name);
 
 		
 		

@@ -38,6 +38,7 @@ import CustomEssentials.Events.Items.ItemsCore;
 import CustomEssentials.Events.Items.Weapons.StormAxe;
 import CustomEssentials.Events.Misc.ProjectileCreator;
 import CustomEssentials.Events.Mobs.MobLevel;
+import CustomEssentials.Events.PlayerSkills.Skills;
 import CustomEssentials.Events.PlayerStats.Stats;
 import CustomEssentials.Utils.Utils;
 
@@ -59,7 +60,6 @@ public class MobEvents implements Listener{
 	
 	@EventHandler
 	public void onMobKill(EntityDeathEvent e) {
-		
 		if (!(e.getEntity() instanceof LivingEntity)) return;
 		
 		LivingEntity mob = e.getEntity();
@@ -134,7 +134,6 @@ public class MobEvents implements Listener{
 	//ADD FALL DMG CAUSE!!
 	@EventHandler
 	public void mobDamageEvent(EntityDamageEvent e) {
-		
 		this.hasPlayerCrit = "&c&l";
 		if (e.getEntityType().equals(EntityType.ARMOR_STAND) || (e.getEntity() instanceof CraftArmorStand)) return;
 		
@@ -146,16 +145,30 @@ public class MobEvents implements Listener{
 		if ((e.getEntityType() != EntityType.PLAYER)) {
 			
 			if (e.getEntity().isCustomNameVisible() && e.getEntity().getCustomName().length() > 30) {
-				
+								
 				String mobName = entity.getCustomName();
-				String customName = mobName.replace(""+Math.floor(entity.getHealth()),""+Math.max(0.0,Math.floor(entity.getHealth()-e.getFinalDamage())));
+				
+				String healthString = "";
+				for (int i=0;i<mobName.length();i++) {
+					if (mobName.charAt(i) == '(') {
+						for (int j=i+5;j<mobName.length()-8;j++) {
+							healthString += mobName.charAt(j);
+						}
+						break;
+					}
+				}
+				
+				String customName = mobName.replace(healthString,""+Math.max(0.0,Math.floor(entity.getHealth()-e.getFinalDamage())));
 				
 				e.getEntity().setCustomName("");
 				e.getEntity().setCustomName(customName);				
 				
 												
 			}
+			return;
 		}	
+		
+	
 	}	
 	@SuppressWarnings("deprecation")
 	@EventHandler
@@ -172,70 +185,94 @@ public class MobEvents implements Listener{
 		
 		if (e.getDamager() instanceof CraftLightningStrike) {
 			
-			//POTENTIALLY ADD PLAYER NAMES SO WE CAN PVP!!!!
-			//ADD WAYS TO GIVE COMBAT XP
-			if (e.getDamager().getCustomName().equalsIgnoreCase("thorsAxe")) {
+			e.setDamage(10);
+			if (e.getDamager().getCustomName().contains("stormaxedamage")) {
+				
 				ItemStorageTable table = new ItemStorageTable();
 				ItemsCore axe = table.getIDtoItemsCore().get(6);
 				axe.createItem(1);
 				double damage =  axe.getItemBurstDamage();
-				
 				e.setDamage(damage);
-				if (!(e.getEntity() instanceof Player)) return;
 				
-				Player p = (Player) e.getEntity();
+				String userPlayerName = e.getDamager().getName().replace("stormaxedamage", "");
+				Player userPlayer = null;
+				for (Player p: Bukkit.getOnlinePlayers()) {
+					if (!p.getName().equalsIgnoreCase(userPlayerName)) continue;
+					
+					userPlayer = p;
+					break;
+				}
+				if (!(e.getEntity() instanceof LivingEntity)) return;
 				
-				if (p.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() != 6 && p.getInventory().getItemInOffHand().getItemMeta().getCustomModelData() != 6) return;
-				e.setCancelled(true);
-				p.setFireTicks(0);
-				return;
-			}
-			
-			e.setDamage(10);
-			return;
+				if (!(e.getEntity() instanceof Player)) {
+					LivingEntity mob = (LivingEntity) e.getEntity();
+					if (mob.getHealth()-e.getFinalDamage() > 0) return;
+					
+					Profile userProfile = this.plugin.getProfileManager().getPlayerProfile(userPlayer);
+					
+					Double xpAmount = userProfile.getCombat().getXPamount(mob);
+					
+					if (xpAmount == 0.0) {
+						userPlayer.sendMessage(Utils.chat("&4You require a higher combat level to gain any XP from killing that mob!"));
+					}
+					else {
+						plugin.setDisplayStats(4);
+						userPlayer.playSound(userPlayer.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 2, 1);
+						userProfile.getCombat().addCurrentXP(xpAmount);
+					}					
+				}
+				else {
+					Player p = (Player) e.getEntity();
+					
+					if (!p.equals(userPlayer)) return;
+					e.setCancelled(true);
+					p.setFireTicks(0);
+				}				
+			}			
 		}
 		
 		//ADD ARROW DMG SKELETON
 		if ((!(e.getDamager() instanceof Player)) && (e.getEntity() instanceof LivingEntity)) {
 			
-			
-			LivingEntity entity = (LivingEntity) getDamagerEntity(e.getDamager());	
-			
-			if (entity.isCustomNameVisible() && entity.getCustomName().length() > 30) {
+			if (e.getDamager() instanceof LivingEntity) {
 				
-				String mobName = entity.getCustomName();
-				StringBuilder level = new StringBuilder();
-				boolean continueStr = true;
+				LivingEntity entity = (LivingEntity) getDamagerEntity(e.getDamager());	
 				
-				for (int i=9;i < 20;i++) {
-					if (mobName.charAt(i) == ']') {
-						continueStr = false;
-						break;
-					}
-					if (continueStr == true) {
-						level.append(mobName.charAt(i));	
+				if (entity.isCustomNameVisible() && entity.getCustomName().length() > 30) {
+					
+					String mobName = entity.getCustomName();
+					StringBuilder level = new StringBuilder();
+					boolean continueStr = true;
+					
+					for (int i=9;i < 20;i++) {
+						if (mobName.charAt(i) == ']') {
+							continueStr = false;
+							break;
+						}
+						if (continueStr == true) {
+							level.append(mobName.charAt(i));	
+						}
+						
 					}
 					
+					String levelAmount = "";
+					
+					for (int i=0;i < level.length();i++) {
+						if (level.charAt(i) == '§') break;
+						levelAmount = levelAmount + level.charAt(i);
+					}
+					
+					float lvl = Float.parseFloat(levelAmount);
+					
+					//CHANGE THE ARMOR DEFENCE RATIO!
+					
+					if (e.getEntity() instanceof Player) {
+						Player p = (Player) e.getEntity();
+						double armor = this.plugin.getProfileManager().getPlayerProfile(p).getStats().getArmor();
+						e.setDamage(e.getDamage()*lvl*10/armor);	
+					}
+					else e.setDamage(lvl*10*e.getDamage());
 				}
-				
-				String levelAmount = "";
-				
-				for (int i=0;i < level.length();i++) {
-					if (level.charAt(i) == '§') break;
-					levelAmount = levelAmount + level.charAt(i);
-				}
-				
-				float lvl = Float.parseFloat(levelAmount);
-				
-				//CHANGE THE ARMOR DEFENCE RATIO!
-				
-				if (e.getEntity() instanceof Player) {
-					Player p = (Player) e.getEntity();
-					double armor = this.plugin.getProfileManager().getPlayerProfile(p).getStats().getArmor();
-					e.setDamage(e.getDamage()*lvl*10/armor);	
-				}
-				else e.setDamage(lvl*10*e.getDamage());
-				
 			}
 		}
 		else {
@@ -269,11 +306,23 @@ public class MobEvents implements Listener{
 		
 		//COMPRESS INTO ONE FUNCTION!
 		if ((e.getEntityType() != EntityType.PLAYER)) {
-				
+			
 			if (e.getEntity().isCustomNameVisible() && e.getEntity().getCustomName().length() > 30) {
 				LivingEntity entity = (LivingEntity) e.getEntity();	
 				String mobName = entity.getCustomName();
-				String customName = mobName.replace(""+Math.floor(entity.getHealth()),""+Math.max(0.0,Math.floor(entity.getHealth()-e.getFinalDamage())));
+	
+				String healthString = "";
+				for (int i=0;i<mobName.length();i++) {
+					if (mobName.charAt(i) == '(') {
+						for (int j=i+5;j<mobName.length()-8;j++) {
+							healthString += mobName.charAt(j);
+							System.out.println(healthString);
+						}
+						break;
+					}
+				}
+				
+				String customName = mobName.replace(healthString,""+Math.max(0,Math.floor(entity.getHealth()-e.getFinalDamage())));
 				e.getEntity().setCustomName("");
 				
 				//String customName = Utils.chat("&7&l[&a&l" + level + "&7&l] &6&l" + entity.getName() + " &7&l(&a&l" + Math.floor(Math.max(0,entity.getHealth()-e.getFinalDamage())) + "&4♥&7&l)");
@@ -281,7 +330,8 @@ public class MobEvents implements Listener{
 				e.getEntity().setCustomName(customName);				
 				
 												
-			}
+			}	
+				
 			
 			
 		}
@@ -327,12 +377,11 @@ public class MobEvents implements Listener{
 		if ((damager instanceof CraftProjectile) || (damager instanceof CraftFireball) || (damager instanceof Projectile)) {
 			Projectile arrow = (Projectile) damager;
 			Entity entity = (Entity) arrow.getShooter();
-			
-		
-			
+
 			return entity;
 			
 		}
+		
 		LivingEntity entity = (LivingEntity) damager;
 		return entity;
 	}
