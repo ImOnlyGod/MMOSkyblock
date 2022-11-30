@@ -24,6 +24,7 @@ import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.event.player.PlayerFishEvent.State;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -103,6 +104,9 @@ public class MobEvents implements Listener{
 	@EventHandler
 	public void mobSpawnEvent(CreatureSpawnEvent e) {
 		
+		if (e.getSpawnReason().equals(SpawnReason.LIGHTNING)) {
+			e.getEntity().setCustomName(null);;
+		}
 		if (!(e.getEntity() instanceof LivingEntity)) return;
 		if (e.getEntity() instanceof ArmorStand) return;
 		
@@ -316,7 +320,6 @@ public class MobEvents implements Listener{
 					if (mobName.charAt(i) == '(') {
 						for (int j=i+5;j<mobName.length()-8;j++) {
 							healthString += mobName.charAt(j);
-							System.out.println(healthString);
 						}
 						break;
 					}

@@ -172,7 +172,6 @@ public class Main extends JavaPlugin{
 								
 				profiles.getPlayerProfile(p).incrementPlayTime();
 				Stats stats = profileManager.getPlayerProfile(p).getStats();
-				Stats pathStats = profileManager.getPlayerProfile(p).getPath().getStats();
 				int currentMana = stats.getMana();
 				int manaRegen = stats.getManaRegen();
 				int TotalMana = stats.getTotalMana();
@@ -181,8 +180,14 @@ public class Main extends JavaPlugin{
 				ItemStats setStats = new ItemStats(p,profileManager);
 				setStats.setItemStats();		
 				
-				if (currentMana < TotalMana) stats.setMana(currentMana+Math.max(manaRegen, 1));
+				if (currentMana < TotalMana) {
+					if (currentMana + Math.max(manaRegen, 1) > TotalMana) {
+						stats.setMana(TotalMana);
+					}
+					else stats.setMana(currentMana+Math.max(manaRegen, 1));
+				}
 				
+				if (currentMana > TotalMana) stats.setMana(TotalMana);
 								
 				String health = HealthUtils.getActionBarHealthText(p);
 				String armor = ArmorUtils.getActionBarArmorText(profile);
@@ -399,7 +404,6 @@ public class Main extends JavaPlugin{
 		Profile profile = this.getProfileManager().getPlayerProfile(player);
 		Stats stats = profile.getStats();
 		//IMPLEMENT
-		Stats pathStats = profile.getPath().getStats();
 		Skills combat = profile.getCombat();
 		Skills farming = profile.getFarming();
 		Skills fishing = profile.getFishing();
