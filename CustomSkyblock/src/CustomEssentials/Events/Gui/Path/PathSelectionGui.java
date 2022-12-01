@@ -1,7 +1,9 @@
 package CustomEssentials.Events.Gui.Path;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -13,6 +15,10 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
+
+import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.properties.Property;
 
 import CustomEssentials.Main;
 import CustomEssentials.Events.Profile;
@@ -116,6 +122,25 @@ public class PathSelectionGui implements TabExecutor{
 		assassinMeta.setLore(assassinLore);
 		assassin.setItemMeta(assassinMeta);
 		menu.setItem(22, assassin);
+		
+		//back item
+		ItemStack mainMenu = new ItemStack(Material.PLAYER_HEAD,1);		
+		SkullMeta mainMenuMeta = (SkullMeta) mainMenu.getItemMeta();
+		mainMenuMeta.setDisplayName(Utils.chat("&a&lGo Back"));
+		GameProfile mainMenuGameProfile = new GameProfile(UUID.randomUUID(),"");
+		String mainMenuValue = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZmJlNTI5YWI2YjJlYTdjNTBkOTE5MmQ4OWY4OThmZDdkYThhOWU3NTBkMzc4Mjk1ZGY3MzIwNWU3YTdlZWFlMCJ9fX0=";
+		mainMenuGameProfile.getProperties().put("textures", new Property("texture",mainMenuValue));	
+		
+		try {
+			Field profileField = mainMenuMeta.getClass().getDeclaredField("profile");
+			profileField.setAccessible(true);
+			profileField.set(mainMenuMeta, mainMenuGameProfile);					
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		mainMenu.setItemMeta(mainMenuMeta);
+		menu.setItem(0, mainMenu);
 		
 		
 		return menu;

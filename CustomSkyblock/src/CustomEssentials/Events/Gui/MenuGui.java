@@ -123,6 +123,7 @@ public class MenuGui implements TabExecutor{
 		
 		skillsMeta.setDisplayName(Utils.chat("&a&lSkills"));
 		List<String> SkillsLore = new ArrayList<String>();
+		SkillsLore.add(Utils.chat("&7&oClick to see Skill Progression!"));
 		
 		skillsMeta.setLore(SkillsLore);
 		skills.setItemMeta(skillsMeta);
@@ -148,10 +149,34 @@ public class MenuGui implements TabExecutor{
 		List<String> bankLore = new ArrayList<String>();
 		bankLore.add(Utils.chat("&7Current Balance: &a$" + Math.round(profile.getBalance()*100)/100));
 		
-		
 		bankMeta.setLore(bankLore);
 		bank.setItemMeta(bankMeta);
 		menu.setItem(22, bank);
+		
+		//Path item
+		ItemStack path = new ItemStack(Material.ENDER_EYE,1);
+		ItemMeta pathMeta = path.getItemMeta();
+		
+		pathMeta.setDisplayName(Utils.chat("&5&lPath"));
+		List<String> pathLore = new ArrayList<String>();
+		pathLore.add(Utils.chat("&7&oClick to see Path Information!"));
+		
+		pathMeta.setLore(pathLore);
+		path.setItemMeta(pathMeta);
+		menu.setItem(23, path);
+		
+		
+		//Crafting Item
+		ItemStack craft = new ItemStack(Material.CRAFTING_TABLE,1);
+		ItemMeta craftMeta = craft.getItemMeta();
+		
+		craftMeta.setDisplayName(Utils.chat("&5&lCrafting"));
+		List<String> craftLore = new ArrayList<String>();
+		craftLore.add(Utils.chat("&7&oClick to open a virtual crafting grid!"));
+		
+		craftMeta.setLore(craftLore);
+		craft.setItemMeta(craftMeta);
+		menu.setItem(31, craft);
 		
 		return menu;
 				

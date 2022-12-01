@@ -15,6 +15,7 @@ import org.bukkit.inventory.PlayerInventory;
 
 import CustomEssentials.Main;
 import CustomEssentials.Events.Profile;
+import CustomEssentials.Events.Gui.Path.PathStatsGui;
 import CustomEssentials.Events.Gui.Shop.ItemsBuySellGui;
 import CustomEssentials.Events.Gui.Skills.SkillProgression;
 import CustomEssentials.Events.Items.Crafting.CustomCraft;
@@ -85,6 +86,7 @@ public class GuiShops implements Listener{
 	@EventHandler
 	public void OnClick(InventoryClickEvent e) {
 		Player p = (Player) e.getWhoClicked();
+		Profile playerProfile = this.plugin.getProfileManager().getPlayerProfile(p);
 		
 		if (this.shopPrices == null) this.shopPrices = new ItemPrices();
 		
@@ -97,16 +99,32 @@ public class GuiShops implements Listener{
 				return;
 			}			
 			e.setCancelled(true);
-			ItemStack skills = e.getInventory().getItem(18);
 			
 			if (e.getCurrentItem() == null) return;
-			if (e.getCurrentItem().isSimilar(skills)) {
-				p.performCommand("skills");
-			}			
+			if (e.getSlot() == 18) p.performCommand("skills");
+			else if (e.getSlot() == 23) p.performCommand("path");
+			else if (e.getSlot() == 31) p.performCommand("craft");
 			
 			return;
 		}
-		
+		else 
+			if (e.getView().getTitle().equalsIgnoreCase(Utils.chat("&5&lPath Info"))) {
+				ClickType click = e.getClick();
+				if (!isValidClick(click)) {
+					e.setCancelled(true);				
+				}
+				if (e.getClickedInventory() != e.getView().getTopInventory()) {
+					return;
+				}			
+				e.setCancelled(true);				
+				if (e.getSlot() == 0) p.performCommand("menu");
+				else if (e.getSlot() == 40) p.performCommand("pathselector");
+				else if (e.getSlot() == 22) {
+					PathStatsGui openPathStats = new PathStatsGui(p,playerProfile);
+				}
+				
+				return;
+			}		
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&a&lSkills")))) {
 			ClickType click = e.getClick();
 			if (!isValidClick(click)) {
@@ -116,7 +134,6 @@ public class GuiShops implements Listener{
 				return;
 			}
 			e.setCancelled(true);
-			Profile playerProfile = this.plugin.getProfileManager().getPlayerProfile(p);
 			
 			if (e.getSlot() == 0) p.performCommand("menu");
 			else if (e.getSlot() == 19) {
@@ -190,6 +207,8 @@ public class GuiShops implements Listener{
 			ItemStack tank = e.getInventory().getItem(20);
 			ItemStack archer = e.getInventory().getItem(21);
 			ItemStack assassin = e.getInventory().getItem(22);
+			
+			if (e.getSlot() == 0) p.performCommand("path");
 			
 			if (e.getCurrentItem().isSimilar(tank) && (!(profile.getPath() instanceof Tank))) {
 				profile.setPath(profile.getPaths().get("tank"));
@@ -849,6 +868,32 @@ public class GuiShops implements Listener{
 			for (int i=37; i<41; i++) {
 				if (craftingGUI.getItem(i) != null)	p.getWorld().dropItem(p.getLocation(), craftingGUI.getItem(i));
 			}
+		}
+		else if (e.getView().getTitle().equalsIgnoreCase(Utils.chat("&5&lPath Info"))) {
+			
+			Bukkit.getScheduler().scheduleSyncDelayedTask(this.plugin, new Runnable() {
+				@Override
+				public void run() {
+					
+					if (p.getOpenInventory().getTitle().equalsIgnoreCase("Crafting")) {
+						p.performCommand("menu");
+					}					
+				}
+			},1);
+			return;
+		}
+		else if (e.getView().getTitle().equalsIgnoreCase(Utils.chat("&5&lChoose a Path"))) {
+			
+			Bukkit.getScheduler().scheduleSyncDelayedTask(this.plugin, new Runnable() {
+				@Override
+				public void run() {
+					
+					if (p.getOpenInventory().getTitle().equalsIgnoreCase("Crafting")) {
+						p.performCommand("path");
+					}					
+				}
+			},1);
+			return;
 		}
 	}
 	

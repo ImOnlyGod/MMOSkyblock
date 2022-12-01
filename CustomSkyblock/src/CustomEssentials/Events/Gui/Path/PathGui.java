@@ -79,6 +79,7 @@ public class PathGui implements TabExecutor{
 		pointsMeta.setDisplayName(Utils.chat("&b&lAttributes"));
 		
 		ArrayList<String> pointsLore = new ArrayList<String>();
+		pointsLore.add(Utils.chat("&7&oClick to modify current Attributes!"));
 		pointsLore.add("");
 		pointsLore.add(Utils.chat("&fAvailable Attribute Points:"));
 		pointsLore.add(Utils.chat("&fTotal Attribute Points:"));
@@ -93,6 +94,7 @@ public class PathGui implements TabExecutor{
 		evolutionMeta.setDisplayName(Utils.chat("&e&lEvolution"));
 		
 		ArrayList<String> evolutionLore = new ArrayList<String>();
+		evolutionLore.add(Utils.chat("&7&oClick to view Evolution Progression!"));
 		evolutionLore.add("");
 		evolutionLore.add(Utils.chat("&fStage: " + currentPathName));
 		evolutionLore.add(Utils.chat("&f"));
@@ -107,6 +109,7 @@ public class PathGui implements TabExecutor{
 		questsMeta.setDisplayName(Utils.chat("&4&lQuests"));
 		
 		ArrayList<String> questsLore = new ArrayList<String>();
+		questsLore.add(Utils.chat("&7&oClick to view Quests!"));
 		questsLore.add("");
 		questsLore.add(Utils.chat("&fCurrent: "));
 		questsLore.add(Utils.chat("&f"));
@@ -133,6 +136,7 @@ public class PathGui implements TabExecutor{
 		changePathMeta.setDisplayName(Utils.chat("&c&lChange Paths"));
 		
 		ArrayList<String> changePathLore = new ArrayList<String>();
+		changePathLore.add(Utils.chat("&7&oClick to change your Path!"));
 		changePathLore.add("");
 		
 		changePathMeta.setLore(changePathLore);
@@ -140,8 +144,7 @@ public class PathGui implements TabExecutor{
 		menu.setItem(40, changePath);
 		
 		
-		
-		
+		//menu item		
 		ItemStack mainMenu = new ItemStack(Material.PLAYER_HEAD,1);		
 		SkullMeta mainMenuMeta = (SkullMeta) mainMenu.getItemMeta();
 		mainMenuMeta.setDisplayName(Utils.chat("&a&lBack to Main Menu"));
