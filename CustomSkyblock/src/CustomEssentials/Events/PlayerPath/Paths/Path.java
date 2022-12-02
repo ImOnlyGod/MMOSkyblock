@@ -1,13 +1,15 @@
 package CustomEssentials.Events.PlayerPath.Paths;
 
+import java.util.ArrayList;
 import CustomEssentials.Events.PlayerStats.Stats;
+import CustomEssentials.Utils.Utils;
 
 public abstract class Path {
 	
 	private int level; 
 	private Double currentXP;
 	private Double maxXP;
-	private int prestige;
+	private int skillPoints;
 	private Stats stats;
 	private String name = "path";
 	
@@ -23,19 +25,23 @@ public abstract class Path {
 	public void levelUp() {
 		this.level ++;		
 		this.currentXP = this.currentXP - this.maxXP;
-		this.maxXP = 2*this.maxXP + (Math.PI * this.maxXP/(Math.E));
+		this.maxXP = 1.3*this.maxXP + (Math.PI * this.maxXP/(Math.E));
 		this.levelUpStats();
 	}
 	
 	public void levelUpStats() {
+		if (Math.floorMod(this.level, 2) == 1) {
+			this.skillPoints++;
+		}
 	}
 	
-	public void prestigeUp() {
-		this.setLevel(0);
-		this.setCurrentXP(0.0);
-		this.setMaxXP(100.0);
-		this.prestige++;
-		this.stats.resetStats();   
+	public ArrayList<String> calcLevelUpRewards(int level) {
+		ArrayList<String> levelRewards = new ArrayList<String>();
+		if (Math.floorMod(level, 2) == 1) {
+			levelRewards.add(Utils.chat("&a&l+ Skill Point (x1)"));
+		}
+		
+		return levelRewards;
 	}
 
 	public Stats getStats() {
@@ -64,6 +70,7 @@ public abstract class Path {
 	
 	public void addCurrentXP(Double amount) {
 		this.currentXP = this.currentXP + amount;
+		if (this.currentXP >= this.maxXP) this.levelUp();
 	}
 
 	public Double getMaxXP() {
@@ -75,11 +82,11 @@ public abstract class Path {
 	}
 
 	public int getPrestige() {
-		return prestige;
+		return skillPoints;
 	}
 
 	public void setPrestige(int prestige) {
-		this.prestige = prestige;
+		this.skillPoints = prestige;
 	}
 
 	public String getName() {
