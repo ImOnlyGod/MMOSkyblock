@@ -38,7 +38,7 @@ public abstract class Path {
 	public ArrayList<String> calcLevelUpRewards(int level) {
 		ArrayList<String> levelRewards = new ArrayList<String>();
 		if (Math.floorMod(level, 2) == 1) {
-			levelRewards.add(Utils.chat("&a&l+ Skill Point (x1)"));
+			levelRewards.add(Utils.chat("&b+ &7Skill Point (x1)"));
 		}
 		
 		return levelRewards;

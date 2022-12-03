@@ -1,6 +1,9 @@
 package CustomEssentials.Events.PlayerPath.Paths;
 
+import java.util.ArrayList;
+
 import CustomEssentials.Events.PlayerStats.Stats;
+import CustomEssentials.Utils.Utils;
 
 public class Archer extends Path{
 	
@@ -34,6 +37,15 @@ public class Archer extends Path{
 		stats.setDefaultPhysicalDamage(stats.getDefaultPhysicalDamage() + pDmgScalar);
 		stats.setDefaultBurstDmg(stats.getBurstDamage() + mDmgScalar);
 		
+	}
+	
+	public ArrayList<String> calcLevelUpRewards(int level) {
+		ArrayList<String> levelRewards = super.calcLevelUpRewards(level);
+		if (Math.floorMod(level, 2) == 1) {
+			levelRewards.add(Utils.chat("&a&l+ Skill Point (x1)"));
+		}
+		
+		return levelRewards;
 	}
 	
 	public int getHealthValue(int level, int prestige) {

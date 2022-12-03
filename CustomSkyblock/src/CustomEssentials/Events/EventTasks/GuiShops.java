@@ -121,6 +121,7 @@ public class GuiShops implements Listener{
 				else if (e.getSlot() == 40) p.performCommand("pathselector");
 				else if (e.getSlot() == 22) {
 					PathStatsGui openPathStats = new PathStatsGui(p,playerProfile);
+					openPathStats.openPage1();
 				}
 				
 				return;
@@ -169,6 +170,26 @@ public class GuiShops implements Listener{
 			}
 			e.setCancelled(true);
 			if (e.getSlot() == 0) p.performCommand("skills");
+			
+			return;
+		}
+		else if ((e.getView().getTitle().contains(Utils.chat("&7&lProgress &7(Page")))) {	
+			ClickType click = e.getClick();
+			if (!isValidClick(click)) {
+				e.setCancelled(true);				
+			}
+			if (e.getClickedInventory() != e.getView().getTopInventory()) {
+				return;
+			}
+			e.setCancelled(true);
+			
+			PathStatsGui openPathStats = new PathStatsGui(p,playerProfile);
+			String title = e.getView().getTitle();
+			int currentPage = openPathStats.getCurrentPage(title);
+			
+			if (e.getSlot() == 50) openPathStats.nextPage(currentPage+1);
+			else if (e.getSlot() == 49) p.performCommand("path");
+			if (currentPage != 1 && e.getSlot() == 48) openPathStats.previousPage(currentPage-1);			
 			
 			return;
 		}
@@ -895,8 +916,20 @@ public class GuiShops implements Listener{
 			},1);
 			return;
 		}
+		else if (e.getView().getTitle().contains(Utils.chat("&7&lProgress &7(Page"))) {
+			
+			Bukkit.getScheduler().scheduleSyncDelayedTask(this.plugin, new Runnable() {
+				@Override
+				public void run() {
+					
+					if (p.getOpenInventory().getTitle().equalsIgnoreCase("Crafting")) {
+						p.performCommand("path");
+					}					
+				}
+			},1);
+			return;
+		}
 	}
-	
 	public String getPreviousMenu(ItemStack item) {
 		GuiItems items = new GuiItems();
 		Material itemType = item.getType();

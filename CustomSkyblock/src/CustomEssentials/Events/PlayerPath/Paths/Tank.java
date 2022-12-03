@@ -1,6 +1,9 @@
 package CustomEssentials.Events.PlayerPath.Paths;
 
+import java.util.ArrayList;
+
 import CustomEssentials.Events.PlayerStats.Stats;
+import CustomEssentials.Utils.Utils;
 
 public class Tank extends Path{
 	
@@ -8,24 +11,24 @@ public class Tank extends Path{
 	public Tank() {
 		super();
 		Stats stats = this.getStats();
-		stats.setDefaultHealth(500);
-		stats.setDefaultArmor(50);
-		stats.setDefaultMR(35);
-		stats.setDefaultMana(300);
+		stats.setDefaultHealth(100);
+		stats.setDefaultArmor(10);
+		stats.setDefaultMR(7);
+		stats.setDefaultMana(80);
 		this.setName("tank");
 		
 	}
 		
 	public void levelUpStats() {
+		super.levelUpStats();
 		int level = this.getLevel();
-		int prestige = this.getPrestige();
-		
-		int healthScalar = this.getHealthValue(level, prestige);
-		int armorScalar = this.getArmorValue(level, prestige);
-		int mrScalar = this.getMRValue(level, prestige);
-		int manaScalar = this.getPDamageValue(level, prestige);
-		int pDmgScalar = this.getManaValue(level, prestige);
-		int mDmgScalar = this.getMDamageValue(level, prestige);
+
+		int healthScalar = this.getHealthValue(level);
+		int armorScalar = this.getArmorValue(level);
+		int mrScalar = this.getMRValue(level);
+		int manaScalar = this.getPDamageValue(level);
+		int pDmgScalar = this.getManaValue(level);
+		int mDmgScalar = this.getMDamageValue(level);
 			
 		Stats stats = this.getStats();
 		stats.setDefaultHealth(stats.getDefaultHealth() + healthScalar);
@@ -33,27 +36,36 @@ public class Tank extends Path{
 		stats.setDefaultMR(stats.getDefaultMR() + mrScalar);
 		stats.setDefaultMana(stats.getDefaultMana() + manaScalar);
 		stats.setDefaultPhysicalDamage(stats.getDefaultPhysicalDamage() + pDmgScalar);
-		stats.setDefaultBurstDmg(stats.getBurstDamage() + mDmgScalar);
+		stats.setDefaultBurstDmg(stats.getDefaultBurstDmg() + mDmgScalar);
 		
 	}
 	
-	public int getHealthValue(int level, int prestige) {
-		return 50 + prestige*level + 2*level;
+	public ArrayList<String> calcLevelUpRewards(int level) {
+		ArrayList<String> levelRewards = super.calcLevelUpRewards(level);
+		
+		
+		return levelRewards;
 	}
-	public int getArmorValue(int level, int prestige) {
-		return  5 + (int) ((prestige*level + 2*level)/10);
+
+	
+	
+	public int getHealthValue(int level) {
+		return (int) (10+Math.floor(level/5));
 	}
-	public int getMRValue(int level, int prestige) {
-		return 3 + (int) ((prestige*level + 2*level)/10);
+	public int getArmorValue(int level) {
+		return  1 + (int) ((level + 2*level)/10);
 	}
-	public int getPDamageValue(int level, int prestige) {
-		return 3 + (int) ((prestige*level + 2*level)/10);
+	public int getMRValue(int level) {
+		return 3 + (int) ((level + 2*level)/10);
 	}
-	public int getManaValue(int level, int prestige) {
-		return 30 + prestige*level + 2*level;
+	public int getPDamageValue(int level) {
+		return 3 + (int) ((level + 2*level)/10);
 	}
-	public int getMDamageValue(int level, int prestige) {
-		return 3 + (int) ((prestige*level + 2*level)/10);
+	public int getManaValue(int level) {
+		return 30 + level + 2*level;
+	}
+	public int getMDamageValue(int level) {
+		return 3 + (int) ((level + 2*level)/10);
 	}
 	
 	
