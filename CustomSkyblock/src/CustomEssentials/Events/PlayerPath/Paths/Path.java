@@ -10,6 +10,7 @@ public abstract class Path {
 	private Double currentXP;
 	private Double maxXP;
 	private int skillPoints;
+	private int skillPointsMax;
 	private Stats stats;
 	private String name = "path";
 	
@@ -31,7 +32,8 @@ public abstract class Path {
 	
 	public void levelUpStats() {
 		if (Math.floorMod(this.level, 2) == 1) {
-			this.skillPoints++;
+			this.setSkillPoints(this.getSkillPoints() + 1);
+			this.setSkillPointsMax(this.getSkillPointsMax() + 1);
 		}
 	}
 	
@@ -81,13 +83,6 @@ public abstract class Path {
 		this.maxXP = maxXP;
 	}
 
-	public int getPrestige() {
-		return skillPoints;
-	}
-
-	public void setPrestige(int prestige) {
-		this.skillPoints = prestige;
-	}
 
 	public String getName() {
 		return name;
@@ -95,6 +90,22 @@ public abstract class Path {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public int getSkillPoints() {
+		return skillPoints;
+	}
+
+	public void setSkillPoints(int skillPoints) {
+		this.skillPoints = skillPoints;
+	}
+
+	public int getSkillPointsMax() {
+		return skillPointsMax;
+	}
+
+	public void setSkillPointsMax(int skillPointsMax) {
+		this.skillPointsMax = skillPointsMax;
 	}
 
 }

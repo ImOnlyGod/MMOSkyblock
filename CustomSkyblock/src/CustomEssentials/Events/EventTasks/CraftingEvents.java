@@ -1,17 +1,24 @@
 package CustomEssentials.Events.EventTasks;
 
-import org.bukkit.Bukkit;
+import java.util.ArrayList;
+
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.enchantments.EnchantmentOffer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.enchantment.EnchantItemEvent;
+import org.bukkit.event.enchantment.PrepareItemEnchantEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.event.inventory.PrepareAnvilEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import CustomEssentials.Main;
-import CustomEssentials.Events.Items.Crafting.CustomCraft;
+import CustomEssentials.Events.Enchants.CustomEnchants;
 import CustomEssentials.Utils.Utils;
 
 
@@ -86,6 +93,42 @@ public class CraftingEvents implements Listener{
 		}
 	
 	}
+	
+	@EventHandler
+	public void putItemInEnchantTable(PrepareItemEnchantEvent e) {
+		//MAYBE CUSTOM GUI??/
+		System.out.println(e.getEnchantmentBonus()); //POWER OF BOOKSHELV
+		e.getOffers()[0] = new EnchantmentOffer(Enchantment.DIG_SPEED,1,1);
+		e.getOffers()[1] = new EnchantmentOffer(Enchantment.DIG_SPEED,1,1);
+		e.getOffers()[2] = new EnchantmentOffer(CustomEnchants.TELEPATHY, 1, 120);
+		
+	}
+	
+	@EventHandler
+	public void enchantingEvent(EnchantItemEvent e) {
+		System.out.println(e.getEnchantBlock().getBlockPower());
+		System.out.println(e.getEnchantsToAdd());
+		e.setExpLevelCost(50);
+		e.getEnchantsToAdd().remove(Enchantment.PROTECTION_ENVIRONMENTAL);
+		e.getEnchantsToAdd().remove(Enchantment.PROTECTION_EXPLOSIONS);
+		e.getEnchantsToAdd().remove(Enchantment.PROTECTION_FALL);
+		e.getEnchantsToAdd().remove(Enchantment.PROTECTION_FIRE);
+		e.getEnchantsToAdd().remove(Enchantment.PROTECTION_PROJECTILE);
+		e.getEnchantsToAdd().remove(Enchantment.DURABILITY);
+		e.getEnchantsToAdd().replace(Enchantment.PROTECTION_ENVIRONMENTAL, 10);
+		e.getItem().addUnsafeEnchantment(CustomEnchants.TELEPATHY, 1);
+		ItemMeta meta = e.getItem().getItemMeta();
+		ArrayList<String> lore = new ArrayList<String>();
+		lore.add("telepathy");
+		meta.setLore(lore);
+		e.getItem().setItemMeta(meta);
+	}
+	
+	@EventHandler
+	public void putItemInEnchantTable(PrepareAnvilEvent e) {
+		
+	}
+	
 
 	public Main getPlugin() {
 		return plugin;

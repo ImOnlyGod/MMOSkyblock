@@ -33,6 +33,7 @@ import org.bukkit.inventory.ItemStack;
 import CustomEssentials.Main;
 import CustomEssentials.Events.PlayerProfileManager;
 import CustomEssentials.Events.Profile;
+import CustomEssentials.Events.Enchants.CustomEnchants;
 import CustomEssentials.Events.Items.ItemStats;
 import CustomEssentials.Events.Items.ItemStorageTable;
 import CustomEssentials.Events.Items.ItemsCore;
@@ -361,6 +362,7 @@ public class MobEvents implements Listener{
 		if (item == null) return;
 		
 		if (!(e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK))) return;
+		
 		
 		if (p.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1) item.itemAbility(p, profiles.getPlayerProfile(p));
 		else if (p.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 6) {

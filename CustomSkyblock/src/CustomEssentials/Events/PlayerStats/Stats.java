@@ -363,7 +363,7 @@ public class Stats {
 		int scalar = (level+"").length();
 		ArrayList<String> result = new ArrayList<String>();
 		result.add(Utils.chat("&7" + scalar + " &aArmor"));
-		result.add(Utils.chat("&7" + 2*scalar + " &5Magic Resist"));
+		if (((int) scalar/2) <1) result.add(Utils.chat("&7" + scalar + " &5Magic Resist"));
 		return result;
 		
 	}
@@ -371,7 +371,7 @@ public class Stats {
 	public ArrayList<String> calclevelUpFarming(int level) {
 		int scalar = (level+"").length();
 		ArrayList<String> result = new ArrayList<String>();
-		result.add(Utils.chat("&7" + (2*(scalar+1)) + " &cHealth"));
+		result.add(Utils.chat("&7" + ((int) 1.2*(scalar+1)) + " &cHealth"));
 		return result;
 		
 	}
@@ -379,7 +379,7 @@ public class Stats {
 	public ArrayList<String> calclevelUpCombat(int level) {
 		int scalar = (level+"").length();
 		ArrayList<String> result = new ArrayList<String>();
-		result.add(Utils.chat("&7" + 0.5 + "x &bCrit Chance"));
+		result.add(Utils.chat("&7" + 0.25 + "x &bCrit Chance"));
 		result.add(Utils.chat("&7" + (0.1*scalar) + "x &bCrit Damage"));
 		return result;
 		
@@ -403,19 +403,19 @@ public class Stats {
 	public void levelUpMining(int level) {
 		int scalar = (level+"").length();
 		this.defaultArmor += scalar;
-		this.defaultMR += 2*scalar;
+		this.defaultMR += (int)scalar/2;
 		
 	}
 
 	public void levelUpFarming(int level) {
 		int scalar = (level+"").length();
-		this.defaultHealth += 2*(scalar+1);
+		this.defaultHealth += (int) 1.2*(scalar+1);
 		
 	}
 	
 	public void levelUpCombat(int level) {
 		int scalar = (level+"").length();
-		this.defaultCritChance += 0.5;
+		this.defaultCritChance += 0.25;
 		this.defaultCritDmg += (scalar * 0.1);
 		
 	}

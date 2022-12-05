@@ -3,7 +3,6 @@ package CustomEssentials.Events.PlayerPath.Paths;
 import java.util.ArrayList;
 
 import CustomEssentials.Events.PlayerStats.Stats;
-import CustomEssentials.Utils.Utils;
 
 public class Archer extends Path{
 	
@@ -19,15 +18,15 @@ public class Archer extends Path{
 	}
 		
 	public void levelUpStats() {
+		super.levelUpStats();
 		int level = this.getLevel();
-		int prestige = this.getPrestige();
-		
-		int healthScalar = this.getHealthValue(level, prestige);
-		int armorScalar = this.getArmorValue(level, prestige);
-		int mrScalar = this.getMRValue(level, prestige);
-		int manaScalar = this.getPDamageValue(level, prestige);
-		int pDmgScalar = this.getManaValue(level, prestige);
-		int mDmgScalar = this.getMDamageValue(level, prestige);
+
+		int healthScalar = this.getHealthValue(level);
+		int armorScalar = this.getArmorValue(level);
+		int mrScalar = this.getMRValue(level);
+		int manaScalar = this.getPDamageValue(level);
+		int pDmgScalar = this.getManaValue(level);
+		int mDmgScalar = this.getMDamageValue(level);
 			
 		Stats stats = this.getStats();
 		stats.setDefaultHealth(stats.getDefaultHealth() + healthScalar);
@@ -35,36 +34,33 @@ public class Archer extends Path{
 		stats.setDefaultMR(stats.getDefaultMR() + mrScalar);
 		stats.setDefaultMana(stats.getDefaultMana() + manaScalar);
 		stats.setDefaultPhysicalDamage(stats.getDefaultPhysicalDamage() + pDmgScalar);
-		stats.setDefaultBurstDmg(stats.getBurstDamage() + mDmgScalar);
+		stats.setDefaultBurstDmg(stats.getDefaultBurstDmg() + mDmgScalar);
 		
 	}
 	
 	public ArrayList<String> calcLevelUpRewards(int level) {
 		ArrayList<String> levelRewards = super.calcLevelUpRewards(level);
-		if (Math.floorMod(level, 2) == 1) {
-			levelRewards.add(Utils.chat("&a&l+ Skill Point (x1)"));
-		}
 		
 		return levelRewards;
 	}
 	
-	public int getHealthValue(int level, int prestige) {
-		return 5 + prestige*level + 2*level;
+	public int getHealthValue(int level) {
+		return (int) (10+Math.floor(level/5));
 	}
-	public int getArmorValue(int level, int prestige) {
-		return  1 + (int) ((prestige*level + 2*level)/10);
+	public int getArmorValue(int level) {
+		return  1 + (int) ((level + 2*level)/10);
 	}
-	public int getMRValue(int level, int prestige) {
-		return 3 + (int) ((prestige*level + 2*level)/10);
+	public int getMRValue(int level) {
+		return 3 + (int) ((level + 2*level)/10);
 	}
-	public int getPDamageValue(int level, int prestige) {
-		return 20 + (int) ((prestige*level + 2*level)/10);
+	public int getPDamageValue(int level) {
+		return 3 + (int) ((level + 2*level)/10);
 	}
-	public int getManaValue(int level, int prestige) {
-		return 30 + prestige*level + 2*level;
+	public int getManaValue(int level) {
+		return 30 + level + 2*level;
 	}
-	public int getMDamageValue(int level, int prestige) {
-		return 0 + (int) ((prestige*level + 2*level)/10);
+	public int getMDamageValue(int level) {
+		return 3 + (int) ((level + 2*level)/10);
 	}
 	
 	

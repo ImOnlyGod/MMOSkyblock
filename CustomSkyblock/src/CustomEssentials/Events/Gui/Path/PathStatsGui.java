@@ -57,7 +57,8 @@ public class PathStatsGui {
 	}
 	
 	public void openPage1() {
-		String pathName = this.playerPath.getName().replace(this.playerPath.getName().charAt(0), this.playerPath.getName().toUpperCase().charAt(0));
+		char firstCharName = this.playerPath.getName().toUpperCase().charAt(0);
+		String pathName = firstCharName + this.playerPath.getName().substring(1);
 		Inventory gui = Bukkit.createInventory(null, 54,Utils.chat("&b&l"+pathName+" &7&lProgress &7(Page 1)"));
 		
 		int currentPathLevel = this.playerPath.getLevel();
@@ -231,7 +232,8 @@ public class PathStatsGui {
 	}
 
 	public void oddPage(int page) {
-		String pathName = this.playerPath.getName().replace(this.playerPath.getName().charAt(0), this.playerPath.getName().toUpperCase().charAt(0));
+		char firstCharName = this.playerPath.getName().toUpperCase().charAt(0);
+		String pathName = firstCharName + this.playerPath.getName().substring(1);
 		Inventory gui = Bukkit.createInventory(null, 54,Utils.chat("&b&l"+pathName+" &7&lProgress &7(Page "+page+")"));
 		
 		int currentPathLevel = this.playerPath.getLevel();
@@ -383,7 +385,8 @@ public class PathStatsGui {
 	}
 	
 	public void evenPage(int page) {
-		String pathName = this.playerPath.getName().replace(this.playerPath.getName().charAt(0), this.playerPath.getName().toUpperCase().charAt(0));
+		char firstCharName = this.playerPath.getName().toUpperCase().charAt(0);
+		String pathName = firstCharName + this.playerPath.getName().substring(1);
 		Inventory gui = Bukkit.createInventory(null, 54,Utils.chat("&b&l"+pathName+" &7&lProgress &7(Page "+page+")"));
 		
 		int currentPathLevel = this.playerPath.getLevel();

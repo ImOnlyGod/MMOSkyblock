@@ -81,8 +81,8 @@ public class PathGui implements TabExecutor{
 		ArrayList<String> pointsLore = new ArrayList<String>();
 		pointsLore.add(Utils.chat("&7&oClick to modify current Attributes!"));
 		pointsLore.add("");
-		pointsLore.add(Utils.chat("&fAvailable Attribute Points:"));
-		pointsLore.add(Utils.chat("&fTotal Attribute Points:"));
+		pointsLore.add(Utils.chat("&fAvailable Attribute Points: &7"+currentPathStats.getSkillPoints()));
+		pointsLore.add(Utils.chat("&fTotal Attribute Points: &7"+currentPathStats.getSkillPointsMax()));
 		
 		pointsMeta.setLore(pointsLore);
 		points.setItemMeta(pointsMeta);

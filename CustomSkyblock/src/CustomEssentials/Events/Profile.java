@@ -37,7 +37,7 @@ public class Profile {
 		this.playTime = playTime;
 		this.balance = 0.0;
 		this.initialisePaths();
-		this.setPath(this.paths.get("default"));
+		this.path = this.paths.get("default");
 	}
 	
 	public CombatSkill getCombat() {

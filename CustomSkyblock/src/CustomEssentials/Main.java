@@ -19,6 +19,7 @@ import CustomEssentials.Commands.PlayerEconomy.BalanceCommand;
 import CustomEssentials.Commands.PlayerEconomy.PayCommand;
 import CustomEssentials.Events.PlayerProfileManager;
 import CustomEssentials.Events.Profile;
+import CustomEssentials.Events.Enchants.CustomEnchants;
 import CustomEssentials.Events.EventTasks.CraftingEvents;
 import CustomEssentials.Events.EventTasks.FishingEvents;
 import CustomEssentials.Events.EventTasks.FoodSaturation;
@@ -98,6 +99,8 @@ public class Main extends JavaPlugin{
 		generateShopFile();
 		this.profileManager = new PlayerProfileManager(this);
 
+		CustomEnchants.register();
+		
 		new MenuGui(this);
 		new SkillsGui(this);
 		new PathSelectionGui(this);
@@ -504,7 +507,7 @@ public class Main extends JavaPlugin{
 		playerData.set(storedPathName + ".level", path.getLevel());
 		playerData.set(storedPathName + ".xp",path.getCurrentXP());
 		playerData.set(storedPathName + ".MaxXp", path.getMaxXP());
-		playerData.set(storedPathName + ".prestige", path.getPrestige());
+		playerData.set(storedPathName + ".skillpoints", path.getSkillPoints());
 		playerData.set(storedPathName + ".Health", pathStats.getHealth());
 		playerData.set(storedPathName + ".Armor", pathStats.getArmor());
 		playerData.set(storedPathName + ".MagicResist", pathStats.getMagicResist());
@@ -638,7 +641,8 @@ public class Main extends JavaPlugin{
 		playerPath.setLevel(playerData.getInt("GeneralPath.level"));
 		playerPath.setCurrentXP((Double) playerData.get("GeneralPath.xp"));
 		playerPath.setMaxXP((Double) playerData.get("GeneralPath.MaxXp"));
-		playerPath.setPrestige(playerData.getInt("GeneralPath.prestige"));
+		playerPath.setSkillPoints(playerData.getInt("GeneralPath.skillPoints"));
+		playerPath.setSkillPointsMax(playerData.getInt("GeneralPath.skillPointsMax"));
 		
 		getPathStats(playerPath,"GeneralPath",playerData);
 		
@@ -667,7 +671,8 @@ public class Main extends JavaPlugin{
 		path.setLevel(playerData.getInt(storedPathName + ".level"));
 		path.setCurrentXP((Double) playerData.get(storedPathName + ".xp"));
 		path.setMaxXP((Double) playerData.get(storedPathName + ".MaxXp"));
-		path.setPrestige(playerData.getInt(storedPathName + ".prestige"));
+		path.setSkillPoints(playerData.getInt(storedPathName + ".skillPoints"));
+		path.setSkillPointsMax(playerData.getInt(storedPathName + ".skillPointsMax"));
 		pathStats.setHealth(playerData.getInt(storedPathName + ".Health"));
 		pathStats.setArmor(playerData.getInt(storedPathName + ".Armor"));
 		pathStats.setMagicResist(playerData.getInt(storedPathName + ".MagicResist"));
