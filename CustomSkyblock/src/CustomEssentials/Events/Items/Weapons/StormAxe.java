@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -73,7 +74,6 @@ public class StormAxe extends ItemsCore{
 		int currentMana = profile.getStats().getMana();
 		if (currentMana-55 < 0) return;
 		profile.getStats().setMana(currentMana-55);
-		
 		Location playerLoc = p.getLocation();
 		
 		String name = p.getName().toLowerCase() + "stormaxedamage";

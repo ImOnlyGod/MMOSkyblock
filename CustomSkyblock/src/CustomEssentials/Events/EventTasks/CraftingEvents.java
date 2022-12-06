@@ -14,11 +14,13 @@ import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.inventory.PrepareAnvilEvent;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import CustomEssentials.Main;
-import CustomEssentials.Events.Enchants.CustomEnchants;
+import CustomEssentials.Events.Gui.Enchants.EnchantTableGui;
+import CustomEssentials.Events.Items.Enchants.CustomEnchants;
 import CustomEssentials.Utils.Utils;
 
 
@@ -36,7 +38,13 @@ public class CraftingEvents implements Listener{
 			e.setCancelled(true);
 			Player p = (Player) e.getPlayer();
 			p.performCommand("craft");
-		}		
+		}
+		else if (e.getInventory().getType() == InventoryType.ENCHANTING) {
+			e.setCancelled(true);
+			Player p = (Player) e.getPlayer();
+			EnchantTableGui gui = new EnchantTableGui(p, this.plugin);
+			gui.createInitialGui();
+		}
 	}
 	
 	
@@ -98,34 +106,65 @@ public class CraftingEvents implements Listener{
 	public void putItemInEnchantTable(PrepareItemEnchantEvent e) {
 		//MAYBE CUSTOM GUI??/
 		System.out.println(e.getEnchantmentBonus()); //POWER OF BOOKSHELV
-		e.getOffers()[0] = new EnchantmentOffer(Enchantment.DIG_SPEED,1,1);
-		e.getOffers()[1] = new EnchantmentOffer(Enchantment.DIG_SPEED,1,1);
-		e.getOffers()[2] = new EnchantmentOffer(CustomEnchants.TELEPATHY, 1, 120);
+		e.getOffers()[0] = new EnchantmentOffer(CustomEnchants.VACUUM, 1, 10);
+		e.getOffers()[1] = new EnchantmentOffer(CustomEnchants.VACUUM, 1, 30);
+		e.getOffers()[2] = new EnchantmentOffer(CustomEnchants.VACUUM, 1, 60);
 		
 	}
 	
 	@EventHandler
 	public void enchantingEvent(EnchantItemEvent e) {
-		System.out.println(e.getEnchantBlock().getBlockPower());
-		System.out.println(e.getEnchantsToAdd());
 		e.setExpLevelCost(50);
-		e.getEnchantsToAdd().remove(Enchantment.PROTECTION_ENVIRONMENTAL);
-		e.getEnchantsToAdd().remove(Enchantment.PROTECTION_EXPLOSIONS);
-		e.getEnchantsToAdd().remove(Enchantment.PROTECTION_FALL);
-		e.getEnchantsToAdd().remove(Enchantment.PROTECTION_FIRE);
-		e.getEnchantsToAdd().remove(Enchantment.PROTECTION_PROJECTILE);
-		e.getEnchantsToAdd().remove(Enchantment.DURABILITY);
-		e.getEnchantsToAdd().replace(Enchantment.PROTECTION_ENVIRONMENTAL, 10);
-		e.getItem().addUnsafeEnchantment(CustomEnchants.TELEPATHY, 1);
-		ItemMeta meta = e.getItem().getItemMeta();
-		ArrayList<String> lore = new ArrayList<String>();
-		lore.add("telepathy");
-		meta.setLore(lore);
-		e.getItem().setItemMeta(meta);
+		//e.getEnchantsToAdd().remove(Enchantment.PROTECTION_ENVIRONMENTAL);
+		//e.getEnchantsToAdd().remove(Enchantment.PROTECTION_EXPLOSIONS);
+		//e.getEnchantsToAdd().remove(Enchantment.PROTECTION_FALL);
+		//e.getEnchantsToAdd().remove(Enchantment.PROTECTION_FIRE);
+		//e.getEnchantsToAdd().remove(Enchantment.PROTECTION_PROJECTILE);
+		//e.getEnchantsToAdd().remove(Enchantment.DURABILITY);
+		//e.getEnchantsToAdd().replace(Enchantment.PROTECTION_ENVIRONMENTAL, 10);
+		e.getEnchantsToAdd().put(CustomEnchants.VACUUM, 1);
+		for (Enchantment enchant: e.getEnchantsToAdd().keySet()) {
+			if (e.getItem().getItemMeta().hasCustomModelData()) {
+				//replace damage if sharpness
+				this.addCustomItemEnchantmentLore(e.getItem(), enchant, e.getEnchantsToAdd().get(enchant));
+			}
+			else this.addVanillaItemEnchantmentLore(e.getItem(), enchant, e.getEnchantsToAdd().get(enchant));
+		}
+		
 	}
 	
 	@EventHandler
-	public void putItemInEnchantTable(PrepareAnvilEvent e) {
+	public void putItemInAnvil(PrepareAnvilEvent e) {
+		
+	}
+	
+	public void addVanillaItemEnchantmentLore(ItemStack item, Enchantment enchant, int level) {
+		
+	}
+	
+	public void addCustomItemEnchantmentLore(ItemStack item, Enchantment enchant, int level) {
+		
+		ItemMeta meta = item.getItemMeta();
+		meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+		ArrayList<String> lore = (ArrayList<String>) meta.getLore();
+		if (!lore.contains(Utils.chat("&6&lEnchantments: "))) {
+			for (int i=2;i<lore.size();i++) {
+				if (!lore.get(i).equalsIgnoreCase(Utils.chat("                          "))) continue;
+				lore.add(i+1, Utils.chat("&6&lEnchantments: "));
+				break;
+			}
+		}
+		//Add diff color based on rarity
+		String enchantName = enchant.getKey().toString().toLowerCase().replace("minecraft:","");
+		char firstChar = enchantName.toUpperCase().charAt(0);
+		enchantName = firstChar + enchantName.substring(1);
+		String enchantText = Utils.chat("&a+ &7"+enchantName + " " + level);
+		int index = lore.indexOf(Utils.chat("&6&lEnchantments: "));
+		lore.add(index+1, enchantText);
+		
+		meta.setLore(lore);
+		item.setItemMeta(meta);
+		
 		
 	}
 	

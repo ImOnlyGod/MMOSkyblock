@@ -1,4 +1,6 @@
-package CustomEssentials.Events.Enchants;
+package CustomEssentials.Events.Items.Enchants;
+
+import javax.tools.Tool;
 
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
@@ -9,11 +11,13 @@ public class EnchantmentWrapper extends Enchantment{
 
 	public final String name;
 	public final int maxLevel;
+	public final EnchantmentTarget target;
 	
-	public EnchantmentWrapper(String namespace, String name, int level) {
+	public EnchantmentWrapper(String namespace, String name, int level, EnchantmentTarget target) {
 		super(NamespacedKey.minecraft(namespace));
 		this.name = name;
 		this.maxLevel = level;
+		this.target = target;
 	}
 
 	@Override
@@ -30,8 +34,7 @@ public class EnchantmentWrapper extends Enchantment{
 
 	@Override
 	public EnchantmentTarget getItemTarget() {
-		// TODO Auto-generated method stub
-		return null;
+		return target;
 	}
 
 	@Override

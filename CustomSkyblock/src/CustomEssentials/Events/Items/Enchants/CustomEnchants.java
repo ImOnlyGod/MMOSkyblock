@@ -1,19 +1,20 @@
-package CustomEssentials.Events.Enchants;
+package CustomEssentials.Events.Items.Enchants;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.enchantments.EnchantmentTarget;
 
 public class CustomEnchants {
 	
-	public static final Enchantment TELEPATHY = new EnchantmentWrapper("telepathy","Telepathy",1);
+	public static final Enchantment VACUUM = new EnchantmentWrapper("vacuum","Vacuum",1,EnchantmentTarget.TOOL);
 	
 	public static void register() {
-		boolean registered = Arrays.stream(Enchantment.values()).collect(Collectors.toList()).contains(TELEPATHY);
+		boolean registered = Arrays.stream(Enchantment.values()).collect(Collectors.toList()).contains(VACUUM);
 		if (!registered) {
-			registerEnchantment(TELEPATHY);
+			registerEnchantment(VACUUM);
 		}
 	}
 	

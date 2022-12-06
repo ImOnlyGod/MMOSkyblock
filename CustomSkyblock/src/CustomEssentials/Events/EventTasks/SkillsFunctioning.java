@@ -1,5 +1,6 @@
 package CustomEssentials.Events.EventTasks;
 
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -17,6 +18,7 @@ import org.bukkit.metadata.FixedMetadataValue;
 
 import CustomEssentials.Main;
 import CustomEssentials.Events.Profile;
+import CustomEssentials.Events.Items.Enchants.CustomEnchants;
 import CustomEssentials.Utils.Utils;
 
 
@@ -78,6 +80,23 @@ public class SkillsFunctioning implements Listener{
 		e.getBlock().setMetadata("placed", new FixedMetadataValue(this.plugin,"something"));
 	}
 	
+	public boolean checkEnchantsBlockBreak(Player p, Block block) {
+		
+		if (p.getInventory().getItemInMainHand() == null) return true;
+		if (!block.isPreferredTool(p.getInventory().getItemInMainHand())) return false;
+		if (p.getGameMode() == GameMode.CREATIVE) return true;
+		//CHECK FORTUNE + BOOST DROPS
+		if (p.getInventory().getItemInMainHand().getItemMeta().hasEnchant(CustomEnchants.VACUUM)) {
+			for (ItemStack item :block.getDrops()) {
+				p.getInventory().addItem(item);
+			}			
+			
+			return false;
+		}
+		if (block.hasMetadata("placed")) return true;
+		return true;
+	}
+	
 	@EventHandler
 	public void onBlockBreak(BlockBreakEvent e) {
 		
@@ -88,8 +107,8 @@ public class SkillsFunctioning implements Listener{
 		profile.getForaging().generateWoodXp();
 		profile.getMining().generateBlockXp();
 		
+		e.setDropItems(checkEnchantsBlockBreak(p,e.getBlock()));
 		if (e.getBlock().hasMetadata("placed")) return;
-		
 		
 		if (profile.getMining().getBlockXp().containsKey(block)) {
 				
