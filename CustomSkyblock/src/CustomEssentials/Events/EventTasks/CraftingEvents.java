@@ -43,7 +43,7 @@ public class CraftingEvents implements Listener{
 			e.setCancelled(true);
 			Player p = (Player) e.getPlayer();
 			EnchantTableGui gui = new EnchantTableGui(p, this.plugin);
-			gui.createInitialGui();
+			gui.openGui();
 		}
 	}
 	

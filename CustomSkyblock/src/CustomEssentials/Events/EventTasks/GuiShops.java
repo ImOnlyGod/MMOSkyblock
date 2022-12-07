@@ -15,6 +15,7 @@ import org.bukkit.inventory.PlayerInventory;
 
 import CustomEssentials.Main;
 import CustomEssentials.Events.Profile;
+import CustomEssentials.Events.Gui.Enchants.EnchantTableGui;
 import CustomEssentials.Events.Gui.Path.PathStatsGui;
 import CustomEssentials.Events.Gui.Shop.ItemsBuySellGui;
 import CustomEssentials.Events.Gui.Skills.SkillProgression;
@@ -190,6 +191,39 @@ public class GuiShops implements Listener{
 			if (e.getSlot() == 50) openPathStats.nextPage(currentPage+1);
 			else if (e.getSlot() == 49) p.performCommand("path");
 			if (currentPage != 1 && e.getSlot() == 48) openPathStats.previousPage(currentPage-1);			
+			
+			return;
+		}
+		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&5&lEnchanting Station")))) {
+			EnchantTableGui enchantTable = new EnchantTableGui(p,this.plugin);
+			ClickType click = e.getClick();
+			if (!isValidClick(click)) {
+				e.setCancelled(true);				
+			}
+			if (e.getClickedInventory()!=e.getView().getTopInventory() && !enchantTable.isValidInput(e.getCurrentItem())) return;	
+			if (e.getClickedInventory()!=e.getView().getTopInventory() && enchantTable.isValidInput(e.getCurrentItem()) && e.getView().getTopInventory().getItem(19)!=null) return;
+			
+			if (e.getSlot()==19 && e.getClickedInventory()==e.getView().getTopInventory() && e.getCurrentItem() != null) {
+				
+				if (this.InvenSpace((PlayerInventory) e.getView().getBottomInventory(), 1) > 0) {
+					e.getView().getBottomInventory().addItem(e.getCurrentItem());
+				}
+				else {
+					//IMPLEMENT ITEM STORAGE WHEN INVEN IS FULL
+				}
+				e.getView().setItem(19, null);
+				e.setCancelled(true);
+			}
+			if (e.getClickedInventory()==e.getView().getBottomInventory() && enchantTable.isValidInput(e.getCurrentItem()) && e.getView().getTopInventory().getItem(19)==null) {
+				e.getView().getTopInventory().setItem(19, e.getView().getBottomInventory().getItem(e.getSlot()));
+				e.getView().getBottomInventory().setItem(e.getSlot(), null);		
+				e.setCancelled(true);
+			}
+			
+			enchantTable.setGui(e.getView().getTopInventory());
+			enchantTable.generateValidInventory();		
+			enchantTable.openGui();
+			
 			
 			return;
 		}
