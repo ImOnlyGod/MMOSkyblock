@@ -10,6 +10,7 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
@@ -30,31 +31,103 @@ public class EnchantTableGui {
 	private ArrayList<ItemStack> allowedItems = new ArrayList<ItemStack>();
 	private HashMap<Enchantment,ArrayList<String>> EnchantLore = new HashMap<Enchantment,ArrayList<String>>();
 	private HashMap<Enchantment,Material> EnchantItem = new HashMap<Enchantment,Material>();
-	
+	private HashMap<Material,Enchantment> ItemEnchant = new HashMap<Material,Enchantment>();
+	private HashMap<Enchantment,Integer> EnchantXp = new HashMap<Enchantment,Integer>();
+	private HashMap<Enchantment,Integer> EnchantMoney = new HashMap<Enchantment,Integer>();
+	private HashMap<Enchantment,Integer> EnchantLevelRequirement = new HashMap<Enchantment,Integer>();
+
+	public HashMap<Enchantment, Integer> getEnchantXp() {
+		return EnchantXp;
+	}
+
+	public void setEnchantXp(HashMap<Enchantment, Integer> enchantXp) {
+		EnchantXp = enchantXp;
+	}
+
+	public HashMap<Enchantment, Integer> getEnchantMoney() {
+		return EnchantMoney;
+	}
+
+	public void setEnchantMoney(HashMap<Enchantment, Integer> enchantMoney) {
+		EnchantMoney = enchantMoney;
+	}
+
+	public HashMap<Enchantment, Integer> getEnchantLevelRequirement() {
+		return EnchantLevelRequirement;
+	}
+
+	public void setEnchantLevelRequirement(HashMap<Enchantment, Integer> enchantLevelRequirement) {
+		EnchantLevelRequirement = enchantLevelRequirement;
+	}
+
 	public EnchantTableGui(Player p, Main plugin) {
 		this.p = p;
 		this.plugin = plugin;
 		this.generateAllowedItems();
 		this.generateEnchantLore();
+		this.generateEnchantRequirements();
 		this.generateEnchantItem();
 		this.generateMaterialToEnchants();
 		this.createInitialGui();
 	}
 	
+	public void generateEnchantRequirements() {
+		this.EnchantLevelRequirement.put(CustomEnchants.VACUUM, 0);
+		this.EnchantXp.put(CustomEnchants.VACUUM, 1000);
+		this.EnchantMoney.put(CustomEnchants.VACUUM, 1000);		
+		
+	}
+	
 	public void generateEnchantItem() {
 		this.EnchantItem.put(CustomEnchants.VACUUM, Material.HOPPER);
+		this.ItemEnchant.put(Material.HOPPER, CustomEnchants.VACUUM);
 	}
 	
 	public void generateEnchantLore() {
 		//VACUUM LORE
 		ArrayList<String> vacuumLore = new ArrayList<String>();
-		vacuumLore.add(Utils.chat("&5&oClick here to view levels"));
+		vacuumLore.add(Utils.chat("&7&oClick here to view levels"));
 		
 		this.EnchantLore.put(CustomEnchants.VACUUM, vacuumLore);
 	}
 	
 	public void generateAllowedItems() {
 		
+	}
+	
+	public void enchantLevelsGui(Enchantment enchant) {
+		int slot = 12;
+		for (int i=0;i<15;i++) {
+			if (slot > 34) break;
+			
+			this.gui.setItem(slot, null);			
+			
+			if (slot==16 || slot == 25) slot += 5;
+			else slot++;
+		}
+		
+		slot = 12;
+		int enchantMaxLevel = enchant.getMaxLevel()+1;
+		for (int i=1;i<enchantMaxLevel;i++) {
+			if (slot > 34) break;
+			
+			ItemStack enchantItem = new ItemStack(this.EnchantItem.get(enchant),i);
+			ItemMeta enchantMeta = enchantItem.getItemMeta();
+			String enchName = enchant.getKey().toString().replace("minecraft:", "").substring(1);
+			char firstChar = enchant.getKey().toString().replace("minecraft:", "").toUpperCase().charAt(0);
+			enchName = firstChar + enchName;
+			enchantMeta.setDisplayName(Utils.chat("&a"+enchName+" "+i));
+			
+			ArrayList<String> vacuumLore = new ArrayList<String>();
+			vacuumLore.add("test");
+			
+			enchantMeta.setLore(vacuumLore);
+			enchantItem.setItemMeta(enchantMeta);
+			this.gui.setItem(slot, enchantItem);			
+			
+			if (slot==16 || slot == 25) slot += 5;
+			else slot++;			
+		}		
 	}
 	
 	public void openGui() {
@@ -93,10 +166,20 @@ public class EnchantTableGui {
 	
 	public void generateSwordEnchants(ArrayList<Enchantment> enchants) {
 		
+		int slot = 12;
 		for (Enchantment ench: enchants) {
-			if (this.gui.getItem(19).getItemMeta().hasEnchant(ench)) continue;
+			if (slot > 34) break;
+			if (this.gui.getItem(19).getItemMeta().hasEnchant(ench)) {
+				
+			}
 			ItemStack enchantItem = new ItemStack(this.EnchantItem.get(ench));
 			ItemMeta enchantMeta = enchantItem.getItemMeta();
+			
+			if (this.gui.getItem(19).getItemMeta().hasEnchant(ench)) {
+				enchantMeta.addEnchant(ench, 1, false);
+				enchantMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+			}
+			
 			
 			String enchName = ench.getKey().toString().replace("minecraft:", "").substring(1);
 			char firstChar = ench.getKey().toString().replace("minecraft:", "").toUpperCase().charAt(0);
@@ -105,7 +188,11 @@ public class EnchantTableGui {
 			enchantMeta.setLore(this.EnchantLore.get(ench));
 			enchantItem.setItemMeta(enchantMeta);
 			
-			this.gui.setItem(12, enchantItem);
+			
+			
+			this.gui.setItem(slot, enchantItem);
+			if (slot==16 || slot == 25) slot += 5;
+			else slot++;
 		}
 		
 	}
@@ -216,6 +303,14 @@ public class EnchantTableGui {
 
 	public void setEnchantItem(HashMap<Enchantment,Material> enchantItem) {
 		EnchantItem = enchantItem;
+	}
+
+	public HashMap<Material,Enchantment> getItemEnchant() {
+		return ItemEnchant;
+	}
+
+	public void setItemEnchant(HashMap<Material,Enchantment> itemEnchant) {
+		ItemEnchant = itemEnchant;
 	}
 
 }

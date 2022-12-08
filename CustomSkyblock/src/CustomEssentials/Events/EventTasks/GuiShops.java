@@ -1,7 +1,10 @@
 package CustomEssentials.Events.EventTasks;
 
+import java.util.ArrayList;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -10,8 +13,10 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import CustomEssentials.Main;
 import CustomEssentials.Events.Profile;
@@ -213,18 +218,48 @@ public class GuiShops implements Listener{
 				}
 				e.getView().setItem(19, null);
 				e.setCancelled(true);
+				enchantTable.setGui(e.getView().getTopInventory());
+				enchantTable.generateValidInventory();		
 			}
 			if (e.getClickedInventory()==e.getView().getBottomInventory() && enchantTable.isValidInput(e.getCurrentItem()) && e.getView().getTopInventory().getItem(19)==null) {
 				e.getView().getTopInventory().setItem(19, e.getView().getBottomInventory().getItem(e.getSlot()));
 				e.getView().getBottomInventory().setItem(e.getSlot(), null);		
 				e.setCancelled(true);
+				enchantTable.setGui(e.getView().getTopInventory());
+				enchantTable.generateValidInventory();		
 			}
+			if (e.getCurrentItem()==null) return;
+			if (enchantTable.getItemEnchant().get(e.getCurrentItem().getType()) != null) {
+				enchantTable.setGui(e.getView().getTopInventory());
+				
+				if (!e.getView().getTopInventory().getItem(12).getItemMeta().getLore().contains(Utils.chat("&7&oClick here to view levels"))) {
+				
+					int spaceIndex = e.getCurrentItem().getItemMeta().getDisplayName().indexOf(' ');
+					int enchantLevel = Integer.parseInt(e.getCurrentItem().getItemMeta().getDisplayName().substring(spaceIndex+1));
+					Enchantment addEnchant = enchantTable.getItemEnchant().get(e.getCurrentItem().getType());
+					
+					//CHECK FOR XP AND LEVEL AND MONEY
+					ItemStack enchantingItem = e.getView().getTopInventory().getItem(19);
+					
+					enchantingItem.addEnchantment(addEnchant, enchantLevel);
+					
+					if (enchantingItem.getItemMeta().hasCustomModelData()) this.addCustomItemEnchantmentLore(enchantingItem, addEnchant, enchantLevel);
+					else this.addVanillaItemEnchantmentLore(enchantingItem, addEnchant, enchantLevel);
+					
+					Inventory updateGui = enchantTable.getGui();
+					updateGui.setItem(19, enchantingItem);
+					
+					enchantTable.setGui(updateGui);
+					enchantTable.generateValidInventory();
+					
+					
+				}
+				else enchantTable.enchantLevelsGui(enchantTable.getItemEnchant().get(e.getCurrentItem().getType()));
+							
+				
+			}			
 			
-			enchantTable.setGui(e.getView().getTopInventory());
-			enchantTable.generateValidInventory();		
 			enchantTable.openGui();
-			
-			
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&2&lCraft")))) {
@@ -963,6 +998,19 @@ public class GuiShops implements Listener{
 			},1);
 			return;
 		}
+		else if (e.getView().getTitle().equalsIgnoreCase(Utils.chat("&5&lEnchanting Station"))) {
+			ItemStack enchantedItem = e.getView().getTopInventory().getItem(19);
+			Bukkit.getScheduler().scheduleSyncDelayedTask(this.plugin, new Runnable() {
+				@Override
+				public void run() {
+					
+					if (p.getOpenInventory().getTitle().equalsIgnoreCase("Crafting")) {
+						if (enchantedItem != null) 	e.getPlayer().getInventory().addItem(enchantedItem);
+					}					
+				}
+			},1);
+			return;
+		}
 	}
 	public String getPreviousMenu(ItemStack item) {
 		GuiItems items = new GuiItems();
@@ -1030,6 +1078,36 @@ public class GuiShops implements Listener{
 		}
 
 		return null;
+	}
+	
+	public void addVanillaItemEnchantmentLore(ItemStack item, Enchantment enchant, int level) {
+		
+	}
+	
+	public void addCustomItemEnchantmentLore(ItemStack item, Enchantment enchant, int level) {
+		
+		ItemMeta meta = item.getItemMeta();
+		meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+		ArrayList<String> lore = (ArrayList<String>) meta.getLore();
+		if (!lore.contains(Utils.chat("&6&lEnchantments: "))) {
+			for (int i=2;i<lore.size();i++) {
+				if (!lore.get(i).equalsIgnoreCase(Utils.chat("                          "))) continue;
+				lore.add(i+1, Utils.chat("&6&lEnchantments: "));
+				break;
+			}
+		}
+		//Add diff color based on rarity
+		String enchantName = enchant.getKey().toString().toLowerCase().replace("minecraft:","");
+		char firstChar = enchantName.toUpperCase().charAt(0);
+		enchantName = firstChar + enchantName.substring(1);
+		String enchantText = Utils.chat("&a+ &7"+enchantName + " " + level);
+		int index = lore.indexOf(Utils.chat("&6&lEnchantments: "));
+		lore.add(index+1, enchantText);
+		
+		if (!meta.getLore().contains(enchantText))	meta.setLore(lore);
+		item.setItemMeta(meta);
+		
+		
 	}
 
 

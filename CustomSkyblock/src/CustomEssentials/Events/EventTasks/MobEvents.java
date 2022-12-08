@@ -1,6 +1,7 @@
 package CustomEssentials.Events.EventTasks;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
@@ -14,6 +15,7 @@ import org.bukkit.craftbukkit.v1_17_R1.entity.CraftProjectile;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Fireball;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
@@ -21,13 +23,14 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
-import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.event.player.PlayerFishEvent.State;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import CustomEssentials.Main;
@@ -40,7 +43,6 @@ import CustomEssentials.Events.Items.Enchants.CustomEnchants;
 import CustomEssentials.Events.Items.Weapons.StormAxe;
 import CustomEssentials.Events.Misc.ProjectileCreator;
 import CustomEssentials.Events.Mobs.MobLevel;
-import CustomEssentials.Events.PlayerSkills.Skills;
 import CustomEssentials.Events.PlayerStats.Stats;
 import CustomEssentials.Utils.Utils;
 
@@ -58,7 +60,31 @@ public class MobEvents implements Listener{
 	public void generateMobNames() {
 		//this.mobNames.put(Entity, hasPlayerCrit)
 	}
-					
+	
+	public boolean hasInvenSpace(Player p, ItemStack drop) {
+		
+		Inventory inv = p.getInventory();
+		for (int i=0;i<36;i++) {
+			ItemStack item = inv.getItem(i);
+			if (item == null) return true;
+			if (!item.isSimilar(drop)) continue;
+			if (item.getAmount() + drop.getAmount() < item.getMaxStackSize()) return true;
+		}
+		
+		return false;
+		
+	}
+			
+	public void vacuumFeature(Player p, List<ItemStack> drops) {
+		
+		int i =0;
+		for (ItemStack item:drops) {
+			if (!hasInvenSpace(p,item)) continue;;	
+			p.getInventory().addItem(item);
+			drops.set(i, null);
+			i++;
+		}				
+	}
 	
 	@EventHandler
 	public void onMobKill(EntityDeathEvent e) {
@@ -66,9 +92,12 @@ public class MobEvents implements Listener{
 		
 		LivingEntity mob = e.getEntity();
 		
-		if (!(mob.getKiller() instanceof Player)) return;
-						
-		Player p = mob.getKiller();	
+		if (!(mob.getKiller() instanceof Player) && !(mob.getKiller() instanceof Fireball)) return;
+					
+		Player p;
+		if (mob.getKiller() instanceof Player)	p = mob.getKiller();	
+		else p = (Player) this.getDamagerEntity(e.getEntity());
+		
 		Profile profile = plugin.getProfileManager().getPlayerProfile(p);
 				
 		Double xpAmount = profile.getCombat().getXPamount(mob);
@@ -81,6 +110,16 @@ public class MobEvents implements Listener{
 			p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 2, 1);
 			profile.getCombat().addCurrentXP(xpAmount);
 		}
+		
+		if (p.getInventory().getItemInMainHand() == null) return;
+		ItemStack item = p.getInventory().getItemInMainHand();
+		if (item.getItemMeta().hasEnchant(CustomEnchants.VACUUM)) {
+			
+			this.vacuumFeature(p, e.getDrops());
+			
+			
+		}
+		
 		
 	}
 	
@@ -430,6 +469,8 @@ public class MobEvents implements Listener{
 		}, 10L);
 		
 	}
+	
+	
 	
 		
 	
