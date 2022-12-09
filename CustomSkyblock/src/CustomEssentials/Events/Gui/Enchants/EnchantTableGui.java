@@ -74,13 +74,27 @@ public class EnchantTableGui {
 	public void generateEnchantRequirements() {
 		this.EnchantLevelRequirement.put(CustomEnchants.VACUUM, 0);
 		this.EnchantXp.put(CustomEnchants.VACUUM, 1000);
-		this.EnchantMoney.put(CustomEnchants.VACUUM, 1000);		
+		this.EnchantMoney.put(CustomEnchants.VACUUM, 1000);	
+		
+		this.EnchantLevelRequirement.put(CustomEnchants.BRUTE, 0);
+		this.EnchantXp.put(CustomEnchants.BRUTE, 1000);
+		this.EnchantMoney.put(CustomEnchants.BRUTE, 1000);	
+		
+		this.EnchantLevelRequirement.put(CustomEnchants.EXPERIENCE_EXTRACTOR, 0);
+		this.EnchantXp.put(CustomEnchants.EXPERIENCE_EXTRACTOR, 1000);
+		this.EnchantMoney.put(CustomEnchants.EXPERIENCE_EXTRACTOR, 1000);	
 		
 	}
 	
 	public void generateEnchantItem() {
 		this.EnchantItem.put(CustomEnchants.VACUUM, Material.HOPPER);
 		this.ItemEnchant.put(Material.HOPPER, CustomEnchants.VACUUM);
+		
+		this.EnchantItem.put(CustomEnchants.BRUTE, Material.NETHER_STAR);
+		this.ItemEnchant.put(Material.NETHER_STAR, CustomEnchants.BRUTE);
+
+		this.EnchantItem.put(CustomEnchants.EXPERIENCE_EXTRACTOR, Material.EXPERIENCE_BOTTLE);
+		this.ItemEnchant.put(Material.EXPERIENCE_BOTTLE, CustomEnchants.EXPERIENCE_EXTRACTOR);
 	}
 	
 	public void generateEnchantLore() {
@@ -89,6 +103,47 @@ public class EnchantTableGui {
 		vacuumLore.add(Utils.chat("&7&oClick here to view levels"));
 		
 		this.EnchantLore.put(CustomEnchants.VACUUM, vacuumLore);
+		this.EnchantLore.put(CustomEnchants.BRUTE, vacuumLore);
+		this.EnchantLore.put(CustomEnchants.EXPERIENCE_EXTRACTOR, vacuumLore);
+		
+	}
+	
+	public void generateMaterialToEnchants() {
+		ArrayList<Enchantment> swordEnchants = new ArrayList<Enchantment>();
+		swordEnchants.add(CustomEnchants.VACUUM);
+		swordEnchants.add(CustomEnchants.BRUTE);
+		swordEnchants.add(CustomEnchants.EXPERIENCE_EXTRACTOR);
+		
+		this.materialToEnchants.put(Material.WOODEN_SWORD, swordEnchants);
+		this.materialToEnchants.put(Material.STONE_SWORD, swordEnchants);
+		this.materialToEnchants.put(Material.IRON_SWORD, swordEnchants);
+		this.materialToEnchants.put(Material.GOLDEN_SWORD, swordEnchants);
+		this.materialToEnchants.put(Material.DIAMOND_SWORD, swordEnchants);
+		this.materialToEnchants.put(Material.NETHERITE_SWORD, swordEnchants);
+		
+		ArrayList<Enchantment> pickaxeEnchants = new ArrayList<Enchantment>();
+		pickaxeEnchants.add(CustomEnchants.VACUUM);
+		
+		this.materialToEnchants.put(Material.WOODEN_PICKAXE, pickaxeEnchants);
+		this.materialToEnchants.put(Material.STONE_PICKAXE, pickaxeEnchants);
+		this.materialToEnchants.put(Material.IRON_PICKAXE, pickaxeEnchants);
+		this.materialToEnchants.put(Material.GOLDEN_PICKAXE, pickaxeEnchants);
+		this.materialToEnchants.put(Material.DIAMOND_PICKAXE, pickaxeEnchants);
+		this.materialToEnchants.put(Material.NETHERITE_PICKAXE, pickaxeEnchants);
+		
+		ArrayList<Enchantment> axeEnchants = new ArrayList<Enchantment>();
+		axeEnchants.add(CustomEnchants.VACUUM);
+		axeEnchants.add(CustomEnchants.BRUTE);
+		axeEnchants.add(CustomEnchants.EXPERIENCE_EXTRACTOR);
+		
+		this.materialToEnchants.put(Material.WOODEN_AXE, axeEnchants);
+		this.materialToEnchants.put(Material.STONE_AXE, axeEnchants);
+		this.materialToEnchants.put(Material.IRON_AXE, axeEnchants);
+		this.materialToEnchants.put(Material.GOLDEN_AXE, axeEnchants);
+		this.materialToEnchants.put(Material.DIAMOND_AXE, axeEnchants);
+		this.materialToEnchants.put(Material.NETHERITE_AXE, axeEnchants);
+		
+		
 	}
 	
 	public void generateAllowedItems() {
@@ -116,7 +171,7 @@ public class EnchantTableGui {
 			String enchName = enchant.getKey().toString().replace("minecraft:", "").substring(1);
 			char firstChar = enchant.getKey().toString().replace("minecraft:", "").toUpperCase().charAt(0);
 			enchName = firstChar + enchName;
-			enchantMeta.setDisplayName(Utils.chat("&a"+enchName+" "+i));
+			enchantMeta.setDisplayName(Utils.chat("&a"+enchName.replace("_e", " E")+" "+i));
 			
 			ArrayList<String> vacuumLore = new ArrayList<String>();
 			vacuumLore.add("test");
@@ -152,7 +207,6 @@ public class EnchantTableGui {
 		}
 		ItemStack item = this.gui.getItem(19);
 		ArrayList<Enchantment> enchants = this.materialToEnchants.get(item.getType());
-		
 		for (int i=0;i<45;i++) {
 			if (this.gui.getItem(i)==null) continue;
 			if (this.gui.getItem(i).getType().equals(Material.RED_STAINED_GLASS_PANE)) {
@@ -165,6 +219,12 @@ public class EnchantTableGui {
 	}
 	
 	public void generateSwordEnchants(ArrayList<Enchantment> enchants) {
+		
+		for (int i=12;i<35;i++) {
+			this.gui.setItem(i, null);
+			
+			if (i==16 || i == 25) i += 5;
+		}		
 		
 		int slot = 12;
 		for (Enchantment ench: enchants) {
@@ -184,7 +244,7 @@ public class EnchantTableGui {
 			String enchName = ench.getKey().toString().replace("minecraft:", "").substring(1);
 			char firstChar = ench.getKey().toString().replace("minecraft:", "").toUpperCase().charAt(0);
 			enchName = firstChar + enchName;
-			enchantMeta.setDisplayName(Utils.chat("&7"+enchName));
+			enchantMeta.setDisplayName(Utils.chat("&7"+enchName.replace("_e", " E")));
 			enchantMeta.setLore(this.EnchantLore.get(ench));
 			enchantItem.setItemMeta(enchantMeta);
 			
@@ -195,29 +255,6 @@ public class EnchantTableGui {
 			else slot++;
 		}
 		
-	}
-	
-	
-	public void generateMaterialToEnchants() {
-		ArrayList<Enchantment> swordEnchants = new ArrayList<Enchantment>();
-		swordEnchants.add(CustomEnchants.VACUUM);
-		
-		this.materialToEnchants.put(Material.WOODEN_SWORD, swordEnchants);
-		this.materialToEnchants.put(Material.STONE_SWORD, swordEnchants);
-		this.materialToEnchants.put(Material.IRON_SWORD, swordEnchants);
-		this.materialToEnchants.put(Material.GOLDEN_SWORD, swordEnchants);
-		this.materialToEnchants.put(Material.DIAMOND_SWORD, swordEnchants);
-		this.materialToEnchants.put(Material.NETHERITE_SWORD, swordEnchants);
-		
-		ArrayList<Enchantment> pickaxeEnchants = new ArrayList<Enchantment>();
-		pickaxeEnchants.add(CustomEnchants.VACUUM);
-		
-		this.materialToEnchants.put(Material.WOODEN_PICKAXE, pickaxeEnchants);
-		this.materialToEnchants.put(Material.STONE_PICKAXE, pickaxeEnchants);
-		this.materialToEnchants.put(Material.IRON_PICKAXE, pickaxeEnchants);
-		this.materialToEnchants.put(Material.GOLDEN_PICKAXE, pickaxeEnchants);
-		this.materialToEnchants.put(Material.DIAMOND_PICKAXE, pickaxeEnchants);
-		this.materialToEnchants.put(Material.NETHERITE_PICKAXE, pickaxeEnchants);
 	}
 	
 	public void createInitialGui() {

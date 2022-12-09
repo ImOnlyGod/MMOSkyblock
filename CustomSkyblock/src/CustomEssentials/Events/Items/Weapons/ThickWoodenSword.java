@@ -23,6 +23,7 @@ public class ThickWoodenSword extends ItemsCore{
 		
 		
 		//Add stats
+		setItemBasePhysicalDamage(5);
 		setItemPhysicalDamage(5);
 		//meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, new AttributeModifier("generic.attackDamage", getItemPhysicalDamage(), Operation.ADD_NUMBER));
 		setItemFlags(meta);
@@ -30,7 +31,7 @@ public class ThickWoodenSword extends ItemsCore{
 		//Set name and lore
 		setItemName(Utils.chat("&7Thick Wooden Sword &8[&5Tier: &7F&8]"));
 		meta.setDisplayName(getItemName());	
-		meta.setCustomModelData(0);
+		meta.setCustomModelData(7);
 		
 		ArrayList<String> lore = createLore(meta);
 		meta.setLore(lore);
@@ -44,7 +45,7 @@ public class ThickWoodenSword extends ItemsCore{
 	private ArrayList<String> createLore(ItemMeta meta) {
 		ArrayList<String> lore = new ArrayList<String>();	
 		lore.add(Utils.chat("                          "));
-		lore.add(Utils.chat("&cDamage:&6 "+ getItemPhysicalDamage() +"⚔"));
+		lore.add(Utils.chat("&cDamage:&6 +"+ getItemPhysicalDamage() +"⚔"));
 		lore.add(Utils.chat("                          "));
 		lore.add(Utils.chat("&6&lDescription: &7Forged by Compressed Wood,"));
 		lore.add(Utils.chat("&7to be an upgraded Wooden Sword!"));

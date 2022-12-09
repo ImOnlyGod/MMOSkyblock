@@ -113,12 +113,13 @@ public class MobEvents implements Listener{
 		
 		if (p.getInventory().getItemInMainHand() == null) return;
 		ItemStack item = p.getInventory().getItemInMainHand();
-		if (item.getItemMeta().hasEnchant(CustomEnchants.VACUUM)) {
-			
-			this.vacuumFeature(p, e.getDrops());
-			
-			
+		if (item.getItemMeta().hasEnchant(CustomEnchants.VACUUM)) this.vacuumFeature(p, e.getDrops());
+		else if (item.getItemMeta().hasEnchant(CustomEnchants.EXPERIENCE_EXTRACTOR)) {
+			int currentXp = e.getDroppedExp();
+			double multiplier = item.getItemMeta().getEnchantLevel(CustomEnchants.EXPERIENCE_EXTRACTOR)*0.5;
+			e.setDroppedExp((int) (currentXp + (currentXp*multiplier)));
 		}
+		
 		
 		
 	}

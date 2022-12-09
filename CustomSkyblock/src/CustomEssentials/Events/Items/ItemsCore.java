@@ -13,6 +13,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import CustomEssentials.Events.Profile;
+import CustomEssentials.Utils.Utils;
 
 public class ItemsCore {
 	
@@ -29,11 +30,18 @@ public class ItemsCore {
 	private int itemSpeed = 0;
 	private int itemCDR = 0;
 	private double itemLifeSteal = 0;
+	private int itemBasePhysicalDamage = 0;
 	
 	private String itemName;
 	
 	public void itemAbility(Player p, Profile profile) {
 		
+	}
+	
+	public String addBruteDamage(int level) {
+		int damage =  (int) Math.max(level,this.itemBasePhysicalDamage*level*0.05);
+		this.itemPhysicalDamage += damage;
+		return Utils.chat("&cDamage:&6 +"+ getItemPhysicalDamage() +"⚔ &7(&a+&e" + damage + "&7)");
 	}
 	
 	public int getItemHeathStat() {
@@ -165,6 +173,14 @@ public class ItemsCore {
 
 	public void setItemLifeSteal(double itemLifeSteal) {
 		this.itemLifeSteal = itemLifeSteal;
+	}
+
+	public int getItemBasePhysicalDamage() {
+		return itemBasePhysicalDamage;
+	}
+
+	public void setItemBasePhysicalDamage(int itemBasePhysicalDamage) {
+		this.itemBasePhysicalDamage = itemBasePhysicalDamage;
 	}
 
 

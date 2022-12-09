@@ -27,6 +27,7 @@ public class HadesBlade extends ItemsCore{
 		
 		
 		//Add stats
+		setItemBasePhysicalDamage(100);
 		setItemPhysicalDamage(100);
 		setItemManaStat(100);
 		setItemCritChance(25);

@@ -26,6 +26,7 @@ public class StormAxe extends ItemsCore{
 		
 		
 		//Add stats
+		setItemBasePhysicalDamage(250);
 		setItemPhysicalDamage(250);
 		setItemManaStat(400);
 		setItemCritChance(15);

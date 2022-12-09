@@ -24,6 +24,8 @@ import CustomEssentials.Events.Gui.Enchants.EnchantTableGui;
 import CustomEssentials.Events.Gui.Path.PathStatsGui;
 import CustomEssentials.Events.Gui.Shop.ItemsBuySellGui;
 import CustomEssentials.Events.Gui.Skills.SkillProgression;
+import CustomEssentials.Events.Items.ItemStorageTable;
+import CustomEssentials.Events.Items.ItemsCore;
 import CustomEssentials.Events.Items.Crafting.CustomCraft;
 import CustomEssentials.Events.Items.Crafting.CustomCraftingItemSet;
 import CustomEssentials.Events.PlayerPath.Paths.Archer;
@@ -207,6 +209,7 @@ public class GuiShops implements Listener{
 			}
 			if (e.getClickedInventory()!=e.getView().getTopInventory() && !enchantTable.isValidInput(e.getCurrentItem())) return;	
 			if (e.getClickedInventory()!=e.getView().getTopInventory() && enchantTable.isValidInput(e.getCurrentItem()) && e.getView().getTopInventory().getItem(19)!=null) return;
+			if (e.getClickedInventory() == e.getView().getTopInventory()) e.setCancelled(true);
 			
 			if (e.getSlot()==19 && e.getClickedInventory()==e.getView().getTopInventory() && e.getCurrentItem() != null) {
 				
@@ -219,47 +222,66 @@ public class GuiShops implements Listener{
 				e.getView().setItem(19, null);
 				e.setCancelled(true);
 				enchantTable.setGui(e.getView().getTopInventory());
-				enchantTable.generateValidInventory();		
+				enchantTable.generateValidInventory();	
+				enchantTable.openGui();
 			}
 			if (e.getClickedInventory()==e.getView().getBottomInventory() && enchantTable.isValidInput(e.getCurrentItem()) && e.getView().getTopInventory().getItem(19)==null) {
 				e.getView().getTopInventory().setItem(19, e.getView().getBottomInventory().getItem(e.getSlot()));
 				e.getView().getBottomInventory().setItem(e.getSlot(), null);		
 				e.setCancelled(true);
 				enchantTable.setGui(e.getView().getTopInventory());
-				enchantTable.generateValidInventory();		
+				enchantTable.generateValidInventory();	
+				enchantTable.openGui();
 			}
 			if (e.getCurrentItem()==null) return;
 			if (enchantTable.getItemEnchant().get(e.getCurrentItem().getType()) != null) {
 				enchantTable.setGui(e.getView().getTopInventory());
 				
 				if (!e.getView().getTopInventory().getItem(12).getItemMeta().getLore().contains(Utils.chat("&7&oClick here to view levels"))) {
-				
-					int spaceIndex = e.getCurrentItem().getItemMeta().getDisplayName().indexOf(' ');
+					
+					int spaceIndex = 0;
+					for (int i=0; i<e.getCurrentItem().getItemMeta().getDisplayName().length();i++) {
+						char chr = e.getCurrentItem().getItemMeta().getDisplayName().charAt(i);
+						if (chr == ' ') spaceIndex = i;
+					}					
+					
 					int enchantLevel = Integer.parseInt(e.getCurrentItem().getItemMeta().getDisplayName().substring(spaceIndex+1));
 					Enchantment addEnchant = enchantTable.getItemEnchant().get(e.getCurrentItem().getType());
 					
 					//CHECK FOR XP AND LEVEL AND MONEY
 					ItemStack enchantingItem = e.getView().getTopInventory().getItem(19);
 					
-					enchantingItem.addEnchantment(addEnchant, enchantLevel);
 					
-					if (enchantingItem.getItemMeta().hasCustomModelData()) this.addCustomItemEnchantmentLore(enchantingItem, addEnchant, enchantLevel);
-					else this.addVanillaItemEnchantmentLore(enchantingItem, addEnchant, enchantLevel);
+					if (enchantingItem.getItemMeta().hasEnchant(addEnchant)) {
+						if (enchantingItem.getItemMeta().getEnchantLevel(addEnchant) < enchantLevel) {
+							enchantingItem.addEnchantment(addEnchant, enchantLevel);
+							if (enchantingItem.getItemMeta().hasCustomModelData()) this.addCustomItemEnchantmentLore(enchantingItem, addEnchant, enchantLevel);
+							else this.addVanillaItemEnchantmentLore(enchantingItem, addEnchant, enchantLevel);
+						}
+					}
+					else {
+						enchantingItem.addEnchantment(addEnchant, enchantLevel);
+						if (enchantingItem.getItemMeta().hasCustomModelData()) this.addCustomItemEnchantmentLore(enchantingItem, addEnchant, enchantLevel);
+						else this.addVanillaItemEnchantmentLore(enchantingItem, addEnchant, enchantLevel);
+					}
+					
 					
 					Inventory updateGui = enchantTable.getGui();
 					updateGui.setItem(19, enchantingItem);
 					
 					enchantTable.setGui(updateGui);
 					enchantTable.generateValidInventory();
-					
+					enchantTable.openGui();
 					
 				}
-				else enchantTable.enchantLevelsGui(enchantTable.getItemEnchant().get(e.getCurrentItem().getType()));
+				else {
+					enchantTable.enchantLevelsGui(enchantTable.getItemEnchant().get(e.getCurrentItem().getType()));
+					enchantTable.openGui();
+				}
 							
 				
 			}			
 			
-			enchantTable.openGui();
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&2&lCraft")))) {
@@ -1086,9 +1108,10 @@ public class GuiShops implements Listener{
 	
 	public void addCustomItemEnchantmentLore(ItemStack item, Enchantment enchant, int level) {
 		
-		ItemMeta meta = item.getItemMeta();
+		ItemMeta meta = item.getItemMeta();		
 		meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 		ArrayList<String> lore = (ArrayList<String>) meta.getLore();
+		
 		if (!lore.contains(Utils.chat("&6&lEnchantments: "))) {
 			for (int i=2;i<lore.size();i++) {
 				if (!lore.get(i).equalsIgnoreCase(Utils.chat("                          "))) continue;
@@ -1100,11 +1123,31 @@ public class GuiShops implements Listener{
 		String enchantName = enchant.getKey().toString().toLowerCase().replace("minecraft:","");
 		char firstChar = enchantName.toUpperCase().charAt(0);
 		enchantName = firstChar + enchantName.substring(1);
-		String enchantText = Utils.chat("&a+ &7"+enchantName + " " + level);
+		String enchantText = Utils.chat("&a+ &7"+enchantName.replace("_e", " E") + " " + level);
 		int index = lore.indexOf(Utils.chat("&6&lEnchantments: "));
-		lore.add(index+1, enchantText);
 		
-		if (!meta.getLore().contains(enchantText))	meta.setLore(lore);
+		if (enchantName.equalsIgnoreCase("Brute")) {
+			for (int i=0;i<lore.size();i++) {
+				
+				if (!lore.get(i).contains(Utils.chat("&cDamage:&6 +"))) continue;
+				ItemsCore updateDamage = new ItemStorageTable().getIDtoItemsCore().get(meta.getCustomModelData());
+				updateDamage.createItem(1);
+				lore.set(i, updateDamage.addBruteDamage(level));
+				break;
+			}
+		}
+		boolean containsEnchant = false; 
+		
+		for (int i=0;i<lore.size();i++) {
+			if (!lore.get(i).contains(Utils.chat("&a+ &7"+enchantName))) continue;
+			lore.set(i, enchantText);
+			containsEnchant = true;
+			break;
+			}
+		
+		
+		if (!containsEnchant) lore.add(index+1, enchantText);
+		meta.setLore(lore);
 		item.setItemMeta(meta);
 		
 		

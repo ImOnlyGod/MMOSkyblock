@@ -21,7 +21,7 @@ public class ItemStorageTable {
 	}
 	
 	private void putItems() {
-		this.IDtoItemsCore.put(0, new ThickWoodenSword());
+		this.IDtoItemsCore.put(7, new ThickWoodenSword());
 		this.CmdtoItemsCore.put("basicsword", new ThickWoodenSword());
 		
 		this.IDtoItemsCore.put(1, new HadesBlade());

@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import CustomEssentials.Events.PlayerProfileManager;
+import CustomEssentials.Events.Items.Enchants.CustomEnchants;
 import CustomEssentials.Events.PlayerStats.Stats;
 
 public class ItemStats {
@@ -60,8 +61,7 @@ public class ItemStats {
 		setItemSpeedStat();
 		
 	}
-
-	//FIX ADAPT WITH PATH STATS CURRENTLY ACCUMULATES
+		
 	public void setItemManaStat() {
 		Stats stats = profileManager.getPlayerProfile(p).getStats();
 		Stats pathStats = profileManager.getPlayerProfile(p).getPath().getStats();
@@ -94,6 +94,9 @@ public class ItemStats {
 			ItemsCore item = itemTable.getIDtoItemsCore().get(ID);
 			if (item == null) continue;
 			item.createItem(1);
+			
+			if (items.get(i).getItemMeta().hasEnchant(CustomEnchants.BRUTE)) item.addBruteDamage(items.get(i).getItemMeta().getEnchantLevel(CustomEnchants.BRUTE));
+			
 			int dmg= item.getItemPhysicalDamage();
 			totalDmg = totalDmg + dmg;
 			
