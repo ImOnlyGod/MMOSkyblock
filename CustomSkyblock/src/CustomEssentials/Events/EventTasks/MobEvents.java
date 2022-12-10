@@ -115,9 +115,11 @@ public class MobEvents implements Listener{
 		ItemStack item = p.getInventory().getItemInMainHand();
 		if (item.getItemMeta().hasEnchant(CustomEnchants.VACUUM)) this.vacuumFeature(p, e.getDrops());
 		else if (item.getItemMeta().hasEnchant(CustomEnchants.EXPERIENCE_EXTRACTOR)) {
-			int currentXp = e.getDroppedExp();
+			int currentXp = Math.max(1, e.getDroppedExp());
 			double multiplier = item.getItemMeta().getEnchantLevel(CustomEnchants.EXPERIENCE_EXTRACTOR)*0.5;
-			e.setDroppedExp((int) (currentXp + (currentXp*multiplier)));
+			
+			if (mob.getKiller() instanceof Player) e.setDroppedExp((int) (currentXp + (currentXp*multiplier)));
+			else p.giveExp((int) (currentXp + (currentXp*multiplier)));
 		}
 		
 		
@@ -256,6 +258,16 @@ public class MobEvents implements Listener{
 					Profile userProfile = this.plugin.getProfileManager().getPlayerProfile(userPlayer);
 					
 					Double xpAmount = userProfile.getCombat().getXPamount(mob);
+					
+					ItemStack item = userPlayer.getInventory().getItemInMainHand();
+					//ADD VACUUM FOR LIGHTNING
+					//if (item.getItemMeta().hasEnchant(CustomEnchants.VACUUM)) this.vacuumFeature(userPlayer, mob..getDrops());
+					//SET XP HASHMAP TO CHECK XP (WITH MOB NAME && GOLD!!) AND CHECK DROPS
+					if (item.getItemMeta().hasEnchant(CustomEnchants.EXPERIENCE_EXTRACTOR)) {
+						int currentXp = 1;
+						double multiplier = item.getItemMeta().getEnchantLevel(CustomEnchants.EXPERIENCE_EXTRACTOR)*0.5;
+						userPlayer.giveExp((int) (currentXp + (currentXp*multiplier)));
+					}
 					
 					if (xpAmount == 0.0) {
 						userPlayer.sendMessage(Utils.chat("&4You require a higher combat level to gain any XP from killing that mob!"));

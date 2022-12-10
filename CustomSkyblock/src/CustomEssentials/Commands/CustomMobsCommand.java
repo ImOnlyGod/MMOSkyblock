@@ -11,9 +11,9 @@ import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 
 import CustomEssentials.Main;
-import CustomEssentials.Events.Mobs.AgressiveGolem;
-import CustomEssentials.Events.Mobs.Basic_Zombie;
-import CustomEssentials.Events.Mobs.WildPig;
+import CustomEssentials.Events.Mobs.CustomMobs.AgressiveGolem;
+import CustomEssentials.Events.Mobs.CustomMobs.Basic_Zombie;
+import CustomEssentials.Events.Mobs.CustomMobs.WildPig;
 
 public class CustomMobsCommand implements TabExecutor{
 	

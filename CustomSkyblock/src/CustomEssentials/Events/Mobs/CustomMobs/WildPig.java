@@ -1,4 +1,4 @@
-package CustomEssentials.Events.Mobs;
+package CustomEssentials.Events.Mobs.CustomMobs;
 
 import java.lang.reflect.Field;
 import java.util.Map;

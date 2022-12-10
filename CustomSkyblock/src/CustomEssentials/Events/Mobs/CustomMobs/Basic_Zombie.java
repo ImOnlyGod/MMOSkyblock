@@ -1,4 +1,4 @@
-package CustomEssentials.Events.Mobs;
+package CustomEssentials.Events.Mobs.CustomMobs;
 
 import org.bukkit.Location;
 
