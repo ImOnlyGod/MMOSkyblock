@@ -43,6 +43,7 @@ import CustomEssentials.Events.Items.Enchants.CustomEnchants;
 import CustomEssentials.Events.Items.Weapons.StormAxe;
 import CustomEssentials.Events.Misc.ProjectileCreator;
 import CustomEssentials.Events.Mobs.MobLevel;
+import CustomEssentials.Events.Mobs.MobMappings;
 import CustomEssentials.Events.PlayerStats.Stats;
 import CustomEssentials.Utils.Utils;
 
@@ -52,6 +53,7 @@ public class MobEvents implements Listener{
 	private Main plugin;
 	private String hasPlayerCrit = "&c&l";
 	private HashMap<EntityType,String> mobNames = new HashMap<EntityType,String>();
+	private MobMappings mobMaps = new MobMappings();
 		
 	public MobEvents(Main plugin) {
 		this.plugin = plugin;
@@ -91,6 +93,7 @@ public class MobEvents implements Listener{
 		if (!(e.getEntity() instanceof LivingEntity)) return;
 		
 		LivingEntity mob = e.getEntity();
+		e.setDroppedExp((int) mobMaps.getXPamount(mob));
 		
 		if (!(mob.getKiller() instanceof Player) && !(mob.getKiller() instanceof Fireball)) return;
 					
@@ -114,15 +117,19 @@ public class MobEvents implements Listener{
 		if (p.getInventory().getItemInMainHand() == null) return;
 		ItemStack item = p.getInventory().getItemInMainHand();
 		if (item.getItemMeta().hasEnchant(CustomEnchants.VACUUM)) this.vacuumFeature(p, e.getDrops());
-		else if (item.getItemMeta().hasEnchant(CustomEnchants.EXPERIENCE_EXTRACTOR)) {
+		if (item.getItemMeta().hasEnchant(CustomEnchants.EXPERIENCE_EXTRACTOR)) {
 			int currentXp = Math.max(1, e.getDroppedExp());
 			double multiplier = item.getItemMeta().getEnchantLevel(CustomEnchants.EXPERIENCE_EXTRACTOR)*0.5;
 			
 			if (mob.getKiller() instanceof Player) e.setDroppedExp((int) (currentXp + (currentXp*multiplier)));
 			else p.giveExp((int) (currentXp + (currentXp*multiplier)));
 		}
-		
-		
+		if (item.getItemMeta().hasEnchant(CustomEnchants.PICKPOCKET)) {
+			double initialMoney = mobMaps.getMoneyamount(mob);
+			int enchantLevel = item.getItemMeta().getEnchantLevel(CustomEnchants.PICKPOCKET);
+			double totalMoney = initialMoney + (initialMoney*0.1*(enchantLevel-1));
+			profile.addBalance(totalMoney);
+		}	
 		
 	}
 	
@@ -268,6 +275,12 @@ public class MobEvents implements Listener{
 						double multiplier = item.getItemMeta().getEnchantLevel(CustomEnchants.EXPERIENCE_EXTRACTOR)*0.5;
 						userPlayer.giveExp((int) (currentXp + (currentXp*multiplier)));
 					}
+					if (item.getItemMeta().hasEnchant(CustomEnchants.PICKPOCKET)) {
+						double initialMoney = mobMaps.getMoneyamount(mob);
+						int enchantLevel = item.getItemMeta().getEnchantLevel(CustomEnchants.PICKPOCKET);
+						double totalMoney = initialMoney + (initialMoney*0.1*(enchantLevel-1));
+						userProfile.addBalance(totalMoney);
+					}	
 					
 					if (xpAmount == 0.0) {
 						userPlayer.sendMessage(Utils.chat("&4You require a higher combat level to gain any XP from killing that mob!"));

@@ -17,14 +17,17 @@ public class CombatSkill extends Skills {
 		
 		if (this.mobXp.size() < 1) generateMobXp();
 		if (this.levelRequirements.size() < 1) generateLevelRequirements();
-		
+
 		String mobName = mob.getCustomName();
+		int leftStringName = mobName.indexOf("]") + 2;
+		int rightStringName = mobName.indexOf("(") - 5;		
 		int levelLeftString = mobName.indexOf('[') + 5;
 		int levelRightString = mobName.indexOf(']') - 4;
 		int level = Integer.valueOf(mobName.substring(levelLeftString,levelRightString));
+		mobName = mobName.substring(leftStringName, rightStringName);
 		
 		for (int i=0; i<this.mobNames.size(); i++) {
-			if (mobName.contains(this.mobNames.get(i))) {
+			if (mobName.equalsIgnoreCase(this.mobNames.get(i))) {
 				if (this.getLevel() < this.levelRequirements.get(this.mobNames.get(i))) break;
 				
 				return level*this.mobXp.get(this.mobNames.get(i));
@@ -48,6 +51,7 @@ public class CombatSkill extends Skills {
 		this.mobXp.put("§6§lMule", (float) 1);
 		this.mobXp.put("§6§lOcelot", (float) 1);
 		this.mobXp.put("§6§lParrot", (float) 1);
+		this.mobXp.put("§6§lPig", (float) 1);
 		this.mobXp.put("§6§lPufferfish", (float) 1);
 		this.mobXp.put("§6§lRabbit", (float) 1);
 		this.mobXp.put("§6§lSalmon", (float) 1);
@@ -72,7 +76,7 @@ public class CombatSkill extends Skills {
 		this.mobXp.put("§6§lPolar Bear", (float) 1);
 		this.mobXp.put("§6§lSpider", (float) 1);
 		this.mobXp.put("§6§lWolf", (float) 1);
-		this.mobXp.put("§6§lZombified Piglin", (float) 3.0);
+		this.mobXp.put("§6§lZombified Piglin", (float) 1.0);
 		
 		this.mobXp.put("§6§lBlaze", (float) 1);
 		this.mobXp.put("§6§lCreeper", (float) 1);
@@ -86,8 +90,8 @@ public class CombatSkill extends Skills {
 		this.mobXp.put("§6§lHusk", (float) 1);
 		this.mobXp.put("§6§lMagma Cube", (float) 1);
 		this.mobXp.put("§6§lPhantom", (float) 1);
-		this.mobXp.put("§6§lPiglin Brute", (float) 10.0);
-		this.mobXp.put("§6§lPiglin", (float) 7.0);
+		this.mobXp.put("§6§lPiglin Brute", (float) 1.0);
+		this.mobXp.put("§6§lPiglin", (float) 1.0);
 		this.mobXp.put("§6§lPillager", (float) 1);
 		this.mobXp.put("§6§lRavager", (float) 1);
 		this.mobXp.put("§6§lShulker", (float) 1);
@@ -103,10 +107,9 @@ public class CombatSkill extends Skills {
 		this.mobXp.put("§6§lZombie Villager", (float) 1);
 		this.mobXp.put("§6§lZombie", (float) 1);
 		
-		this.mobXp.put("§6§lPig", (float) 2);
-		this.mobXp.put("§7§lBasic Zombie", (float) 1);
-		this.mobXp.put("§5§lWild Pig", (float) 1);
-		this.mobXp.put("§c§lAgressive Golem", (float) 1);	
+		this.mobXp.put("§7§lBasic Zombie", (float) 5);
+		this.mobXp.put("§5§lWild Pig", (float) 3);
+		this.mobXp.put("§c§lAgressive Golem", (float) 25);	
 		
 		this.mobNames.add("§6§lAxolotl");
 		this.mobNames.add("§6§lBat");

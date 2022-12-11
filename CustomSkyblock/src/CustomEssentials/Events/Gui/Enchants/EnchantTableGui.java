@@ -82,7 +82,11 @@ public class EnchantTableGui {
 		
 		this.EnchantLevelRequirement.put(CustomEnchants.EXPERIENCE_EXTRACTOR, 0);
 		this.EnchantXp.put(CustomEnchants.EXPERIENCE_EXTRACTOR, 1000);
-		this.EnchantMoney.put(CustomEnchants.EXPERIENCE_EXTRACTOR, 1000);	
+		this.EnchantMoney.put(CustomEnchants.EXPERIENCE_EXTRACTOR, 1000);
+		
+		this.EnchantLevelRequirement.put(CustomEnchants.PICKPOCKET, 0);
+		this.EnchantXp.put(CustomEnchants.PICKPOCKET, 1000);
+		this.EnchantMoney.put(CustomEnchants.PICKPOCKET, 1000);
 		
 	}
 	
@@ -95,6 +99,9 @@ public class EnchantTableGui {
 
 		this.EnchantItem.put(CustomEnchants.EXPERIENCE_EXTRACTOR, Material.EXPERIENCE_BOTTLE);
 		this.ItemEnchant.put(Material.EXPERIENCE_BOTTLE, CustomEnchants.EXPERIENCE_EXTRACTOR);
+		
+		this.EnchantItem.put(CustomEnchants.PICKPOCKET, Material.GOLD_NUGGET);
+		this.ItemEnchant.put(Material.GOLD_NUGGET, CustomEnchants.PICKPOCKET);
 	}
 	
 	public void generateEnchantLore() {
@@ -105,6 +112,7 @@ public class EnchantTableGui {
 		this.EnchantLore.put(CustomEnchants.VACUUM, vacuumLore);
 		this.EnchantLore.put(CustomEnchants.BRUTE, vacuumLore);
 		this.EnchantLore.put(CustomEnchants.EXPERIENCE_EXTRACTOR, vacuumLore);
+		this.EnchantLore.put(CustomEnchants.PICKPOCKET, vacuumLore);
 		
 	}
 	
@@ -113,6 +121,7 @@ public class EnchantTableGui {
 		swordEnchants.add(CustomEnchants.VACUUM);
 		swordEnchants.add(CustomEnchants.BRUTE);
 		swordEnchants.add(CustomEnchants.EXPERIENCE_EXTRACTOR);
+		swordEnchants.add(CustomEnchants.PICKPOCKET);
 		
 		this.materialToEnchants.put(Material.WOODEN_SWORD, swordEnchants);
 		this.materialToEnchants.put(Material.STONE_SWORD, swordEnchants);
@@ -135,6 +144,7 @@ public class EnchantTableGui {
 		axeEnchants.add(CustomEnchants.VACUUM);
 		axeEnchants.add(CustomEnchants.BRUTE);
 		axeEnchants.add(CustomEnchants.EXPERIENCE_EXTRACTOR);
+		axeEnchants.add(CustomEnchants.PICKPOCKET);
 		
 		this.materialToEnchants.put(Material.WOODEN_AXE, axeEnchants);
 		this.materialToEnchants.put(Material.STONE_AXE, axeEnchants);
@@ -223,7 +233,7 @@ public class EnchantTableGui {
 		for (int i=12;i<35;i++) {
 			this.gui.setItem(i, null);
 			
-			if (i==16 || i == 25) i += 5;
+			if (i==16 || i == 25) i += 4;
 		}		
 		
 		int slot = 12;

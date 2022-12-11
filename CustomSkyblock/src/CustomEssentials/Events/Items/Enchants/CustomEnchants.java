@@ -12,6 +12,7 @@ public class CustomEnchants {
 	public static final Enchantment VACUUM = new EnchantmentWrapper("vacuum","Vacuum",1,EnchantmentTarget.TOOL);
 	public static final Enchantment BRUTE = new EnchantmentWrapper("brute","Brute",5,EnchantmentTarget.WEAPON);
 	public static final Enchantment EXPERIENCE_EXTRACTOR = new EnchantmentWrapper("experience_extractor","Experience_extractor",2,EnchantmentTarget.WEAPON);
+	public static final Enchantment PICKPOCKET = new EnchantmentWrapper("pickpocket","Pickpocket",11,EnchantmentTarget.WEAPON);
 	
 	public static void register() {
 		boolean registered = Arrays.stream(Enchantment.values()).collect(Collectors.toList()).contains(VACUUM);
@@ -25,6 +26,10 @@ public class CustomEnchants {
 		registered = Arrays.stream(Enchantment.values()).collect(Collectors.toList()).contains(EXPERIENCE_EXTRACTOR);
 		if (!registered) {
 			registerEnchantment(EXPERIENCE_EXTRACTOR);
+		}
+		registered = Arrays.stream(Enchantment.values()).collect(Collectors.toList()).contains(PICKPOCKET);
+		if (!registered) {
+			registerEnchantment(PICKPOCKET);
 		}
 	}
 	

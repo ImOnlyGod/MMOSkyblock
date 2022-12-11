@@ -1,17 +1,62 @@
 package CustomEssentials.Events.Mobs;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+
+import org.bukkit.entity.Entity;
+import org.bukkit.inventory.ItemStack;
 
 public class MobMappings {
 	
 	private HashMap<String,Integer> NameToXp = new HashMap<String,Integer>();
 	private HashMap<String,Integer> NameToMoney = new HashMap<String,Integer>();
-	private HashMap<String,Integer> NameToDrops = new HashMap<String,Integer>();
+	private HashMap<String,ArrayList<ItemStack>> NameToDrops = new HashMap<String,ArrayList<ItemStack>>();
 	
 	public MobMappings() {
 		this.generateNameToDrops();
 		this.generateNameToMoney();
 		this.getNameToXp();
+	}
+	
+	public String[] getNameLevel(Entity mob) {
+		
+		String mobName = mob.getCustomName();
+		int leftStringName = mobName.indexOf("]") + 2;
+		int rightStringName = mobName.indexOf("(") - 5;		
+		int levelLeftString = mobName.indexOf('[') + 5;
+		int levelRightString = mobName.indexOf(']') - 4;
+		String level = mobName.substring(levelLeftString,levelRightString);
+		mobName = mobName.substring(leftStringName, rightStringName);
+		
+		String[] output = new String[2];
+		output[0] = mobName;
+		output[1] = level;
+		
+		return output;
+	}
+	
+	public double getXPamount(Entity mob) {
+		
+		String[] values = getNameLevel(mob);
+		String mobName = values[0];
+		int level = Integer.valueOf(values[1]);
+		
+		if (!this.NameToXp.containsKey(mobName)) return 0.0;
+		int amount = this.NameToXp.get(mobName) * level;
+		
+		return amount;
+	}
+	
+	public double getMoneyamount(Entity mob) {
+		
+		String[] values = getNameLevel(mob);
+		String mobName = values[0];
+		int level = Integer.valueOf(values[1]);
+		
+		if (!this.NameToMoney.containsKey(mobName)) return 0.0;
+		int amount = this.NameToMoney.get(mobName) * level;
+		
+		return amount;
 	}
 	
 	public void generateNameToXp() {
@@ -170,7 +215,7 @@ public class MobMappings {
 	}
 
 	public void generateNameToDrops() {
-	
+		
 	}
 
 	public HashMap<String, Integer> getNameToXp() {
@@ -189,13 +234,15 @@ public class MobMappings {
 		NameToMoney = nameToMoney;
 	}
 
-	public HashMap<String, Integer> getNameToDrops() {
+	public HashMap<String,ArrayList<ItemStack>> getNameToDrops() {
 		return NameToDrops;
 	}
 
-	public void setNameToDrops(HashMap<String, Integer> nameToDrops) {
+	public void setNameToDrops(HashMap<String,ArrayList<ItemStack>> nameToDrops) {
 		NameToDrops = nameToDrops;
 	}
+
+
 	
 	
 }	
