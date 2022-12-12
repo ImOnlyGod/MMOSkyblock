@@ -2,15 +2,20 @@ package CustomEssentials.Events.Mobs;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
+import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.inventory.ItemStack;
+
+import CustomEssentials.Events.Items.CustomItems.CompressedItems;
 
 public class MobMappings {
 	
 	private HashMap<String,Integer> NameToXp = new HashMap<String,Integer>();
 	private HashMap<String,Integer> NameToMoney = new HashMap<String,Integer>();
-	private HashMap<String,ArrayList<ItemStack>> NameToDrops = new HashMap<String,ArrayList<ItemStack>>();
+	private HashMap<String,ArrayList<ItemStack>> NameToLuckyDrops = new HashMap<String,ArrayList<ItemStack>>();
+	private HashMap<String,ArrayList<Integer>> NameToLuckyDropChance = new HashMap<String,ArrayList<Integer>>();
 	
 	public MobMappings() {
 		this.generateNameToDrops();
@@ -33,6 +38,24 @@ public class MobMappings {
 		output[1] = level;
 		
 		return output;
+	}
+	
+	public ArrayList<ItemStack> getLuckyDrops(Entity mob) {
+		String[] mobStats = this.getNameLevel(mob);
+		String mobName = mobStats[0];
+		int mobLevel = Integer.parseInt(mobStats[1]);
+		ArrayList<ItemStack> finalDrops = new ArrayList<ItemStack>();
+		
+		if (!this.NameToLuckyDropChance.containsKey(mobName)) return finalDrops;
+
+		int i = 0;
+		for (int chance: this.NameToLuckyDropChance.get(mobName)) {
+			Random rand = new Random();
+			if (rand.nextInt(Math.max(1,(int) chance-(mobLevel/10))) == 0) finalDrops.add(this.NameToLuckyDrops.get(mobName).get(i));
+			i++;
+		}		
+		
+		return finalDrops;
 	}
 	
 	public double getXPamount(Entity mob) {
@@ -215,7 +238,19 @@ public class MobMappings {
 	}
 
 	public void generateNameToDrops() {
+		ArrayList<ItemStack> wildPigDrops = new ArrayList<ItemStack>();
+		wildPigDrops.add(new CompressedItems().createItem(Material.PORKCHOP,1));
+		ArrayList<Integer> wildPigDropChance = new ArrayList<Integer>();
+		wildPigDropChance.add(30);
+		this.NameToLuckyDrops.put("§5§lWild Pig", wildPigDrops);
+		this.NameToLuckyDropChance.put("§5§lWild Pig", wildPigDropChance);
 		
+		ArrayList<ItemStack> agressiveGolemDrops = new ArrayList<ItemStack>();
+		agressiveGolemDrops.add(new CompressedItems().createItem(Material.IRON_INGOT,1));
+		ArrayList<Integer> gressiveGolemDropChance = new ArrayList<Integer>();
+		gressiveGolemDropChance.add(25);
+		this.NameToLuckyDrops.put("§c§lAgressive Golem", agressiveGolemDrops);
+		this.NameToLuckyDropChance.put("§c§lAgressive Golem", gressiveGolemDropChance);
 	}
 
 	public HashMap<String, Integer> getNameToXp() {
@@ -234,13 +269,23 @@ public class MobMappings {
 		NameToMoney = nameToMoney;
 	}
 
-	public HashMap<String,ArrayList<ItemStack>> getNameToDrops() {
-		return NameToDrops;
+	public HashMap<String,ArrayList<ItemStack>> getNameToLuckyDrops() {
+		return NameToLuckyDrops;
 	}
 
-	public void setNameToDrops(HashMap<String,ArrayList<ItemStack>> nameToDrops) {
-		NameToDrops = nameToDrops;
+	public void setNameToLuckyDrops(HashMap<String,ArrayList<ItemStack>> nameToLuckyDrops) {
+		NameToLuckyDrops = nameToLuckyDrops;
 	}
+
+	public HashMap<String,ArrayList<Integer>> getNameToLuckyDropChance() {
+		return NameToLuckyDropChance;
+	}
+
+	public void setNameToLuckyDropChance(HashMap<String,ArrayList<Integer>> nameToLuckyDropChance) {
+		NameToLuckyDropChance = nameToLuckyDropChance;
+	}
+
+
 
 
 	

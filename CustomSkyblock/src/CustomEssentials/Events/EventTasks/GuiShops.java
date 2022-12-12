@@ -18,6 +18,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import com.mojang.authlib.yggdrasil.response.ProfileSearchResultsResponse;
+
 import CustomEssentials.Main;
 import CustomEssentials.Events.Profile;
 import CustomEssentials.Events.Gui.Enchants.EnchantTableGui;
@@ -249,9 +251,13 @@ public class GuiShops implements Listener{
 					Enchantment addEnchant = enchantTable.getItemEnchant().get(e.getCurrentItem().getType());
 					
 					//CHECK FOR XP AND LEVEL AND MONEY
+					int playerXP = p.getTotalExperience();
+					int playerEnchantingLevel = this.plugin.getProfileManager().getPlayerProfile(p).getEnchanting().getLevel();
+					double playerMoney = this.plugin.getProfileManager().getPlayerProfile(p).getBalance();
+					
 					ItemStack enchantingItem = e.getView().getTopInventory().getItem(19);
 					
-					
+					//PUT IN SEPEATE FUNCTION
 					if (enchantingItem.getItemMeta().hasEnchant(addEnchant)) {
 						if (enchantingItem.getItemMeta().getEnchantLevel(addEnchant) < enchantLevel) {
 							enchantingItem.addEnchantment(addEnchant, enchantLevel);

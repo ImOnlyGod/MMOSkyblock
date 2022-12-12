@@ -8,6 +8,7 @@ import CustomEssentials.Events.PlayerPath.Paths.Default;
 import CustomEssentials.Events.PlayerPath.Paths.Path;
 import CustomEssentials.Events.PlayerPath.Paths.Tank;
 import CustomEssentials.Events.PlayerSkills.CombatSkill;
+import CustomEssentials.Events.PlayerSkills.EnchantingSkill;
 import CustomEssentials.Events.PlayerSkills.FarmingSkill;
 import CustomEssentials.Events.PlayerSkills.FishingSkill;
 import CustomEssentials.Events.PlayerSkills.ForagingSkill;
@@ -22,18 +23,20 @@ public class Profile {
 	private FarmingSkill farming;
 	private FishingSkill fishing;
 	private ForagingSkill foraging;
+	private EnchantingSkill enchanting;
 	private int playTime; //Seconds
 	private double balance;
 	private Path path;
 	private HashMap<String,Path> paths = new HashMap<String,Path>();
 	
-	public Profile(Stats newStats, MiningSkill mining, CombatSkill combat, FarmingSkill farming, FishingSkill fishing, ForagingSkill foraging, int playTime) {
+	public Profile(Stats newStats, MiningSkill mining, CombatSkill combat, FarmingSkill farming, FishingSkill fishing, ForagingSkill foraging, EnchantingSkill enchanting, int playTime) {
 		this.stats = newStats;
 		this.mining = mining;
 		this.combat = combat;
 		this.farming = farming;
 		this.fishing = fishing;
 		this.foraging = foraging;
+		this.enchanting = enchanting;
 		this.playTime = playTime;
 		this.balance = 0.0;
 		this.initialisePaths();
@@ -113,6 +116,14 @@ public class Profile {
 	
 	public void removeBalance(Double amount) {
 		this.balance -= amount;
+	}
+
+	public EnchantingSkill getEnchanting() {
+		return enchanting;
+	}
+
+	public void setEnchanting(EnchantingSkill enchanting) {
+		this.enchanting = enchanting;
 	}
 	
 

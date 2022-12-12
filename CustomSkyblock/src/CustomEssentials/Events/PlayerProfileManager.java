@@ -7,9 +7,8 @@ import java.util.UUID;
 import org.bukkit.entity.Player;
 
 import CustomEssentials.Main;
-import CustomEssentials.Events.PlayerPath.Paths.Default;
-import CustomEssentials.Events.PlayerPath.Paths.Tank;
 import CustomEssentials.Events.PlayerSkills.CombatSkill;
+import CustomEssentials.Events.PlayerSkills.EnchantingSkill;
 import CustomEssentials.Events.PlayerSkills.FarmingSkill;
 import CustomEssentials.Events.PlayerSkills.FishingSkill;
 import CustomEssentials.Events.PlayerSkills.ForagingSkill;
@@ -29,7 +28,7 @@ public class PlayerProfileManager {
 	
 	public void createPlayerProfile(Player p) {
 		
-		Profile newProfile = new Profile(new Stats(), new MiningSkill(), new CombatSkill(), new FarmingSkill(), new FishingSkill(), new ForagingSkill(),0);
+		Profile newProfile = new Profile(new Stats(), new MiningSkill(), new CombatSkill(), new FarmingSkill(), new FishingSkill(), new ForagingSkill(), new EnchantingSkill(),0);
 		UUID playerID = p.getUniqueId();
 		
 		

@@ -26,6 +26,7 @@ import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.event.player.PlayerFishEvent.State;
@@ -46,6 +47,7 @@ import CustomEssentials.Events.Mobs.MobLevel;
 import CustomEssentials.Events.Mobs.MobMappings;
 import CustomEssentials.Events.PlayerStats.Stats;
 import CustomEssentials.Utils.Utils;
+import net.minecraft.world.entity.EntityLightning;
 
 
 public class MobEvents implements Listener{
@@ -91,15 +93,34 @@ public class MobEvents implements Listener{
 	@EventHandler
 	public void onMobKill(EntityDeathEvent e) {
 		if (!(e.getEntity() instanceof LivingEntity)) return;
-		
 		LivingEntity mob = e.getEntity();
 		e.setDroppedExp((int) mobMaps.getXPamount(mob));
 		
-		if (!(mob.getKiller() instanceof Player) && !(mob.getKiller() instanceof Fireball)) return;
+		if (!(mob.getKiller() instanceof Player) && !(mob.getKiller() instanceof Fireball) && !(mob.getLastDamageCause().getCause() == DamageCause.LIGHTNING)) return;
 					
-		Player p;
-		if (mob.getKiller() instanceof Player)	p = mob.getKiller();	
+		Player p = null;	
+		if (mob.getLastDamageCause().getCause() == DamageCause.LIGHTNING) {
+			EntityDamageByEntityEvent cause = (EntityDamageByEntityEvent) mob.getLastDamageCause();
+			Entity lightningStrike = cause.getDamager();
+			if (lightningStrike.getCustomName().contains("stormaxedamage")) {				
+				String userPlayerName = lightningStrike.getName().replace("stormaxedamage", "");
+				Player userPlayer = null;
+				for (Player player: Bukkit.getOnlinePlayers()) {
+					if (!player.getName().equalsIgnoreCase(userPlayerName)) continue;
+					p = player;
+					break;
+				}
+			}
+			else return;
+		}
+		else if (mob.getKiller() instanceof Player)	p = mob.getKiller();
 		else p = (Player) this.getDamagerEntity(e.getEntity());
+		
+		//Check for probability
+		for (ItemStack luckyDrop: this.mobMaps.getLuckyDrops(mob)) {
+			e.getDrops().add(luckyDrop);
+		}
+		
 		
 		Profile profile = plugin.getProfileManager().getPlayerProfile(p);
 				
@@ -258,39 +279,7 @@ public class MobEvents implements Listener{
 				}
 				if (!(e.getEntity() instanceof LivingEntity)) return;
 				
-				if (!(e.getEntity() instanceof Player)) {
-					LivingEntity mob = (LivingEntity) e.getEntity();
-					if (mob.getHealth()-e.getFinalDamage() > 0) return;
-					
-					Profile userProfile = this.plugin.getProfileManager().getPlayerProfile(userPlayer);
-					
-					Double xpAmount = userProfile.getCombat().getXPamount(mob);
-					
-					ItemStack item = userPlayer.getInventory().getItemInMainHand();
-					//ADD VACUUM FOR LIGHTNING
-					//if (item.getItemMeta().hasEnchant(CustomEnchants.VACUUM)) this.vacuumFeature(userPlayer, mob..getDrops());
-					//SET XP HASHMAP TO CHECK XP (WITH MOB NAME && GOLD!!) AND CHECK DROPS
-					if (item.getItemMeta().hasEnchant(CustomEnchants.EXPERIENCE_EXTRACTOR)) {
-						int currentXp = 1;
-						double multiplier = item.getItemMeta().getEnchantLevel(CustomEnchants.EXPERIENCE_EXTRACTOR)*0.5;
-						userPlayer.giveExp((int) (currentXp + (currentXp*multiplier)));
-					}
-					if (item.getItemMeta().hasEnchant(CustomEnchants.PICKPOCKET)) {
-						double initialMoney = mobMaps.getMoneyamount(mob);
-						int enchantLevel = item.getItemMeta().getEnchantLevel(CustomEnchants.PICKPOCKET);
-						double totalMoney = initialMoney + (initialMoney*0.1*(enchantLevel-1));
-						userProfile.addBalance(totalMoney);
-					}	
-					
-					if (xpAmount == 0.0) {
-						userPlayer.sendMessage(Utils.chat("&4You require a higher combat level to gain any XP from killing that mob!"));
-					}
-					else {
-						plugin.setDisplayStats(4);
-						userPlayer.playSound(userPlayer.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 2, 1);
-						userProfile.getCombat().addCurrentXP(xpAmount);
-					}					
-				}
+				if (!(e.getEntity() instanceof Player)) return;
 				else {
 					Player p = (Player) e.getEntity();
 					
