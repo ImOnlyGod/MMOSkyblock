@@ -30,11 +30,30 @@ public class EnchantTableGui {
 	private HashMap<Material,ArrayList<Enchantment>> materialToEnchants = new HashMap<Material,ArrayList<Enchantment>>();
 	private ArrayList<ItemStack> allowedItems = new ArrayList<ItemStack>();
 	private HashMap<Enchantment,ArrayList<String>> EnchantLore = new HashMap<Enchantment,ArrayList<String>>();
+	private HashMap<String,ArrayList<String>> EnchantSpecificLore = new HashMap<String,ArrayList<String>>();
 	private HashMap<Enchantment,Material> EnchantItem = new HashMap<Enchantment,Material>();
 	private HashMap<Material,Enchantment> ItemEnchant = new HashMap<Material,Enchantment>();
 	private HashMap<Enchantment,Integer> EnchantXp = new HashMap<Enchantment,Integer>();
 	private HashMap<Enchantment,Integer> EnchantMoney = new HashMap<Enchantment,Integer>();
 	private HashMap<Enchantment,Integer> EnchantLevelRequirement = new HashMap<Enchantment,Integer>();
+	private HashMap<String,Integer> EnchantXpRequirement = new HashMap<String,Integer>();
+	private HashMap<String,Integer> EnchantSkillRequirement = new HashMap<String,Integer>();
+
+	public HashMap<String, Integer> getEnchantXpRequirement() {
+		return EnchantXpRequirement;
+	}
+
+	public void setEnchantXpRequirement(HashMap<String, Integer> enchantXpRequirement) {
+		EnchantXpRequirement = enchantXpRequirement;
+	}
+
+	public HashMap<String, Integer> getEnchantSkillRequirement() {
+		return EnchantSkillRequirement;
+	}
+
+	public void setEnchantSkillRequirement(HashMap<String, Integer> enchantSkillRequirement) {
+		EnchantSkillRequirement = enchantSkillRequirement;
+	}
 
 	public HashMap<Enchantment, Integer> getEnchantXp() {
 		return EnchantXp;
@@ -63,12 +82,59 @@ public class EnchantTableGui {
 	public EnchantTableGui(Player p, Main plugin) {
 		this.p = p;
 		this.plugin = plugin;
+		this.generateEnchantingRequirement();
 		this.generateAllowedItems();
 		this.generateEnchantLore();
 		this.generateEnchantRequirements();
 		this.generateEnchantItem();
 		this.generateMaterialToEnchants();
 		this.createInitialGui();
+		
+	}
+	
+	public void generateEnchantingRequirement() { 
+		this.EnchantXpRequirement.put("Vacuum 1", 1500);
+		this.EnchantSkillRequirement.put("Vacuum 1", 5);
+		
+		this.EnchantXpRequirement.put("Brute 1", 250);
+		this.EnchantSkillRequirement.put("Brute 1", 0);
+		this.EnchantXpRequirement.put("Brute 2", 1000);
+		this.EnchantSkillRequirement.put("Brute 2", 0);
+		this.EnchantXpRequirement.put("Brute 3", 2500);
+		this.EnchantSkillRequirement.put("Brute 3", 0);
+		this.EnchantXpRequirement.put("Brute 4", 10000);
+		this.EnchantSkillRequirement.put("Brute 4", 0);
+		this.EnchantXpRequirement.put("Brute 5", 25000);
+		this.EnchantSkillRequirement.put("Brute 5", 0);
+		
+		this.EnchantXpRequirement.put("Experience Extractor 1", 5000);
+		this.EnchantSkillRequirement.put("Experience Extractor 1", 10);
+		this.EnchantXpRequirement.put("Experience Extractor 2", 50000);
+		this.EnchantSkillRequirement.put("Experience Extractor 2", 25);
+		
+		this.EnchantXpRequirement.put("Pickpocket 1", 1500);
+		this.EnchantSkillRequirement.put("Pickpocket 1", 1);
+		this.EnchantXpRequirement.put("Pickpocket 2", 1500);
+		this.EnchantSkillRequirement.put("Pickpocket 2", 1);
+		this.EnchantXpRequirement.put("Pickpocket 3", 1500);
+		this.EnchantSkillRequirement.put("Pickpocket 3", 1);
+		this.EnchantXpRequirement.put("Pickpocket 4", 1500);
+		this.EnchantSkillRequirement.put("Pickpocket 4", 1);
+		this.EnchantXpRequirement.put("Pickpocket 5", 1500);
+		this.EnchantSkillRequirement.put("Pickpocket 5", 1);
+		this.EnchantXpRequirement.put("Pickpocket 6", 1500);
+		this.EnchantSkillRequirement.put("Pickpocket 6", 1);
+		this.EnchantXpRequirement.put("Pickpocket 7", 1500);
+		this.EnchantSkillRequirement.put("Pickpocket 7", 1);
+		this.EnchantXpRequirement.put("Pickpocket 8", 1500);
+		this.EnchantSkillRequirement.put("Pickpocket 8", 1);
+		this.EnchantXpRequirement.put("Pickpocket 9", 1500);
+		this.EnchantSkillRequirement.put("Pickpocket 9", 1);
+		this.EnchantXpRequirement.put("Pickpocket 10", 1500);
+		this.EnchantSkillRequirement.put("Pickpocket 10", 1);
+		this.EnchantXpRequirement.put("Pickpocket 11", 1500);
+		this.EnchantSkillRequirement.put("Pickpocket 11", 1);
+		
 	}
 	
 	public void generateEnchantRequirements() {
@@ -108,6 +174,7 @@ public class EnchantTableGui {
 		//VACUUM LORE
 		ArrayList<String> vacuumLore = new ArrayList<String>();
 		vacuumLore.add(Utils.chat("&7&oClick here to view levels"));
+		//ADD ENCHANT SPECIFIC LORE
 		
 		this.EnchantLore.put(CustomEnchants.VACUUM, vacuumLore);
 		this.EnchantLore.put(CustomEnchants.BRUTE, vacuumLore);
@@ -358,6 +425,14 @@ public class EnchantTableGui {
 
 	public void setItemEnchant(HashMap<Material,Enchantment> itemEnchant) {
 		ItemEnchant = itemEnchant;
+	}
+
+	public HashMap<String,ArrayList<String>> getEnchantSpecificLore() {
+		return EnchantSpecificLore;
+	}
+
+	public void setEnchantSpecificLore(HashMap<String,ArrayList<String>> enchantSpecificLore) {
+		EnchantSpecificLore = enchantSpecificLore;
 	}
 
 }

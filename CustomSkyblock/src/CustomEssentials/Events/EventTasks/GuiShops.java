@@ -238,8 +238,8 @@ public class GuiShops implements Listener{
 			if (e.getCurrentItem()==null) return;
 			if (enchantTable.getItemEnchant().get(e.getCurrentItem().getType()) != null) {
 				enchantTable.setGui(e.getView().getTopInventory());
-				
-				if (!e.getView().getTopInventory().getItem(12).getItemMeta().getLore().contains(Utils.chat("&7&oClick here to view levels"))) {
+				ItemStack currentItem = e.getView().getTopInventory().getItem(12);
+				if (!currentItem.getItemMeta().getLore().contains(Utils.chat("&7&oClick here to view levels"))) {
 					
 					int spaceIndex = 0;
 					for (int i=0; i<e.getCurrentItem().getItemMeta().getDisplayName().length();i++) {
@@ -250,27 +250,17 @@ public class GuiShops implements Listener{
 					int enchantLevel = Integer.parseInt(e.getCurrentItem().getItemMeta().getDisplayName().substring(spaceIndex+1));
 					Enchantment addEnchant = enchantTable.getItemEnchant().get(e.getCurrentItem().getType());
 					
-					//CHECK FOR XP AND LEVEL AND MONEY
-					int playerXP = p.getTotalExperience();
+					int playerXp = p.getTotalExperience();
 					int playerEnchantingLevel = this.plugin.getProfileManager().getPlayerProfile(p).getEnchanting().getLevel();
-					double playerMoney = this.plugin.getProfileManager().getPlayerProfile(p).getBalance();
+					
+					String itemName = e.getCurrentItem().getItemMeta().getDisplayName().substring(2);
+					
+					int requiredXp = enchantTable.getEnchantXpRequirement().get(itemName);
+					int requiredEnchantingLevel = enchantTable.getEnchantSkillRequirement().get(itemName);
 					
 					ItemStack enchantingItem = e.getView().getTopInventory().getItem(19);
 					
-					//PUT IN SEPEATE FUNCTION
-					if (enchantingItem.getItemMeta().hasEnchant(addEnchant)) {
-						if (enchantingItem.getItemMeta().getEnchantLevel(addEnchant) < enchantLevel) {
-							enchantingItem.addEnchantment(addEnchant, enchantLevel);
-							if (enchantingItem.getItemMeta().hasCustomModelData()) this.addCustomItemEnchantmentLore(enchantingItem, addEnchant, enchantLevel);
-							else this.addVanillaItemEnchantmentLore(enchantingItem, addEnchant, enchantLevel);
-						}
-					}
-					else {
-						enchantingItem.addEnchantment(addEnchant, enchantLevel);
-						if (enchantingItem.getItemMeta().hasCustomModelData()) this.addCustomItemEnchantmentLore(enchantingItem, addEnchant, enchantLevel);
-						else this.addVanillaItemEnchantmentLore(enchantingItem, addEnchant, enchantLevel);
-					}
-					
+					addingEnchantments(enchantingItem,addEnchant,enchantLevel,playerXp,requiredXp,playerEnchantingLevel,requiredEnchantingLevel,p);
 					
 					Inventory updateGui = enchantTable.getGui();
 					updateGui.setItem(19, enchantingItem);
@@ -1106,6 +1096,36 @@ public class GuiShops implements Listener{
 		}
 
 		return null;
+	}
+	
+	public void addingEnchantments(ItemStack enchantingItem, Enchantment addEnchant, int enchantLevel, int playerXp, int requiredXp, int playerSkillLevel, int requiredSkillLevel, Player p) {
+		
+		if (requiredXp > playerXp || requiredSkillLevel > playerSkillLevel) {
+			p.sendMessage(Utils.chat("&c&lYou do not meet the requirements for apply that enchantment!"));
+			return;
+		}
+		
+		if (enchantingItem.getItemMeta().hasEnchant(addEnchant)) {
+			if (enchantingItem.getItemMeta().getEnchantLevel(addEnchant) < enchantLevel) {
+				enchantingItem.addEnchantment(addEnchant, enchantLevel);
+				if (enchantingItem.getItemMeta().hasCustomModelData()) this.addCustomItemEnchantmentLore(enchantingItem, addEnchant, enchantLevel);
+				else this.addVanillaItemEnchantmentLore(enchantingItem, addEnchant, enchantLevel);
+			}
+			else {
+				p.sendMessage(Utils.chat("&c&lYou already have the same enchantment!"));
+				return;
+			}
+		}
+		else {
+			enchantingItem.addEnchantment(addEnchant, enchantLevel);
+			if (enchantingItem.getItemMeta().hasCustomModelData()) this.addCustomItemEnchantmentLore(enchantingItem, addEnchant, enchantLevel);
+			else this.addVanillaItemEnchantmentLore(enchantingItem, addEnchant, enchantLevel);
+		}
+		p.setTotalExperience(0);
+		p.setLevel(0);
+		p.setExp(0);
+		p.giveExp(playerXp-requiredXp);
+		p.sendMessage(Utils.chat("&d&lThat enchantment cost you &a" + requiredXp + " experience!"));
 	}
 	
 	public void addVanillaItemEnchantmentLore(ItemStack item, Enchantment enchant, int level) {

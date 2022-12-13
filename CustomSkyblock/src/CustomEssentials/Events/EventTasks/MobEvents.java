@@ -93,6 +93,7 @@ public class MobEvents implements Listener{
 	@EventHandler
 	public void onMobKill(EntityDeathEvent e) {
 		if (!(e.getEntity() instanceof LivingEntity)) return;
+		if (e.getEntity() instanceof Player) return;
 		LivingEntity mob = e.getEntity();
 		e.setDroppedExp((int) mobMaps.getXPamount(mob));
 		
@@ -115,6 +116,8 @@ public class MobEvents implements Listener{
 		}
 		else if (mob.getKiller() instanceof Player)	p = mob.getKiller();
 		else p = (Player) this.getDamagerEntity(e.getEntity());
+		
+		
 		
 		//Check for probability
 		for (ItemStack luckyDrop: this.mobMaps.getLuckyDrops(mob)) {
