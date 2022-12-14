@@ -33,9 +33,6 @@ public class EnchantTableGui {
 	private HashMap<String,ArrayList<String>> EnchantSpecificLore = new HashMap<String,ArrayList<String>>();
 	private HashMap<Enchantment,Material> EnchantItem = new HashMap<Enchantment,Material>();
 	private HashMap<Material,Enchantment> ItemEnchant = new HashMap<Material,Enchantment>();
-	private HashMap<Enchantment,Integer> EnchantXp = new HashMap<Enchantment,Integer>();
-	private HashMap<Enchantment,Integer> EnchantMoney = new HashMap<Enchantment,Integer>();
-	private HashMap<Enchantment,Integer> EnchantLevelRequirement = new HashMap<Enchantment,Integer>();
 	private HashMap<String,Integer> EnchantXpRequirement = new HashMap<String,Integer>();
 	private HashMap<String,Integer> EnchantSkillRequirement = new HashMap<String,Integer>();
 
@@ -55,37 +52,12 @@ public class EnchantTableGui {
 		EnchantSkillRequirement = enchantSkillRequirement;
 	}
 
-	public HashMap<Enchantment, Integer> getEnchantXp() {
-		return EnchantXp;
-	}
-
-	public void setEnchantXp(HashMap<Enchantment, Integer> enchantXp) {
-		EnchantXp = enchantXp;
-	}
-
-	public HashMap<Enchantment, Integer> getEnchantMoney() {
-		return EnchantMoney;
-	}
-
-	public void setEnchantMoney(HashMap<Enchantment, Integer> enchantMoney) {
-		EnchantMoney = enchantMoney;
-	}
-
-	public HashMap<Enchantment, Integer> getEnchantLevelRequirement() {
-		return EnchantLevelRequirement;
-	}
-
-	public void setEnchantLevelRequirement(HashMap<Enchantment, Integer> enchantLevelRequirement) {
-		EnchantLevelRequirement = enchantLevelRequirement;
-	}
-
 	public EnchantTableGui(Player p, Main plugin) {
 		this.p = p;
 		this.plugin = plugin;
 		this.generateEnchantingRequirement();
 		this.generateAllowedItems();
 		this.generateEnchantLore();
-		this.generateEnchantRequirements();
 		this.generateEnchantItem();
 		this.generateMaterialToEnchants();
 		this.createInitialGui();
@@ -135,24 +107,19 @@ public class EnchantTableGui {
 		this.EnchantXpRequirement.put("Pickpocket 11", 1500);
 		this.EnchantSkillRequirement.put("Pickpocket 11", 1);
 		
-	}
-	
-	public void generateEnchantRequirements() {
-		this.EnchantLevelRequirement.put(CustomEnchants.VACUUM, 0);
-		this.EnchantXp.put(CustomEnchants.VACUUM, 1000);
-		this.EnchantMoney.put(CustomEnchants.VACUUM, 1000);	
+		this.EnchantXpRequirement.put("Collection 1", 0);
+		this.EnchantSkillRequirement.put("Collection 1", 0);
+		this.EnchantXpRequirement.put("Collection 2", 0);
+		this.EnchantSkillRequirement.put("Collection 2", 0);
+		this.EnchantXpRequirement.put("Collection 3", 0);
+		this.EnchantSkillRequirement.put("Collection 3", 0);
 		
-		this.EnchantLevelRequirement.put(CustomEnchants.BRUTE, 0);
-		this.EnchantXp.put(CustomEnchants.BRUTE, 1000);
-		this.EnchantMoney.put(CustomEnchants.BRUTE, 1000);	
-		
-		this.EnchantLevelRequirement.put(CustomEnchants.EXPERIENCE_EXTRACTOR, 0);
-		this.EnchantXp.put(CustomEnchants.EXPERIENCE_EXTRACTOR, 1000);
-		this.EnchantMoney.put(CustomEnchants.EXPERIENCE_EXTRACTOR, 1000);
-		
-		this.EnchantLevelRequirement.put(CustomEnchants.PICKPOCKET, 0);
-		this.EnchantXp.put(CustomEnchants.PICKPOCKET, 1000);
-		this.EnchantMoney.put(CustomEnchants.PICKPOCKET, 1000);
+		this.EnchantXpRequirement.put("Prosperity 1", 0);
+		this.EnchantSkillRequirement.put("Prosperity 1", 0);
+		this.EnchantXpRequirement.put("Prosperity 2", 0);
+		this.EnchantSkillRequirement.put("Prosperity 2", 0);
+		this.EnchantXpRequirement.put("Prosperity 3", 0);
+		this.EnchantSkillRequirement.put("Prosperity 3", 0);
 		
 	}
 	
@@ -168,6 +135,12 @@ public class EnchantTableGui {
 		
 		this.EnchantItem.put(CustomEnchants.PICKPOCKET, Material.GOLD_NUGGET);
 		this.ItemEnchant.put(Material.GOLD_NUGGET, CustomEnchants.PICKPOCKET);
+		
+		this.EnchantItem.put(CustomEnchants.COLLECTION, Material.EGG);
+		this.ItemEnchant.put(Material.EGG, CustomEnchants.COLLECTION);
+
+		this.EnchantItem.put(CustomEnchants.PROSPERITY, Material.ENCHANTED_GOLDEN_APPLE);
+		this.ItemEnchant.put(Material.ENCHANTED_GOLDEN_APPLE, CustomEnchants.PROSPERITY);
 	}
 	
 	public void generateEnchantLore() {
@@ -180,6 +153,8 @@ public class EnchantTableGui {
 		this.EnchantLore.put(CustomEnchants.BRUTE, vacuumLore);
 		this.EnchantLore.put(CustomEnchants.EXPERIENCE_EXTRACTOR, vacuumLore);
 		this.EnchantLore.put(CustomEnchants.PICKPOCKET, vacuumLore);
+		this.EnchantLore.put(CustomEnchants.COLLECTION, vacuumLore);
+		this.EnchantLore.put(CustomEnchants.PROSPERITY, vacuumLore);
 		
 	}
 	
@@ -189,6 +164,8 @@ public class EnchantTableGui {
 		swordEnchants.add(CustomEnchants.BRUTE);
 		swordEnchants.add(CustomEnchants.EXPERIENCE_EXTRACTOR);
 		swordEnchants.add(CustomEnchants.PICKPOCKET);
+		swordEnchants.add(CustomEnchants.COLLECTION);
+		swordEnchants.add(CustomEnchants.PROSPERITY);
 		
 		this.materialToEnchants.put(Material.WOODEN_SWORD, swordEnchants);
 		this.materialToEnchants.put(Material.STONE_SWORD, swordEnchants);
@@ -212,6 +189,8 @@ public class EnchantTableGui {
 		axeEnchants.add(CustomEnchants.BRUTE);
 		axeEnchants.add(CustomEnchants.EXPERIENCE_EXTRACTOR);
 		axeEnchants.add(CustomEnchants.PICKPOCKET);
+		axeEnchants.add(CustomEnchants.COLLECTION);
+		axeEnchants.add(CustomEnchants.PROSPERITY);
 		
 		this.materialToEnchants.put(Material.WOODEN_AXE, axeEnchants);
 		this.materialToEnchants.put(Material.STONE_AXE, axeEnchants);
@@ -239,7 +218,9 @@ public class EnchantTableGui {
 		}
 		
 		slot = 12;
+		
 		int enchantMaxLevel = enchant.getMaxLevel()+1;
+		if (enchant == CustomEnchants.COLLECTION || enchant == CustomEnchants.PROSPERITY) enchantMaxLevel -= 1;
 		for (int i=1;i<enchantMaxLevel;i++) {
 			if (slot > 34) break;
 			

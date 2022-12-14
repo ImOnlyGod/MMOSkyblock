@@ -34,6 +34,7 @@ public class ItemStats {
 		stats.setHealth(stats.getDefaultHealth() + pathStats.getDefaultHealth());
 		stats.setSpeed(stats.getDefaultSpeed() + pathStats.getDefaultSpeed());
 		stats.setManaRegen(Math.max(1,stats.getDefaultManaRegen()+pathStats.getManaRegen()));
+		stats.setLuck(stats.getDefaultLuck() + pathStats.getDefaultLuck());
 		p.getAttribute(Attribute.GENERIC_ARMOR).setBaseValue(stats.getArmor() + pathStats.getArmor());
 		p.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(stats.getHealth() + pathStats.getHealth());
 		p.setHealthScaled(true);
@@ -59,6 +60,7 @@ public class ItemStats {
 		setItemDamageStat();
 		setItemMRStat();
 		setItemSpeedStat();
+		setItemLuckStat();
 		
 	}
 		
@@ -220,6 +222,30 @@ public class ItemStats {
 		}
 		stats.setSpeed(totalSpeed);
 		p.setWalkSpeed((float) ((stats.getSpeed() + pathStats.getSpeed())/500f));
+	}
+	
+	public void setItemLuckStat() {
+		Stats stats = profileManager.getPlayerProfile(p).getStats();
+		Stats pathStats = profileManager.getPlayerProfile(p).getPath().getStats();
+		int totalLuck = stats.getDefaultLuck() + pathStats.getDefaultLuck();
+		ItemStorageTable itemTable = new ItemStorageTable();
+		
+		for (int i = 0; i < items.size(); i++) {
+			
+			int ID = getItemCustomID(items.get(i));
+			ItemsCore item = itemTable.getIDtoItemsCore().get(ID);
+			if (item == null) continue;
+			item.createItem(1);
+			
+			if (items.get(i).getItemMeta().hasEnchant(CustomEnchants.PROSPERITY)) item.addLuck(items.get(i).getItemMeta().getEnchantLevel(CustomEnchants.PROSPERITY));
+			
+			int mana= item.getItemLuck();
+			totalLuck = totalLuck + mana;
+			
+		}
+		
+		stats.setLuck(totalLuck);	
+		
 	}
 	
 	public Boolean isValidItem(ItemStack item) {

@@ -31,6 +31,7 @@ public class ItemsCore {
 	private int itemCDR = 0;
 	private double itemLifeSteal = 0;
 	private int itemBasePhysicalDamage = 0;
+	private int itemLuck = 0;
 	
 	private String itemName;
 	
@@ -42,6 +43,12 @@ public class ItemsCore {
 		int damage =  (int) Math.max(level,this.itemBasePhysicalDamage*level*0.05);
 		this.itemPhysicalDamage += damage;
 		return Utils.chat("&cDamage:&6 +"+ getItemPhysicalDamage() +"⚔ &7(&a+&e" + damage + "&7)");
+	}
+	
+	public String addLuck(int level) {
+		int luck =  (int) level*10;
+		this.itemLuck += luck;
+		return Utils.chat("&1Luck:&6 +"+ getItemLuck() +"<> &7(&a+&e" + luck + "&7)");
 	}
 	
 	public int getItemHeathStat() {
@@ -181,6 +188,14 @@ public class ItemsCore {
 
 	public void setItemBasePhysicalDamage(int itemBasePhysicalDamage) {
 		this.itemBasePhysicalDamage = itemBasePhysicalDamage;
+	}
+
+	public int getItemLuck() {
+		return itemLuck;
+	}
+
+	public void setItemLuck(int itemLuck) {
+		this.itemLuck = itemLuck;
 	}
 
 

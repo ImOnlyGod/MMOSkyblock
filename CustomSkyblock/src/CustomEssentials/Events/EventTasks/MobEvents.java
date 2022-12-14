@@ -90,6 +90,26 @@ public class MobEvents implements Listener{
 		}				
 	}
 	
+	public void collectionFeature(List<ItemStack> drops, int enchantLevel) {
+		
+		int i =0;
+		for (ItemStack item:drops) {
+			int currentAmount = item.getAmount();
+			double multiplier = 1 + (enchantLevel*0.25); 
+			int newAmount = currentAmount;
+			Random chance = new Random();
+			
+			if (currentAmount < 4 && enchantLevel < 5) {
+				if (chance.nextDouble(multiplier) > 1) newAmount += chance.nextInt(1,enchantLevel+1); 
+			}
+			else newAmount = (int) (currentAmount * multiplier * chance.nextInt(enchantLevel));
+				
+			item.setAmount(newAmount);
+			drops.set(i, item);
+			i++;
+		}				
+	}
+	
 	@EventHandler
 	public void onMobKill(EntityDeathEvent e) {
 		if (!(e.getEntity() instanceof LivingEntity)) return;
@@ -105,7 +125,6 @@ public class MobEvents implements Listener{
 			Entity lightningStrike = cause.getDamager();
 			if (lightningStrike.getCustomName().contains("stormaxedamage")) {				
 				String userPlayerName = lightningStrike.getName().replace("stormaxedamage", "");
-				Player userPlayer = null;
 				for (Player player: Bukkit.getOnlinePlayers()) {
 					if (!player.getName().equalsIgnoreCase(userPlayerName)) continue;
 					p = player;
@@ -115,15 +134,7 @@ public class MobEvents implements Listener{
 			else return;
 		}
 		else if (mob.getKiller() instanceof Player)	p = mob.getKiller();
-		else p = (Player) this.getDamagerEntity(e.getEntity());
-		
-		
-		
-		//Check for probability
-		for (ItemStack luckyDrop: this.mobMaps.getLuckyDrops(mob)) {
-			e.getDrops().add(luckyDrop);
-		}
-		
+		else p = (Player) this.getDamagerEntity(e.getEntity());		
 		
 		Profile profile = plugin.getProfileManager().getPlayerProfile(p);
 				
@@ -138,8 +149,16 @@ public class MobEvents implements Listener{
 			profile.getCombat().addCurrentXP(xpAmount);
 		}
 		
-		if (p.getInventory().getItemInMainHand() == null) return;
-		ItemStack item = p.getInventory().getItemInMainHand();
+		ItemStack item = p.getInventory().getItemInMainHand();		
+		if (item == null) return;
+		
+		//Check for probability
+		int playerLuck = profile.getStats().getLuck();
+		for (ItemStack luckyDrop: this.mobMaps.getLuckyDrops(mob,playerLuck)) {
+			e.getDrops().add(luckyDrop);
+		}	
+		
+		if (item.getItemMeta().hasEnchant(CustomEnchants.COLLECTION)) collectionFeature(e.getDrops(), item.getItemMeta().getEnchantLevel(CustomEnchants.COLLECTION));
 		if (item.getItemMeta().hasEnchant(CustomEnchants.VACUUM)) this.vacuumFeature(p, e.getDrops());
 		if (item.getItemMeta().hasEnchant(CustomEnchants.EXPERIENCE_EXTRACTOR)) {
 			int currentXp = Math.max(1, e.getDroppedExp());

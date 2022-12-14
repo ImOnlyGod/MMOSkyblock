@@ -1162,6 +1162,14 @@ public class GuiShops implements Listener{
 				break;
 			}
 		}
+		if (enchantName.equalsIgnoreCase("Prosperity")) {
+			ItemsCore updateDamage = new ItemStorageTable().getIDtoItemsCore().get(meta.getCustomModelData());
+			updateDamage.createItem(1);
+			String luckLore = updateDamage.addLuck(level);
+			lore.add(index-1, luckLore);
+			index += 1;
+			
+		}
 		boolean containsEnchant = false; 
 		
 		for (int i=0;i<lore.size();i++) {

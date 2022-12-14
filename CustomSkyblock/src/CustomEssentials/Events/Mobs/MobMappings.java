@@ -40,7 +40,7 @@ public class MobMappings {
 		return output;
 	}
 	
-	public ArrayList<ItemStack> getLuckyDrops(Entity mob) {
+	public ArrayList<ItemStack> getLuckyDrops(Entity mob, int luck) {
 		String[] mobStats = this.getNameLevel(mob);
 		String mobName = mobStats[0];
 		int mobLevel = Integer.parseInt(mobStats[1]);
@@ -51,7 +51,7 @@ public class MobMappings {
 		int i = 0;
 		for (int chance: this.NameToLuckyDropChance.get(mobName)) {
 			Random rand = new Random();
-			if (rand.nextInt(Math.max(1,(int) chance-(mobLevel/10))) == 0) finalDrops.add(this.NameToLuckyDrops.get(mobName).get(i));
+			if (rand.nextInt((int) (Math.max(1,chance-(mobLevel/10))-(luck*0.01))) == 0) finalDrops.add(this.NameToLuckyDrops.get(mobName).get(i));
 			i++;
 		}		
 		
