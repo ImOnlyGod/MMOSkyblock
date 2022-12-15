@@ -51,7 +51,7 @@ public class MobMappings {
 		int i = 0;
 		for (int chance: this.NameToLuckyDropChance.get(mobName)) {
 			Random rand = new Random();
-			if (rand.nextInt((int) (Math.max(1,chance-(mobLevel/10))-(luck*0.01))) == 0) finalDrops.add(this.NameToLuckyDrops.get(mobName).get(i));
+			if (rand.nextInt((int) (Math.max(1,chance-(mobLevel/10)-(luck*0.1)))) == 0) finalDrops.add(this.NameToLuckyDrops.get(mobName).get(i));
 			i++;
 		}		
 		

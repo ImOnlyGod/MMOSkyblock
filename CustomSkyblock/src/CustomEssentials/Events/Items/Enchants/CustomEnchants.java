@@ -15,6 +15,8 @@ public class CustomEnchants {
 	public static final Enchantment PICKPOCKET = new EnchantmentWrapper("pickpocket","Pickpocket",11,EnchantmentTarget.WEAPON);
 	public static final Enchantment COLLECTION = new EnchantmentWrapper("collection","Collection",4,EnchantmentTarget.WEAPON);
 	public static final Enchantment PROSPERITY = new EnchantmentWrapper("prosperity","Prosperity",4,EnchantmentTarget.WEAPON);
+	public static final Enchantment JIGSAW = new EnchantmentWrapper("jigsaw","Jigsaw",3,EnchantmentTarget.TOOL);
+	public static final Enchantment GEM_EXTRACTOR = new EnchantmentWrapper("gem_extractor","Gem_extractor",5,EnchantmentTarget.TOOL);
 	
 	public static void register() {
 		boolean registered = Arrays.stream(Enchantment.values()).collect(Collectors.toList()).contains(VACUUM);
@@ -41,7 +43,14 @@ public class CustomEnchants {
 		if (!registered) {
 			registerEnchantment(PROSPERITY);
 		}
-		
+		registered = Arrays.stream(Enchantment.values()).collect(Collectors.toList()).contains(JIGSAW);
+		if (!registered) {
+			registerEnchantment(JIGSAW);
+		}
+		registered = Arrays.stream(Enchantment.values()).collect(Collectors.toList()).contains(GEM_EXTRACTOR);
+		if (!registered) {
+			registerEnchantment(GEM_EXTRACTOR);
+		}
 	}
 	
 	public static void registerEnchantment(Enchantment enchantment) {

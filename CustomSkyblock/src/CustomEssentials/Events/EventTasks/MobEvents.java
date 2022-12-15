@@ -153,12 +153,14 @@ public class MobEvents implements Listener{
 		if (item == null) return;
 		
 		//Check for probability
+		if (item.getItemMeta().hasEnchant(CustomEnchants.COLLECTION)) collectionFeature(e.getDrops(), item.getItemMeta().getEnchantLevel(CustomEnchants.COLLECTION));
+		
 		int playerLuck = profile.getStats().getLuck();
 		for (ItemStack luckyDrop: this.mobMaps.getLuckyDrops(mob,playerLuck)) {
 			e.getDrops().add(luckyDrop);
 		}	
 		
-		if (item.getItemMeta().hasEnchant(CustomEnchants.COLLECTION)) collectionFeature(e.getDrops(), item.getItemMeta().getEnchantLevel(CustomEnchants.COLLECTION));
+		
 		if (item.getItemMeta().hasEnchant(CustomEnchants.VACUUM)) this.vacuumFeature(p, e.getDrops());
 		if (item.getItemMeta().hasEnchant(CustomEnchants.EXPERIENCE_EXTRACTOR)) {
 			int currentXp = Math.max(1, e.getDroppedExp());

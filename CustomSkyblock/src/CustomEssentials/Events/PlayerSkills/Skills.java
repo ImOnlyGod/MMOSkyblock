@@ -17,7 +17,11 @@ public abstract class Skills {
 	public void levelUp() {
 		this.level ++;		
 		this.currentXP = this.currentXP - this.maxXP;
-		this.maxXP = 2*this.maxXP + (maxXP/2);
+		if (level < 11) this.maxXP = 2*this.maxXP;
+		else if (level > 10 && level < 20)  this.maxXP = 1.5*this.maxXP;
+		else if (level > 20 && level < 30) this.maxXP = 1.2*this.maxXP;
+		else if (level > 30 && level < 40) this.maxXP = 1.01*this.maxXP;
+		else  this.maxXP = 1.001*this.maxXP;
 	}
 
 	public int getLevel() {

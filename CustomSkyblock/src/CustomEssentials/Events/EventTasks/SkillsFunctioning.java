@@ -1,5 +1,8 @@
 package CustomEssentials.Events.EventTasks;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -85,27 +88,58 @@ public class SkillsFunctioning implements Listener{
 		if (p.getInventory().getItemInMainHand() == null) return true;
 		if (!block.isPreferredTool(p.getInventory().getItemInMainHand())) return false;
 		if (p.getGameMode() == GameMode.CREATIVE) return true;
-		//CHECK FORTUNE + BOOST DROPS
+		ArrayList<ItemStack> drops = new ArrayList<ItemStack>();
+		for (ItemStack item :block.getDrops()) {
+			drops.add(item);
+		}
+		if (p.getInventory().getItemInMainHand().getItemMeta().hasEnchant(CustomEnchants.GEM_EXTRACTOR)) {
+			int enchantLevel = p.getInventory().getItemInMainHand().getItemMeta().getEnchantLevel(CustomEnchants.GEM_EXTRACTOR);
+			int increaseDrops = new Random().nextInt(2);
+			for (ItemStack item :drops) {
+				int amount = item.getAmount();
+				if (enchantLevel == 1 && increaseDrops == 1) item.setAmount(amount*2);
+				else if (enchantLevel == 2)  item.setAmount(amount*2);
+				else if (enchantLevel == 3) {
+					if (increaseDrops == 1) item.setAmount(amount*3);
+					else item.setAmount(amount*2);
+				}
+				else if (enchantLevel == 4)  item.setAmount(amount*3);
+			}
+		}
+		else if (p.getInventory().getItemInMainHand().getItemMeta().hasEnchant(CustomEnchants.JIGSAW)) {
+			ArrayList<ItemStack> silkdrops = new ArrayList<ItemStack>();
+			silkdrops.add(new ItemStack(block.getType()));
+			drops = silkdrops;
+		}
 		if (p.getInventory().getItemInMainHand().getItemMeta().hasEnchant(CustomEnchants.VACUUM)) {
-			for (ItemStack item :block.getDrops()) {
+			for (ItemStack item :drops) {
 				p.getInventory().addItem(item);
 			}			
-			
-			return false;
 		}
-		if (block.hasMetadata("placed")) return true;
-		return true;
+		else {
+			for (ItemStack item :drops) {
+				p.getWorld().dropItemNaturally(block.getLocation(),item);
+			}
+		}
+		return false;
 	}
 	
 	@EventHandler
 	public void onBlockBreak(BlockBreakEvent e) {
-		
 		Material block = e.getBlock().getType();
 		Player p = e.getPlayer();
 		Profile profile = plugin.getProfileManager().getPlayerProfile(p);
 		profile.getFarming().generateCropXp();
 		profile.getForaging().generateWoodXp();
 		profile.getMining().generateBlockXp();
+		ItemStack item = p.getInventory().getItemInMainHand();
+		if (item != null) {
+			if (item.getItemMeta().hasEnchant(CustomEnchants.EXPERIENCE_EXTRACTOR)) {
+				int currentXp = e.getExpToDrop();
+				double multiplier = item.getItemMeta().getEnchantLevel(CustomEnchants.EXPERIENCE_EXTRACTOR)*0.5;
+				p.giveExp((int) (currentXp + (currentXp*multiplier)));
+			}
+		}
 		
 		e.setDropItems(checkEnchantsBlockBreak(p,e.getBlock()));
 		if (e.getBlock().hasMetadata("placed")) return;

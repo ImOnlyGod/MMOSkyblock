@@ -27,6 +27,8 @@ public class EnchantmentWrapper extends Enchantment{
 	@Override
 	public boolean conflictsWith(Enchantment arg0) {
 		// TODO Auto-generated method stub
+		if (this.name.equals("Jigsaw") && arg0.equals(CustomEnchants.GEM_EXTRACTOR)) return true;
+		else if (this.name.equals("gem_extractor") && arg0.equals(CustomEnchants.JIGSAW)) return true;
 		return false;
 	}
 
