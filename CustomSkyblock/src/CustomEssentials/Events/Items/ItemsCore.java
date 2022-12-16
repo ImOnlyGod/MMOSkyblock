@@ -51,6 +51,12 @@ public class ItemsCore {
 		return Utils.chat("&1Luck:&6 +"+ getItemLuck() +"<> &7(&a+&e" + luck + "&7)");
 	}
 	
+	public String addHealth(int level) {
+		int health =  (int) level*10;
+		this.itemHeathStat += health;
+		return Utils.chat("&4Health:&6 +"+ getItemHeathStat() +"♥ &7(&a+&e" + health + "&7)");
+	}
+	
 	public int getItemHeathStat() {
 		return itemHeathStat;
 	}

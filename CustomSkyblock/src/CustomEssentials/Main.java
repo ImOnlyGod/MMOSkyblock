@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
 
+import CustomEssentials.Commands.CustomSpawnerCommand;
 import CustomEssentials.Commands.CustomMobsCommand;
 import CustomEssentials.Commands.EatCommand;
 import CustomEssentials.Commands.FlyCommand;
@@ -108,6 +109,7 @@ public class Main extends JavaPlugin{
 		new MainShopMenu(this);
 		new CraftGui(this);
 		new WeaponTabCommand(this);
+		new CustomSpawnerCommand(this);
 		new CustomMobsCommand(this);
 		readShopData();
 		getServer().getPluginManager().registerEvents(new MobEvents(this), this);

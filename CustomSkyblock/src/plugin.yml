@@ -48,4 +48,5 @@ commands:
   shopBrewing2:
   craft:
   path:
+  spawner:
   

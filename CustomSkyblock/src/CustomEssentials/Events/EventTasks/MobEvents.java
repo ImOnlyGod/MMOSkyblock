@@ -28,6 +28,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.SpawnerSpawnEvent;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.event.player.PlayerFishEvent.State;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -45,9 +46,11 @@ import CustomEssentials.Events.Items.Weapons.StormAxe;
 import CustomEssentials.Events.Misc.ProjectileCreator;
 import CustomEssentials.Events.Mobs.MobLevel;
 import CustomEssentials.Events.Mobs.MobMappings;
+import CustomEssentials.Events.Mobs.CustomMobs.AgressiveGolem;
+import CustomEssentials.Events.Mobs.CustomMobs.Basic_Zombie;
+import CustomEssentials.Events.Mobs.CustomMobs.WildPig;
 import CustomEssentials.Events.PlayerStats.Stats;
 import CustomEssentials.Utils.Utils;
-import net.minecraft.world.entity.EntityLightning;
 
 
 public class MobEvents implements Listener{
@@ -195,6 +198,24 @@ public class MobEvents implements Listener{
 		}
 	}
 	
+	@EventHandler
+	public void spawnerMobsEvent(SpawnerSpawnEvent e) {
+		Location loc = e.getLocation();
+		if (e.getSpawner().hasMetadata("wildpig Spawner")) {			
+			new WildPig(loc,1);
+			e.setCancelled(true);
+		}
+		else if (e.getSpawner().hasMetadata("agressivegolem Spawner")) {			
+			new AgressiveGolem(loc,1);
+			e.setCancelled(true);
+		}
+		else if (e.getSpawner().hasMetadata("basiczombie Spawner")) {			
+			new Basic_Zombie(loc,1);
+			e.setCancelled(true);
+		}
+		
+	}
+	
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void mobSpawnEvent(CreatureSpawnEvent e) {
@@ -202,6 +223,7 @@ public class MobEvents implements Listener{
 		if (e.getSpawnReason().equals(SpawnReason.LIGHTNING)) {
 			e.getEntity().setCustomName(null);;
 		}
+		
 		if (!(e.getEntity() instanceof LivingEntity)) return;
 		if (e.getEntity() instanceof ArmorStand) return;
 		

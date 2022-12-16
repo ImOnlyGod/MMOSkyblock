@@ -1153,23 +1153,15 @@ public class GuiShops implements Listener{
 		int index = lore.indexOf(Utils.chat("&6&lEnchantments: "));
 		
 		if (enchantName.equalsIgnoreCase("Brute")) {
-			for (int i=0;i<lore.size();i++) {
-				
-				if (!lore.get(i).contains(Utils.chat("&cDamage:&6 +"))) continue;
-				ItemsCore updateDamage = new ItemStorageTable().getIDtoItemsCore().get(meta.getCustomModelData());
-				updateDamage.createItem(1);
-				lore.set(i, updateDamage.addBruteDamage(level));
-				break;
-			}
+			index = this.updateStatLores(lore, meta, level, index, Utils.chat("&cDamage:&6"));	
 		}
 		if (enchantName.equalsIgnoreCase("Prosperity")) {
-			ItemsCore updateDamage = new ItemStorageTable().getIDtoItemsCore().get(meta.getCustomModelData());
-			updateDamage.createItem(1);
-			String luckLore = updateDamage.addLuck(level);
-			lore.add(index-1, luckLore);
-			index += 1;
-			
+			index = this.updateStatLores(lore, meta, level, index, Utils.chat("&1Luck:&6"));
 		}
+		if (enchantName.equalsIgnoreCase("Giant")) {
+			index = this.updateStatLores(lore, meta, level, index, Utils.chat("&4Health:&6"));			
+		}
+		
 		boolean containsEnchant = false; 
 		
 		for (int i=0;i<lore.size();i++) {
@@ -1184,7 +1176,32 @@ public class GuiShops implements Listener{
 		meta.setLore(lore);
 		item.setItemMeta(meta);
 		
+	}
+	
+	public int updateStatLores(ArrayList<String> lore, ItemMeta meta, int level, int index, String statString) {
+
+		ItemsCore updateStat = new ItemStorageTable().getIDtoItemsCore().get(meta.getCustomModelData());
+		updateStat.createItem(1);
+		String updatedLore = updateStat.addHealth(level);
+		if (statString.equals(Utils.chat("&1Luck:&6"))) updatedLore = updateStat.addLuck(level);
+		else if (statString.equals(Utils.chat("&cDamage:&6"))) updatedLore = updateStat.addBruteDamage(level);
 		
+		Boolean hasStat = false;
+		
+		for (int i=0;i<lore.size();i++) {
+			
+			if (!lore.get(i).contains(statString)) continue;
+			lore.set(i, updatedLore);
+			hasStat = true;
+			break;
+		}
+		
+		if (!hasStat) {
+			lore.add(index-1, updatedLore);
+			index += 1;
+		}
+		
+		return index;
 	}
 
 

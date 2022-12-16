@@ -8,7 +8,10 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
+import org.bukkit.block.CreatureSpawner;
 import org.bukkit.block.data.Ageable;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -22,6 +25,7 @@ import org.bukkit.metadata.FixedMetadataValue;
 import CustomEssentials.Main;
 import CustomEssentials.Events.Profile;
 import CustomEssentials.Events.Items.Enchants.CustomEnchants;
+import CustomEssentials.Events.Mobs.CustomMobs.WildPig;
 import CustomEssentials.Utils.Utils;
 
 
@@ -38,6 +42,27 @@ public class SkillsFunctioning implements Listener{
 		Block block = e.getBlock();
 		
 		if (block.getType() == Material.FARMLAND) return;
+		
+		if (block.getType() == Material.SPAWNER) {
+			String spawnerName = e.getItemInHand().getItemMeta().getDisplayName();
+			if (spawnerName.equals("wildpig Spawner")) {
+				CreatureSpawner spawner = (CreatureSpawner) e.getBlock().getState();
+				spawner.setSpawnedType(EntityType.PIG);
+				spawner.update();
+			}
+			else if (spawnerName.equals("agressivegolem Spawner")) {
+				CreatureSpawner spawner = (CreatureSpawner) e.getBlock().getState();
+				spawner.setSpawnedType(EntityType.IRON_GOLEM);
+				spawner.update();
+			}
+			else if (spawnerName.equals("basiczombie Spawner")) {
+				CreatureSpawner spawner = (CreatureSpawner) e.getBlock().getState();
+				spawner.setSpawnedType(EntityType.ZOMBIE);
+				spawner.update();
+			}
+			e.getBlock().setMetadata(spawnerName, new FixedMetadataValue(this.plugin,"spawner"));
+			
+		}
 				
 		if (e.getItemInHand().getItemMeta().hasDisplayName()) {
 			if (e.getItemInHand().getItemMeta().getDisplayName().contains(Utils.chat("&7&lCompressed"))) {
@@ -92,6 +117,7 @@ public class SkillsFunctioning implements Listener{
 		for (ItemStack item :block.getDrops()) {
 			drops.add(item);
 		}
+
 		if (p.getInventory().getItemInMainHand().getItemMeta().hasEnchant(CustomEnchants.GEM_EXTRACTOR)) {
 			int enchantLevel = p.getInventory().getItemInMainHand().getItemMeta().getEnchantLevel(CustomEnchants.GEM_EXTRACTOR);
 			int increaseDrops = new Random().nextInt(2);
@@ -107,9 +133,17 @@ public class SkillsFunctioning implements Listener{
 			}
 		}
 		else if (p.getInventory().getItemInMainHand().getItemMeta().hasEnchant(CustomEnchants.JIGSAW)) {
+			//FUNCTION WITH CUSTOM SPANWERS
 			ArrayList<ItemStack> silkdrops = new ArrayList<ItemStack>();
-			silkdrops.add(new ItemStack(block.getType()));
+			ItemStack item = new ItemStack(block.getType());
+			if (block.getType() == Material.SPAWNER) {
+				CreatureSpawner spawner = (CreatureSpawner) block.getState();
+				item.setData(spawner.getData());
+			}
+			
+			silkdrops.add(item);
 			drops = silkdrops;
+			
 		}
 		if (p.getInventory().getItemInMainHand().getItemMeta().hasEnchant(CustomEnchants.VACUUM)) {
 			for (ItemStack item :drops) {
@@ -134,11 +168,13 @@ public class SkillsFunctioning implements Listener{
 		profile.getMining().generateBlockXp();
 		ItemStack item = p.getInventory().getItemInMainHand();
 		if (item != null) {
-			if (item.getItemMeta().hasEnchant(CustomEnchants.EXPERIENCE_EXTRACTOR)) {
-				int currentXp = e.getExpToDrop();
-				double multiplier = item.getItemMeta().getEnchantLevel(CustomEnchants.EXPERIENCE_EXTRACTOR)*0.5;
-				p.giveExp((int) (currentXp + (currentXp*multiplier)));
-			}
+			if (item.hasItemMeta()) {
+				if (item.getItemMeta().hasEnchant(CustomEnchants.EXPERIENCE_EXTRACTOR)) {
+					int currentXp = e.getExpToDrop();
+					double multiplier = item.getItemMeta().getEnchantLevel(CustomEnchants.EXPERIENCE_EXTRACTOR)*0.5;
+					p.giveExp((int) (currentXp + (currentXp*multiplier)));
+				}
+			}			
 		}
 		
 		e.setDropItems(checkEnchantsBlockBreak(p,e.getBlock()));

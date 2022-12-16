@@ -83,6 +83,7 @@ public class EnchantTableGui {
 		this.EnchantTier.put(CustomEnchants.PROSPERITY, epic);
 		this.EnchantTier.put(CustomEnchants.JIGSAW, epic);
 		this.EnchantTier.put(CustomEnchants.GEM_EXTRACTOR, rare);
+		this.EnchantTier.put(CustomEnchants.GIANT, common);
 	}
 	
 	public void addRequirementLores(ArrayList<String> lore, String enchantName) {
@@ -296,6 +297,57 @@ public class EnchantTableGui {
 		gemLore4.add(Utils.chat("&7Get 200% more drops from breaking ores or "));
 		gemLore4.add(Utils.chat("&7other specfic blocks."));
 		addRequirementLores(gemLore4,"Gem Extractor 4");
+		//GIANT LORES
+		ArrayList<String> giantLore1 = new ArrayList<String>();
+		giantLore1.add(Utils.chat(""));
+		giantLore1.add(Utils.chat("&f&lEnchant Info"));
+		giantLore1.add(Utils.chat("&7Gain an additional 10 max Health."));
+		addRequirementLores(giantLore1,"Giant 1");
+		ArrayList<String> giantLore2 = new ArrayList<String>();
+		giantLore2.add(Utils.chat(""));
+		giantLore2.add(Utils.chat("&f&lEnchant Info"));
+		giantLore2.add(Utils.chat("&7Gain an additional 20 max Health."));
+		addRequirementLores(giantLore2,"Giant 2");
+		ArrayList<String> giantLore3 = new ArrayList<String>();
+		giantLore3.add(Utils.chat(""));
+		giantLore3.add(Utils.chat("&f&lEnchant Info"));
+		giantLore3.add(Utils.chat("&7Gain an additional 30 max Health."));
+		addRequirementLores(giantLore3,"Giant 3");
+		ArrayList<String> giantLore4 = new ArrayList<String>();
+		giantLore4.add(Utils.chat(""));
+		giantLore4.add(Utils.chat("&f&lEnchant Info"));
+		giantLore4.add(Utils.chat("&7Gain an additional 40 max Health."));
+		addRequirementLores(giantLore4,"Giant 4");
+		ArrayList<String> giantLore5 = new ArrayList<String>();
+		giantLore5.add(Utils.chat(""));
+		giantLore5.add(Utils.chat("&f&lEnchant Info"));
+		giantLore5.add(Utils.chat("&7Gain an additional 50 max Health."));
+		addRequirementLores(giantLore5,"Giant 5");
+		ArrayList<String> giantLore6 = new ArrayList<String>();
+		giantLore6.add(Utils.chat(""));
+		giantLore6.add(Utils.chat("&f&lEnchant Info"));
+		giantLore6.add(Utils.chat("&7Gain an additional 60 max Health."));
+		addRequirementLores(giantLore6,"Giant 6");
+		ArrayList<String> giantLore7 = new ArrayList<String>();
+		giantLore7.add(Utils.chat(""));
+		giantLore7.add(Utils.chat("&f&lEnchant Info"));
+		giantLore7.add(Utils.chat("&7Gain an additional 70 max Health."));
+		addRequirementLores(giantLore7,"Giant 7");
+		ArrayList<String> giantLore8 = new ArrayList<String>();
+		giantLore8.add(Utils.chat(""));
+		giantLore8.add(Utils.chat("&f&lEnchant Info"));
+		giantLore8.add(Utils.chat("&7Gain an additional 80 max Health."));
+		addRequirementLores(giantLore8,"Giant 8");
+		ArrayList<String> giantLore9 = new ArrayList<String>();
+		giantLore9.add(Utils.chat(""));
+		giantLore9.add(Utils.chat("&f&lEnchant Info"));
+		giantLore9.add(Utils.chat("&7Gain an additional 90 max Health."));
+		addRequirementLores(giantLore9,"Giant 9");
+		ArrayList<String> giantLore10 = new ArrayList<String>();
+		giantLore10.add(Utils.chat(""));
+		giantLore10.add(Utils.chat("&f&lEnchant Info"));
+		giantLore10.add(Utils.chat("&7Gain an additional 100 max Health."));
+		addRequirementLores(giantLore10,"Giant 10");
 		
 		this.EnchantSpecificLore.put(Utils.chat("&eVacuum 1"), vacuumLore1);
 		this.EnchantSpecificLore.put(Utils.chat("&aBrute 1"), bruteLore1);
@@ -328,6 +380,16 @@ public class EnchantTableGui {
 		this.EnchantSpecificLore.put(Utils.chat("&aGem Extractor 2"), gemLore2);
 		this.EnchantSpecificLore.put(Utils.chat("&aGem Extractor 3"), gemLore3);
 		this.EnchantSpecificLore.put(Utils.chat("&aGem Extractor 4"), gemLore4);
+		this.EnchantSpecificLore.put(Utils.chat("&eGiant 1"), giantLore1);
+		this.EnchantSpecificLore.put(Utils.chat("&eGiant 2"), giantLore2);
+		this.EnchantSpecificLore.put(Utils.chat("&eGiant 3"), giantLore3);
+		this.EnchantSpecificLore.put(Utils.chat("&eGiant 4"), giantLore4);
+		this.EnchantSpecificLore.put(Utils.chat("&eGiant 5"), giantLore5);
+		this.EnchantSpecificLore.put(Utils.chat("&eGiant 6"), giantLore6);
+		this.EnchantSpecificLore.put(Utils.chat("&eGiant 7"), giantLore7);
+		this.EnchantSpecificLore.put(Utils.chat("&eGiant 8"), giantLore8);
+		this.EnchantSpecificLore.put(Utils.chat("&eGiant 9"), giantLore9);
+		this.EnchantSpecificLore.put(Utils.chat("&eGiant 10"), giantLore10);
 	}	
 	
 	public void generateEnchantingRequirement() { 
@@ -401,6 +463,27 @@ public class EnchantTableGui {
 		this.EnchantXpRequirement.put("Gem Extractor 4", 0);
 		this.EnchantSkillRequirement.put("Gem Extractor 4", 0);
 		
+		this.EnchantXpRequirement.put("Giant 1", 0);
+		this.EnchantSkillRequirement.put("Giant 1", 0);
+		this.EnchantXpRequirement.put("Giant 2", 0);
+		this.EnchantSkillRequirement.put("Giant 2", 0);
+		this.EnchantXpRequirement.put("Giant 3", 0);
+		this.EnchantSkillRequirement.put("Giant 3", 0);
+		this.EnchantXpRequirement.put("Giant 4", 0);
+		this.EnchantSkillRequirement.put("Giant 4", 0);
+		this.EnchantXpRequirement.put("Giant 5", 0);
+		this.EnchantSkillRequirement.put("Giant 5", 0);
+		this.EnchantXpRequirement.put("Giant 6", 0);
+		this.EnchantSkillRequirement.put("Giant 6", 0);
+		this.EnchantXpRequirement.put("Giant 7", 0);
+		this.EnchantSkillRequirement.put("Giant 7", 0);
+		this.EnchantXpRequirement.put("Giant 8", 0);
+		this.EnchantSkillRequirement.put("Giant 8", 0);
+		this.EnchantXpRequirement.put("Giant 9", 0);
+		this.EnchantSkillRequirement.put("Giant 9", 0);
+		this.EnchantXpRequirement.put("Giant 10", 0);
+		this.EnchantSkillRequirement.put("Giant 10", 0);
+		
 	}
 	
 	public void generateEnchantItem() {
@@ -427,6 +510,9 @@ public class EnchantTableGui {
 		
 		this.EnchantItem.put(CustomEnchants.GEM_EXTRACTOR, Material.EMERALD);
 		this.ItemEnchant.put(Material.EMERALD, CustomEnchants.GEM_EXTRACTOR);
+		
+		this.EnchantItem.put(CustomEnchants.GIANT, Material.OAK_LOG);
+		this.ItemEnchant.put(Material.OAK_LOG, CustomEnchants.GIANT);
 	}
 	
 	public void generateEnchantLore() {
@@ -531,6 +617,18 @@ public class EnchantTableGui {
 		gemLore.add(Utils.chat("&f&lApplies on:&7 Pickaxe"));
 		gemLore.add("");
 		gemLore.add(this.EnchantTier.get(CustomEnchants.GEM_EXTRACTOR));
+		//GIANT LORE
+		ArrayList<String> giantLore = new ArrayList<String>();
+		giantLore.add(Utils.chat("&7&oClick here to view levels"));
+		giantLore.add("");
+		giantLore.add(Utils.chat("&f&lEnchant Info"));
+		giantLore.add(Utils.chat("&7Grants max health based on enchant"));
+		giantLore.add(Utils.chat("&7level."));
+		giantLore.add("");
+		giantLore.add(Utils.chat("&f&lMax Enchant Level: &7" + 10));
+		giantLore.add(Utils.chat("&f&lApplies on:&7 Armor"));
+		giantLore.add("");
+		giantLore.add(this.EnchantTier.get(CustomEnchants.GIANT));
 		
 		//ADD ENCHANT SPECIFIC LORE
 		this.EnchantLore.put(CustomEnchants.BRUTE, bruteLore);
@@ -541,6 +639,7 @@ public class EnchantTableGui {
 		this.EnchantLore.put(CustomEnchants.PROSPERITY, prosperityLore);
 		this.EnchantLore.put(CustomEnchants.JIGSAW, jigsawLore);
 		this.EnchantLore.put(CustomEnchants.GEM_EXTRACTOR, gemLore);
+		this.EnchantLore.put(CustomEnchants.GIANT, giantLore);
 		
 		
 	}
@@ -589,6 +688,47 @@ public class EnchantTableGui {
 		this.materialToEnchants.put(Material.DIAMOND_AXE, axeEnchants);
 		this.materialToEnchants.put(Material.NETHERITE_AXE, axeEnchants);
 		
+		ArrayList<Enchantment> helmetEnchants = new ArrayList<Enchantment>();
+		helmetEnchants.add(CustomEnchants.GIANT);
+		
+		this.materialToEnchants.put(Material.LEATHER_HELMET, helmetEnchants);
+		this.materialToEnchants.put(Material.CHAINMAIL_HELMET, helmetEnchants);
+		this.materialToEnchants.put(Material.IRON_HELMET, helmetEnchants);
+		this.materialToEnchants.put(Material.GOLDEN_HELMET, helmetEnchants);
+		this.materialToEnchants.put(Material.DIAMOND_HELMET, helmetEnchants);
+		this.materialToEnchants.put(Material.NETHERITE_HELMET, helmetEnchants);
+		this.materialToEnchants.put(Material.TURTLE_HELMET, helmetEnchants);
+		
+		
+		ArrayList<Enchantment> chestplateEnchants = new ArrayList<Enchantment>();
+		chestplateEnchants.add(CustomEnchants.GIANT);
+		
+		this.materialToEnchants.put(Material.LEATHER_CHESTPLATE, chestplateEnchants);
+		this.materialToEnchants.put(Material.CHAINMAIL_CHESTPLATE, chestplateEnchants);
+		this.materialToEnchants.put(Material.IRON_CHESTPLATE, chestplateEnchants);
+		this.materialToEnchants.put(Material.GOLDEN_CHESTPLATE, chestplateEnchants);
+		this.materialToEnchants.put(Material.DIAMOND_CHESTPLATE, chestplateEnchants);
+		this.materialToEnchants.put(Material.NETHERITE_CHESTPLATE, chestplateEnchants);
+		
+		ArrayList<Enchantment> leggingsEnchants = new ArrayList<Enchantment>();
+		leggingsEnchants.add(CustomEnchants.GIANT);
+		
+		this.materialToEnchants.put(Material.LEATHER_LEGGINGS, leggingsEnchants);
+		this.materialToEnchants.put(Material.CHAINMAIL_LEGGINGS, leggingsEnchants);
+		this.materialToEnchants.put(Material.IRON_LEGGINGS, leggingsEnchants);
+		this.materialToEnchants.put(Material.GOLDEN_LEGGINGS, leggingsEnchants);
+		this.materialToEnchants.put(Material.DIAMOND_LEGGINGS, leggingsEnchants);
+		this.materialToEnchants.put(Material.NETHERITE_LEGGINGS, leggingsEnchants);
+		
+		ArrayList<Enchantment> bootsEnchants = new ArrayList<Enchantment>();
+		bootsEnchants.add(CustomEnchants.GIANT);
+		
+		this.materialToEnchants.put(Material.LEATHER_BOOTS, bootsEnchants);
+		this.materialToEnchants.put(Material.CHAINMAIL_BOOTS, bootsEnchants);
+		this.materialToEnchants.put(Material.IRON_BOOTS, bootsEnchants);
+		this.materialToEnchants.put(Material.GOLDEN_BOOTS, bootsEnchants);
+		this.materialToEnchants.put(Material.DIAMOND_BOOTS, bootsEnchants);
+		this.materialToEnchants.put(Material.NETHERITE_BOOTS, bootsEnchants);
 		
 	}
 	

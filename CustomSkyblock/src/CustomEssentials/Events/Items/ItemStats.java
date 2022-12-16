@@ -159,6 +159,9 @@ public class ItemStats {
 			ItemsCore item = itemTable.getIDtoItemsCore().get(ID);
 			if (item == null) continue;
 			item.createItem(1);
+			
+			if (items.get(i).getItemMeta().hasEnchant(CustomEnchants.GIANT)) item.addHealth(items.get(i).getItemMeta().getEnchantLevel(CustomEnchants.GIANT));
+			
 			int health= item.getItemHeathStat();
 			totalHealth = totalHealth + health;
 			
