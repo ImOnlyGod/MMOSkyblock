@@ -1,6 +1,7 @@
 package CustomEssentials.Commands;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.bukkit.Location;
@@ -13,15 +14,12 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import CustomEssentials.Main;
-import CustomEssentials.Events.Mobs.CustomMobs.AgressiveGolem;
-import CustomEssentials.Events.Mobs.CustomMobs.Basic_Zombie;
-import CustomEssentials.Events.Mobs.CustomMobs.WildPig;
 import CustomEssentials.Utils.Utils;
-import net.minecraft.world.level.MobSpawner;
 
 public class CustomSpawnerCommand implements TabExecutor{
 	
 	private ArrayList<String> MobsCommandList = new ArrayList<String>();
+	private HashMap<String,String> commandToName = new HashMap<String,String>();
 	
 	@SuppressWarnings("unused")
 	private Main plugin; 
@@ -29,6 +27,8 @@ public class CustomSpawnerCommand implements TabExecutor{
 	public CustomSpawnerCommand(Main plugin) {
 		this.plugin = plugin;
 		plugin.getCommand("spawner").setExecutor(this);		
+		generateMobCommandList();
+		generateMobNames();
 	}
 	
 	@Override
@@ -49,7 +49,7 @@ public class CustomSpawnerCommand implements TabExecutor{
 		if (!(sender instanceof Player)) {
 			return false;
 		}
-		generateMobCommandList();
+		
 		Player p = (Player) sender;
 		Location loc = p.getLocation();
 		
@@ -85,13 +85,28 @@ public class CustomSpawnerCommand implements TabExecutor{
 		
 	}
 	
+	public void generateMobNames() {
+		this.commandToName.put("basiczombie", Utils.chat("&6Basic Zombie &7Spawner"));
+		this.commandToName.put("agressivegolem", Utils.chat("&6Agressive Golem &7Spawner"));
+		this.commandToName.put("wildpig", Utils.chat("&6Wild Pig &7Spawner"));
+		
+	}
+	
 	public void performMobSpawn(String arg, Player p) {
 		ItemStack spawner = new ItemStack(Material.SPAWNER);
 		ItemMeta spawnerMeta = spawner.getItemMeta();
-		spawnerMeta.setDisplayName(arg + " Spawner");
+		spawnerMeta.setDisplayName(this.commandToName.get(arg));
 		spawner.setItemMeta(spawnerMeta);
 		p.getInventory().addItem(spawner);
 		
+	}
+
+	public HashMap<String,String> getCommandToName() {
+		return commandToName;
+	}
+
+	public void setCommandToName(HashMap<String,String> commandToName) {
+		this.commandToName = commandToName;
 	}
 	
 

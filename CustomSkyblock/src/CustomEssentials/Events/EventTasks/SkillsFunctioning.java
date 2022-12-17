@@ -10,7 +10,6 @@ import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.block.data.Ageable;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -20,12 +19,12 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.event.player.PlayerFishEvent.State;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.metadata.FixedMetadataValue;
 
 import CustomEssentials.Main;
 import CustomEssentials.Events.Profile;
 import CustomEssentials.Events.Items.Enchants.CustomEnchants;
-import CustomEssentials.Events.Mobs.CustomMobs.WildPig;
 import CustomEssentials.Utils.Utils;
 
 
@@ -45,17 +44,17 @@ public class SkillsFunctioning implements Listener{
 		
 		if (block.getType() == Material.SPAWNER) {
 			String spawnerName = e.getItemInHand().getItemMeta().getDisplayName();
-			if (spawnerName.equals("wildpig Spawner")) {
+			if (spawnerName.equals( Utils.chat("&6Wild Pig &7Spawner"))) {
 				CreatureSpawner spawner = (CreatureSpawner) e.getBlock().getState();
 				spawner.setSpawnedType(EntityType.PIG);
 				spawner.update();
 			}
-			else if (spawnerName.equals("agressivegolem Spawner")) {
+			else if (spawnerName.equals(Utils.chat("&6Agressive Golem &7Spawner"))) {
 				CreatureSpawner spawner = (CreatureSpawner) e.getBlock().getState();
 				spawner.setSpawnedType(EntityType.IRON_GOLEM);
 				spawner.update();
 			}
-			else if (spawnerName.equals("basiczombie Spawner")) {
+			else if (spawnerName.equals(Utils.chat("&6Basic Zombie &7Spawner"))) {
 				CreatureSpawner spawner = (CreatureSpawner) e.getBlock().getState();
 				spawner.setSpawnedType(EntityType.ZOMBIE);
 				spawner.update();
@@ -136,12 +135,23 @@ public class SkillsFunctioning implements Listener{
 			//FUNCTION WITH CUSTOM SPANWERS
 			ArrayList<ItemStack> silkdrops = new ArrayList<ItemStack>();
 			ItemStack item = new ItemStack(block.getType());
+			int enchantLevel = p.getInventory().getItemInMainHand().getItemMeta().getEnchantLevel(CustomEnchants.JIGSAW);
 			if (block.getType() == Material.SPAWNER) {
 				CreatureSpawner spawner = (CreatureSpawner) block.getState();
 				item.setData(spawner.getData());
+				ItemMeta meta = item.getItemMeta();
+				if (spawner.hasMetadata(Utils.chat("&6Wild Pig &7Spawner"))) meta.setDisplayName(Utils.chat("&6Wild Pig &7Spawner"));
+				else if (spawner.hasMetadata(Utils.chat("&6Agressive Golem &7Spawner")))  meta.setDisplayName(Utils.chat("&6Agressive Golem &7Spawner"));
+				else if (spawner.hasMetadata(Utils.chat("&6Basic Zombie &7Spawner")))  meta.setDisplayName(Utils.chat("&6Basic Zombie &7Spawner"));
+				
+				item.setItemMeta(meta);
 			}
+			if (block.getType() == Material.SPAWNER && enchantLevel > 1) silkdrops.add(item);
+			else if (block.getType() == Material.SPAWNER && enchantLevel == 1);
+			else silkdrops.add(item);
 			
-			silkdrops.add(item);
+			
+			
 			drops = silkdrops;
 			
 		}

@@ -201,15 +201,15 @@ public class MobEvents implements Listener{
 	@EventHandler
 	public void spawnerMobsEvent(SpawnerSpawnEvent e) {
 		Location loc = e.getLocation();
-		if (e.getSpawner().hasMetadata("wildpig Spawner")) {			
+		if (e.getSpawner().hasMetadata(Utils.chat("&6Wild Pig &7Spawner"))) {			
 			new WildPig(loc,1);
 			e.setCancelled(true);
 		}
-		else if (e.getSpawner().hasMetadata("agressivegolem Spawner")) {			
+		else if (e.getSpawner().hasMetadata(Utils.chat("&6Agressive Golem &7Spawner"))) {			
 			new AgressiveGolem(loc,1);
 			e.setCancelled(true);
 		}
-		else if (e.getSpawner().hasMetadata("basiczombie Spawner")) {			
+		else if (e.getSpawner().hasMetadata(Utils.chat("&6Basic Zombie &7Spawner"))) {			
 			new Basic_Zombie(loc,1);
 			e.setCancelled(true);
 		}
