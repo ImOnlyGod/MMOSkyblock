@@ -1,13 +1,17 @@
 package CustomEssentials.Events.Mobs.CustomMobs;
 
 import java.lang.reflect.Field;
+
 import java.util.Map;
+import java.util.UUID;
 
 import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.craftbukkit.v1_17_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_17_R1.attribute.CraftAttributeMap;
 import org.bukkit.craftbukkit.v1_17_R1.entity.CraftLivingEntity;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Pig;
 
 import CustomEssentials.Utils.Utils;
@@ -63,11 +67,10 @@ public class WildPig extends EntityPig{
 		pig.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(50f);
 		
 		pig.setHealth(50);
+		
 		this.getWorld().addEntity(this);
 	}
-	
-	
-	
+		
 	@Override
     public void initPathfinder() {
 		super.initPathfinder(); 

@@ -34,6 +34,7 @@ public class Basic_Zombie extends EntityZombie{
 		zombie.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(500f);
 		zombie.setHealth(500);
 		zombie.getEquipment().setHelmet(helmet);
+		zombie.setCanPickupItems(true);
 		this.getWorld().addEntity(this,CreatureSpawnEvent.SpawnReason.NATURAL);			
 		
 		}

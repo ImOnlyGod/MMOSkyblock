@@ -15,7 +15,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.event.player.PlayerFishEvent.State;
 import org.bukkit.inventory.ItemStack;
@@ -105,11 +107,12 @@ public class SkillsFunctioning implements Listener{
 		
 
 		e.getBlock().setMetadata("placed", new FixedMetadataValue(this.plugin,"something"));
-	}
+	}	
 	
 	public boolean checkEnchantsBlockBreak(Player p, Block block) {
 		
 		if (p.getInventory().getItemInMainHand() == null) return true;
+		if (!p.getInventory().getItemInMainHand().hasItemMeta()) return true;
 		if (!block.isPreferredTool(p.getInventory().getItemInMainHand())) return false;
 		if (p.getGameMode() == GameMode.CREATIVE) return true;
 		ArrayList<ItemStack> drops = new ArrayList<ItemStack>();
@@ -149,9 +152,7 @@ public class SkillsFunctioning implements Listener{
 			if (block.getType() == Material.SPAWNER && enchantLevel > 1) silkdrops.add(item);
 			else if (block.getType() == Material.SPAWNER && enchantLevel == 1);
 			else silkdrops.add(item);
-			
-			
-			
+
 			drops = silkdrops;
 			
 		}
@@ -166,6 +167,11 @@ public class SkillsFunctioning implements Listener{
 			}
 		}
 		return false;
+	}
+	
+	@EventHandler
+	public void miningBlock(BlockDamageEvent e) {
+		
 	}
 	
 	@EventHandler

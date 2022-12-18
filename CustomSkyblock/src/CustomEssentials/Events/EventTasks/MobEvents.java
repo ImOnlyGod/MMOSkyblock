@@ -1,6 +1,7 @@
 package CustomEssentials.Events.EventTasks;
 
 import java.util.HashMap;
+
 import java.util.List;
 import java.util.Random;
 
@@ -8,6 +9,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.v1_17_R1.entity.CraftArmorStand;
 import org.bukkit.craftbukkit.v1_17_R1.entity.CraftFireball;
 import org.bukkit.craftbukkit.v1_17_R1.entity.CraftLightningStrike;
@@ -59,6 +61,7 @@ public class MobEvents implements Listener{
 	private String hasPlayerCrit = "&c&l";
 	private HashMap<EntityType,String> mobNames = new HashMap<EntityType,String>();
 	private MobMappings mobMaps = new MobMappings();
+	private HashMap<String,Long> cooldowns = new HashMap<String,Long>();
 		
 	public MobEvents(Main plugin) {
 		this.plugin = plugin;
@@ -444,6 +447,46 @@ public class MobEvents implements Listener{
 				
 	}
 	
+	public boolean isAbilityCooldown(String name) {
+		if (!this.cooldowns.containsKey(name)) return false;
+		
+		long cD = (this.cooldowns.get(name)-System.currentTimeMillis())/1000;
+		
+		if (cD > 0) return true;
+		
+		return false;
+	}
+	
+	public void handleCooldown(ItemsCore item, Player p, Profile playerProfile) {
+		String itemName = p.getInventory().getItemInMainHand().getItemMeta().getDisplayName() + p.getDisplayName();
+		if (isAbilityCooldown(itemName)) {
+			long cD = ((this.cooldowns.get(itemName)-System.currentTimeMillis())/1000);
+			p.sendMessage(Utils.chat("&bYou can use that ability in " + cD + " seconds!"));
+		}
+		else {
+			item.itemAbility(p, playerProfile);
+			if (!this.cooldowns.containsKey(itemName)) this.cooldowns.put(itemName, System.currentTimeMillis() + (15 * 1000));
+			else this.cooldowns.replace(itemName, System.currentTimeMillis() + (15 * 1000));
+		}
+	}
+	
+	public void handleCooldownStormAxe(ItemsCore item, Player p, Profile playerProfile, Action action, Block block) {
+		String itemName = p.getInventory().getItemInMainHand().getItemMeta().getDisplayName() + p.getDisplayName();
+		if (isAbilityCooldown(itemName)) {
+			long cD = ((this.cooldowns.get(itemName)-System.currentTimeMillis())/1000);
+			p.sendMessage(Utils.chat("&bYou can use that ability in " + cD + " seconds!"));
+		}
+		else {
+			if ((action.equals(Action.RIGHT_CLICK_AIR))) {
+				((StormAxe) item).axeAbility(p,  playerProfile, p.getLocation());
+			}
+			else {
+				((StormAxe) item).axeAbility(p,  playerProfile, block.getLocation());
+			}
+			if (!this.cooldowns.containsKey(itemName)) this.cooldowns.put(itemName, System.currentTimeMillis() + (25 * 1000));
+			else this.cooldowns.replace(itemName, System.currentTimeMillis() + (25 * 1000));
+		}
+	}
 	
 	@EventHandler
 	public void playerRightClickEvent(PlayerInteractEvent e) {
@@ -463,16 +506,12 @@ public class MobEvents implements Listener{
 		
 		if (!(e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK))) return;
 		
-		
-		if (p.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1) item.itemAbility(p, profiles.getPlayerProfile(p));
+
+		if (p.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1) {
+			this.handleCooldown(item, p, profiles.getPlayerProfile(p));			
+		}
 		else if (p.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 6) {
-			if ((e.getAction().equals(Action.RIGHT_CLICK_AIR))) {
-				((StormAxe) item).axeAbility(p,  profiles.getPlayerProfile(p), p.getLocation());
-			}
-			else {
-				((StormAxe) item).axeAbility(p,  profiles.getPlayerProfile(p), e.getClickedBlock().getLocation());
-			}
-			
+			this.handleCooldownStormAxe(item, p, profiles.getPlayerProfile(p), e.getAction(), e.getClickedBlock());
 		}
 		
 		
@@ -529,6 +568,22 @@ public class MobEvents implements Listener{
 			
 		}, 10L);
 		
+	}
+
+	public HashMap<String,Long> getCooldowns() {
+		return cooldowns;
+	}
+
+	public void setCooldowns(HashMap<String,Long> cooldowns) {
+		this.cooldowns = cooldowns;
+	}
+
+	public HashMap<EntityType,String> getMobNames() {
+		return mobNames;
+	}
+
+	public void setMobNames(HashMap<EntityType,String> mobNames) {
+		this.mobNames = mobNames;
 	}
 	
 	
