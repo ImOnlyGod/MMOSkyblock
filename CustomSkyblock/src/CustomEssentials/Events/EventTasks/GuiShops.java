@@ -1105,9 +1105,9 @@ public class GuiShops implements Listener{
 			return;
 		}
 		
-		if (enchantingItem.getItemMeta().hasEnchant(addEnchant)) {
+		if (enchantingItem.getItemMeta().hasEnchant(addEnchant)) {			
 			if (enchantingItem.getItemMeta().getEnchantLevel(addEnchant) < enchantLevel) {
-				enchantingItem.addEnchantment(addEnchant, enchantLevel);
+				enchantingItem.addUnsafeEnchantment(addEnchant, enchantLevel);
 				if (enchantingItem.getItemMeta().hasCustomModelData()) this.addCustomItemEnchantmentLore(enchantingItem, addEnchant, enchantLevel);
 				else this.addVanillaItemEnchantmentLore(enchantingItem, addEnchant, enchantLevel);
 			}
@@ -1117,7 +1117,7 @@ public class GuiShops implements Listener{
 			}
 		}
 		else {
-			enchantingItem.addEnchantment(addEnchant, enchantLevel);
+			enchantingItem.addUnsafeEnchantment(addEnchant, enchantLevel);
 			if (enchantingItem.getItemMeta().hasCustomModelData()) this.addCustomItemEnchantmentLore(enchantingItem, addEnchant, enchantLevel);
 			else this.addVanillaItemEnchantmentLore(enchantingItem, addEnchant, enchantLevel);
 		}

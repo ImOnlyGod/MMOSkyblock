@@ -109,8 +109,24 @@ public class SkillsFunctioning implements Listener{
 		e.getBlock().setMetadata("placed", new FixedMetadataValue(this.plugin,"something"));
 	}	
 	
-	public boolean checkEnchantsBlockBreak(Player p, Block block) {
+	public void veinMineBlocks(Player p,Block block, int currentLevel, int enchantLevel) {
+		if (currentLevel >= enchantLevel) return;
+			
+		Material blockType = block.getType();
+		block.setMetadata("VEINMINE", new FixedMetadataValue(this.plugin,"veinmine"));
+		p.breakBlock(block);
 		
+		if (block.getRelative(-1,0,0).getType() == blockType) veinMineBlocks(p, block.getRelative(-1,0,0), currentLevel+1,enchantLevel);
+		if (block.getRelative(1,0,0).getType() == blockType) veinMineBlocks(p, block.getRelative(1,0,0), currentLevel+1,enchantLevel);
+		if (block.getRelative(0,-1,0).getType() == blockType) veinMineBlocks(p, block.getRelative(0,-1,0), currentLevel+1,enchantLevel);
+		if (block.getRelative(0,1,0).getType() == blockType) veinMineBlocks(p, block.getRelative(0,1,0), currentLevel+1,enchantLevel);
+		if (block.getRelative(0,0,-1).getType() == blockType) veinMineBlocks(p, block.getRelative(0,0,-1), currentLevel+1,enchantLevel);
+		if (block.getRelative(0,0,1).getType() == blockType) veinMineBlocks(p, block.getRelative(0,0,1), currentLevel+1,enchantLevel);
+		
+		
+	}
+	
+	public boolean checkEnchantsBlockBreak(Player p, Block block) {
 		if (p.getInventory().getItemInMainHand() == null) return true;
 		if (!p.getInventory().getItemInMainHand().hasItemMeta()) return true;
 		if (!block.isPreferredTool(p.getInventory().getItemInMainHand())) return false;
@@ -119,7 +135,12 @@ public class SkillsFunctioning implements Listener{
 		for (ItemStack item :block.getDrops()) {
 			drops.add(item);
 		}
-
+		
+		if (p.getInventory().getItemInMainHand().getItemMeta().hasEnchant(CustomEnchants.VEINMINE) && !block.hasMetadata("VEINMINE")) {
+			int enchantLevel = p.getInventory().getItemInMainHand().getItemMeta().getEnchantLevel(CustomEnchants.VEINMINE);
+			veinMineBlocks(p,block, 0, enchantLevel);
+			
+		}
 		if (p.getInventory().getItemInMainHand().getItemMeta().hasEnchant(CustomEnchants.GEM_EXTRACTOR)) {
 			int enchantLevel = p.getInventory().getItemInMainHand().getItemMeta().getEnchantLevel(CustomEnchants.GEM_EXTRACTOR);
 			int increaseDrops = new Random().nextInt(2);
@@ -155,7 +176,7 @@ public class SkillsFunctioning implements Listener{
 
 			drops = silkdrops;
 			
-		}
+		}		
 		if (p.getInventory().getItemInMainHand().getItemMeta().hasEnchant(CustomEnchants.VACUUM)) {
 			for (ItemStack item :drops) {
 				p.getInventory().addItem(item);
@@ -176,6 +197,8 @@ public class SkillsFunctioning implements Listener{
 	
 	@EventHandler
 	public void onBlockBreak(BlockBreakEvent e) {
+		System.out.println("Check");
+		System.out.println(e.getPlayer());
 		Material block = e.getBlock().getType();
 		Player p = e.getPlayer();
 		Profile profile = plugin.getProfileManager().getPlayerProfile(p);

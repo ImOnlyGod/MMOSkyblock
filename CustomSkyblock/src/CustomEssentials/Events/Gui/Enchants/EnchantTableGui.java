@@ -22,6 +22,7 @@ import com.mojang.authlib.properties.Property;
 import CustomEssentials.Main;
 import CustomEssentials.Events.Items.Enchants.CustomEnchants;
 import CustomEssentials.Utils.Utils;
+import net.minecraft.world.item.enchantment.Enchantments;
 
 public class EnchantTableGui {
 	
@@ -84,6 +85,8 @@ public class EnchantTableGui {
 		this.EnchantTier.put(CustomEnchants.JIGSAW, epic);
 		this.EnchantTier.put(CustomEnchants.GEM_EXTRACTOR, rare);
 		this.EnchantTier.put(CustomEnchants.GIANT, common);
+		this.EnchantTier.put(Enchantment.DIG_SPEED, common);
+		this.EnchantTier.put(CustomEnchants.VEINMINE, epic);
 	}
 	
 	public void addRequirementLores(ArrayList<String> lore, String enchantName) {
@@ -348,6 +351,68 @@ public class EnchantTableGui {
 		giantLore10.add(Utils.chat("&f&lEnchant Info"));
 		giantLore10.add(Utils.chat("&7Gain an additional 100 max Health."));
 		addRequirementLores(giantLore10,"Giant 10");
+		//EFFICIENCY LORES
+		ArrayList<String> efficiencyLore1 = new ArrayList<String>();
+		efficiencyLore1.add(Utils.chat(""));
+		efficiencyLore1.add(Utils.chat("&f&lEnchant Info"));
+		efficiencyLore1.add(Utils.chat("&7Increases mining speed by 25%."));
+		addRequirementLores(efficiencyLore1,"Efficiency 1");
+		ArrayList<String> efficiencyLore2 = new ArrayList<String>();
+		efficiencyLore2.add(Utils.chat(""));
+		efficiencyLore2.add(Utils.chat("&f&lEnchant Info"));
+		efficiencyLore2.add(Utils.chat("&7Increases mining speed by 30%."));
+		addRequirementLores(efficiencyLore2,"Efficiency 2");
+		ArrayList<String> efficiencyLore3 = new ArrayList<String>();
+		efficiencyLore3.add(Utils.chat(""));
+		efficiencyLore3.add(Utils.chat("&f&lEnchant Info"));
+		efficiencyLore3.add(Utils.chat("&7Increases mining speed by 35%."));
+		addRequirementLores(efficiencyLore3,"Efficiency 3");
+		ArrayList<String> efficiencyLore4 = new ArrayList<String>();
+		efficiencyLore4.add(Utils.chat(""));
+		efficiencyLore4.add(Utils.chat("&f&lEnchant Info"));
+		efficiencyLore4.add(Utils.chat("&7Increases mining speed by 40%."));
+		addRequirementLores(efficiencyLore4,"Efficiency 4");
+		ArrayList<String> efficiencyLore5 = new ArrayList<String>();
+		efficiencyLore5.add(Utils.chat(""));
+		efficiencyLore5.add(Utils.chat("&f&lEnchant Info"));
+		efficiencyLore5.add(Utils.chat("&7Increases mining speed by 45%."));
+		addRequirementLores(efficiencyLore5,"Efficiency 5");
+		ArrayList<String> efficiencyLore6 = new ArrayList<String>();
+		efficiencyLore6.add(Utils.chat(""));
+		efficiencyLore6.add(Utils.chat("&f&lEnchant Info"));
+		efficiencyLore6.add(Utils.chat("&7Increases mining speed by 50%."));
+		addRequirementLores(efficiencyLore5,"Efficiency 6");
+		//VEINMINE LORES
+		ArrayList<String> veinmineLore1 = new ArrayList<String>();
+		veinmineLore1.add(Utils.chat(""));
+		veinmineLore1.add(Utils.chat("&f&lEnchant Info"));
+		veinmineLore1.add(Utils.chat("&7Breaks a maximum of 1 matching adjacent"));
+		veinmineLore1.add(Utils.chat("&7block in all direction."));
+		addRequirementLores(veinmineLore1,"Veinmine 1");
+		ArrayList<String> veinmineLore2 = new ArrayList<String>();
+		veinmineLore2.add(Utils.chat(""));
+		veinmineLore2.add(Utils.chat("&f&lEnchant Info"));
+		veinmineLore2.add(Utils.chat("&7Breaks a maximum of 2 matching adjacent"));
+		veinmineLore2.add(Utils.chat("&7block in all direction."));
+		addRequirementLores(veinmineLore2,"Veinmine 2");
+		ArrayList<String> veinmineLore3 = new ArrayList<String>();
+		veinmineLore3.add(Utils.chat(""));
+		veinmineLore3.add(Utils.chat("&f&lEnchant Info"));
+		veinmineLore3.add(Utils.chat("&7Breaks a maximum of 3 matching adjacent"));
+		veinmineLore3.add(Utils.chat("&7block in all direction."));
+		addRequirementLores(veinmineLore3,"Veinmine 3");
+		ArrayList<String> veinmineLore4 = new ArrayList<String>();
+		veinmineLore4.add(Utils.chat(""));
+		veinmineLore4.add(Utils.chat("&f&lEnchant Info"));
+		veinmineLore4.add(Utils.chat("&7Breaks a maximum of 4 matching adjacent"));
+		veinmineLore4.add(Utils.chat("&7block in all direction."));
+		addRequirementLores(veinmineLore4,"Veinmine 4");
+		ArrayList<String> veinmineLore5 = new ArrayList<String>();
+		veinmineLore5.add(Utils.chat(""));
+		veinmineLore5.add(Utils.chat("&f&lEnchant Info"));
+		veinmineLore5.add(Utils.chat("&7Breaks a maximum of 5 matching adjacent"));
+		veinmineLore5.add(Utils.chat("&7block in all direction."));
+		addRequirementLores(veinmineLore5,"Veinmine 5");
 		
 		this.EnchantSpecificLore.put(Utils.chat("&eVacuum 1"), vacuumLore1);
 		this.EnchantSpecificLore.put(Utils.chat("&aBrute 1"), bruteLore1);
@@ -390,6 +455,17 @@ public class EnchantTableGui {
 		this.EnchantSpecificLore.put(Utils.chat("&eGiant 8"), giantLore8);
 		this.EnchantSpecificLore.put(Utils.chat("&eGiant 9"), giantLore9);
 		this.EnchantSpecificLore.put(Utils.chat("&eGiant 10"), giantLore10);
+		this.EnchantSpecificLore.put(Utils.chat("&eEfficiency 1"), efficiencyLore1);
+		this.EnchantSpecificLore.put(Utils.chat("&eEfficiency 2"), efficiencyLore2);
+		this.EnchantSpecificLore.put(Utils.chat("&eEfficiency 3"), efficiencyLore3);
+		this.EnchantSpecificLore.put(Utils.chat("&eEfficiency 4"), efficiencyLore4);
+		this.EnchantSpecificLore.put(Utils.chat("&eEfficiency 5"), efficiencyLore5);
+		this.EnchantSpecificLore.put(Utils.chat("&eEfficiency 6"), efficiencyLore6);
+		this.EnchantSpecificLore.put(Utils.chat("&cVeinmine 1"), veinmineLore1);
+		this.EnchantSpecificLore.put(Utils.chat("&cVeinmine 2"), veinmineLore2);
+		this.EnchantSpecificLore.put(Utils.chat("&cVeinmine 3"), veinmineLore3);
+		this.EnchantSpecificLore.put(Utils.chat("&cVeinmine 4"), veinmineLore4);
+		this.EnchantSpecificLore.put(Utils.chat("&cVeinmine 5"), veinmineLore5);
 	}	
 	
 	public void generateEnchantingRequirement() { 
@@ -484,6 +560,30 @@ public class EnchantTableGui {
 		this.EnchantXpRequirement.put("Giant 10", 0);
 		this.EnchantSkillRequirement.put("Giant 10", 0);
 		
+		this.EnchantXpRequirement.put("Efficiency 1", 0);
+		this.EnchantSkillRequirement.put("Efficiency 1", 0);
+		this.EnchantXpRequirement.put("Efficiency 2", 0);
+		this.EnchantSkillRequirement.put("Efficiency 2", 0);
+		this.EnchantXpRequirement.put("Efficiency 3", 0);
+		this.EnchantSkillRequirement.put("Efficiency 3", 0);
+		this.EnchantXpRequirement.put("Efficiency 4", 0);
+		this.EnchantSkillRequirement.put("Efficiency 4", 0);
+		this.EnchantXpRequirement.put("Efficiency 5", 0);
+		this.EnchantSkillRequirement.put("Efficiency 5", 0);
+		this.EnchantXpRequirement.put("Efficiency 6", 0);
+		this.EnchantSkillRequirement.put("Efficiency 6", 0);
+		
+		this.EnchantXpRequirement.put("Veinmine 1", 0);
+		this.EnchantSkillRequirement.put("Veinmine 1", 0);
+		this.EnchantXpRequirement.put("Veinmine 2", 0);
+		this.EnchantSkillRequirement.put("Veinmine 2", 0);
+		this.EnchantXpRequirement.put("Veinmine 3", 0);
+		this.EnchantSkillRequirement.put("Veinmine 3", 0);
+		this.EnchantXpRequirement.put("Veinmine 4", 0);
+		this.EnchantSkillRequirement.put("Veinmine 4", 0);
+		this.EnchantXpRequirement.put("Veinmine 5", 0);
+		this.EnchantSkillRequirement.put("Veinmine 5", 0);
+		
 	}
 	
 	public void generateEnchantItem() {
@@ -513,6 +613,12 @@ public class EnchantTableGui {
 		
 		this.EnchantItem.put(CustomEnchants.GIANT, Material.OAK_LOG);
 		this.ItemEnchant.put(Material.OAK_LOG, CustomEnchants.GIANT);
+		
+		this.EnchantItem.put(Enchantment.DIG_SPEED, Material.NETHERITE_INGOT);
+		this.ItemEnchant.put(Material.NETHERITE_INGOT, Enchantment.DIG_SPEED);
+		
+		this.EnchantItem.put(CustomEnchants.VEINMINE, Material.VINE);
+		this.ItemEnchant.put(Material.VINE, CustomEnchants.VEINMINE);
 	}
 	
 	public void generateEnchantLore() {
@@ -629,6 +735,30 @@ public class EnchantTableGui {
 		giantLore.add(Utils.chat("&f&lApplies on:&7 Armor"));
 		giantLore.add("");
 		giantLore.add(this.EnchantTier.get(CustomEnchants.GIANT));
+		//EFFICIENCY LORE
+		ArrayList<String> efficiencyLore = new ArrayList<String>();
+		efficiencyLore.add(Utils.chat("&7&oClick here to view levels"));
+		efficiencyLore.add("");
+		efficiencyLore.add(Utils.chat("&f&lEnchant Info"));
+		efficiencyLore.add(Utils.chat("&7Grants mining speed based on enchant"));
+		efficiencyLore.add(Utils.chat("&7level."));
+		efficiencyLore.add("");
+		efficiencyLore.add(Utils.chat("&f&lMax Enchant Level: &7" + 6));
+		efficiencyLore.add(Utils.chat("&f&lApplies on:&7 Tools"));
+		efficiencyLore.add("");
+		efficiencyLore.add(this.EnchantTier.get(Enchantment.DIG_SPEED));
+		//VEINMINE LORE
+		ArrayList<String> veinmineLore = new ArrayList<String>();
+		veinmineLore.add(Utils.chat("&7&oClick here to view levels"));
+		veinmineLore.add("");
+		veinmineLore.add(Utils.chat("&f&lEnchant Info"));
+		veinmineLore.add(Utils.chat("&7Breaks adjacent similar blocks to a"));
+		veinmineLore.add(Utils.chat("&7block you mined."));
+		veinmineLore.add("");
+		veinmineLore.add(Utils.chat("&f&lMax Enchant Level: &7" + 5));
+		veinmineLore.add(Utils.chat("&f&lApplies on:&7 Pickaxe"));
+		veinmineLore.add("");
+		veinmineLore.add(this.EnchantTier.get(CustomEnchants.VEINMINE));
 		
 		//ADD ENCHANT SPECIFIC LORE
 		this.EnchantLore.put(CustomEnchants.BRUTE, bruteLore);
@@ -640,6 +770,8 @@ public class EnchantTableGui {
 		this.EnchantLore.put(CustomEnchants.JIGSAW, jigsawLore);
 		this.EnchantLore.put(CustomEnchants.GEM_EXTRACTOR, gemLore);
 		this.EnchantLore.put(CustomEnchants.GIANT, giantLore);
+		this.EnchantLore.put(Enchantment.DIG_SPEED, efficiencyLore);
+		this.EnchantLore.put(CustomEnchants.VEINMINE, veinmineLore);
 		
 		
 	}
@@ -665,6 +797,8 @@ public class EnchantTableGui {
 		pickaxeEnchants.add(CustomEnchants.JIGSAW);
 		pickaxeEnchants.add(CustomEnchants.GEM_EXTRACTOR);
 		pickaxeEnchants.add(CustomEnchants.EXPERIENCE_EXTRACTOR);
+		pickaxeEnchants.add(Enchantment.DIG_SPEED);
+		pickaxeEnchants.add(CustomEnchants.VEINMINE);
 		
 		this.materialToEnchants.put(Material.WOODEN_PICKAXE, pickaxeEnchants);
 		this.materialToEnchants.put(Material.STONE_PICKAXE, pickaxeEnchants);
@@ -751,6 +885,7 @@ public class EnchantTableGui {
 		
 		int enchantMaxLevel = enchant.getMaxLevel()+1;
 		if (enchant == CustomEnchants.COLLECTION || enchant == CustomEnchants.PROSPERITY || enchant == CustomEnchants.JIGSAW || enchant == CustomEnchants.GEM_EXTRACTOR) enchantMaxLevel -= 1;
+		if (enchant == Enchantment.DIG_SPEED) enchantMaxLevel = 7;
 		for (int i=1;i<enchantMaxLevel;i++) {
 			if (slot > 34) break;
 			

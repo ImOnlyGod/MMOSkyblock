@@ -2,6 +2,7 @@ package CustomEssentials.Events.Items;
 
 import java.util.HashMap;
 
+import CustomEssentials.Events.Items.Tools.DarkPickaxe;
 import CustomEssentials.Events.Items.Weapons.HadesBlade;
 import CustomEssentials.Events.Items.Weapons.StormAxe;
 import CustomEssentials.Events.Items.Weapons.ThickWoodenSword;
@@ -41,6 +42,9 @@ public class ItemStorageTable {
 		
 		this.IDtoItemsCore.put(6, new StormAxe());
 		this.CmdtoItemsCore.put("stormaxe", new StormAxe());
+		
+		this.IDtoItemsCore.put(8, new DarkPickaxe());
+		this.CmdtoItemsCore.put("darkpickaxe", new DarkPickaxe());
 	}
 
 	@SuppressWarnings("unchecked")
