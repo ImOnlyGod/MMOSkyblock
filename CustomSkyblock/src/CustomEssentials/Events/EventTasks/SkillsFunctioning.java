@@ -15,9 +15,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockDamageEvent;
+import org.bukkit.event.block.BlockPistonExtendEvent;
+import org.bukkit.event.block.BlockPistonRetractEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.event.player.PlayerFishEvent.State;
 import org.bukkit.inventory.ItemStack;
@@ -136,12 +136,12 @@ public class SkillsFunctioning implements Listener{
 			drops.add(item);
 		}
 		
-		if (p.getInventory().getItemInMainHand().getItemMeta().hasEnchant(CustomEnchants.VEINMINE) && !block.hasMetadata("VEINMINE")) {
+		if (p.getInventory().getItemInMainHand().getItemMeta().hasEnchant(CustomEnchants.VEINMINE) && !block.hasMetadata("VEINMINE") && !block.hasMetadata("placed")) {
 			int enchantLevel = p.getInventory().getItemInMainHand().getItemMeta().getEnchantLevel(CustomEnchants.VEINMINE);
 			veinMineBlocks(p,block, 0, enchantLevel);
 			
 		}
-		if (p.getInventory().getItemInMainHand().getItemMeta().hasEnchant(CustomEnchants.GEM_EXTRACTOR)) {
+		if (p.getInventory().getItemInMainHand().getItemMeta().hasEnchant(CustomEnchants.GEM_EXTRACTOR) && !block.hasMetadata("placed")) {
 			int enchantLevel = p.getInventory().getItemInMainHand().getItemMeta().getEnchantLevel(CustomEnchants.GEM_EXTRACTOR);
 			int increaseDrops = new Random().nextInt(2);
 			for (ItemStack item :drops) {
@@ -191,14 +191,21 @@ public class SkillsFunctioning implements Listener{
 	}
 	
 	@EventHandler
-	public void miningBlock(BlockDamageEvent e) {
-		
+	public void pistonExtend(BlockPistonExtendEvent e) {
+		for (Block block : e.getBlocks()) {
+			if (block.hasMetadata("placed")) block.setMetadata("placed", new FixedMetadataValue(this.plugin,"something"));
+		}
+	}
+	
+	@EventHandler
+	public void pistonRetract(BlockPistonRetractEvent e) {
+		for (Block block : e.getBlocks()) {
+			if (block.hasMetadata("placed")) block.setMetadata("placed", new FixedMetadataValue(this.plugin,"something"));
+		}
 	}
 	
 	@EventHandler
 	public void onBlockBreak(BlockBreakEvent e) {
-		System.out.println("Check");
-		System.out.println(e.getPlayer());
 		Material block = e.getBlock().getType();
 		Player p = e.getPlayer();
 		Profile profile = plugin.getProfileManager().getPlayerProfile(p);
