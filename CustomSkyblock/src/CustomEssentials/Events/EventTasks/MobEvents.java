@@ -1,7 +1,6 @@
 package CustomEssentials.Events.EventTasks;
 
 import java.util.HashMap;
-
 import java.util.List;
 import java.util.Random;
 
@@ -122,8 +121,8 @@ public class MobEvents implements Listener{
 		if (e.getEntity() instanceof Player) return;
 		LivingEntity mob = e.getEntity();
 		e.setDroppedExp((int) mobMaps.getXPamount(mob));
-		
-		if (!(mob.getKiller() instanceof Player) && !(mob.getKiller() instanceof Fireball) && !(mob.getLastDamageCause().getCause() == DamageCause.LIGHTNING)) return;
+		Entity killer =((EntityDamageByEntityEvent) e.getEntity().getLastDamageCause()).getDamager();
+		if (!(killer instanceof Player) && !(killer instanceof Fireball) && !(killer instanceof ArmorStand) && !(mob.getLastDamageCause().getCause() == DamageCause.LIGHTNING)) return;
 					
 		Player p = null;	
 		if (mob.getLastDamageCause().getCause() == DamageCause.LIGHTNING) {
@@ -139,8 +138,8 @@ public class MobEvents implements Listener{
 			}
 			else return;
 		}
-		else if (mob.getKiller() instanceof Player)	p = mob.getKiller();
-		else p = (Player) this.getDamagerEntity(e.getEntity());		
+		else if (killer instanceof Player)	p = mob.getKiller();
+		else p = (Player) this.getDamagerEntity(killer);		
 		
 		Profile profile = plugin.getProfileManager().getPlayerProfile(p);
 				
@@ -157,7 +156,7 @@ public class MobEvents implements Listener{
 		
 		ItemStack item = p.getInventory().getItemInMainHand();		
 		if (item == null) return;
-		
+		if (!item.hasItemMeta()) return;
 		//Check for probability
 		if (item.getItemMeta().hasEnchant(CustomEnchants.COLLECTION)) collectionFeature(e.getDrops(), item.getItemMeta().getEnchantLevel(CustomEnchants.COLLECTION));
 		
@@ -385,7 +384,7 @@ public class MobEvents implements Listener{
 		}
 		else {
 			
-					
+			System.out.println(e.getCause());	
 			Player p = (Player) e.getDamager();		
 			PlayerProfileManager profile = this.plugin.getProfileManager();
 			
@@ -393,7 +392,7 @@ public class MobEvents implements Listener{
 			double critChance = stats.getCriticalChance();
 			double critDamage = stats.getCriticalDamage();
 			double damage = e.getFinalDamage();
-				
+			
 			Random rand = new Random();
 			int crit = rand.nextInt(101);
 			if (crit <= critChance) {
@@ -408,10 +407,8 @@ public class MobEvents implements Listener{
 			double lifeSteal = stats.getLifeStealHealAmount(damage);
 			if (!(lifeSteal+health > p.getMaxHealth())) {
 				p.setHealth(health+lifeSteal);
-			}
-			
-		}
-		
+			}	
+		}		
 		//COMPRESS INTO ONE FUNCTION!
 		if ((e.getEntityType() != EntityType.PLAYER)) {
 			
@@ -464,9 +461,9 @@ public class MobEvents implements Listener{
 			p.sendMessage(Utils.chat("&bYou can use that ability in " + cD + " seconds!"));
 		}
 		else {
-			item.itemAbility(p, playerProfile);
-			if (!this.cooldowns.containsKey(itemName)) this.cooldowns.put(itemName, System.currentTimeMillis() + (15 * 1000));
-			else this.cooldowns.replace(itemName, System.currentTimeMillis() + (15 * 1000));
+			item.itemAbility(p, playerProfile, this.plugin);
+			if (!this.cooldowns.containsKey(itemName)) this.cooldowns.put(itemName, System.currentTimeMillis() + (1 * 1000));
+			else this.cooldowns.replace(itemName, System.currentTimeMillis() + (1 * 1000));
 		}
 	}
 	
@@ -510,6 +507,9 @@ public class MobEvents implements Listener{
 		if (p.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1) {
 			this.handleCooldown(item, p, profiles.getPlayerProfile(p));			
 		}
+		else if (p.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 9) {
+			this.handleCooldown(item, p, profiles.getPlayerProfile(p));			
+		}
 		else if (p.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 6) {
 			this.handleCooldownStormAxe(item, p, profiles.getPlayerProfile(p), e.getAction(), e.getClickedBlock());
 		}
@@ -523,7 +523,15 @@ public class MobEvents implements Listener{
 			Entity entity = (Entity) arrow.getShooter();
 
 			return entity;
-			
+		}
+		else if (damager instanceof CraftArmorStand)  {
+			if (damager.getCustomName().contains("starfiredamage")) {				
+				String userPlayerName = damager.getName().replace("starfiredamage", "");
+				for (Player player: Bukkit.getOnlinePlayers()) {
+					if (!player.getName().equalsIgnoreCase(userPlayerName)) continue;
+					return player;
+				}
+			}
 		}
 		
 		LivingEntity entity = (LivingEntity) damager;

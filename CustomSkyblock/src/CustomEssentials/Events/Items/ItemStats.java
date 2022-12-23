@@ -27,6 +27,7 @@ public class ItemStats {
 		Stats pathStats = profileManager.getPlayerProfile(p).getPath().getStats();
 		stats.setTotalMana(stats.getDefaultMana() + pathStats.getDefaultMana() + pathStats.getMana());
 		stats.setPhysicalDamage(stats.getDefaultPhysicalDamage() + pathStats.getDefaultPhysicalDamage());
+		stats.setBurstDamage(stats.getDefaultBurstDmg() + pathStats.getDefaultBurstDmg());
 		stats.setCriticalChance(stats.getDefaultCritChance() + pathStats.getDefaultCritChance() + pathStats.getCriticalChance());
 		stats.setCriticalDamage(stats.getDefaultCritDmg() + pathStats.getDefaultCritDmg() + pathStats.getCriticalDamage());
 		stats.setArmor(stats.getDefaultArmor() + pathStats.getDefaultArmor());
@@ -61,6 +62,7 @@ public class ItemStats {
 		setItemMRStat();
 		setItemSpeedStat();
 		setItemLuckStat();
+		setItemBurstDamageStat();
 		
 	}
 		
@@ -105,6 +107,26 @@ public class ItemStats {
 		}
 		p.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(totalDmg);
 		stats.setPhysicalDamage(totalDmg);	
+		
+	}
+	
+	public void setItemBurstDamageStat() {
+		Stats stats = profileManager.getPlayerProfile(p).getStats();
+		Stats pathStats = profileManager.getPlayerProfile(p).getPath().getStats();
+		int totalDmg = (int) (stats.getDefaultBurstDmg() + pathStats.getDefaultBurstDmg() + pathStats.getBurstDamage());
+		ItemStorageTable itemTable = new ItemStorageTable();
+		
+		for (int i = 0; i < items.size(); i++) {
+			int ID = getItemCustomID(items.get(i));
+			ItemsCore item = itemTable.getIDtoItemsCore().get(ID);
+			if (item == null) continue;
+			item.createItem(1);
+			
+			int dmg= (int) item.getItemBurstDamage();
+			totalDmg = totalDmg + dmg;
+			
+		}
+		stats.setBurstDamage(totalDmg);	
 		
 	}
 	

@@ -3,14 +3,12 @@ package CustomEssentials.Events.Items.Weapons;
 import java.util.ArrayList;
 
 import org.bukkit.Material;
-import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeModifier;
-import org.bukkit.attribute.AttributeModifier.Operation;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import CustomEssentials.Main;
 import CustomEssentials.Events.Profile;
 import CustomEssentials.Events.Items.ItemsCore;
 import CustomEssentials.Utils.Utils;
@@ -68,7 +66,7 @@ public class HadesBlade extends ItemsCore{
 	}
 	
 	@Override
-	public void itemAbility(Player p, Profile profile) {
+	public void itemAbility(Player p, Profile profile, Main plugin) {
 
 		int currentMana = profile.getStats().getMana();
 		

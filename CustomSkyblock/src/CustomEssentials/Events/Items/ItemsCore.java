@@ -1,17 +1,14 @@
 package CustomEssentials.Events.Items;
 
-import org.bukkit.entity.Player;
-
-
-
-import org.bukkit.inventory.ItemStack;
-
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.attribute.AttributeModifier.Operation;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import CustomEssentials.Main;
 import CustomEssentials.Events.Profile;
 import CustomEssentials.Utils.Utils;
 
@@ -35,7 +32,7 @@ public class ItemsCore {
 	
 	private String itemName;
 	
-	public void itemAbility(Player p, Profile profile) {
+	public void itemAbility(Player p, Profile profile, Main plugin) {
 		
 	}
 	

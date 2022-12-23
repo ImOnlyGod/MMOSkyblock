@@ -77,7 +77,7 @@ public class CustomEnchants {
 		}
 		
 		if (registered) {
-			System.out.println("Enchantment Registered");
+			System.out.println(enchantment.getKey() + " Enchantment Registered");
 		}
 		
 		
