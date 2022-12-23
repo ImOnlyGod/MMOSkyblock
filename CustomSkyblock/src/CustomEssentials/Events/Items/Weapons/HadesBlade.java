@@ -2,11 +2,20 @@ package CustomEssentials.Events.Items.Weapons;
 
 import java.util.ArrayList;
 
+import org.bukkit.Color;
 import org.bukkit.Material;
+import org.bukkit.Particle;
+import org.bukkit.Particle.DustOptions;
+import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Fireball;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import CustomEssentials.Main;
 import CustomEssentials.Events.Profile;
@@ -85,6 +94,23 @@ public class HadesBlade extends ItemsCore{
 		f.setSilent(true);
 		f.setShooter(p);	
 		
+		DustOptions dust = new Particle.DustOptions(Color.YELLOW, 10);
+		new BukkitRunnable() {
+			int despawnCounter = 1;
+			@Override
+			public void run() {
+				if (despawnCounter == 30) {
+					f.remove();
+					cancel();
+					return;
+				}
+				despawnCounter++;					
+				
+				p.spawnParticle(Particle.REDSTONE, f.getLocation(), 1,dust);
+				p.spawnParticle(Particle.FLAME, f.getLocation(), 1);
+				p.spawnParticle(Particle.SMOKE_NORMAL, f.getLocation(), 1);
+			}			
+		}.runTaskTimer(plugin,0,1);
 		
 		
 	}

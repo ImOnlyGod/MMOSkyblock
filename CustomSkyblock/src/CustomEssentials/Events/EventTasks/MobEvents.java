@@ -119,9 +119,14 @@ public class MobEvents implements Listener{
 	public void onMobKill(EntityDeathEvent e) {
 		if (!(e.getEntity() instanceof LivingEntity)) return;
 		if (e.getEntity() instanceof Player) return;
+		if (e.getEntity().getCustomName() == null) return;
 		LivingEntity mob = e.getEntity();
 		e.setDroppedExp((int) mobMaps.getXPamount(mob));
-		Entity killer =((EntityDamageByEntityEvent) e.getEntity().getLastDamageCause()).getDamager();
+		Entity killer = null;
+		if (e.getEntity().getLastDamageCause().getCause() == DamageCause.ENTITY_ATTACK) {
+			killer  = ((EntityDamageByEntityEvent) e.getEntity().getLastDamageCause()).getDamager();
+		}
+		
 		if (!(killer instanceof Player) && !(killer instanceof Fireball) && !(killer instanceof ArmorStand) && !(mob.getLastDamageCause().getCause() == DamageCause.LIGHTNING)) return;
 					
 		Player p = null;	
