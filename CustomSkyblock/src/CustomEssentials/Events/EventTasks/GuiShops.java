@@ -1108,8 +1108,8 @@ public class GuiShops implements Listener{
 		if (enchantingItem.getItemMeta().hasEnchant(addEnchant)) {			
 			if (enchantingItem.getItemMeta().getEnchantLevel(addEnchant) < enchantLevel) {
 				enchantingItem.addUnsafeEnchantment(addEnchant, enchantLevel);
-				if (enchantingItem.getItemMeta().hasCustomModelData()) this.addCustomItemEnchantmentLore(enchantingItem, addEnchant, enchantLevel);
-				else this.addVanillaItemEnchantmentLore(enchantingItem, addEnchant, enchantLevel);
+				this.addCustomItemEnchantmentLore(enchantingItem, addEnchant, enchantLevel);
+				
 			}
 			else {
 				p.sendMessage(Utils.chat("&c&lYou already have the same enchantment!"));
@@ -1118,18 +1118,13 @@ public class GuiShops implements Listener{
 		}
 		else {
 			enchantingItem.addUnsafeEnchantment(addEnchant, enchantLevel);
-			if (enchantingItem.getItemMeta().hasCustomModelData()) this.addCustomItemEnchantmentLore(enchantingItem, addEnchant, enchantLevel);
-			else this.addVanillaItemEnchantmentLore(enchantingItem, addEnchant, enchantLevel);
+			this.addCustomItemEnchantmentLore(enchantingItem, addEnchant, enchantLevel);
 		}
 		p.setTotalExperience(0);
 		p.setLevel(0);
 		p.setExp(0);
 		p.giveExp(playerXp-requiredXp);
 		p.sendMessage(Utils.chat("&d&lThat enchantment cost you &a" + requiredXp + " experience!"));
-	}
-	
-	public void addVanillaItemEnchantmentLore(ItemStack item, Enchantment enchant, int level) {
-		
 	}
 	
 	public void addCustomItemEnchantmentLore(ItemStack item, Enchantment enchant, int level) {

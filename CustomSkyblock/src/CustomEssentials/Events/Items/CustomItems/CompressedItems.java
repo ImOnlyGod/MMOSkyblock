@@ -22,11 +22,17 @@ public class CompressedItems extends ItemsCore{
 		
 		//Set name and lore
 		setItemFlags(meta);
-		setItemName(Utils.chat("&7&lCompressed " + material.toString().replace('_', ' ')));
-		meta.addEnchant(Enchantment.DURABILITY, 1, false);
-		meta.setDisplayName(getItemName());	
-		//meta.setCustomModelData(material.getData().get);		
+		String name = material.name().replace('_', ' ').toLowerCase();
+		String itemName =  material.name().toUpperCase().substring(0,1);
+		for (int i = 1; i< material.name().length();i++) {
+			if (name.charAt(i-1) == ' ') itemName += name.toUpperCase().charAt(i);
+
+			else itemName += name.charAt(i);
+		}		
 		
+		setItemName(Utils.chat("&7&lCompressed " + itemName));
+		meta.addEnchant(Enchantment.DURABILITY, 1, false);
+		meta.setDisplayName(getItemName());		
 		
 		
 		ArrayList<String> lore = createLore(meta);

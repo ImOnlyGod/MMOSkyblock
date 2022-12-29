@@ -1,4 +1,4 @@
-package CustomEssentials.Events.Items.Weapons;
+package CustomEssentials.Events.Items.Weapons.Vanilla.Swords;
 
 import java.util.ArrayList;
 
@@ -13,25 +13,22 @@ import CustomEssentials.Events.Items.ItemsCore;
 import CustomEssentials.Utils.Utils;
 
 
-public class ThickWoodenSword extends ItemsCore{
+public class NetheriteSword extends ItemsCore{
 		
 	public ItemStack createItem(int amount) {
 		
 		//Create the item
-		ItemStack item = new ItemStack(Material.WOODEN_SWORD,amount);
+		ItemStack item = new ItemStack(Material.NETHERITE_SWORD,amount);
 		ItemMeta meta = item.getItemMeta();
+			
+		setItemBasePhysicalDamage(7);
+		setItemPhysicalDamage(7);	
 		
-		
-		//Add stats
-		setItemBasePhysicalDamage(15);
-		setItemPhysicalDamage(15);
-		//meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, new AttributeModifier("generic.attackDamage", getItemPhysicalDamage(), Operation.ADD_NUMBER));
 		setItemFlags(meta);
-		
 		//Set name and lore
-		setItemName(Utils.chat("&7Thick Wooden Sword &8[&5Tier: &7F&8]"));
+		setItemName(Utils.chat("&fNetherite Sword &8[&5Tier: &7F&8]"));
 		meta.setDisplayName(getItemName());	
-		meta.setCustomModelData(7);
+		meta.setCustomModelData(105);
 		
 		ArrayList<String> lore = createLore(meta);
 		meta.setLore(lore);
@@ -47,8 +44,7 @@ public class ThickWoodenSword extends ItemsCore{
 		lore.add(Utils.chat("                          "));
 		lore.add(Utils.chat("&cDamage:&6 +"+ getItemPhysicalDamage() +"⚔"));
 		lore.add(Utils.chat("                          "));
-		lore.add(Utils.chat("&6&lDescription: &7Forged by Compressed Wood,"));
-		lore.add(Utils.chat("&7to be an upgraded Wooden Sword!"));
+		lore.add(Utils.chat("&6&lDescription: &7None"));
 		lore.add(Utils.chat("&6&lAbility: &7None"));
 		lore.add(Utils.chat("                          "));
 		lore.add(Utils.chat("&f&l&oCommon Weapon"));

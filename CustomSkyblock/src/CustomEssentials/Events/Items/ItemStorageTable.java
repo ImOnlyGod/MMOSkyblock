@@ -11,6 +11,12 @@ import CustomEssentials.Events.Items.Weapons.Armor.HardStoneArmor.HardStoneBoots
 import CustomEssentials.Events.Items.Weapons.Armor.HardStoneArmor.HardStoneChestplate;
 import CustomEssentials.Events.Items.Weapons.Armor.HardStoneArmor.HardStoneHelmet;
 import CustomEssentials.Events.Items.Weapons.Armor.HardStoneArmor.HardStoneLeggings;
+import CustomEssentials.Events.Items.Weapons.Vanilla.Swords.DiamondSword;
+import CustomEssentials.Events.Items.Weapons.Vanilla.Swords.GoldenSword;
+import CustomEssentials.Events.Items.Weapons.Vanilla.Swords.IronSword;
+import CustomEssentials.Events.Items.Weapons.Vanilla.Swords.NetheriteSword;
+import CustomEssentials.Events.Items.Weapons.Vanilla.Swords.StoneSword;
+import CustomEssentials.Events.Items.Weapons.Vanilla.Swords.WoodenSword;
 
 public class ItemStorageTable {
 	
@@ -49,6 +55,28 @@ public class ItemStorageTable {
 		
 		this.IDtoItemsCore.put(9, new StarFire());
 		this.CmdtoItemsCore.put("starfire", new StarFire());
+		
+		this.IDtoItemsCore.put(9, new StarFire());
+		this.CmdtoItemsCore.put("starfire", new StarFire());
+		
+		//Vanilla
+		this.IDtoItemsCore.put(100, new WoodenSword());
+		this.CmdtoItemsCore.put("woodensword", new WoodenSword());
+		
+		this.IDtoItemsCore.put(101, new StoneSword());
+		this.CmdtoItemsCore.put("stonesword", new StoneSword());
+		
+		this.IDtoItemsCore.put(102, new IronSword());
+		this.CmdtoItemsCore.put("ironsword", new IronSword());
+		
+		this.IDtoItemsCore.put(103, new GoldenSword());
+		this.CmdtoItemsCore.put("goldensword", new GoldenSword());
+		
+		this.IDtoItemsCore.put(104, new DiamondSword());
+		this.CmdtoItemsCore.put("diamondsword", new DiamondSword());
+		
+		this.IDtoItemsCore.put(105, new NetheriteSword());
+		this.CmdtoItemsCore.put("netheritesword", new NetheriteSword());
 	}
 
 	@SuppressWarnings("unchecked")

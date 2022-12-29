@@ -12,6 +12,12 @@ import CustomEssentials.Events.Items.Weapons.Armor.HardStoneArmor.HardStoneBoots
 import CustomEssentials.Events.Items.Weapons.Armor.HardStoneArmor.HardStoneChestplate;
 import CustomEssentials.Events.Items.Weapons.Armor.HardStoneArmor.HardStoneHelmet;
 import CustomEssentials.Events.Items.Weapons.Armor.HardStoneArmor.HardStoneLeggings;
+import CustomEssentials.Events.Items.Weapons.Vanilla.Swords.DiamondSword;
+import CustomEssentials.Events.Items.Weapons.Vanilla.Swords.GoldenSword;
+import CustomEssentials.Events.Items.Weapons.Vanilla.Swords.IronSword;
+import CustomEssentials.Events.Items.Weapons.Vanilla.Swords.NetheriteSword;
+import CustomEssentials.Events.Items.Weapons.Vanilla.Swords.StoneSword;
+import CustomEssentials.Events.Items.Weapons.Vanilla.Swords.WoodenSword;
 
 public class CustomShapedRecipes {
 
@@ -173,12 +179,34 @@ public class CustomShapedRecipes {
 	}
 	
 	private void addTripleItemRecipes() {
+		addAllTripleInputVerticalItem(new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.STICK),new WoodenSword().createItem(1));
+		addAllTripleInputVerticalItem(new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.STICK),new WoodenSword().createItem(1));
+		addAllTripleInputVerticalItem(new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.STICK),new WoodenSword().createItem(1));
+		addAllTripleInputVerticalItem(new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.STICK),new WoodenSword().createItem(1));
+		addAllTripleInputVerticalItem(new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.STICK),new WoodenSword().createItem(1));
+		addAllTripleInputVerticalItem(new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.STICK),new WoodenSword().createItem(1));
+		addAllTripleInputVerticalItem(new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.STICK),new WoodenSword().createItem(1));
+		addAllTripleInputVerticalItem(new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.STICK),new WoodenSword().createItem(1));
+		
+		addAllTripleInputVerticalItem(new ItemStack(Material.COBBLESTONE),new ItemStack(Material.STICK),new StoneSword().createItem(1));
+		addAllTripleInputVerticalItem(new ItemStack(Material.COBBLED_DEEPSLATE),new ItemStack(Material.STICK),new StoneSword().createItem(1));
+		addAllTripleInputVerticalItem(new ItemStack(Material.BASALT),new ItemStack(Material.STICK),new StoneSword().createItem(1));
+		
+		addAllTripleInputVerticalItem(new ItemStack(Material.IRON_INGOT),new ItemStack(Material.STICK),new IronSword().createItem(1));
+		addAllTripleInputVerticalItem(new ItemStack(Material.GOLD_INGOT),new ItemStack(Material.STICK),new GoldenSword().createItem(1));
+		addAllTripleInputVerticalItem(new ItemStack(Material.DIAMOND),new ItemStack(Material.STICK),new DiamondSword().createItem(1));
+		addAllTripleInputVerticalItem(new ItemStack(Material.NETHERITE_INGOT),new ItemStack(Material.STICK),new NetheriteSword().createItem(1));
+		
 		addAllTripleInputVerticalItem(new CompressedItems().createItem(Material.OAK_LOG,1),new ItemStack(Material.STICK),new ThickWoodenSword().createItem(1));
 			
 		
 	}
 	
 	private void addArmorItemRecipes() {
+		
+		
+		
+		
 		addAllSingleInputHelmetItem(new CompressedItems().createItem(Material.COBBLESTONE,1),new HardStoneHelmet().createItem(1));
 		addAllSingleInputChestplateItem(new CompressedItems().createItem(Material.COBBLESTONE,1),new HardStoneChestplate().createItem(1));
 		addAllSingleInputLeggingsItem(new CompressedItems().createItem(Material.COBBLESTONE,1),new HardStoneLeggings().createItem(1));

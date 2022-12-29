@@ -1193,99 +1193,12 @@ public class VanillaShapedRecipes {
 	}
 	
 	private void addToolsItemRecipes() {
-		addAllTInputPickItem(new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_PICKAXE));
-		addAllTInputPickItem(new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_PICKAXE));
-		addAllTInputPickItem(new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_PICKAXE));
-		addAllTInputPickItem(new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_PICKAXE));
-		addAllTInputPickItem(new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_PICKAXE));
-		addAllTInputPickItem(new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_PICKAXE));
-		addAllTInputPickItem(new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_PICKAXE));
-		addAllTInputPickItem(new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_PICKAXE));
-		addAllTInputPickItem(new ItemStack(Material.COBBLESTONE),new ItemStack(Material.STICK), new ItemStack(Material.STONE_PICKAXE));
-		addAllTInputPickItem(new ItemStack(Material.DEEPSLATE),new ItemStack(Material.STICK), new ItemStack(Material.STONE_PICKAXE));
-		addAllTInputPickItem(new ItemStack(Material.IRON_INGOT),new ItemStack(Material.STICK), new ItemStack(Material.IRON_PICKAXE));
-		addAllTInputPickItem(new ItemStack(Material.GOLD_INGOT),new ItemStack(Material.STICK), new ItemStack(Material.GOLDEN_PICKAXE));
-		addAllTInputPickItem(new ItemStack(Material.DIAMOND),new ItemStack(Material.STICK), new ItemStack(Material.DIAMOND_PICKAXE));	
 		
-		addAllTInputAxeItem(new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_AXE));
-		addAllTInputAxeItem(new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_AXE));
-		addAllTInputAxeItem(new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_AXE));
-		addAllTInputAxeItem(new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_AXE));
-		addAllTInputAxeItem(new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_AXE));
-		addAllTInputAxeItem(new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_AXE));
-		addAllTInputAxeItem(new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_AXE));
-		addAllTInputAxeItem(new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_AXE));
-		addAllTInputAxeItem(new ItemStack(Material.COBBLESTONE),new ItemStack(Material.STICK), new ItemStack(Material.STONE_AXE));
-		addAllTInputAxeItem(new ItemStack(Material.DEEPSLATE),new ItemStack(Material.STICK), new ItemStack(Material.STONE_AXE));
-		addAllTInputAxeItem(new ItemStack(Material.IRON_INGOT),new ItemStack(Material.STICK), new ItemStack(Material.IRON_AXE));
-		addAllTInputAxeItem(new ItemStack(Material.GOLD_INGOT),new ItemStack(Material.STICK), new ItemStack(Material.GOLDEN_AXE));
-		addAllTInputAxeItem(new ItemStack(Material.DIAMOND),new ItemStack(Material.STICK), new ItemStack(Material.DIAMOND_AXE));
-		
-		addAllTInputHoeItem(new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_HOE));
-		addAllTInputHoeItem(new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_HOE));
-		addAllTInputHoeItem(new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_HOE));
-		addAllTInputHoeItem(new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_HOE));
-		addAllTInputHoeItem(new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_HOE));
-		addAllTInputHoeItem(new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_HOE));
-		addAllTInputHoeItem(new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_HOE));
-		addAllTInputHoeItem(new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_HOE));
-		addAllTInputHoeItem(new ItemStack(Material.COBBLESTONE),new ItemStack(Material.STICK), new ItemStack(Material.STONE_HOE));
-		addAllTInputHoeItem(new ItemStack(Material.DEEPSLATE),new ItemStack(Material.STICK), new ItemStack(Material.STONE_HOE));
-		addAllTInputHoeItem(new ItemStack(Material.IRON_INGOT),new ItemStack(Material.STICK), new ItemStack(Material.IRON_HOE));
-		addAllTInputHoeItem(new ItemStack(Material.GOLD_INGOT),new ItemStack(Material.STICK), new ItemStack(Material.GOLDEN_HOE));
-		addAllTInputHoeItem(new ItemStack(Material.DIAMOND),new ItemStack(Material.STICK), new ItemStack(Material.DIAMOND_HOE));
-		
-		addAllTripleInputVerticalItem(new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_SWORD));
-		addAllTripleInputVerticalItem(new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_SWORD));
-		addAllTripleInputVerticalItem(new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_SWORD));
-		addAllTripleInputVerticalItem(new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_SWORD));
-		addAllTripleInputVerticalItem(new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_SWORD));
-		addAllTripleInputVerticalItem(new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_SWORD));
-		addAllTripleInputVerticalItem(new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_SWORD));
-		addAllTripleInputVerticalItem(new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_SWORD));
-		addAllTripleInputVerticalItem(new ItemStack(Material.COBBLESTONE),new ItemStack(Material.COBBLESTONE),new ItemStack(Material.STICK), new ItemStack(Material.STONE_SWORD));
-		addAllTripleInputVerticalItem(new ItemStack(Material.DEEPSLATE),new ItemStack(Material.DEEPSLATE),new ItemStack(Material.STICK), new ItemStack(Material.STONE_SWORD));
-		addAllTripleInputVerticalItem(new ItemStack(Material.IRON_INGOT),new ItemStack(Material.IRON_INGOT),new ItemStack(Material.STICK), new ItemStack(Material.IRON_SWORD));
-		addAllTripleInputVerticalItem(new ItemStack(Material.GOLD_INGOT),new ItemStack(Material.GOLD_INGOT),new ItemStack(Material.STICK), new ItemStack(Material.GOLDEN_SWORD));
-		addAllTripleInputVerticalItem(new ItemStack(Material.DIAMOND),new ItemStack(Material.DIAMOND),new ItemStack(Material.STICK), new ItemStack(Material.DIAMOND_SWORD));
-		
-		addAllTripleInputVerticalItem(new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.STICK),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_SHOVEL));
-		addAllTripleInputVerticalItem(new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.STICK),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_SHOVEL));
-		addAllTripleInputVerticalItem(new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.STICK),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_SHOVEL));
-		addAllTripleInputVerticalItem(new ItemStack(Material.DARK_OAK_PLANKS),new ItemStack(Material.STICK),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_SHOVEL));
-		addAllTripleInputVerticalItem(new ItemStack(Material.JUNGLE_PLANKS),new ItemStack(Material.STICK),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_SHOVEL));
-		addAllTripleInputVerticalItem(new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.STICK),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_SHOVEL));
-		addAllTripleInputVerticalItem(new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.STICK),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_SHOVEL));
-		addAllTripleInputVerticalItem(new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.STICK),new ItemStack(Material.STICK), new ItemStack(Material.WOODEN_SHOVEL));
-		addAllTripleInputVerticalItem(new ItemStack(Material.COBBLESTONE),new ItemStack(Material.STICK),new ItemStack(Material.STICK), new ItemStack(Material.STONE_SHOVEL));
-		addAllTripleInputVerticalItem(new ItemStack(Material.DEEPSLATE),new ItemStack(Material.STICK),new ItemStack(Material.STICK), new ItemStack(Material.STONE_SHOVEL));
-		addAllTripleInputVerticalItem(new ItemStack(Material.IRON_INGOT),new ItemStack(Material.STICK),new ItemStack(Material.STICK), new ItemStack(Material.IRON_SHOVEL));
-		addAllTripleInputVerticalItem(new ItemStack(Material.GOLD_INGOT),new ItemStack(Material.STICK),new ItemStack(Material.STICK), new ItemStack(Material.GOLDEN_SHOVEL));
-		addAllTripleInputVerticalItem(new ItemStack(Material.DIAMOND),new ItemStack(Material.STICK),new ItemStack(Material.STICK), new ItemStack(Material.DIAMOND_SHOVEL));
 			
 	}
 	
 	private void addArmorItemRecipes() {
-		addAllArmorInputHelmetItem(new ItemStack(Material.LEATHER),new ItemStack(Material.LEATHER_HELMET));
-		addAllArmorInputHelmetItem(new ItemStack(Material.IRON_INGOT),new ItemStack(Material.IRON_HELMET));
-		addAllArmorInputHelmetItem(new ItemStack(Material.GOLD_INGOT),new ItemStack(Material.GOLDEN_HELMET));
-		addAllArmorInputHelmetItem(new ItemStack(Material.DIAMOND),new ItemStack(Material.DIAMOND_HELMET));
-		addAllArmorInputHelmetItem(new ItemStack(Material.SCUTE),new ItemStack(Material.TURTLE_HELMET));
 		
-		addAllArmorInputChestplateItem(new ItemStack(Material.LEATHER),new ItemStack(Material.LEATHER_CHESTPLATE));
-		addAllArmorInputChestplateItem(new ItemStack(Material.IRON_INGOT),new ItemStack(Material.IRON_CHESTPLATE));
-		addAllArmorInputChestplateItem(new ItemStack(Material.GOLD_INGOT),new ItemStack(Material.GOLDEN_CHESTPLATE));
-		addAllArmorInputChestplateItem(new ItemStack(Material.DIAMOND),new ItemStack(Material.DIAMOND_CHESTPLATE));
-		
-		addAllArmorInputLeggingsItem(new ItemStack(Material.LEATHER),new ItemStack(Material.LEATHER_LEGGINGS));
-		addAllArmorInputLeggingsItem(new ItemStack(Material.IRON_INGOT),new ItemStack(Material.IRON_LEGGINGS));
-		addAllArmorInputLeggingsItem(new ItemStack(Material.GOLD_INGOT),new ItemStack(Material.GOLDEN_LEGGINGS));
-		addAllArmorInputLeggingsItem(new ItemStack(Material.DIAMOND),new ItemStack(Material.DIAMOND_LEGGINGS));
-		
-		addAllArmorInputBootsItem(new ItemStack(Material.LEATHER),new ItemStack(Material.LEATHER_BOOTS));
-		addAllArmorInputBootsItem(new ItemStack(Material.IRON_INGOT),new ItemStack(Material.IRON_BOOTS));
-		addAllArmorInputBootsItem(new ItemStack(Material.GOLD_INGOT),new ItemStack(Material.GOLDEN_BOOTS));
-		addAllArmorInputBootsItem(new ItemStack(Material.DIAMOND),new ItemStack(Material.DIAMOND_BOOTS));
 	}
 	
 	private void addStairsItemRecipes() {
