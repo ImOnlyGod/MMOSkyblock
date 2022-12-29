@@ -1,7 +1,6 @@
 package CustomEssentials.Events.Gui.Enchants;
 
 import java.lang.reflect.Field;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
@@ -21,8 +20,8 @@ import com.mojang.authlib.properties.Property;
 
 import CustomEssentials.Main;
 import CustomEssentials.Events.Items.Enchants.CustomEnchants;
+import CustomEssentials.Events.Items.Weapons.StarFire;
 import CustomEssentials.Utils.Utils;
-import net.minecraft.world.item.enchantment.Enchantments;
 
 public class EnchantTableGui {
 	
@@ -30,7 +29,7 @@ public class EnchantTableGui {
 	private Main plugin;
 	private Inventory gui;
 	private HashMap<Material,ArrayList<Enchantment>> materialToEnchants = new HashMap<Material,ArrayList<Enchantment>>();
-	private ArrayList<ItemStack> allowedItems = new ArrayList<ItemStack>();
+	private HashMap<ItemStack,ArrayList<Enchantment>> itemsToEnchants = new HashMap<ItemStack,ArrayList<Enchantment>>();
 	private HashMap<Enchantment,ArrayList<String>> EnchantLore = new HashMap<Enchantment,ArrayList<String>>();
 	private HashMap<String,ArrayList<String>> EnchantSpecificLore = new HashMap<String,ArrayList<String>>();
 	private HashMap<Enchantment,Material> EnchantItem = new HashMap<Enchantment,Material>();
@@ -61,7 +60,6 @@ public class EnchantTableGui {
 		this.generateEnchantTier();
 		this.generateEnchantingRequirement();
 		this.generateEnchantLevelLore();		
-		this.generateAllowedItems();
 		this.generateEnchantLore();
 		this.generateEnchantItem();
 		this.generateMaterialToEnchants();
@@ -864,10 +862,18 @@ public class EnchantTableGui {
 		this.materialToEnchants.put(Material.DIAMOND_BOOTS, bootsEnchants);
 		this.materialToEnchants.put(Material.NETHERITE_BOOTS, bootsEnchants);
 		
-	}
-	
-	public void generateAllowedItems() {
+		ArrayList<Enchantment> starfireEnchants = new ArrayList<Enchantment>();
+		starfireEnchants.add(CustomEnchants.VACUUM);
+		starfireEnchants.add(CustomEnchants.BRUTE);
+		starfireEnchants.add(CustomEnchants.EXPERIENCE_EXTRACTOR);
+		starfireEnchants.add(CustomEnchants.PICKPOCKET);
+		starfireEnchants.add(CustomEnchants.COLLECTION);
+		starfireEnchants.add(CustomEnchants.PROSPERITY);
 		
+		StarFire starfire = new StarFire();
+		ItemStack item = starfire.createItem(1);
+		
+		this.itemsToEnchants.put(item, starfireEnchants);
 	}
 	
 	public void enchantLevelsGui(Enchantment enchant) {
@@ -914,7 +920,7 @@ public class EnchantTableGui {
 		for (Material allowedMaterials: this.materialToEnchants.keySet()) {
 			if (item.getType().equals(allowedMaterials)) return true;
 		}
-		for (ItemStack allowedItem: this.allowedItems) {
+		for (ItemStack allowedItem: this.itemsToEnchants.keySet()) {
 			if (item.getItemMeta().getDisplayName().equalsIgnoreCase(allowedItem.getItemMeta().getDisplayName())) return true;
 		}
 		return false;
@@ -926,7 +932,18 @@ public class EnchantTableGui {
 			return;
 		}
 		ItemStack item = this.gui.getItem(19);
-		ArrayList<Enchantment> enchants = this.materialToEnchants.get(item.getType());
+		ArrayList<Enchantment> enchants = null;
+		if (this.materialToEnchants.containsKey(item.getType())) {
+			enchants = this.materialToEnchants.get(item.getType());
+		}
+		else {
+			for (ItemStack i: this.itemsToEnchants.keySet()) {
+				if (!i.getItemMeta().getDisplayName().equalsIgnoreCase(item.getItemMeta().getDisplayName())) continue;
+				enchants = this.itemsToEnchants.get(i);
+				break;
+			}
+		}
+		
 		for (int i=0;i<45;i++) {
 			if (this.gui.getItem(i)==null) continue;
 			if (this.gui.getItem(i).getType().equals(Material.RED_STAINED_GLASS_PANE)) {
@@ -1030,14 +1047,6 @@ public class EnchantTableGui {
 		this.materialToEnchants = materialToEnchants;
 	}
 
-	public ArrayList<ItemStack> getAllowedItems() {
-		return allowedItems;
-	}
-
-	public void setAllowedItems(ArrayList<ItemStack> allowedItems) {
-		this.allowedItems = allowedItems;
-	}
-
 	public Inventory getGui() {
 		return gui;
 	}
@@ -1084,6 +1093,14 @@ public class EnchantTableGui {
 
 	public void setEnchantTier(HashMap<Enchantment,String> enchantTier) {
 		EnchantTier = enchantTier;
+	}
+
+	public HashMap<ItemStack,ArrayList<Enchantment>> getItemsToEnchants() {
+		return itemsToEnchants;
+	}
+
+	public void setItemsToEnchants(HashMap<ItemStack,ArrayList<Enchantment>> itemsToEnchants) {
+		this.itemsToEnchants = itemsToEnchants;
 	}
 
 }

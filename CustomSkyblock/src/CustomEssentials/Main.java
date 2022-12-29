@@ -11,8 +11,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
 
-import CustomEssentials.Commands.CustomSpawnerCommand;
+import CustomEssentials.Commands.BaseCommands;
 import CustomEssentials.Commands.CustomMobsCommand;
+import CustomEssentials.Commands.CustomSpawnerCommand;
 import CustomEssentials.Commands.EatCommand;
 import CustomEssentials.Commands.FlyCommand;
 import CustomEssentials.Commands.WeaponTabCommand;
@@ -77,6 +78,17 @@ public class Main extends JavaPlugin{
 	private int displayStats = 0;
 	private File playerDataFolderLocation;
 	private ItemPrices shopPrices;
+	
+	public ItemPrices getShopPrices() {
+		return shopPrices;
+	}
+
+
+	public void setShopPrices(ItemPrices shopPrices) {
+		this.shopPrices = shopPrices;
+	}
+
+
 	private ItemPrices shopPricesPrevious;
 	
 	public ItemPrices getShopPricesPrevious() {
@@ -91,42 +103,7 @@ public class Main extends JavaPlugin{
 
 	private File shopPricesLocation;
 
-	
-	@Override
-	public void onEnable() {
-		
-		//getServer().getConsoleSender().sendMessage(Utils.chat("&aPlugin has been enabled!"));
-		generatePlayerFolder();	
-		generateShopFile();
-		this.profileManager = new PlayerProfileManager(this);
-
-		CustomEnchants.register();
-		
-		new MenuGui(this);
-		new SkillsGui(this);
-		new PathSelectionGui(this);
-		new PathGui(this);
-		new MainShopMenu(this);
-		new CraftGui(this);
-		new WeaponTabCommand(this);
-		new CustomSpawnerCommand(this);
-		new CustomMobsCommand(this);
-		readShopData();
-		getServer().getPluginManager().registerEvents(new MobEvents(this), this);
-		getServer().getPluginManager().registerEvents(new PlayerJoinLeave(this), this);
-		getServer().getPluginManager().registerEvents(new GuiShops(this, this.shopPrices), this);
-		getServer().getPluginManager().registerEvents(new SkillsFunctioning(this), this);
-		getServer().getPluginManager().registerEvents(new FoodSaturation(this), this);
-		getServer().getPluginManager().registerEvents(new FishingEvents(this), this);
-		getServer().getPluginManager().registerEvents(new CraftingEvents(this), this);
-		
-		loadConfig();
-				
-		new FlyCommand(this);
-		new EatCommand(this);
-		new BalanceCommand(this);
-		new PayCommand(this);
-
+	public void generateShopGui() {
 		new BlockShop1(this, this.shopPrices);
 		new BlockShop2(this, this.shopPrices);
 		new BlockShop3(this, this.shopPrices);
@@ -152,12 +129,49 @@ public class Main extends JavaPlugin{
 		new RedstoneShop2(this, this.shopPrices);
 		new BrewingShop1(this, this.shopPrices);
 		new BrewingShop2(this, this.shopPrices);
+	}
+	
+	@Override
+	public void onEnable() {
 		
+		//getServer().getConsoleSender().sendMessage(Utils.chat("&aPlugin has been enabled!"));
+		generatePlayerFolder();	
+		generateShopFile();
+		this.profileManager = new PlayerProfileManager(this);
+
+		CustomEnchants.register();
+		
+		new MenuGui(this);
+		new SkillsGui(this);
+		new PathSelectionGui(this);
+		new PathGui(this);
+		new MainShopMenu(this);
+		new CraftGui(this);
+		new WeaponTabCommand(this);
+		new CustomSpawnerCommand(this);
+		new CustomMobsCommand(this);
+		new BaseCommands(this);
+		readShopData();
+		getServer().getPluginManager().registerEvents(new MobEvents(this), this);
+		getServer().getPluginManager().registerEvents(new PlayerJoinLeave(this), this);
+		getServer().getPluginManager().registerEvents(new GuiShops(this, this.shopPrices), this);
+		getServer().getPluginManager().registerEvents(new SkillsFunctioning(this), this);
+		getServer().getPluginManager().registerEvents(new FoodSaturation(this), this);
+		getServer().getPluginManager().registerEvents(new FishingEvents(this), this);
+		getServer().getPluginManager().registerEvents(new CraftingEvents(this), this);
+		
+		loadConfig();
+				
+		new FlyCommand(this);
+		new EatCommand(this);
+		new BalanceCommand(this);
+		new PayCommand(this);
+		
+		this.generateShopGui();		
 		
 		for (Player p : Bukkit.getOnlinePlayers()) {
 			readPlayerProfile(p);
 		}
-		
 		
 		
 		BukkitScheduler scheduler = getServer().getScheduler();
@@ -295,6 +309,7 @@ public class Main extends JavaPlugin{
 	public void onDisable() {		
 		saveShopPrices();
 		savePlayerData();
+		saveConfig();
 		getServer().getConsoleSender().sendMessage("Plugin has been disabled!");
 		
 	}

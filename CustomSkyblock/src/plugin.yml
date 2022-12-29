@@ -49,4 +49,5 @@ commands:
   craft:
   path:
   spawner:
+  customessentials:
   

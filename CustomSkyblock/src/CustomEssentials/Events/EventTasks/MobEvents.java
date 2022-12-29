@@ -389,7 +389,6 @@ public class MobEvents implements Listener{
 		}
 		else {
 			
-			System.out.println(e.getCause());	
 			Player p = (Player) e.getDamager();		
 			PlayerProfileManager profile = this.plugin.getProfileManager();
 			
