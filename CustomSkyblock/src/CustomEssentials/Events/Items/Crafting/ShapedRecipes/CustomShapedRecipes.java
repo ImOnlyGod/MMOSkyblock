@@ -2,12 +2,32 @@ package CustomEssentials.Events.Items.Crafting.ShapedRecipes;
 
 import java.util.HashMap;
 
-
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 import CustomEssentials.Events.Items.Crafting.CustomItemSets;
 import CustomEssentials.Events.Items.CustomItems.CompressedItems;
+import CustomEssentials.Events.Items.Vanilla.Armor.Boots.DiamondBoots;
+import CustomEssentials.Events.Items.Vanilla.Armor.Boots.GoldenBoots;
+import CustomEssentials.Events.Items.Vanilla.Armor.Boots.IronBoots;
+import CustomEssentials.Events.Items.Vanilla.Armor.Boots.LetherBoots;
+import CustomEssentials.Events.Items.Vanilla.Armor.Boots.NetheriteBoots;
+import CustomEssentials.Events.Items.Vanilla.Armor.Chestplate.DiamondChestplate;
+import CustomEssentials.Events.Items.Vanilla.Armor.Chestplate.GoldenChestplate;
+import CustomEssentials.Events.Items.Vanilla.Armor.Chestplate.IronChestplate;
+import CustomEssentials.Events.Items.Vanilla.Armor.Chestplate.LetherChestplate;
+import CustomEssentials.Events.Items.Vanilla.Armor.Chestplate.NetheriteChestplate;
+import CustomEssentials.Events.Items.Vanilla.Armor.Helmet.DiamondHelmet;
+import CustomEssentials.Events.Items.Vanilla.Armor.Helmet.GoldenHelmet;
+import CustomEssentials.Events.Items.Vanilla.Armor.Helmet.IronHelmet;
+import CustomEssentials.Events.Items.Vanilla.Armor.Helmet.LetherHelmet;
+import CustomEssentials.Events.Items.Vanilla.Armor.Helmet.NetheriteHelmet;
+import CustomEssentials.Events.Items.Vanilla.Armor.Helmet.TurtleHelmet;
+import CustomEssentials.Events.Items.Vanilla.Armor.Leggings.DiamondLeggings;
+import CustomEssentials.Events.Items.Vanilla.Armor.Leggings.GoldenLeggings;
+import CustomEssentials.Events.Items.Vanilla.Armor.Leggings.IronLeggings;
+import CustomEssentials.Events.Items.Vanilla.Armor.Leggings.LetherLeggings;
+import CustomEssentials.Events.Items.Vanilla.Armor.Leggings.NetheriteLeggings;
 import CustomEssentials.Events.Items.Vanilla.Swords.DiamondSword;
 import CustomEssentials.Events.Items.Vanilla.Swords.GoldenSword;
 import CustomEssentials.Events.Items.Vanilla.Swords.IronSword;
@@ -318,6 +338,96 @@ public class CustomShapedRecipes {
 		}
 	}
 	
+	public void addAllArmorInputHelmetItem(ItemStack inputItem1,ItemStack outputItem) {
+
+		for (int i=0;i<3;i++) {
+			for (int j=0;j<2;j++) {
+				ItemStack[][] inputItems = new ItemStack[4][4];
+				ItemStack[][] resultItems = new ItemStack[2][2];
+				inputItems[i][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+1][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i][j+1] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i][j+2] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+1][j+2] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				
+				
+				resultItems[0][0] = outputItem;
+				resultItems[0][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][0] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				recipeOutput.put(inputItems, resultItems);
+			}
+		}		
+	}
+	
+	public void addAllArmorInputChestplateItem(ItemStack inputItem1,ItemStack outputItem) {
+
+		for (int i=0;i<2;i++) {
+			for (int j=0;j<2;j++) {
+				ItemStack[][] inputItems = new ItemStack[4][4];
+				ItemStack[][] resultItems = new ItemStack[2][2];
+				inputItems[i][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+1][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+2][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i][j+2] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+1][j+1] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+2][j+1] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+1][j+2] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+2][j+2] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				
+				resultItems[0][0] = outputItem;
+				resultItems[0][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][0] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				recipeOutput.put(inputItems, resultItems);
+			}
+		}		
+	}
+	
+	public void addAllArmorInputLeggingsItem(ItemStack inputItem1,ItemStack outputItem) {
+
+		for (int i=0;i<2;i++) {
+			for (int j=0;j<2;j++) {
+				ItemStack[][] inputItems = new ItemStack[4][4];
+				ItemStack[][] resultItems = new ItemStack[2][2];
+				inputItems[i][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+1][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i][j+1] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i][j+2] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+1][j+2] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+2][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+2][j+2] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				
+				resultItems[0][0] = outputItem;
+				resultItems[0][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][0] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				recipeOutput.put(inputItems, resultItems);
+			}
+		}		
+	}
+	
+	public void addAllArmorInputBootsItem(ItemStack inputItem1,ItemStack outputItem) {
+
+		for (int i=0;i<3;i++) {
+			for (int j=0;j<2;j++) {
+				ItemStack[][] inputItems = new ItemStack[4][4];
+				ItemStack[][] resultItems = new ItemStack[2][2];
+				inputItems[i][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+1][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i][j+2] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+1][j+2] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				
+				
+				resultItems[0][0] = outputItem;
+				resultItems[0][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][0] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				recipeOutput.put(inputItems, resultItems);
+			}
+		}		
+	}
+	
 	private void addSingleItemRecipes() {
 		
 		for (Material material: this.getVanillaItems().getVanillaToCustomItems()) {
@@ -418,9 +528,33 @@ public class CustomShapedRecipes {
 		addAllTInputHoeItem(new ItemStack(Material.GOLD_INGOT),new ItemStack(Material.STICK),new GoldenHoe().createItem(1));
 		addAllTInputHoeItem(new ItemStack(Material.DIAMOND),new ItemStack(Material.STICK),new DiamondHoe().createItem(1));
 		addAllTInputHoeItem(new ItemStack(Material.NETHERITE_INGOT),new ItemStack(Material.STICK),new NetheriteHoe().createItem(1));
+		
 		//Vanilla Armor
+		addAllSingleInputHelmetItem(new ItemStack(Material.LEATHER), new LetherHelmet().createItem(1));
+		addAllSingleInputHelmetItem(new ItemStack(Material.IRON_INGOT), new IronHelmet().createItem(1));
+		addAllSingleInputHelmetItem(new ItemStack(Material.GOLD_INGOT), new GoldenHelmet().createItem(1));
+		addAllSingleInputHelmetItem(new ItemStack(Material.DIAMOND), new DiamondHelmet().createItem(1));
+		addAllSingleInputHelmetItem(new ItemStack(Material.NETHERITE_INGOT), new NetheriteHelmet().createItem(1));
+		addAllSingleInputHelmetItem(new ItemStack(Material.SCUTE), new TurtleHelmet().createItem(1));
 		
+		addAllSingleInputChestplateItem(new ItemStack(Material.LEATHER), new LetherChestplate().createItem(1));
+		addAllSingleInputChestplateItem(new ItemStack(Material.IRON_INGOT), new IronChestplate().createItem(1));
+		addAllSingleInputChestplateItem(new ItemStack(Material.GOLD_INGOT), new GoldenChestplate().createItem(1));
+		addAllSingleInputChestplateItem(new ItemStack(Material.DIAMOND), new DiamondChestplate().createItem(1));
+		addAllSingleInputChestplateItem(new ItemStack(Material.NETHERITE_INGOT), new NetheriteChestplate().createItem(1));
 		
+		addAllSingleInputLeggingsItem(new ItemStack(Material.LEATHER), new LetherLeggings().createItem(1));
+		addAllSingleInputLeggingsItem(new ItemStack(Material.IRON_INGOT), new IronLeggings().createItem(1));
+		addAllSingleInputLeggingsItem(new ItemStack(Material.GOLD_INGOT), new GoldenLeggings().createItem(1));
+		addAllSingleInputLeggingsItem(new ItemStack(Material.DIAMOND), new DiamondLeggings().createItem(1));
+		addAllSingleInputLeggingsItem(new ItemStack(Material.NETHERITE_INGOT), new NetheriteLeggings().createItem(1));
+		
+		addAllSingleInputBootsItem(new ItemStack(Material.LEATHER), new LetherBoots().createItem(1));
+		addAllSingleInputBootsItem(new ItemStack(Material.IRON_INGOT), new IronBoots().createItem(1));
+		addAllSingleInputBootsItem(new ItemStack(Material.GOLD_INGOT), new GoldenBoots().createItem(1));
+		addAllSingleInputBootsItem(new ItemStack(Material.DIAMOND), new DiamondBoots().createItem(1));
+		addAllSingleInputBootsItem(new ItemStack(Material.NETHERITE_INGOT), new NetheriteBoots().createItem(1));
+
 		//Custom Weapons
 		addAllTripleInputVerticalItem(new CompressedItems().createItem(Material.OAK_LOG,1),new ItemStack(Material.STICK),new ThickWoodenSword().createItem(1));
 			

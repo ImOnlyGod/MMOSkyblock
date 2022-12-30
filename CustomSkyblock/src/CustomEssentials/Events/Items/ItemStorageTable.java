@@ -3,6 +3,27 @@ package CustomEssentials.Events.Items;
 import java.util.HashMap;
 
 import CustomEssentials.Events.Items.Tools.DarkPickaxe;
+import CustomEssentials.Events.Items.Vanilla.Armor.Boots.DiamondBoots;
+import CustomEssentials.Events.Items.Vanilla.Armor.Boots.GoldenBoots;
+import CustomEssentials.Events.Items.Vanilla.Armor.Boots.IronBoots;
+import CustomEssentials.Events.Items.Vanilla.Armor.Boots.LetherBoots;
+import CustomEssentials.Events.Items.Vanilla.Armor.Boots.NetheriteBoots;
+import CustomEssentials.Events.Items.Vanilla.Armor.Chestplate.DiamondChestplate;
+import CustomEssentials.Events.Items.Vanilla.Armor.Chestplate.GoldenChestplate;
+import CustomEssentials.Events.Items.Vanilla.Armor.Chestplate.IronChestplate;
+import CustomEssentials.Events.Items.Vanilla.Armor.Chestplate.LetherChestplate;
+import CustomEssentials.Events.Items.Vanilla.Armor.Chestplate.NetheriteChestplate;
+import CustomEssentials.Events.Items.Vanilla.Armor.Helmet.DiamondHelmet;
+import CustomEssentials.Events.Items.Vanilla.Armor.Helmet.GoldenHelmet;
+import CustomEssentials.Events.Items.Vanilla.Armor.Helmet.IronHelmet;
+import CustomEssentials.Events.Items.Vanilla.Armor.Helmet.LetherHelmet;
+import CustomEssentials.Events.Items.Vanilla.Armor.Helmet.NetheriteHelmet;
+import CustomEssentials.Events.Items.Vanilla.Armor.Helmet.TurtleHelmet;
+import CustomEssentials.Events.Items.Vanilla.Armor.Leggings.DiamondLeggings;
+import CustomEssentials.Events.Items.Vanilla.Armor.Leggings.GoldenLeggings;
+import CustomEssentials.Events.Items.Vanilla.Armor.Leggings.IronLeggings;
+import CustomEssentials.Events.Items.Vanilla.Armor.Leggings.LetherLeggings;
+import CustomEssentials.Events.Items.Vanilla.Armor.Leggings.NetheriteLeggings;
 import CustomEssentials.Events.Items.Vanilla.Swords.DiamondSword;
 import CustomEssentials.Events.Items.Vanilla.Swords.GoldenSword;
 import CustomEssentials.Events.Items.Vanilla.Swords.IronSword;
@@ -173,6 +194,69 @@ public class ItemStorageTable {
 		
 		this.IDtoItemsCore.put(129, new NetheriteHoe());
 		this.CmdtoItemsCore.put("netheritehoe", new NetheriteHoe());
+		
+		this.IDtoItemsCore.put(130, new LetherHelmet());
+		this.CmdtoItemsCore.put("leatherhelmet", new LetherHelmet());
+		
+		this.IDtoItemsCore.put(131, new IronHelmet());
+		this.CmdtoItemsCore.put("ironhelmet", new IronHelmet());
+		
+		this.IDtoItemsCore.put(132, new GoldenHelmet());
+		this.CmdtoItemsCore.put("goldenhelmet", new GoldenHelmet());
+		
+		this.IDtoItemsCore.put(133, new DiamondHelmet());
+		this.CmdtoItemsCore.put("diamondhelmet", new DiamondHelmet());
+		
+		this.IDtoItemsCore.put(134, new NetheriteHelmet());
+		this.CmdtoItemsCore.put("netheritehelmet", new NetheriteHelmet());
+		
+		this.IDtoItemsCore.put(135, new TurtleHelmet());
+		this.CmdtoItemsCore.put("turtlehelmet", new TurtleHelmet());
+		
+		this.IDtoItemsCore.put(136, new LetherChestplate());
+		this.CmdtoItemsCore.put("leatherchestplate", new LetherChestplate());
+		
+		this.IDtoItemsCore.put(137, new IronChestplate());
+		this.CmdtoItemsCore.put("ironchestplate", new IronChestplate());
+		
+		this.IDtoItemsCore.put(138, new GoldenChestplate());
+		this.CmdtoItemsCore.put("goldenchestplate", new GoldenChestplate());
+		
+		this.IDtoItemsCore.put(139, new DiamondChestplate());
+		this.CmdtoItemsCore.put("diamondchestplate", new DiamondChestplate());
+		
+		this.IDtoItemsCore.put(140, new NetheriteChestplate());
+		this.CmdtoItemsCore.put("netheritechestplate", new NetheriteChestplate());
+		
+		this.IDtoItemsCore.put(141, new LetherLeggings());
+		this.CmdtoItemsCore.put("leatherleggings", new LetherLeggings());
+		
+		this.IDtoItemsCore.put(142, new IronLeggings());
+		this.CmdtoItemsCore.put("ironleggings", new IronLeggings());
+		
+		this.IDtoItemsCore.put(143, new GoldenLeggings());
+		this.CmdtoItemsCore.put("goldenleggings", new GoldenLeggings());
+		
+		this.IDtoItemsCore.put(144, new DiamondLeggings());
+		this.CmdtoItemsCore.put("diamondleggings", new DiamondLeggings());
+		
+		this.IDtoItemsCore.put(145, new NetheriteLeggings());
+		this.CmdtoItemsCore.put("netheriteleggings", new NetheriteLeggings());
+		
+		this.IDtoItemsCore.put(146, new LetherBoots());
+		this.CmdtoItemsCore.put("leatherboots", new LetherBoots());
+		
+		this.IDtoItemsCore.put(147, new IronBoots());
+		this.CmdtoItemsCore.put("ironboots", new IronBoots());
+		
+		this.IDtoItemsCore.put(148, new GoldenBoots());
+		this.CmdtoItemsCore.put("goldenboots", new GoldenBoots());
+		
+		this.IDtoItemsCore.put(149, new DiamondBoots());
+		this.CmdtoItemsCore.put("diamondboots", new DiamondBoots());
+		
+		this.IDtoItemsCore.put(150, new NetheriteBoots());
+		this.CmdtoItemsCore.put("netheriteboots", new NetheriteBoots());
 		
 		
 	}
