@@ -1,4 +1,4 @@
-package CustomEssentials.Events.Items.Weapons.Vanilla.Swords;
+package CustomEssentials.Events.Items.Vanilla.Tools.Pickaxe;
 
 import java.util.ArrayList;
 
@@ -13,22 +13,22 @@ import CustomEssentials.Events.Items.ItemsCore;
 import CustomEssentials.Utils.Utils;
 
 
-public class StoneSword extends ItemsCore{
+public class NetheritePickaxe extends ItemsCore{
 		
 	public ItemStack createItem(int amount) {
 		
 		//Create the item
-		ItemStack item = new ItemStack(Material.STONE_SWORD,amount);
+		ItemStack item = new ItemStack(Material.NETHERITE_PICKAXE,amount);
 		ItemMeta meta = item.getItemMeta();
 			
-		setItemBasePhysicalDamage(2);
-		setItemPhysicalDamage(2);	
+		setItemBasePhysicalDamage(5);
+		setItemPhysicalDamage(5);	
 		
 		setItemFlags(meta);
 		//Set name and lore
-		setItemName(Utils.chat("&fStone Sword &8[&5Tier: &7F&8]"));
+		setItemName(Utils.chat("&fNetherite Pickaxe &8[&5Tier: &7F&8]"));
 		meta.setDisplayName(getItemName());	
-		meta.setCustomModelData(101);
+		meta.setCustomModelData(111);
 		
 		ArrayList<String> lore = createLore(meta);
 		meta.setLore(lore);
@@ -47,7 +47,7 @@ public class StoneSword extends ItemsCore{
 		lore.add(Utils.chat("&6&lDescription: &7None"));
 		lore.add(Utils.chat("&6&lAbility: &7None"));
 		lore.add(Utils.chat("                          "));
-		lore.add(Utils.chat("&f&l&oCommon Weapon"));
+		lore.add(Utils.chat("&f&l&oCommon Pickaxe"));
 		
 		return lore;
 	}

@@ -13,8 +13,6 @@ public class VanillaShapedRecipes {
 		addDoubleItemRecipes();
 		addTripleItemRecipes();
 		addQuadItemRecipes();
-		addToolsItemRecipes();
-		addArmorItemRecipes();
 		addStairsItemRecipes();
 		addMiscItemsRecipes();
 		addFillItemsRecipes();
@@ -297,108 +295,6 @@ public class VanillaShapedRecipes {
 		}
 	}
 	
-	public void addAllTInputPickItem(ItemStack inputItem1,ItemStack inputItem2, ItemStack outputItem) {
-		
-		for (int i=0;i<2;i++) {
-			for (int j=0;j<2;j++) {
-				ItemStack[][] inputItems = new ItemStack[4][4];
-				ItemStack[][] resultItems = new ItemStack[2][2];
-				inputItems[i][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
-				inputItems[i][j+1] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
-				inputItems[i][j+2] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
-				inputItems[i+1][j+1] = new ItemStack(inputItem2.getType(),inputItem2.getAmount());
-				inputItems[i+2][j+1] = new ItemStack(inputItem2.getType(),inputItem2.getAmount());
-				
-				
-				resultItems[0][0] = new ItemStack(outputItem.getType(),outputItem.getAmount());
-				resultItems[0][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
-				resultItems[1][0] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
-				resultItems[1][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
-				recipeOutput.put(inputItems, resultItems);
-			}
-		}
-	}
-	
-	public void addAllTInputAxeItem(ItemStack inputItem1,ItemStack inputItem2, ItemStack outputItem) {
-		
-		for (int i=0;i<2;i++) {
-			for (int j=0;j<3;j++) {
-				ItemStack[][] inputItems = new ItemStack[4][4];
-				ItemStack[][] resultItems = new ItemStack[2][2];
-				inputItems[i][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
-				inputItems[i][j+1] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
-				inputItems[i+1][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
-				inputItems[i+1][j+1] = new ItemStack(inputItem2.getType(),inputItem2.getAmount());
-				inputItems[i+2][j+1] = new ItemStack(inputItem2.getType(),inputItem2.getAmount());
-				
-				
-				resultItems[0][0] = new ItemStack(outputItem.getType(),outputItem.getAmount());
-				resultItems[0][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
-				resultItems[1][0] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
-				resultItems[1][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
-				recipeOutput.put(inputItems, resultItems);
-			}
-		}
-		
-		for (int i=0;i<2;i++) {
-			for (int j=0;j<3;j++) {
-				ItemStack[][] inputItems = new ItemStack[4][4];
-				ItemStack[][] resultItems = new ItemStack[2][2];
-				inputItems[i][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
-				inputItems[i][j+1] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
-				inputItems[i+1][j+1] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
-				inputItems[i+1][j] = new ItemStack(inputItem2.getType(),inputItem2.getAmount());
-				inputItems[i+2][j] = new ItemStack(inputItem2.getType(),inputItem2.getAmount());
-				
-				
-				resultItems[0][0] = new ItemStack(outputItem.getType(),outputItem.getAmount());
-				resultItems[0][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
-				resultItems[1][0] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
-				resultItems[1][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
-				recipeOutput.put(inputItems, resultItems);
-			}
-		}
-	}
-	
-	public void addAllTInputHoeItem(ItemStack inputItem1,ItemStack inputItem2, ItemStack outputItem) {
-		
-		for (int i=0;i<2;i++) {
-			for (int j=0;j<3;j++) {
-				ItemStack[][] inputItems = new ItemStack[4][4];
-				ItemStack[][] resultItems = new ItemStack[2][2];
-				inputItems[i][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
-				inputItems[i][j+1] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
-				
-				inputItems[i+1][j+1] = new ItemStack(inputItem2.getType(),inputItem2.getAmount());
-				inputItems[i+2][j+1] = new ItemStack(inputItem2.getType(),inputItem2.getAmount());
-				
-				
-				resultItems[0][0] = new ItemStack(outputItem.getType(),outputItem.getAmount());
-				resultItems[0][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
-				resultItems[1][0] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
-				resultItems[1][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
-				recipeOutput.put(inputItems, resultItems);
-			}
-		}
-		
-		for (int i=0;i<2;i++) {
-			for (int j=0;j<3;j++) {
-				ItemStack[][] inputItems = new ItemStack[4][4];
-				ItemStack[][] resultItems = new ItemStack[2][2];
-				inputItems[i][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
-				inputItems[i][j+1] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
-				inputItems[i+1][j] = new ItemStack(inputItem2.getType(),inputItem2.getAmount());
-				inputItems[i+2][j] = new ItemStack(inputItem2.getType(),inputItem2.getAmount());
-				
-				
-				resultItems[0][0] = new ItemStack(outputItem.getType(),outputItem.getAmount());
-				resultItems[0][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
-				resultItems[1][0] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
-				resultItems[1][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
-				recipeOutput.put(inputItems, resultItems);
-			}
-		}
-	}
 	
 	public void addAllInputGrindStoneItem(ItemStack inputItem1,ItemStack inputItem2,ItemStack inputItem3,ItemStack outputItem) {
 
@@ -1190,15 +1086,6 @@ public class VanillaShapedRecipes {
 		addAllQuadInputCubeItem(new ItemStack(Material.IRON_INGOT),new ItemStack(Material.IRON_INGOT), new ItemStack(Material.IRON_TRAPDOOR));
 		addAllQuadInputCubeItem(new ItemStack(Material.RABBIT_HIDE),new ItemStack(Material.RABBIT_HIDE), new ItemStack(Material.LEATHER));
 		addAllQuadInputCubeItem(new ItemStack(Material.STRING),new ItemStack(Material.STRING), new ItemStack(Material.WHITE_WOOL));
-	}
-	
-	private void addToolsItemRecipes() {
-		
-			
-	}
-	
-	private void addArmorItemRecipes() {
-		
 	}
 	
 	private void addStairsItemRecipes() {

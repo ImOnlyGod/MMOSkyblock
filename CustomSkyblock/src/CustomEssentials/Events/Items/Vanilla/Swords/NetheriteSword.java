@@ -1,4 +1,4 @@
-package CustomEssentials.Events.Items.Weapons.Vanilla.Swords;
+package CustomEssentials.Events.Items.Vanilla.Swords;
 
 import java.util.ArrayList;
 
@@ -13,22 +13,22 @@ import CustomEssentials.Events.Items.ItemsCore;
 import CustomEssentials.Utils.Utils;
 
 
-public class WoodenSword extends ItemsCore{
+public class NetheriteSword extends ItemsCore{
 		
 	public ItemStack createItem(int amount) {
 		
 		//Create the item
-		ItemStack item = new ItemStack(Material.WOODEN_SWORD,amount);
+		ItemStack item = new ItemStack(Material.NETHERITE_SWORD,amount);
 		ItemMeta meta = item.getItemMeta();
 			
-		setItemBasePhysicalDamage(1);
-		setItemPhysicalDamage(1);	
+		setItemBasePhysicalDamage(7);
+		setItemPhysicalDamage(7);	
 		
 		setItemFlags(meta);
 		//Set name and lore
-		setItemName(Utils.chat("&fWooden Sword &8[&5Tier: &7F&8]"));
+		setItemName(Utils.chat("&fNetherite Sword &8[&5Tier: &7F&8]"));
 		meta.setDisplayName(getItemName());	
-		meta.setCustomModelData(100);
+		meta.setCustomModelData(105);
 		
 		ArrayList<String> lore = createLore(meta);
 		meta.setLore(lore);

@@ -1,4 +1,4 @@
-package CustomEssentials.Events.Items.Weapons.Vanilla.Swords;
+package CustomEssentials.Events.Items.Vanilla.Tools.Axe;
 
 import java.util.ArrayList;
 
@@ -13,22 +13,22 @@ import CustomEssentials.Events.Items.ItemsCore;
 import CustomEssentials.Utils.Utils;
 
 
-public class GoldenSword extends ItemsCore{
+public class StoneAxe extends ItemsCore{
 		
 	public ItemStack createItem(int amount) {
 		
 		//Create the item
-		ItemStack item = new ItemStack(Material.GOLDEN_SWORD,amount);
+		ItemStack item = new ItemStack(Material.STONE_AXE,amount);
 		ItemMeta meta = item.getItemMeta();
 			
-		setItemBasePhysicalDamage(4);
-		setItemPhysicalDamage(4);	
+		setItemBasePhysicalDamage(3);
+		setItemPhysicalDamage(3);	
 		
 		setItemFlags(meta);
 		//Set name and lore
-		setItemName(Utils.chat("&fGolden Sword &8[&5Tier: &7F&8]"));
+		setItemName(Utils.chat("&fStone Axe &8[&5Tier: &7F&8]"));
 		meta.setDisplayName(getItemName());	
-		meta.setCustomModelData(103);
+		meta.setCustomModelData(113);
 		
 		ArrayList<String> lore = createLore(meta);
 		meta.setLore(lore);
@@ -47,7 +47,7 @@ public class GoldenSword extends ItemsCore{
 		lore.add(Utils.chat("&6&lDescription: &7None"));
 		lore.add(Utils.chat("&6&lAbility: &7None"));
 		lore.add(Utils.chat("                          "));
-		lore.add(Utils.chat("&f&l&oCommon Weapon"));
+		lore.add(Utils.chat("&f&l&oCommon Axe"));
 		
 		return lore;
 	}
