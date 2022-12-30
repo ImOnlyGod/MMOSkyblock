@@ -528,6 +528,19 @@ public class CustomShapedRecipes {
 		addAllTInputHoeItem(new ItemStack(Material.GOLD_INGOT),new ItemStack(Material.STICK),new GoldenHoe().createItem(1));
 		addAllTInputHoeItem(new ItemStack(Material.DIAMOND),new ItemStack(Material.STICK),new DiamondHoe().createItem(1));
 		addAllTInputHoeItem(new ItemStack(Material.NETHERITE_INGOT),new ItemStack(Material.STICK),new NetheriteHoe().createItem(1));
+
+		//Custom Weapons
+		addAllTripleInputVerticalItem(new CompressedItems().createItem(Material.OAK_LOG,1),new ItemStack(Material.STICK),new ThickWoodenSword().createItem(1));
+			
+		
+	}
+	
+	private void addArmorItemRecipes() {
+		
+		addAllSingleInputHelmetItem(new CompressedItems().createItem(Material.COBBLESTONE,1),new HardStoneHelmet().createItem(1));
+		addAllSingleInputChestplateItem(new CompressedItems().createItem(Material.COBBLESTONE,1),new HardStoneChestplate().createItem(1));
+		addAllSingleInputLeggingsItem(new CompressedItems().createItem(Material.COBBLESTONE,1),new HardStoneLeggings().createItem(1));
+		addAllSingleInputBootsItem(new CompressedItems().createItem(Material.COBBLESTONE,1),new HardStoneBoots().createItem(1));
 		
 		//Vanilla Armor
 		addAllSingleInputHelmetItem(new ItemStack(Material.LEATHER), new LetherHelmet().createItem(1));
@@ -554,19 +567,6 @@ public class CustomShapedRecipes {
 		addAllSingleInputBootsItem(new ItemStack(Material.GOLD_INGOT), new GoldenBoots().createItem(1));
 		addAllSingleInputBootsItem(new ItemStack(Material.DIAMOND), new DiamondBoots().createItem(1));
 		addAllSingleInputBootsItem(new ItemStack(Material.NETHERITE_INGOT), new NetheriteBoots().createItem(1));
-
-		//Custom Weapons
-		addAllTripleInputVerticalItem(new CompressedItems().createItem(Material.OAK_LOG,1),new ItemStack(Material.STICK),new ThickWoodenSword().createItem(1));
-			
-		
-	}
-	
-	private void addArmorItemRecipes() {
-		
-		addAllSingleInputHelmetItem(new CompressedItems().createItem(Material.COBBLESTONE,1),new HardStoneHelmet().createItem(1));
-		addAllSingleInputChestplateItem(new CompressedItems().createItem(Material.COBBLESTONE,1),new HardStoneChestplate().createItem(1));
-		addAllSingleInputLeggingsItem(new CompressedItems().createItem(Material.COBBLESTONE,1),new HardStoneLeggings().createItem(1));
-		addAllSingleInputBootsItem(new CompressedItems().createItem(Material.COBBLESTONE,1),new HardStoneBoots().createItem(1));
 	}
 
 	public HashMap<ItemStack[][],ItemStack[][]> getRecipeOutput() {

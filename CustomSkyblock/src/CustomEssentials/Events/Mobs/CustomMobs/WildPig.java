@@ -2,6 +2,7 @@ package CustomEssentials.Events.Mobs.CustomMobs;
 
 import java.lang.reflect.Field;
 
+
 import java.util.Map;
 import java.util.UUID;
 
@@ -13,6 +14,14 @@ import org.bukkit.craftbukkit.v1_17_R1.entity.CraftLivingEntity;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Pig;
+
+import com.ticxo.modelengine.ModelEngine;
+import com.ticxo.modelengine.api.ModelEngineAPI;
+import com.ticxo.modelengine.api.animation.state.ModelState;
+import com.ticxo.modelengine.api.generator.model.ModelBlueprint;
+import com.ticxo.modelengine.api.model.ActiveModel;
+import com.ticxo.modelengine.api.model.ModeledEntity;
+import com.ticxo.modelengine.api.utils.config.Property;
 
 import CustomEssentials.Utils.Utils;
 import net.minecraft.network.chat.ChatComponentText;
@@ -61,7 +70,11 @@ public class WildPig extends EntityPig{
 		this.setCanPickupLoot(false);		
 		
 		Pig pig = (Pig) this.getBukkitEntity();
-		
+		pig.setInvisible(true);
+		ModelBlueprint model = ModelEngineAPI.getBlueprint("rocky");
+		ActiveModel mob = ModelEngineAPI.createActiveModel(model);
+		ModelEngineAPI.getOrCreateModeledEntity(pig).addModel(mob, true);
+		//mob.spawn();		
 		pig.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(100f);
 		pig.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.3f);
 		pig.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(50f);
@@ -69,6 +82,7 @@ public class WildPig extends EntityPig{
 		pig.setHealth(50);
 		
 		this.getWorld().addEntity(this);
+		mob.getAnimationHandler().playAnimation("punch", level, level, level, A);
 	}
 		
 	@Override

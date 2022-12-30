@@ -36,6 +36,15 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import com.ticxo.modelengine.ModelEngine;
+import com.ticxo.modelengine.api.ModelEngineAPI;
+import com.ticxo.modelengine.api.animation.blueprint.BlueprintAnimation;
+import com.ticxo.modelengine.api.animation.state.ModelState;
+import com.ticxo.modelengine.api.generator.model.ModelBlueprint;
+import com.ticxo.modelengine.api.model.ActiveModel;
+import com.ticxo.modelengine.api.model.ModeledEntity;
+import com.ticxo.modelengine.mythic.compatibility.MEGModel;
+
 import CustomEssentials.Main;
 import CustomEssentials.Events.PlayerProfileManager;
 import CustomEssentials.Events.Profile;
@@ -52,6 +61,10 @@ import CustomEssentials.Events.Mobs.CustomMobs.Basic_Zombie;
 import CustomEssentials.Events.Mobs.CustomMobs.WildPig;
 import CustomEssentials.Events.PlayerStats.Stats;
 import CustomEssentials.Utils.Utils;
+import net.minecraft.world.effect.MobEffectList;
+import net.minecraft.world.entity.animal.EntityPig;
+import net.minecraft.world.entity.monster.EntityZombie;
+import net.minecraft.world.level.World;
 
 
 public class MobEvents implements Listener{
@@ -302,6 +315,14 @@ public class MobEvents implements Listener{
 	@EventHandler
 	public void playerDamageEntityEvent(EntityDamageByEntityEvent e) {
 		
+		if (e.getDamager().getCustomName().contains("Wild Pig")) {	
+			System.out.println("asas");
+			ModelEngineAPI.getOrCreateModeledEntity(e.getDamager()).getModel("rocky").getAnimationHandler().playAnimation("punch",0.001, 1, 1, true);
+			e.setDamage(100);
+				
+		}
+		
+		//System.out.println(model.getModelId());
 		//CREATE SEPEARTE CLASS 
 		ProjectileCreator projectileDamageCalulator = new ProjectileCreator();
 		e.setDamage(projectileDamageCalulator.projectileDamage(e.getDamager(), e.getEntity(), e.getFinalDamage()));
@@ -309,6 +330,10 @@ public class MobEvents implements Listener{
 		
 		if (!(e.getEntity() instanceof LivingEntity)) {
 			return;	
+		}
+		if ((e.getEntity().getCustomName() == null && e.getEntity().getType() != EntityType.PLAYER)) {
+			e.setCancelled(true);
+			return;
 		}
 		
 		if (e.getDamager() instanceof CraftLightningStrike) {
