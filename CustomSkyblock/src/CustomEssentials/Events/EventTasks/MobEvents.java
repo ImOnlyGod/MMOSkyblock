@@ -33,6 +33,7 @@ import org.bukkit.event.entity.SpawnerSpawnEvent;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.event.player.PlayerFishEvent.State;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.world.EntitiesLoadEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -391,7 +392,34 @@ public class MobEvents implements Listener{
 				
 				if (entity.isCustomNameVisible() && entity.getCustomName().length() > 30) {
 					
-					if (e.getDamager().getCustomName().contains("Agressive Golem")) ModelEngineAPI.getOrCreateModeledEntity(e.getDamager()).getModel("rocky").getAnimationHandler().playAnimation("punch",0.0001, 30, 7.8, true);
+					if (e.getDamager().getCustomName().contains("Agressive Golem")) {
+						if (ModelEngineAPI.getOrCreateModeledEntity(e.getDamager()).getModel("rocky") != null) {
+							ModelEngineAPI.getOrCreateModeledEntity(e.getDamager()).getModel("rocky").getAnimationHandler().playAnimation("punch",0.0001, 30, 7.8, true);
+						}
+						else {
+							ModelBlueprint model = ModelEngineAPI.getBlueprint("rocky");
+							ActiveModel mob = ModelEngineAPI.createActiveModel(model);
+							ModelEngineAPI.getOrCreateModeledEntity(e.getDamager()).addModel(mob, true);
+							
+							for (Entity passenger:e.getDamager().getPassengers()) {
+								passenger.remove();
+							}	
+							
+							ArmorStand nameTag = (ArmorStand) e.getDamager().getWorld().spawn(e.getDamager().getLocation().add(0,3,0), ArmorStand.class, armorstand->{
+								armorstand.setInvisible(true);
+								armorstand.setVisible(false);
+								armorstand.setInvulnerable(true);
+								armorstand.setBasePlate(false);
+								armorstand.setCustomName(e.getDamager().getCustomName());
+								armorstand.setCustomNameVisible(true);
+								armorstand.setGravity(true);
+								armorstand.setCollidable(false);
+								
+							});
+							e.getDamager().addPassenger(nameTag);
+						}
+						
+					}
 					
 					String mobName = entity.getCustomName();
 					StringBuilder level = new StringBuilder();
@@ -496,7 +524,7 @@ public class MobEvents implements Listener{
 		damageIndicator(e.getEntity(),e.getFinalDamage(),e.getDamager());
 				
 	}
-	
+
 	public boolean isAbilityCooldown(String name) {
 		if (!this.cooldowns.containsKey(name)) return false;
 		
