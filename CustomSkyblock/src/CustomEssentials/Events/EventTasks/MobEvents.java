@@ -134,6 +134,13 @@ public class MobEvents implements Listener{
 		if (e.getEntity() instanceof Player) return;
 		if (e.getEntity().getCustomName() == null) return;
 		LivingEntity mob = e.getEntity();
+		
+		if (mob.getCustomName().contains("Agressive Golem")) {
+			for (Entity passenger:mob.getPassengers()) {
+				passenger.remove();
+			}		
+		}
+		
 		e.setDroppedExp((int) mobMaps.getXPamount(mob));
 		Entity killer = null;
 		if (e.getEntity().getLastDamageCause().getCause() == DamageCause.ENTITY_ATTACK) {
@@ -270,6 +277,13 @@ public class MobEvents implements Listener{
 		e.getEntity().setCustomName(customName);
 		e.getEntity().setCustomNameVisible(true);
 		
+		if (e.getEntity().getCustomName().contains("Agressive Golem")) {
+			for (Entity passenger:e.getEntity().getPassengers()) {
+				passenger.setCustomName("");
+				passenger.setCustomName(customName);
+			}		
+		}
+		
 	}
 	
 	//ADD FALL DMG CAUSE!!
@@ -302,7 +316,14 @@ public class MobEvents implements Listener{
 				String customName = mobName.replace(healthString,""+Math.max(0.0,Math.floor(entity.getHealth()-e.getFinalDamage())));
 				
 				e.getEntity().setCustomName("");
-				e.getEntity().setCustomName(customName);				
+				e.getEntity().setCustomName(customName);		
+				
+				if (e.getEntity().getCustomName().contains("Agressive Golem")) {
+					for (Entity passenger:e.getEntity().getPassengers()) {
+						passenger.setCustomName("");
+						passenger.setCustomName(customName);
+					}		
+				}
 				
 												
 			}
@@ -314,13 +335,6 @@ public class MobEvents implements Listener{
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void playerDamageEntityEvent(EntityDamageByEntityEvent e) {
-		
-		if (e.getDamager().getCustomName().contains("Wild Pig")) {	
-			System.out.println("asas");
-			ModelEngineAPI.getOrCreateModeledEntity(e.getDamager()).getModel("rocky").getAnimationHandler().playAnimation("punch",0.001, 1, 1, true);
-			e.setDamage(100);
-				
-		}
 		
 		//System.out.println(model.getModelId());
 		//CREATE SEPEARTE CLASS 
@@ -376,6 +390,8 @@ public class MobEvents implements Listener{
 				LivingEntity entity = (LivingEntity) getDamagerEntity(e.getDamager());	
 				
 				if (entity.isCustomNameVisible() && entity.getCustomName().length() > 30) {
+					
+					if (e.getDamager().getCustomName().contains("Agressive Golem")) ModelEngineAPI.getOrCreateModeledEntity(e.getDamager()).getModel("rocky").getAnimationHandler().playAnimation("punch",0.0001, 30, 7.8, true);
 					
 					String mobName = entity.getCustomName();
 					StringBuilder level = new StringBuilder();
@@ -460,7 +476,15 @@ public class MobEvents implements Listener{
 				
 				//String customName = Utils.chat("&7&l[&a&l" + level + "&7&l] &6&l" + entity.getName() + " &7&l(&a&l" + Math.floor(Math.max(0,entity.getHealth()-e.getFinalDamage())) + "&4♥&7&l)");
 				
-				e.getEntity().setCustomName(customName);				
+				e.getEntity().setCustomName(customName);
+				
+				if (e.getEntity().getCustomName().contains("Agressive Golem")) {
+					for (Entity passenger:e.getEntity().getPassengers()) {
+						passenger.setCustomName("");
+						passenger.setCustomName(customName);
+					}		
+				}
+				
 				
 												
 			}	

@@ -70,10 +70,7 @@ public class WildPig extends EntityPig{
 		this.setCanPickupLoot(false);		
 		
 		Pig pig = (Pig) this.getBukkitEntity();
-		pig.setInvisible(true);
-		ModelBlueprint model = ModelEngineAPI.getBlueprint("rocky");
-		ActiveModel mob = ModelEngineAPI.createActiveModel(model);
-		ModelEngineAPI.getOrCreateModeledEntity(pig).addModel(mob, true);
+		
 		//mob.spawn();		
 		pig.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(100f);
 		pig.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.3f);
@@ -82,7 +79,6 @@ public class WildPig extends EntityPig{
 		pig.setHealth(50);
 		
 		this.getWorld().addEntity(this);
-		mob.getAnimationHandler().playAnimation("punch", level, level, level, A);
 	}
 		
 	@Override
