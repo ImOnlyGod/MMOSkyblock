@@ -85,6 +85,7 @@ public class EnchantTableGui {
 		this.EnchantTier.put(CustomEnchants.GIANT, common);
 		this.EnchantTier.put(Enchantment.DIG_SPEED, common);
 		this.EnchantTier.put(CustomEnchants.VEINMINE, epic);
+		this.EnchantTier.put(CustomEnchants.ACCURACY, epic);
 	}
 	
 	public void addRequirementLores(ArrayList<String> lore, String enchantName) {
@@ -247,17 +248,17 @@ public class EnchantTableGui {
 		prosperityLore1.add(Utils.chat(""));
 		prosperityLore1.add(Utils.chat("&f&lEnchant Info"));
 		prosperityLore1.add(Utils.chat("&7Gain 10 luck."));
-		addRequirementLores(prosperityLore1,"Collection 1");
+		addRequirementLores(prosperityLore1,"Prosperity 1");
 		ArrayList<String> prosperityLore2 = new ArrayList<String>();
 		prosperityLore2.add(Utils.chat(""));
 		prosperityLore2.add(Utils.chat("&f&lEnchant Info"));
 		prosperityLore2.add(Utils.chat("&7Gain 20 luck."));
-		addRequirementLores(prosperityLore1,"Collection 1");
+		addRequirementLores(prosperityLore2,"Prosperity 2");
 		ArrayList<String> prosperityLore3 = new ArrayList<String>();
 		prosperityLore3.add(Utils.chat(""));
 		prosperityLore3.add(Utils.chat("&f&lEnchant Info"));
 		prosperityLore3.add(Utils.chat("&7Gain 30 luck."));
-		addRequirementLores(prosperityLore1,"Collection 1");
+		addRequirementLores(prosperityLore3,"Prosperity 3");
 		//JIGSAW LORES
 		ArrayList<String> jigsawLore1 = new ArrayList<String>();
 		jigsawLore1.add(Utils.chat(""));
@@ -411,6 +412,13 @@ public class EnchantTableGui {
 		veinmineLore5.add(Utils.chat("&7Breaks a maximum of 5 matching adjacent"));
 		veinmineLore5.add(Utils.chat("&7block in all direction."));
 		addRequirementLores(veinmineLore5,"Veinmine 5");
+		//ACCURACY LORES
+		ArrayList<String> accuracyLore1 = new ArrayList<String>();
+		accuracyLore1.add(Utils.chat(""));
+		accuracyLore1.add(Utils.chat("&f&lEnchant Info"));
+		accuracyLore1.add(Utils.chat("&7Allows the projectile released from the bow"));
+		accuracyLore1.add(Utils.chat("&7to focus an enemy within a 1 block range."));
+		addRequirementLores(accuracyLore1,"Accuracy 1");
 		
 		this.EnchantSpecificLore.put(Utils.chat("&eVacuum 1"), vacuumLore1);
 		this.EnchantSpecificLore.put(Utils.chat("&aBrute 1"), bruteLore1);
@@ -464,6 +472,7 @@ public class EnchantTableGui {
 		this.EnchantSpecificLore.put(Utils.chat("&cVeinmine 3"), veinmineLore3);
 		this.EnchantSpecificLore.put(Utils.chat("&cVeinmine 4"), veinmineLore4);
 		this.EnchantSpecificLore.put(Utils.chat("&cVeinmine 5"), veinmineLore5);
+		this.EnchantSpecificLore.put(Utils.chat("&cAccuracy 1"), accuracyLore1);
 	}	
 	
 	public void generateEnchantingRequirement() { 
@@ -582,6 +591,9 @@ public class EnchantTableGui {
 		this.EnchantXpRequirement.put("Veinmine 5", 0);
 		this.EnchantSkillRequirement.put("Veinmine 5", 0);
 		
+		this.EnchantXpRequirement.put("Accuracy 1", 0);
+		this.EnchantSkillRequirement.put("Accuracy 1", 0);
+		
 	}
 	
 	public void generateEnchantItem() {
@@ -617,6 +629,9 @@ public class EnchantTableGui {
 		
 		this.EnchantItem.put(CustomEnchants.VEINMINE, Material.VINE);
 		this.ItemEnchant.put(Material.VINE, CustomEnchants.VEINMINE);
+		
+		this.EnchantItem.put(CustomEnchants.ACCURACY, Material.COMPASS);
+		this.ItemEnchant.put(Material.COMPASS, CustomEnchants.ACCURACY);
 	}
 	
 	public void generateEnchantLore() {
@@ -757,6 +772,14 @@ public class EnchantTableGui {
 		veinmineLore.add(Utils.chat("&f&lApplies on:&7 Pickaxe"));
 		veinmineLore.add("");
 		veinmineLore.add(this.EnchantTier.get(CustomEnchants.VEINMINE));
+		//ACCURACY LORE
+		ArrayList<String> accuracyLore = new ArrayList<String>();
+		accuracyLore.add(Utils.chat("&7&oClick here to view levels"));
+		accuracyLore.add(Utils.chat(""));
+		accuracyLore.add(Utils.chat("&f&lEnchant Info"));
+		accuracyLore.add(Utils.chat("&7Allows the projectile released from the bow"));
+		accuracyLore.add(Utils.chat("&7to focus an enemy within a certain distance"));
+		accuracyLore.add(Utils.chat("&7of the enemy, based on enchantment level."));
 		
 		//ADD ENCHANT SPECIFIC LORE
 		this.EnchantLore.put(CustomEnchants.BRUTE, bruteLore);
@@ -770,6 +793,7 @@ public class EnchantTableGui {
 		this.EnchantLore.put(CustomEnchants.GIANT, giantLore);
 		this.EnchantLore.put(Enchantment.DIG_SPEED, efficiencyLore);
 		this.EnchantLore.put(CustomEnchants.VEINMINE, veinmineLore);
+		this.EnchantLore.put(CustomEnchants.ACCURACY, accuracyLore);
 		
 		
 	}
@@ -874,6 +898,16 @@ public class EnchantTableGui {
 		ItemStack item = starfire.createItem(1);
 		
 		this.itemsToEnchants.put(item, starfireEnchants);
+		
+		ArrayList<Enchantment> bowEnchants = new ArrayList<Enchantment>();
+		bowEnchants.add(CustomEnchants.ACCURACY);
+		
+		this.materialToEnchants.put(Material.BOW, bowEnchants);
+		
+		ArrayList<Enchantment> crossbowEnchants = new ArrayList<Enchantment>();
+		crossbowEnchants.add(CustomEnchants.ACCURACY);
+		
+		this.materialToEnchants.put(Material.CROSSBOW, crossbowEnchants);
 	}
 	
 	public void enchantLevelsGui(Enchantment enchant) {
@@ -892,6 +926,7 @@ public class EnchantTableGui {
 		int enchantMaxLevel = enchant.getMaxLevel()+1;
 		if (enchant == CustomEnchants.COLLECTION || enchant == CustomEnchants.PROSPERITY || enchant == CustomEnchants.JIGSAW || enchant == CustomEnchants.GEM_EXTRACTOR) enchantMaxLevel -= 1;
 		if (enchant == Enchantment.DIG_SPEED) enchantMaxLevel = 7;
+		if (enchant == CustomEnchants.ACCURACY) enchantMaxLevel = 2;
 		for (int i=1;i<enchantMaxLevel;i++) {
 			if (slot > 34) break;
 			

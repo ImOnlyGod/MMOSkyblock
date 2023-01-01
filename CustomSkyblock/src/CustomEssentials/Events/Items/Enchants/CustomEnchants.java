@@ -19,6 +19,7 @@ public class CustomEnchants {
 	public static final Enchantment GEM_EXTRACTOR = new EnchantmentWrapper("gem_extractor","Gem_extractor",5,EnchantmentTarget.TOOL);
 	public static final Enchantment GIANT = new EnchantmentWrapper("giant","Giant",10,EnchantmentTarget.ARMOR);
 	public static final Enchantment VEINMINE = new EnchantmentWrapper("veinmine","Veinmine",5,EnchantmentTarget.TOOL);
+	public static final Enchantment ACCURACY = new EnchantmentWrapper("accuracy","Accuracy",5,EnchantmentTarget.BOW);
 	
 	public static void register() {
 		boolean registered = Arrays.stream(Enchantment.values()).collect(Collectors.toList()).contains(VACUUM);
@@ -60,6 +61,10 @@ public class CustomEnchants {
 		registered = Arrays.stream(Enchantment.values()).collect(Collectors.toList()).contains(VEINMINE);
 		if (!registered) {
 			registerEnchantment(VEINMINE);
+		}
+		registered = Arrays.stream(Enchantment.values()).collect(Collectors.toList()).contains(ACCURACY);
+		if (!registered) {
+			registerEnchantment(ACCURACY);
 		}
 	}
 	

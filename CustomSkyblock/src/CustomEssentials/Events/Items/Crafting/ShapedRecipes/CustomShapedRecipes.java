@@ -28,6 +28,8 @@ import CustomEssentials.Events.Items.Vanilla.Armor.Leggings.GoldenLeggings;
 import CustomEssentials.Events.Items.Vanilla.Armor.Leggings.IronLeggings;
 import CustomEssentials.Events.Items.Vanilla.Armor.Leggings.LetherLeggings;
 import CustomEssentials.Events.Items.Vanilla.Armor.Leggings.NetheriteLeggings;
+import CustomEssentials.Events.Items.Vanilla.Bows.Bow;
+import CustomEssentials.Events.Items.Vanilla.Bows.CrossBow;
 import CustomEssentials.Events.Items.Vanilla.Swords.DiamondSword;
 import CustomEssentials.Events.Items.Vanilla.Swords.GoldenSword;
 import CustomEssentials.Events.Items.Vanilla.Swords.IronSword;
@@ -74,6 +76,7 @@ public class CustomShapedRecipes {
 		addSingleItemRecipes();
 		addTripleItemRecipes();
 		addArmorItemRecipes();
+		addBowItemRecipes();
 	}
 	
 	public void addAllSlotInputSingleItem(ItemStack inputItem, ItemStack outputItem) {
@@ -428,6 +431,77 @@ public class CustomShapedRecipes {
 		}		
 	}
 	
+	public void addAll6InputsBowItem(ItemStack inputItem1,ItemStack inputItem2,ItemStack inputItem3,ItemStack inputItem4,ItemStack inputItem5,ItemStack inputItem6,ItemStack outputItem) {
+
+		for (int i=1;i<3;i++) {
+			for (int j=0;j<2;j++) {
+				ItemStack[][] inputItems = new ItemStack[4][4];
+				ItemStack[][] resultItems = new ItemStack[2][2];
+				inputItems[i][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i-1][j+1] = new ItemStack(inputItem2.getType(),inputItem2.getAmount());
+				inputItems[i+1][j+1] = new ItemStack(inputItem3.getType(),inputItem3.getAmount());
+				inputItems[i-1][j+2] = new ItemStack(inputItem4.getType(),inputItem4.getAmount());
+				inputItems[i][j+2] = new ItemStack(inputItem5.getType(),inputItem5.getAmount());
+				inputItems[i+1][j+2] = new ItemStack(inputItem6.getType(),inputItem6.getAmount());
+				
+				
+				
+				resultItems[0][0] = outputItem;
+				resultItems[0][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][0] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				recipeOutput.put(inputItems, resultItems);
+			}
+		}
+		
+		for (int i=1;i<3;i++) {
+			for (int j=2;j<4;j++) {
+				ItemStack[][] inputItems = new ItemStack[4][4];
+				ItemStack[][] resultItems = new ItemStack[2][2];
+				inputItems[i][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i-1][j-1] = new ItemStack(inputItem2.getType(),inputItem2.getAmount());
+				inputItems[i+1][j-1] = new ItemStack(inputItem3.getType(),inputItem3.getAmount());
+				inputItems[i-1][j-2] = new ItemStack(inputItem4.getType(),inputItem4.getAmount());
+				inputItems[i][j-2] = new ItemStack(inputItem5.getType(),inputItem5.getAmount());
+				inputItems[i+1][j-2] = new ItemStack(inputItem6.getType(),inputItem6.getAmount());
+				
+				
+				
+				resultItems[0][0] = outputItem;
+				resultItems[0][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][0] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				recipeOutput.put(inputItems, resultItems);
+			}
+		}	
+		
+	}
+	
+	public void addAll7InputsItem(ItemStack inputItem1,ItemStack inputItem2,ItemStack inputItem3,ItemStack inputItem4,ItemStack inputItem5,ItemStack inputItem6,ItemStack inputItem7,ItemStack outputItem) {
+
+		for (int i=0;i<2;i++) {
+			for (int j=0;j<2;j++) {
+				ItemStack[][] inputItems = new ItemStack[4][4];
+				ItemStack[][] resultItems = new ItemStack[2][2];
+				inputItems[i][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
+				inputItems[i+1][j] = new ItemStack(inputItem2.getType(),inputItem2.getAmount());
+				inputItems[i][j+1] = new ItemStack(inputItem3.getType(),inputItem3.getAmount());
+				inputItems[i+1][j+1] = new ItemStack(inputItem4.getType(),inputItem4.getAmount());
+				inputItems[i+2][j+1] = new ItemStack(inputItem5.getType(),inputItem5.getAmount());
+				inputItems[i][j+2] = new ItemStack(inputItem6.getType(),inputItem6.getAmount());
+				inputItems[i+1][j+2] = new ItemStack(inputItem7.getType(),inputItem7.getAmount());
+				
+				
+				
+				resultItems[0][0] = outputItem;
+				resultItems[0][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][0] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				resultItems[1][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+				recipeOutput.put(inputItems, resultItems);
+			}
+		}		
+	}
+	
 	private void addSingleItemRecipes() {
 		
 		for (Material material: this.getVanillaItems().getVanillaToCustomItems()) {
@@ -567,6 +641,12 @@ public class CustomShapedRecipes {
 		addAllSingleInputBootsItem(new ItemStack(Material.GOLD_INGOT), new GoldenBoots().createItem(1));
 		addAllSingleInputBootsItem(new ItemStack(Material.DIAMOND), new DiamondBoots().createItem(1));
 		addAllSingleInputBootsItem(new ItemStack(Material.NETHERITE_INGOT), new NetheriteBoots().createItem(1));
+	}
+	
+	private void addBowItemRecipes() {
+		addAll6InputsBowItem(new ItemStack(Material.STICK),new ItemStack(Material.STICK),new ItemStack(Material.STICK),new ItemStack(Material.STRING),new ItemStack(Material.STRING),new ItemStack(Material.STRING),new Bow().createItem(1));
+		addAll7InputsItem(new ItemStack(Material.STICK),new ItemStack(Material.STRING),new ItemStack(Material.IRON_INGOT),new ItemStack(Material.TRIPWIRE_HOOK),new ItemStack(Material.STICK),new ItemStack(Material.STICK),new ItemStack(Material.STRING),new CrossBow().createItem(1));
+		
 	}
 
 	public HashMap<ItemStack[][],ItemStack[][]> getRecipeOutput() {

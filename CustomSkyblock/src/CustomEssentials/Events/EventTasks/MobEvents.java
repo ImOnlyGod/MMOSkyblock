@@ -7,9 +7,11 @@ import java.util.Random;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.v1_17_R1.entity.CraftArmorStand;
+import org.bukkit.craftbukkit.v1_17_R1.entity.CraftArrow;
 import org.bukkit.craftbukkit.v1_17_R1.entity.CraftFireball;
 import org.bukkit.craftbukkit.v1_17_R1.entity.CraftLightningStrike;
 import org.bukkit.craftbukkit.v1_17_R1.entity.CraftProjectile;
@@ -29,22 +31,19 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.SpawnerSpawnEvent;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.event.player.PlayerFishEvent.State;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.world.EntitiesLoadEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.Vector;
 
-import com.ticxo.modelengine.ModelEngine;
 import com.ticxo.modelengine.api.ModelEngineAPI;
-import com.ticxo.modelengine.api.animation.blueprint.BlueprintAnimation;
-import com.ticxo.modelengine.api.animation.state.ModelState;
 import com.ticxo.modelengine.api.generator.model.ModelBlueprint;
 import com.ticxo.modelengine.api.model.ActiveModel;
-import com.ticxo.modelengine.api.model.ModeledEntity;
-import com.ticxo.modelengine.mythic.compatibility.MEGModel;
 
 import CustomEssentials.Main;
 import CustomEssentials.Events.PlayerProfileManager;
@@ -62,10 +61,6 @@ import CustomEssentials.Events.Mobs.CustomMobs.Basic_Zombie;
 import CustomEssentials.Events.Mobs.CustomMobs.WildPig;
 import CustomEssentials.Events.PlayerStats.Stats;
 import CustomEssentials.Utils.Utils;
-import net.minecraft.world.effect.MobEffectList;
-import net.minecraft.world.entity.animal.EntityPig;
-import net.minecraft.world.entity.monster.EntityZombie;
-import net.minecraft.world.level.World;
 
 
 public class MobEvents implements Listener{
@@ -206,6 +201,44 @@ public class MobEvents implements Listener{
 			double totalMoney = initialMoney + (initialMoney*0.1*(enchantLevel-1));
 			profile.addBalance(totalMoney);
 		}	
+		
+	}
+	
+	@EventHandler
+	public void ArrowTracing(EntityShootBowEvent e) {
+		
+		if (!(e.getEntity() instanceof Player)) return;
+		if (!e.getBow().getItemMeta().hasEnchant(CustomEnchants.ACCURACY)) return;
+		
+		int enchantLevel = e.getBow().getItemMeta().getEnchantLevel(CustomEnchants.ACCURACY);
+		
+		Player p = (Player) e.getEntity();
+		Projectile arrow = (Projectile) e.getProjectile();
+		
+		final Vector velocity = arrow.getVelocity();
+		
+		new BukkitRunnable() {
+			int despawnCounter = 1;
+			@Override
+			public void run() {
+				if (despawnCounter == 100) {
+					arrow.remove();
+					cancel();
+					return;
+				}
+				despawnCounter++;
+				if (arrow.getNearbyEntities(enchantLevel, enchantLevel, enchantLevel).size() > 0)	{
+					for (Entity mob:arrow.getNearbyEntities(enchantLevel, enchantLevel, enchantLevel)) {
+						if (!(mob instanceof LivingEntity) || (mob instanceof Player) || (mob instanceof ArmorStand)) continue;
+						LivingEntity damageableMob = (LivingEntity) mob;
+						
+						double speed = arrow.getVelocity().length();
+						arrow.setVelocity(velocity.normalize().add(damageableMob.getLocation().toVector().subtract(arrow.getLocation().toVector())).normalize().multiply(speed));
+					}					
+				}					
+			}			
+		}.runTaskTimer(plugin,0,1);
+		
 		
 	}
 	
@@ -599,7 +632,7 @@ public class MobEvents implements Listener{
 	}
 	
 	public Entity getDamagerEntity(Entity damager) {
-		if ((damager instanceof CraftProjectile) || (damager instanceof CraftFireball) || (damager instanceof Projectile)) {
+		if ((damager instanceof CraftProjectile) || (damager instanceof CraftFireball) || (damager instanceof Projectile) || (damager instanceof CraftArrow)) {
 			Projectile arrow = (Projectile) damager;
 			Entity entity = (Entity) arrow.getShooter();
 

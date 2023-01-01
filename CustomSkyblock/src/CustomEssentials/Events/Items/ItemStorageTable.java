@@ -24,6 +24,8 @@ import CustomEssentials.Events.Items.Vanilla.Armor.Leggings.GoldenLeggings;
 import CustomEssentials.Events.Items.Vanilla.Armor.Leggings.IronLeggings;
 import CustomEssentials.Events.Items.Vanilla.Armor.Leggings.LetherLeggings;
 import CustomEssentials.Events.Items.Vanilla.Armor.Leggings.NetheriteLeggings;
+import CustomEssentials.Events.Items.Vanilla.Bows.Bow;
+import CustomEssentials.Events.Items.Vanilla.Bows.CrossBow;
 import CustomEssentials.Events.Items.Vanilla.Swords.DiamondSword;
 import CustomEssentials.Events.Items.Vanilla.Swords.GoldenSword;
 import CustomEssentials.Events.Items.Vanilla.Swords.IronSword;
@@ -257,6 +259,12 @@ public class ItemStorageTable {
 		
 		this.IDtoItemsCore.put(150, new NetheriteBoots());
 		this.CmdtoItemsCore.put("netheriteboots", new NetheriteBoots());
+		
+		this.IDtoItemsCore.put(151, new Bow());
+		this.CmdtoItemsCore.put("bow", new Bow());
+
+		this.IDtoItemsCore.put(152, new CrossBow());
+		this.CmdtoItemsCore.put("crossbow", new CrossBow());
 		
 		
 	}

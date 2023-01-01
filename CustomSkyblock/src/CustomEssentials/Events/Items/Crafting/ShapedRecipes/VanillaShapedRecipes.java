@@ -545,51 +545,7 @@ public class VanillaShapedRecipes {
 		}		
 	}
 	
-	public void addAll6InputsBowItem(ItemStack inputItem1,ItemStack inputItem2,ItemStack inputItem3,ItemStack inputItem4,ItemStack inputItem5,ItemStack inputItem6,ItemStack outputItem) {
-
-		for (int i=1;i<3;i++) {
-			for (int j=0;j<2;j++) {
-				ItemStack[][] inputItems = new ItemStack[4][4];
-				ItemStack[][] resultItems = new ItemStack[2][2];
-				inputItems[i][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
-				inputItems[i-1][j+1] = new ItemStack(inputItem2.getType(),inputItem2.getAmount());
-				inputItems[i+1][j+1] = new ItemStack(inputItem3.getType(),inputItem3.getAmount());
-				inputItems[i-1][j+2] = new ItemStack(inputItem4.getType(),inputItem4.getAmount());
-				inputItems[i][j+2] = new ItemStack(inputItem5.getType(),inputItem5.getAmount());
-				inputItems[i+1][j+2] = new ItemStack(inputItem6.getType(),inputItem6.getAmount());
-				
-				
-				
-				resultItems[0][0] = new ItemStack(outputItem.getType(),outputItem.getAmount());
-				resultItems[0][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
-				resultItems[1][0] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
-				resultItems[1][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
-				recipeOutput.put(inputItems, resultItems);
-			}
-		}
-		
-		for (int i=1;i<3;i++) {
-			for (int j=2;j<4;j++) {
-				ItemStack[][] inputItems = new ItemStack[4][4];
-				ItemStack[][] resultItems = new ItemStack[2][2];
-				inputItems[i][j] = new ItemStack(inputItem1.getType(),inputItem1.getAmount());
-				inputItems[i-1][j-1] = new ItemStack(inputItem2.getType(),inputItem2.getAmount());
-				inputItems[i+1][j-1] = new ItemStack(inputItem3.getType(),inputItem3.getAmount());
-				inputItems[i-1][j-2] = new ItemStack(inputItem4.getType(),inputItem4.getAmount());
-				inputItems[i][j-2] = new ItemStack(inputItem5.getType(),inputItem5.getAmount());
-				inputItems[i+1][j-2] = new ItemStack(inputItem6.getType(),inputItem6.getAmount());
-				
-				
-				
-				resultItems[0][0] = new ItemStack(outputItem.getType(),outputItem.getAmount());
-				resultItems[0][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
-				resultItems[1][0] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
-				resultItems[1][1] = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
-				recipeOutput.put(inputItems, resultItems);
-			}
-		}	
-		
-	}
+	
 	
 	public void addAll7InputUItem(ItemStack inputItem1,ItemStack outputItem) {
 		
@@ -1122,9 +1078,7 @@ public class VanillaShapedRecipes {
 		addAll6InputsItem(new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.ACACIA_PLANKS),new ItemStack(Material.ACACIA_TRAPDOOR,2));
 		addAll6InputsItem(new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.CRIMSON_PLANKS),new ItemStack(Material.CRIMSON_TRAPDOOR,2));
 		addAll6InputsItem(new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.WARPED_PLANKS),new ItemStack(Material.WARPED_TRAPDOOR,2));
-		
-		addAll6InputsBowItem(new ItemStack(Material.STICK),new ItemStack(Material.STICK),new ItemStack(Material.STICK),new ItemStack(Material.STRING),new ItemStack(Material.STRING),new ItemStack(Material.STRING),new ItemStack(Material.BOW));
-		
+	
 		addAll6InputBedItem(new ItemStack(Material.WHITE_WOOL),new ItemStack(Material.OAK_PLANKS),new ItemStack(Material.WHITE_BED));
 		addAll6InputBedItem(new ItemStack(Material.WHITE_WOOL),new ItemStack(Material.BIRCH_PLANKS),new ItemStack(Material.WHITE_BED));
 		addAll6InputBedItem(new ItemStack(Material.WHITE_WOOL),new ItemStack(Material.SPRUCE_PLANKS),new ItemStack(Material.WHITE_BED));
@@ -1401,8 +1355,6 @@ public class VanillaShapedRecipes {
 		addAll7InputUItem(new ItemStack(Material.WARPED_SLAB),new ItemStack(Material.COMPOSTER));
 		
 		addAll7InputUItem(new ItemStack(Material.IRON_INGOT),new ItemStack(Material.CAULDRON));
-		
-		addAll7InputsItem(new ItemStack(Material.STICK),new ItemStack(Material.STRING),new ItemStack(Material.IRON_INGOT),new ItemStack(Material.TRIPWIRE_HOOK),new ItemStack(Material.STICK),new ItemStack(Material.STICK),new ItemStack(Material.STRING),new ItemStack(Material.CROSSBOW));
 		
 		addAll7InputCampItem(new ItemStack(Material.REDSTONE_TORCH),new ItemStack(Material.STONE),new ItemStack(Material.REDSTONE_TORCH),new ItemStack(Material.QUARTZ),new ItemStack(Material.STONE),new ItemStack(Material.REDSTONE_TORCH),new ItemStack(Material.STONE),new ItemStack(Material.COMPARATOR));
 		addAll7InputCampItem(new ItemStack(Material.DIAMOND),new ItemStack(Material.OBSIDIAN),new ItemStack(Material.BOOK),new ItemStack(Material.OBSIDIAN),new ItemStack(Material.OBSIDIAN),new ItemStack(Material.DIAMOND),new ItemStack(Material.OBSIDIAN),new ItemStack(Material.ENCHANTING_TABLE));
