@@ -7,7 +7,6 @@ import java.util.Random;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.v1_17_R1.entity.CraftArmorStand;
@@ -36,6 +35,7 @@ import org.bukkit.event.entity.SpawnerSpawnEvent;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.event.player.PlayerFishEvent.State;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.world.EntitiesLoadEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -139,7 +139,7 @@ public class MobEvents implements Listener{
 		
 		e.setDroppedExp((int) mobMaps.getXPamount(mob));
 		Entity killer = null;
-		if (e.getEntity().getLastDamageCause().getCause() == DamageCause.ENTITY_ATTACK) {
+		if (e.getEntity().getLastDamageCause().getCause() == DamageCause.ENTITY_ATTACK || mob.getLastDamageCause().getCause() == DamageCause.PROJECTILE) {
 			killer  = ((EntityDamageByEntityEvent) e.getEntity().getLastDamageCause()).getDamager();
 		}
 		
@@ -241,6 +241,43 @@ public class MobEvents implements Listener{
 		
 		
 	}
+	
+	@EventHandler
+	public void mobLoading(EntitiesLoadEvent e) {
+		
+		for (Entity entity: e.getEntities()) {
+			if (!(entity instanceof LivingEntity)) continue;
+			if (entity.getCustomName() == null) continue;
+		
+			if (entity.getCustomName().contains("Agressive Golem")) {
+				if (ModelEngineAPI.getOrCreateModeledEntity(entity).getModel("rocky") != null) continue;
+				else {
+					ModelBlueprint model = ModelEngineAPI.getBlueprint("rocky");
+					ActiveModel mob = ModelEngineAPI.createActiveModel(model);
+					ModelEngineAPI.getOrCreateModeledEntity(entity).addModel(mob, true);
+					
+					for (Entity passenger:entity.getPassengers()) {
+						passenger.remove();
+					}	
+					
+					ArmorStand nameTag = (ArmorStand) entity.getWorld().spawn(entity.getLocation().add(0,3,0), ArmorStand.class, armorstand->{
+						armorstand.setInvisible(true);
+						armorstand.setVisible(false);
+						armorstand.setInvulnerable(true);
+						armorstand.setBasePlate(false);
+						armorstand.setCustomName(entity.getCustomName());
+						armorstand.setCustomNameVisible(true);
+						armorstand.setGravity(true);
+						armorstand.setCollidable(false);
+						
+					});
+					entity.addPassenger(nameTag);
+				}
+				
+			}
+		}
+	}
+	
 	
 	@EventHandler
 	public void fishingEvent(PlayerFishEvent e) {
@@ -380,6 +417,11 @@ public class MobEvents implements Listener{
 			return;	
 		}
 		if ((e.getEntity().getCustomName() == null && e.getEntity().getType() != EntityType.PLAYER)) {
+			e.setCancelled(true);
+			return;
+		}
+		
+		if (e.getEntity().getCustomName().contains("starfiredamage") && e.getEntity() instanceof ArmorStand) {
 			e.setCancelled(true);
 			return;
 		}

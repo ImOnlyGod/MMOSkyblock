@@ -39,6 +39,15 @@ public class Stats {
 	private int luck;
 	private int defaultLuck;
 	
+	private int rangedDamage;
+	private double attackSpeed;
+	private double omnivamp;	
+	
+	private double miningFortune;
+	private double farmingFortune;
+	private double lootingFortune;
+	private double fishingFortune;
+	
 
 	public int getLuck() {
 		return luck;

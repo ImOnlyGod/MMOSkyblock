@@ -6,12 +6,16 @@ public abstract class Skills {
 	private Double currentXP;
 	private Double maxXP;
 	private double previousXpAmountGained;
+	private double xpMultiplier;
+	private double globalXpMultiplier;
 	
 	public Skills() {
 		
 		this.setLevel(0);
 		this.setCurrentXP(0.0);
 		this.setMaxXP(10.0);
+		this.setXpMultiplier(1);
+		this.setGlobalXpMultiplier(1);
 	}
 	
 	public void levelUp() {
@@ -41,7 +45,7 @@ public abstract class Skills {
 	}
 	
 	public void addCurrentXP(Double amount) {
-		this.currentXP = this.currentXP + amount;
+		this.currentXP = this.getGlobalXpMultiplier() * this.xpMultiplier * (this.currentXP + amount);
 		this.setPreviousXpAmountGained(amount);
 	}
 
@@ -59,6 +63,22 @@ public abstract class Skills {
 
 	public void setPreviousXpAmountGained(double previousXpAmountGained) {
 		this.previousXpAmountGained = previousXpAmountGained;
+	}
+
+	public double getXpMultiplier() {
+		return xpMultiplier;
+	}
+
+	public void setXpMultiplier(double xpMultiplier) {
+		this.xpMultiplier = xpMultiplier;
+	}
+
+	public double getGlobalXpMultiplier() {
+		return globalXpMultiplier;
+	}
+
+	public void setGlobalXpMultiplier(double globalXpMultiplier) {
+		this.globalXpMultiplier = globalXpMultiplier;
 	}
 	
 }

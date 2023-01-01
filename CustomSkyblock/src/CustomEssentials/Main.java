@@ -494,6 +494,18 @@ public class Main extends JavaPlugin{
 			playerData.set("ForagingSkill.MaxXp", foraging.getMaxXP());
 			playerData.set("MiningSkill.MaxXp", mining.getMaxXP());
 			
+			playerData.set("CombatSkill.xpMultiplier", combat.getXpMultiplier());
+			playerData.set("FarmingSkill.xpMultiplier", farming.getXpMultiplier());
+			playerData.set("FishingSkill.xpMultiplier", fishing.getXpMultiplier());
+			playerData.set("ForagingSkill.xpMultiplier", foraging.getXpMultiplier());
+			playerData.set("MiningSkill.xpMultiplier", mining.getXpMultiplier());
+			
+			playerData.set("CombatSkill.globalXpMultiplier", combat.getGlobalXpMultiplier());
+			playerData.set("FarmingSkill.globalXpMultiplier", farming.getGlobalXpMultiplier());
+			playerData.set("FishingSkill.globalXpMultiplier", fishing.getGlobalXpMultiplier());
+			playerData.set("ForagingSkill.globalXpMultiplier", foraging.getGlobalXpMultiplier());
+			playerData.set("MiningSkill.globalXpMultiplier", mining.getGlobalXpMultiplier());
+			
 			//CURRENT PATH
 			setPathStats(profile.getPath(),"GeneralPath",playerData);
 			
@@ -650,6 +662,18 @@ public class Main extends JavaPlugin{
 		fishing.setMaxXP((Double) playerData.get("FishingSkill.MaxXp"));
 		foraging.setMaxXP((Double) playerData.get("ForagingSkill.MaxXp"));
 		mining.setMaxXP((Double) playerData.get("MiningSkill.MaxXp"));
+		
+		combat.setXpMultiplier(((Double) playerData.get("CombatSkill.xpMultiplier")));
+		farming.setXpMultiplier((Double) playerData.get("FarmingSkill.xpMultiplier"));
+		fishing.setXpMultiplier((Double) playerData.get("FishingSkill.xpMultiplier"));
+		foraging.setXpMultiplier((Double) playerData.get("ForagingSkill.xpMultiplier"));
+		mining.setXpMultiplier((Double) playerData.get("MiningSkill.xpMultiplier"));
+		
+		combat.setGlobalXpMultiplier(((Double) playerData.get("CombatSkill.globalXpMultiplier")));
+		farming.setGlobalXpMultiplier((Double) playerData.get("FarmingSkill.globalXpMultiplier"));
+		fishing.setGlobalXpMultiplier((Double) playerData.get("FishingSkill.globalXpMultiplier"));
+		foraging.setGlobalXpMultiplier((Double) playerData.get("ForagingSkill.globalXpMultiplier"));
+		mining.setGlobalXpMultiplier((Double) playerData.get("MiningSkill.globalXpMultiplier"));
 		
 		//GENERAL PATH
 		playerProfile.setPath(playerProfile.getPaths().get(playerData.get("GeneralPath.Name")));
