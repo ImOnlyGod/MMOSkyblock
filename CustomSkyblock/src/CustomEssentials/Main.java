@@ -17,6 +17,7 @@ import CustomEssentials.Commands.CustomSpawnerCommand;
 import CustomEssentials.Commands.EatCommand;
 import CustomEssentials.Commands.FlyCommand;
 import CustomEssentials.Commands.WeaponTabCommand;
+import CustomEssentials.Commands.PlayerEconomy.AdminEcoCommand;
 import CustomEssentials.Commands.PlayerEconomy.BalanceCommand;
 import CustomEssentials.Commands.PlayerEconomy.PayCommand;
 import CustomEssentials.Events.PlayerProfileManager;
@@ -166,6 +167,7 @@ public class Main extends JavaPlugin{
 		new EatCommand(this);
 		new BalanceCommand(this);
 		new PayCommand(this);
+		new AdminEcoCommand(this);
 		
 		this.generateShopGui();		
 		

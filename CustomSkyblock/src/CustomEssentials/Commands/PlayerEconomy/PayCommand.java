@@ -35,7 +35,7 @@ public class PayCommand implements CommandExecutor {
 		for ( Player p: Bukkit.getOnlinePlayers()) {
 			if (p == Bukkit.getPlayer(args[0])) {
 				valid = true;
-				
+				break;
 			}
 		}
 			
