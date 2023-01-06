@@ -77,6 +77,7 @@ public class CombatSkill extends Skills {
 		this.mobXp.put("§6§lSpider", (float) 1);
 		this.mobXp.put("§6§lWolf", (float) 1);
 		this.mobXp.put("§6§lZombified Piglin", (float) 1.0);
+		this.mobXp.put("§6§lTrader Llama", (float) 1);
 		
 		this.mobXp.put("§6§lBlaze", (float) 1);
 		this.mobXp.put("§6§lCreeper", (float) 1);

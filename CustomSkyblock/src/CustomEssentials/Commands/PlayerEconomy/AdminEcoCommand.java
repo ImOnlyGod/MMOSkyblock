@@ -97,6 +97,8 @@ public class AdminEcoCommand implements TabExecutor{
 	public void executeGive(Player target, double amount) {
 		Profile targetProfile = this.plugin.getProfileManager().getPlayerProfile(target);
 		
+		if (amount < 0) return;
+		
 		targetProfile.addBalance(amount);
 
 		target.sendMessage(Utils.chat(plugin.getConfig().getString("BalanceCommand.reciever_pay_msg") + CurrencyUtils.currencyFormat(amount)));

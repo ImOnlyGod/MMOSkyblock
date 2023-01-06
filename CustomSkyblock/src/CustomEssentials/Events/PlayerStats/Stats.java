@@ -462,6 +462,38 @@ public class Stats {
 		int scalar = (level+"").length();
 		
 	}
+	
+	public void levelDownMining(int level) {
+		int scalar = (level+"").length();
+		this.defaultArmor -= scalar;
+		this.defaultMR -= (int)scalar/2;
+		
+	}
+
+	public void levelDownFarming(int level) {
+		int scalar = (level+"").length();
+		this.defaultHealth -= (int) 1.2*(scalar+1);
+		
+	}
+	
+	public void levelDownCombat(int level) {
+		int scalar = (level+"").length();
+		this.defaultCritChance -= 0.25;
+		this.defaultCritDmg -= (scalar * 0.1);
+		
+	}
+	
+	public void levelDownForaging(int level) {
+		int scalar = (level+"").length();
+		this.defaultPhysicalDamage -= 2*(scalar);
+		this.defaultSpeed -= 1;
+		
+	}
+	
+	public void levelDownFishing(int level) {
+		int scalar = (level+"").length();
+		
+	}
 
 	public int getDefaultMagicDamage() {
 		return defaultMagicDamage;

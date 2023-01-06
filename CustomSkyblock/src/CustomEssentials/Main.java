@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
 
+import CustomEssentials.Commands.AdminSkillCommand;
 import CustomEssentials.Commands.BaseCommands;
 import CustomEssentials.Commands.CustomMobsCommand;
 import CustomEssentials.Commands.CustomSpawnerCommand;
@@ -168,6 +169,7 @@ public class Main extends JavaPlugin{
 		new BalanceCommand(this);
 		new PayCommand(this);
 		new AdminEcoCommand(this);
+		new AdminSkillCommand(this);
 		
 		this.generateShopGui();		
 		
@@ -225,7 +227,7 @@ public class Main extends JavaPlugin{
 					
 					p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(mining));
 					
-					if (profile.getMining().getCurrentXP() >= profile.getMining().getMaxXP()) {
+					while (profile.getMining().getCurrentXP() >= profile.getMining().getMaxXP()) {
 						profile.getMining().levelUp();
 						int level = profile.getMining().getLevel();
 						profile.getStats().levelUpMining(level);
@@ -241,7 +243,7 @@ public class Main extends JavaPlugin{
 					
 					p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(foraging));
 					
-					if (profile.getForaging().getCurrentXP() >= profile.getForaging().getMaxXP()) {
+					while (profile.getForaging().getCurrentXP() >= profile.getForaging().getMaxXP()) {
 						profile.getForaging().levelUp();
 						int level = profile.getForaging().getLevel();
 						profile.getStats().levelUpForaging(level);
@@ -258,7 +260,7 @@ public class Main extends JavaPlugin{
 					
 					p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(farming));
 					
-					if (profile.getFarming().getCurrentXP() >= profile.getFarming().getMaxXP()) {
+					while (profile.getFarming().getCurrentXP() >= profile.getFarming().getMaxXP()) {
 						profile.getFarming().levelUp();
 						int level = profile.getFarming().getLevel();
 						profile.getStats().levelUpFarming(level);
@@ -275,7 +277,7 @@ public class Main extends JavaPlugin{
 					
 					p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(combat));
 					
-					if (profile.getCombat().getCurrentXP() >= profile.getCombat().getMaxXP()) {
+					while (profile.getCombat().getCurrentXP() >= profile.getCombat().getMaxXP()) {
 						profile.getCombat().levelUp();
 						int level = profile.getCombat().getLevel();
 						profile.getStats().levelUpCombat(level);
@@ -291,7 +293,7 @@ public class Main extends JavaPlugin{
 					
 					p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(fishing));
 					
-					if (profile.getFishing().getCurrentXP() >= profile.getFishing().getMaxXP()) {
+					while (profile.getFishing().getCurrentXP() >= profile.getFishing().getMaxXP()) {
 						profile.getFishing().levelUp();
 						int level = profile.getFishing().getLevel();
 						profile.getStats().levelUpFishing(level);
