@@ -27,7 +27,9 @@ public class ItemStats {
 		Stats pathStats = profileManager.getPlayerProfile(p).getPath().getStats();
 		stats.setTotalMana(stats.getDefaultMana() + pathStats.getDefaultMana() + pathStats.getMana());
 		stats.setPhysicalDamage(stats.getDefaultPhysicalDamage() + pathStats.getDefaultPhysicalDamage());
-		stats.setBurstDamage(stats.getDefaultBurstDmg() + pathStats.getDefaultBurstDmg());
+		stats.setBurstDamage(stats.getDefaultBurstDmg() + pathStats.getDefaultBurstDmg() + pathStats.getBurstDamage());
+		stats.setBurstChance(stats.getDefaultBurstChance() + pathStats.getDefaultBurstChance() + pathStats.getBurstChance());
+		stats.setMagicDamage(stats.getDefaultMagicDamage() + pathStats.getDefaultMagicDamage() + pathStats.getMagicDamage());
 		stats.setCriticalChance(stats.getDefaultCritChance() + pathStats.getDefaultCritChance() + pathStats.getCriticalChance());
 		stats.setCriticalDamage(stats.getDefaultCritDmg() + pathStats.getDefaultCritDmg() + pathStats.getCriticalDamage());
 		stats.setArmor(stats.getDefaultArmor() + pathStats.getDefaultArmor());
@@ -36,12 +38,23 @@ public class ItemStats {
 		stats.setSpeed(stats.getDefaultSpeed() + pathStats.getDefaultSpeed());
 		stats.setManaRegen(Math.max(1,stats.getDefaultManaRegen()+pathStats.getManaRegen()));
 		stats.setLuck(stats.getDefaultLuck() + pathStats.getDefaultLuck());
+		stats.setAttackSpeed(stats.getDefaultAttackSpeed() + pathStats.getDefaultAttackSpeed());
+		stats.setOmnivamp(stats.getDefaultOmnivamp() + pathStats.getDefaultOmnivamp() + pathStats.getOmnivamp());
+		stats.setRangedDamage(stats.getDefaultRangedDamage() + pathStats.getDefaultRangedDamage() + pathStats.getRangedDamage());
+		stats.setLifeSteal(stats.getDefaultLifeSteal() + pathStats.getDefaultLifeSteal() + pathStats.getLifeSteal());
+		stats.setMiningFortune(stats.getDefaultMiningFortune() + pathStats.getDefaultMiningFortune() + pathStats.getMiningFortune());
+		stats.setFarmingFortune(stats.getDefaultFarmingFortune() + pathStats.getDefaultFarmingFortune() + pathStats.getFarmingFortune());
+		stats.setLootingFortune(stats.getDefaultLootingFortune() + pathStats.getDefaultLootingFortune() + pathStats.getLootingFortune());
+		stats.setFishingFortune(stats.getDefaultFishingFortune() + pathStats.getDefaultFishingFortune() + pathStats.getFishingFortune());
+		
 		p.getAttribute(Attribute.GENERIC_ARMOR).setBaseValue(stats.getArmor() + pathStats.getArmor());
+		p.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(stats.getAttackSpeed() + pathStats.getAttackSpeed());
 		p.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(stats.getHealth() + pathStats.getHealth());
 		p.setHealthScaled(true);
 		p.setHealthScale(20);
 		p.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(stats.getPhysicalDamage()  +  pathStats.getPhysicalDamage());	
 		p.setWalkSpeed((float) ((stats.getSpeed() + pathStats.getSpeed())/500f));
+
 	}
 	
 	public void setItemStats() {
@@ -63,6 +76,15 @@ public class ItemStats {
 		setItemSpeedStat();
 		setItemLuckStat();
 		setItemBurstDamageStat();
+		setItemMagicDamageStat();
+		setItemAttackSpeedStat();
+		setItemOmnivampStat();
+		setItemLifeStealStat();
+		setItemRangedDamageStat();
+		setItemMiningFortuneStat();
+		setItemFarmingFortuneStat();
+		setItemLootingFortuneStat();
+		setItemFishingFortuneStat();
 		
 	}
 		
@@ -229,6 +251,169 @@ public class ItemStats {
 		}
 		stats.setMagicResist(totalMR);	
 	}
+	
+	public void setItemMagicDamageStat() {
+		Stats stats = profileManager.getPlayerProfile(p).getStats();
+		Stats pathStats = profileManager.getPlayerProfile(p).getPath().getStats();
+		int totalMagicDamage = stats.getDefaultMagicDamage() + pathStats.getDefaultMagicDamage() + pathStats.getMagicDamage();
+		ItemStorageTable itemTable = new ItemStorageTable();
+		
+		for (int i = 0; i < items.size(); i++) {
+			int ID = getItemCustomID(items.get(i));
+			ItemsCore item = itemTable.getIDtoItemsCore().get(ID);
+			if (item == null) continue;
+			item.createItem(1);
+			int mr= item.getItemMagicDamage();
+			totalMagicDamage = totalMagicDamage + mr;
+			
+		}
+		stats.setMagicDamage(totalMagicDamage);	
+	}
+	
+	public void setItemAttackSpeedStat() {
+		Stats stats = profileManager.getPlayerProfile(p).getStats();
+		Stats pathStats = profileManager.getPlayerProfile(p).getPath().getStats();
+		double totalAttackSpeed = stats.getDefaultAttackSpeed() + pathStats.getDefaultAttackSpeed() + pathStats.getAttackSpeed();
+		ItemStorageTable itemTable = new ItemStorageTable();
+		
+		for (int i = 0; i < items.size(); i++) {
+			int ID = getItemCustomID(items.get(i));
+			ItemsCore item = itemTable.getIDtoItemsCore().get(ID);
+			if (item == null) continue;
+			item.createItem(1);
+			double mr= item.getItemAttackSpeed();
+			totalAttackSpeed = totalAttackSpeed + mr;
+			
+		}
+		stats.setAttackSpeed(totalAttackSpeed);	
+		p.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(totalAttackSpeed);
+	}
+	
+	public void setItemOmnivampStat() {
+		Stats stats = profileManager.getPlayerProfile(p).getStats();
+		Stats pathStats = profileManager.getPlayerProfile(p).getPath().getStats();
+		double totalOmnivamp = stats.getDefaultOmnivamp() + pathStats.getDefaultOmnivamp() + pathStats.getOmnivamp();
+		ItemStorageTable itemTable = new ItemStorageTable();
+		
+		for (int i = 0; i < items.size(); i++) {
+			int ID = getItemCustomID(items.get(i));
+			ItemsCore item = itemTable.getIDtoItemsCore().get(ID);
+			if (item == null) continue;
+			item.createItem(1);
+			double mr= item.getItemOmnivamp();
+			totalOmnivamp = totalOmnivamp + mr;
+			
+		}
+		stats.setOmnivamp(totalOmnivamp);	
+	}
+	
+	public void setItemLifeStealStat() {
+		Stats stats = profileManager.getPlayerProfile(p).getStats();
+		Stats pathStats = profileManager.getPlayerProfile(p).getPath().getStats();
+		double totalLifeSteal = stats.getDefaultLifeSteal() + pathStats.getDefaultLifeSteal() + pathStats.getLifeSteal();
+		ItemStorageTable itemTable = new ItemStorageTable();
+		
+		for (int i = 0; i < items.size(); i++) {
+			int ID = getItemCustomID(items.get(i));
+			ItemsCore item = itemTable.getIDtoItemsCore().get(ID);
+			if (item == null) continue;
+			item.createItem(1);
+			double mr = item.getItemLifeSteal();
+			totalLifeSteal = totalLifeSteal + mr;
+			
+		}
+		stats.setLifeSteal(totalLifeSteal);	
+	}
+	
+	public void setItemRangedDamageStat() {
+		Stats stats = profileManager.getPlayerProfile(p).getStats();
+		Stats pathStats = profileManager.getPlayerProfile(p).getPath().getStats();
+		int totalRangedDamage = stats.getDefaultRangedDamage() + pathStats.getDefaultRangedDamage() + pathStats.getRangedDamage();
+		ItemStorageTable itemTable = new ItemStorageTable();
+		
+		for (int i = 0; i < items.size(); i++) {
+			int ID = getItemCustomID(items.get(i));
+			ItemsCore item = itemTable.getIDtoItemsCore().get(ID);
+			if (item == null) continue;
+			item.createItem(1);
+			int mr= item.getItemRangedDamage();
+			totalRangedDamage = totalRangedDamage + mr;
+			
+		}
+		stats.setRangedDamage(totalRangedDamage);	
+	}
+	
+	public void setItemMiningFortuneStat() {
+		Stats stats = profileManager.getPlayerProfile(p).getStats();
+		Stats pathStats = profileManager.getPlayerProfile(p).getPath().getStats();
+		double totalMiningFortune = stats.getDefaultMiningFortune() + pathStats.getDefaultMiningFortune() + pathStats.getMiningFortune();
+		ItemStorageTable itemTable = new ItemStorageTable();
+		
+		for (int i = 0; i < items.size(); i++) {
+			int ID = getItemCustomID(items.get(i));
+			ItemsCore item = itemTable.getIDtoItemsCore().get(ID);
+			if (item == null) continue;
+			item.createItem(1);
+			double mr= item.getItemMiningFortune();
+			totalMiningFortune = totalMiningFortune + mr;
+			
+		}
+		stats.setMiningFortune(totalMiningFortune);	
+	}
+	
+	public void setItemFarmingFortuneStat() {
+		Stats stats = profileManager.getPlayerProfile(p).getStats();
+		Stats pathStats = profileManager.getPlayerProfile(p).getPath().getStats();
+		double totalFarmingFortune = stats.getDefaultFarmingFortune() + pathStats.getDefaultFarmingFortune() + pathStats.getFarmingFortune();
+		ItemStorageTable itemTable = new ItemStorageTable();
+		
+		for (int i = 0; i < items.size(); i++) {
+			int ID = getItemCustomID(items.get(i));
+			ItemsCore item = itemTable.getIDtoItemsCore().get(ID);
+			if (item == null) continue;
+			item.createItem(1);
+			double mr= item.getItemFarmingFortune();
+			totalFarmingFortune = totalFarmingFortune + mr;
+			
+		}
+		stats.setFarmingFortune(totalFarmingFortune);	
+	}
+	
+	public void setItemLootingFortuneStat() {
+		Stats stats = profileManager.getPlayerProfile(p).getStats();
+		Stats pathStats = profileManager.getPlayerProfile(p).getPath().getStats();
+		double totalLootingFortune = stats.getDefaultLootingFortune() + pathStats.getDefaultLootingFortune() + pathStats.getLootingFortune();
+		ItemStorageTable itemTable = new ItemStorageTable();
+		
+		for (int i = 0; i < items.size(); i++) {
+			int ID = getItemCustomID(items.get(i));
+			ItemsCore item = itemTable.getIDtoItemsCore().get(ID);
+			if (item == null) continue;
+			item.createItem(1);
+			double mr= item.getItemLootingFortune();
+			totalLootingFortune = totalLootingFortune + mr;
+			
+		}
+		stats.setLootingFortune(totalLootingFortune);	
+	}
+	
+	public void setItemFishingFortuneStat() {
+		Stats stats = profileManager.getPlayerProfile(p).getStats();
+		Stats pathStats = profileManager.getPlayerProfile(p).getPath().getStats();
+		double totalFishingFortune = stats.getDefaultFishingFortune() + pathStats.getDefaultFishingFortune() + pathStats.getFishingFortune();
+		ItemStorageTable itemTable = new ItemStorageTable();
+		
+		for (int i = 0; i < items.size(); i++) {
+			int ID = getItemCustomID(items.get(i));
+			ItemsCore item = itemTable.getIDtoItemsCore().get(ID);
+			if (item == null) continue;
+			item.createItem(1);
+			double mr= item.getItemFishingFortune();
+			totalFishingFortune = totalFishingFortune + mr;
+			
+		}
+		stats.setFishingFortune(totalFishingFortune);	
+	}	
 	
 	public void setItemSpeedStat() {
 		Stats stats = profileManager.getPlayerProfile(p).getStats();

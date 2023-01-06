@@ -15,6 +15,7 @@ import org.bukkit.craftbukkit.v1_17_R1.entity.CraftFireball;
 import org.bukkit.craftbukkit.v1_17_R1.entity.CraftLightningStrike;
 import org.bukkit.craftbukkit.v1_17_R1.entity.CraftProjectile;
 import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Fireball;
@@ -206,7 +207,6 @@ public class MobEvents implements Listener{
 	
 	@EventHandler
 	public void ArrowTracing(EntityShootBowEvent e) {
-		
 		if (!(e.getEntity() instanceof Player)) return;
 		if (!e.getBow().getItemMeta().hasEnchant(CustomEnchants.ACCURACY)) return;
 		
@@ -456,6 +456,16 @@ public class MobEvents implements Listener{
 					p.setFireTicks(0);
 				}				
 			}			
+		}
+		
+		if (e.getDamager() instanceof CraftArrow) {
+			Arrow arrow = (Arrow) e.getDamager();
+			if (arrow.getShooter() instanceof Player) {
+				Player shooter = (Player) arrow.getShooter();
+				Stats shooterStats = this.plugin.getProfileManager().getPlayerProfile(shooter).getStats();
+				e.setDamage(shooterStats.getRangedDamage());
+			}
+			else e.setDamage(50);
 		}
 		
 		//ADD ARROW DMG SKELETON

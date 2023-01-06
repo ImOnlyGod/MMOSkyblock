@@ -29,7 +29,78 @@ public class ItemsCore {
 	private double itemLifeSteal = 0;
 	private int itemBasePhysicalDamage = 0;
 	private int itemLuck = 0;
+	private int itemRangedDamage = 0;
+	private double itemAttackSpeed = 0;
+	private double itemOmnivamp = 0;
+	private double itemMiningFortune = 0;
+	private double itemFarmingFortune = 0;
+	private double itemLootingFortune = 0;
+	private double itemFishingFortune = 0;
 	
+	public int getItemmagicResist() {
+		return itemmagicResist;
+	}
+
+	public void setItemmagicResist(int itemmagicResist) {
+		this.itemmagicResist = itemmagicResist;
+	}
+
+	public int getItemRangedDamage() {
+		return itemRangedDamage;
+	}
+
+	public void setItemRangedDamage(int itemRangedDamage) {
+		this.itemRangedDamage = itemRangedDamage;
+	}
+
+	public double getItemAttackSpeed() {
+		return itemAttackSpeed;
+	}
+
+	public void setItemAttackSpeed(double itemAttackSpeed) {
+		this.itemAttackSpeed = itemAttackSpeed;
+	}
+
+	public double getItemOmnivamp() {
+		return itemOmnivamp;
+	}
+
+	public void setItemOmnivamp(double itemOmnivamp) {
+		this.itemOmnivamp = itemOmnivamp;
+	}
+
+	public double getItemMiningFortune() {
+		return itemMiningFortune;
+	}
+
+	public void setItemMiningFortune(double itemMiningFortune) {
+		this.itemMiningFortune = itemMiningFortune;
+	}
+
+	public double getItemFarmingFortune() {
+		return itemFarmingFortune;
+	}
+
+	public void setItemFarmingFortune(double itemFarmingFortune) {
+		this.itemFarmingFortune = itemFarmingFortune;
+	}
+
+	public double getItemLootingFortune() {
+		return itemLootingFortune;
+	}
+
+	public void setItemLootingFortune(double itemLootingFortune) {
+		this.itemLootingFortune = itemLootingFortune;
+	}
+
+	public double getItemFishingFortune() {
+		return itemFishingFortune;
+	}
+
+	public void setItemFishingFortune(double itemFishingFortune) {
+		this.itemFishingFortune = itemFishingFortune;
+	}
+
 	private String itemName;
 	
 	public void itemAbility(Player p, Profile profile, Main plugin) {

@@ -22,8 +22,7 @@ public class CrossBow extends ItemsCore{
 		ItemMeta meta = item.getItemMeta();
 		
 		//ADD BASE ARMOR LATER
-		setItemPhysicalDamage(0);
-		setItemBasePhysicalDamage(0);
+		setItemRangedDamage(15);
 		
 		setItemFlags(meta);
 		//Set name and lore
@@ -43,7 +42,7 @@ public class CrossBow extends ItemsCore{
 	private ArrayList<String> createLore(ItemMeta meta) {
 		ArrayList<String> lore = new ArrayList<String>();	
 		lore.add(Utils.chat("                          "));
-		lore.add(Utils.chat("&cDamage:&6 +"+ getItemPhysicalDamage() +"⚔"));
+		lore.add(Utils.chat("&cRanged Damage:&6 +"+ getItemRangedDamage() +"⚔"));
 		lore.add(Utils.chat("                          "));
 		lore.add(Utils.chat("&6&lDescription: &7None"));
 		lore.add(Utils.chat("&6&lAbility: &7None"));

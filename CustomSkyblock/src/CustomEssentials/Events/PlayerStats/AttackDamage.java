@@ -9,7 +9,7 @@ public class AttackDamage implements Listener{
 public void setInitalDamage(Player player) {
 		
 		//player.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(10);
-		player.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(999999999);
+		//player.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(999999999);
 		
 			
 	}

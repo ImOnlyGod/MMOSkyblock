@@ -48,28 +48,23 @@ public class Stats {
 	private double lootingFortune;
 	private double fishingFortune;
 	
-
-	public int getLuck() {
-		return luck;
-	}
-
-	public void setLuck(int luck) {
-		this.luck = luck;
-	}
-
-	public int getDefaultLuck() {
-		return defaultLuck;
-	}
-
-	public void setDefaultLuck(int defaultLuck) {
-		this.defaultLuck = defaultLuck;
-	}
+	private int defaultRangedDamage;
+	private double defaultAttackSpeed;
+	private double defaultOmnivamp;	
+	
+	private double defaultMiningFortune;
+	private double defaultFarmingFortune;
+	private double defaultLootingFortune;
+	private double defaultFishingFortune;	
 
 	public Stats(int health, int armor, int magicResist, int physicalDamage, int magicDamage, int mana, int totalMana,
 			int speed, double criticalDamage, double criticalChance, double burstDamage, double burstChance, 
 			int cooldownReduction,int defaultMana, int defaultHealth, int defaultArmor, int defaultMR, int defaultSpeed,
 			double defaultCritDmg, double defaultCritChance, double defaultBurstDmg, double defaultBurstChance, 
-			double defaultCDR, int defaultPhysicalDamage, double lifeSteal, double defaultLifeSteal,int defaultMagicDamage, int manaRegen, int defaultManaRegen, int luck, int defaultLuck) {
+			double defaultCDR, int defaultPhysicalDamage, double lifeSteal, double defaultLifeSteal,int defaultMagicDamage, 
+			int manaRegen, int defaultManaRegen, int luck, int defaultLuck, int rangedDamage, int defaultRangedDamage,
+			double attackSpeed, double omnivamp, double miningFortune, double farmingFortune, double lootingFortune, double fishingFortune,
+			double defaultAttackSpeed, double defaultOmnivamp, double defaultMiningFortune, double defaultFarmingFortune, double defaultLootingFortune, double defaultFishingFortune) {
 		this.health = health;
 		this.armor = armor;
 		this.magicResist= magicResist;
@@ -101,6 +96,20 @@ public class Stats {
 		this.defaultManaRegen = defaultManaRegen;
 		this.luck = luck;
 		this.defaultLuck = defaultLuck;
+		this.rangedDamage = rangedDamage;
+		this.attackSpeed = attackSpeed;
+		this.omnivamp = omnivamp;
+		this.miningFortune = miningFortune;
+		this.farmingFortune = farmingFortune;
+		this.lootingFortune = lootingFortune;
+		this.fishingFortune = fishingFortune;
+		this.defaultRangedDamage = defaultRangedDamage;
+		this.defaultAttackSpeed = defaultAttackSpeed;
+		this.defaultOmnivamp = defaultOmnivamp;
+		this.defaultMiningFortune = defaultMiningFortune;
+		this.defaultFarmingFortune = defaultFarmingFortune;
+		this.defaultLootingFortune = defaultLootingFortune;
+		this.defaultFishingFortune = defaultFishingFortune;
 	}
 	
 	public Stats() {
@@ -134,7 +143,21 @@ public class Stats {
 		this.manaRegen = 1;
 		this.defaultManaRegen = 1;
 		this.luck = 0;
-		this.defaultLuck = 0;		
+		this.defaultLuck = 0;	
+		this.rangedDamage = 0;
+		this.attackSpeed = 1;
+		this.omnivamp = 0;
+		this.miningFortune = 0;
+		this.farmingFortune = 0;
+		this.lootingFortune = 0;
+		this.fishingFortune = 0;
+		this.defaultRangedDamage = 0;
+		this.defaultAttackSpeed = 1;
+		this.defaultOmnivamp = 0;
+		this.defaultMiningFortune = 0;
+		this.defaultFarmingFortune = 0;
+		this.defaultLootingFortune = 0;
+		this.defaultFishingFortune = 0;
 	}
 	
 	public void resetStats() {
@@ -517,6 +540,134 @@ public class Stats {
 
 	public void setDefaultManaRegen(int defaultManaRegen) {
 		this.defaultManaRegen = defaultManaRegen;
+	}
+
+	public int getLuck() {
+		return luck;
+	}
+
+	public void setLuck(int luck) {
+		this.luck = luck;
+	}
+
+	public int getDefaultLuck() {
+		return defaultLuck;
+	}
+
+	public void setDefaultLuck(int defaultLuck) {
+		this.defaultLuck = defaultLuck;
+	}
+
+	public int getRangedDamage() {
+		return rangedDamage;
+	}
+
+	public void setRangedDamage(int rangedDamage) {
+		this.rangedDamage = rangedDamage;
+	}
+
+	public double getAttackSpeed() {
+		return attackSpeed;
+	}
+
+	public void setAttackSpeed(double attackSpeed) {
+		this.attackSpeed = attackSpeed;
+	}
+
+	public double getOmnivamp() {
+		return omnivamp;
+	}
+
+	public void setOmnivamp(double omnivamp) {
+		this.omnivamp = omnivamp;
+	}
+
+	public double getMiningFortune() {
+		return miningFortune;
+	}
+
+	public void setMiningFortune(double miningFortune) {
+		this.miningFortune = miningFortune;
+	}
+
+	public double getFarmingFortune() {
+		return farmingFortune;
+	}
+
+	public void setFarmingFortune(double farmingFortune) {
+		this.farmingFortune = farmingFortune;
+	}
+
+	public double getLootingFortune() {
+		return lootingFortune;
+	}
+
+	public void setLootingFortune(double lootingFortune) {
+		this.lootingFortune = lootingFortune;
+	}
+
+	public double getFishingFortune() {
+		return fishingFortune;
+	}
+
+	public void setFishingFortune(double fishingFortune) {
+		this.fishingFortune = fishingFortune;
+	}
+
+	public int getDefaultRangedDamage() {
+		return defaultRangedDamage;
+	}
+
+	public void setDefaultRangedDamage(int defaultRangedDamage) {
+		this.defaultRangedDamage = defaultRangedDamage;
+	}
+
+	public double getDefaultAttackSpeed() {
+		return defaultAttackSpeed;
+	}
+
+	public void setDefaultAttackSpeed(double defaultAttackSpeed) {
+		this.defaultAttackSpeed = defaultAttackSpeed;
+	}
+
+	public double getDefaultOmnivamp() {
+		return defaultOmnivamp;
+	}
+
+	public void setDefaultOmnivamp(double defaultOmnivamp) {
+		this.defaultOmnivamp = defaultOmnivamp;
+	}
+
+	public double getDefaultMiningFortune() {
+		return defaultMiningFortune;
+	}
+
+	public void setDefaultMiningFortune(double defaultMiningFortune) {
+		this.defaultMiningFortune = defaultMiningFortune;
+	}
+
+	public double getDefaultFarmingFortune() {
+		return defaultFarmingFortune;
+	}
+
+	public void setDefaultFarmingFortune(double defaultFarmingFortune) {
+		this.defaultFarmingFortune = defaultFarmingFortune;
+	}
+
+	public double getDefaultLootingFortune() {
+		return defaultLootingFortune;
+	}
+
+	public void setDefaultLootingFortune(double defaultLootingFortune) {
+		this.defaultLootingFortune = defaultLootingFortune;
+	}
+
+	public double getDefaultFishingFortune() {
+		return defaultFishingFortune;
+	}
+
+	public void setDefaultFishingFortune(double defaultFishingFortune) {
+		this.defaultFishingFortune = defaultFishingFortune;
 	}
 
 }
