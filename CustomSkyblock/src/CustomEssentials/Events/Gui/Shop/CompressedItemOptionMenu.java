@@ -28,7 +28,14 @@ public class CompressedItemOptionMenu {
 	}
 	
 	public void createBuyGui(ItemStack item, Player p, ItemPrices prices) {
-		this.buyGui = Bukkit.createInventory(null, 27,Utils.chat("&c&lBuy Options&8&l " + item.getType()));
+		String name = item.getType().name().replace('_', ' ').toLowerCase();
+		String itemName =   item.getType().name().toUpperCase().substring(0,1);
+		for (int i = 1; i<  item.getType().name().length();i++) {
+			if (name.charAt(i-1) == ' ') itemName += name.toUpperCase().charAt(i);
+
+			else itemName += name.charAt(i);
+		}	
+		this.buyGui = Bukkit.createInventory(null, 27,Utils.chat("&c&lBuy Options&8&l " + itemName));
 		
 		//Glass Slots
 		for (int i = 0; i < this.buyGui.getSize(); i++) {
@@ -51,12 +58,19 @@ public class CompressedItemOptionMenu {
 	}
 	
 	public void createSellGui(ItemStack item, Player p, ItemPrices prices) {
-		this.sellGui = Bukkit.createInventory(null, 36,Utils.chat("&a&lSell Options&8&l " + item.getType()));
+		String name = item.getType().name().replace('_', ' ').toLowerCase();
+		String itemName =   item.getType().name().toUpperCase().substring(0,1);
+		for (int i = 1; i<  item.getType().name().length();i++) {
+			if (name.charAt(i-1) == ' ') itemName += name.toUpperCase().charAt(i);
+
+			else itemName += name.charAt(i);
+		}	
+		this.sellGui = Bukkit.createInventory(null, 27,Utils.chat("&a&lSell Options&8&l " + itemName));
 		
 		//Glass Slots
 		for (int i = 0; i < this.buyGui.getSize(); i++) {
 			if ((i < 10) || (i > 16)) {
-				ItemStack glassSlot = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);	
+				ItemStack glassSlot = new ItemStack(Material.LIME_STAINED_GLASS_PANE);	
 				this.sellGui.setItem(i, glassSlot);
 				}					
 			}
@@ -75,13 +89,24 @@ public class CompressedItemOptionMenu {
 	public void setItemBuyMeta(ItemStack item, int amount, ItemPrices prices) {
 		ItemMeta meta = item.getItemMeta();
 		List<String> lore = new ArrayList<String>();
-		if (meta.getDisplayName().contains("Compressed")) {
-			meta.setDisplayName(Utils.chat("&c&lBuy x" + amount + " " +  meta.getDisplayName()));
+		
+		String name = item.getType().name().replace('_', ' ').toLowerCase();
+		String itemName =   item.getType().name().toUpperCase().substring(0,1);
+		for (int i = 1; i<  item.getType().name().length();i++) {
+			if (name.charAt(i-1) == ' ') itemName += name.toUpperCase().charAt(i);
+
+			else itemName += name.charAt(i);
+		}		
+		
+		if (meta.getDisplayName().contains(Utils.chat("Compressed"))) {
+			meta.setDisplayName(Utils.chat("&c&lBuy x" + amount + " Compressed " + itemName));
 			lore.add(Utils.chat("&cBuy Price&7: &8$" + CurrencyUtils.currencyFormat(Math.floor(prices.getItemBuyPrice().get(item.getType())*amount*1000*1024)/1000)));
+			lore.add(Utils.chat("&6Middle Click to Sell All"));
 		}
 		else {
-			meta.setDisplayName(Utils.chat("&c&lBuy x" + amount + " " + item.getType()));
+			meta.setDisplayName(Utils.chat("&c&lBuy x" + amount + " " + itemName));
 			lore.add(Utils.chat("&cBuy Price&7: &8$" + CurrencyUtils.currencyFormat(Math.floor(prices.getItemBuyPrice().get(item.getType())*amount*1000)/1000)));
+			lore.add(Utils.chat("&6Middle Click to Sell All"));
 		}		
 		
 		meta.setLore(lore);
@@ -91,13 +116,24 @@ public class CompressedItemOptionMenu {
 	public void setItemSellMeta(ItemStack item, int amount, ItemPrices prices) {
 		ItemMeta meta = item.getItemMeta();
 		List<String> lore = new ArrayList<String>();
-		if (meta.getDisplayName().contains("Compressed")) {
-			meta.setDisplayName(Utils.chat("&a&lSell x" + amount + " " +  meta.getDisplayName()));
+		
+		String name = item.getType().name().replace('_', ' ').toLowerCase();
+		String itemName =   item.getType().name().toUpperCase().substring(0,1);
+		for (int i = 1; i<  item.getType().name().length();i++) {
+			if (name.charAt(i-1) == ' ') itemName += name.toUpperCase().charAt(i);
+
+			else itemName += name.charAt(i);
+		}	
+		
+		if (meta.getDisplayName().contains(Utils.chat("Compressed"))) {
+			meta.setDisplayName(Utils.chat("&a&lSell x" + amount + " Compressed " + itemName));
 			lore.add(Utils.chat("&aSell Price&7: &8$" + CurrencyUtils.currencyFormat(Math.floor(prices.getItemSellPrice().get(item.getType())*amount*1000*1024)/1000)));
+			lore.add(Utils.chat("&6Middle Click to Sell All"));
 		}
 		else {
-			meta.setDisplayName(Utils.chat("&a&lSell x" + amount + " " + item.getType()));
+			meta.setDisplayName(Utils.chat("&a&lSell x" + amount + " " + itemName));
 			lore.add(Utils.chat("&aSell Price&7: &8$" + CurrencyUtils.currencyFormat(Math.floor(prices.getItemSellPrice().get(item.getType())*amount*1000)/1000)));
+			lore.add(Utils.chat("&6Middle Click to Sell All"));
 		}	
 				
 		meta.setLore(lore);

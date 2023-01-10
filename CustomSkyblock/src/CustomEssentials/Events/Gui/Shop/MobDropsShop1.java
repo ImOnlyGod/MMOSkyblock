@@ -141,7 +141,7 @@ public class MobDropsShop1 implements TabExecutor{
 			lore.add(Utils.chat("&aSell Price&7: &8$" +  CurrencyUtils.currencyFormat(this.prices.getItemSellPrice().get(item.getType()))));
 			lore.add(Utils.chat("&6Price Change (12 Hours)&7: &8" + changePercentRecent + "% " + changeSign));
 			lore.add(Utils.chat("&5Price Change (Net Total)&7: &8" + changePercentNet + "% " + changeSign2));
-			
+			lore.add(Utils.chat("&6Middle Click to Sell All"));
 			meta.setLore(lore);
 			item.setItemMeta(meta);
 			menu.setItem(i, item);

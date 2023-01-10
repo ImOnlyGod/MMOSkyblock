@@ -904,7 +904,7 @@ public class ItemPrices {
 	
 	public float computePriceShiftMultiplier(float currentBuyPrice, float currentSellPrice) {
 		//MODIFY THIS NUMBER IF NECESSARY
-		float multiplier = (1 - (((currentBuyPrice)/(currentBuyPrice + currentSellPrice))))/23;
+		float multiplier = (float) (0.0000001);
 		
 		return multiplier;
 	}
@@ -915,13 +915,12 @@ public class ItemPrices {
 			float currentBuyPrice = this.itemBuyPrice.get(item);
 			float currentSellPrice = this.itemSellPrice.get(item);
 			
-			
 			float multiplier = computePriceShiftMultiplier(currentBuyPrice,currentSellPrice);
 			float newBuyPrice = currentBuyPrice + (multiplier * currentBuyPrice);
 			float newSellPrice = currentSellPrice + (multiplier * currentSellPrice);
 			
-			this.itemBuyPrice.replace(item, newBuyPrice);
-			this.itemSellPrice.replace(item, newSellPrice);
+			this.itemBuyPrice.replace(item, (float) Math.max(0.01,newBuyPrice));
+			this.itemSellPrice.replace(item, (float) Math.max(0.01,newSellPrice));
 		}		
 	}
 	
@@ -935,8 +934,8 @@ public class ItemPrices {
 			float newBuyPrice = currentBuyPrice - (multiplier * currentBuyPrice);
 			float newSellPrice = currentSellPrice - (multiplier * currentSellPrice);
 			
-			this.itemBuyPrice.replace(item, newBuyPrice);
-			this.itemSellPrice.replace(item, newSellPrice);
+			this.itemBuyPrice.replace(item, (float) Math.max(0.01,newBuyPrice));
+			this.itemSellPrice.replace(item, (float) Math.max(0.01,newSellPrice));
 		}
 		
 	}

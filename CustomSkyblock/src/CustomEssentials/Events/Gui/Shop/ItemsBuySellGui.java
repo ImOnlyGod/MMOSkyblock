@@ -27,11 +27,18 @@ public class ItemsBuySellGui {
 	}
 	
 	public void createBuyGui(ItemStack item, Player p, ItemPrices prices) {
+		String name = item.getType().name().replace('_', ' ').toLowerCase();
+		String itemName =   item.getType().name().toUpperCase().substring(0,1);
+		for (int i = 1; i<  item.getType().name().length();i++) {
+			if (name.charAt(i-1) == ' ') itemName += name.toUpperCase().charAt(i);
+
+			else itemName += name.charAt(i);
+		}	
 		if (item.getItemMeta().getDisplayName().contains("Compressed")) {
-			this.buyGui = Bukkit.createInventory(null, 36,Utils.chat("&c&lBuying &8&lCompressed " + item.getType()));
+			this.buyGui = Bukkit.createInventory(null, 36,Utils.chat("&c&lBuying &8&lCompressed " + itemName));
 		}
 		else {
-			this.buyGui = Bukkit.createInventory(null, 36,Utils.chat("&c&lBuying &8&l" + item.getType()));
+			this.buyGui = Bukkit.createInventory(null, 36,Utils.chat("&c&lBuying &8&l" + itemName));
 		}
 		
 		//Glass Slots
@@ -105,11 +112,18 @@ public class ItemsBuySellGui {
 	}
 	
 	public void createSellGui(ItemStack item, Player p, ItemPrices prices) {
+		String name = item.getType().name().replace('_', ' ').toLowerCase();
+		String itemName =   item.getType().name().toUpperCase().substring(0,1);
+		for (int i = 1; i<  item.getType().name().length();i++) {
+			if (name.charAt(i-1) == ' ') itemName += name.toUpperCase().charAt(i);
+
+			else itemName += name.charAt(i);
+		}	
 		if (item.getItemMeta().getDisplayName().contains("Compressed")) {
-			this.sellGui = Bukkit.createInventory(null, 36,Utils.chat("&a&lSelling &8&lCompressed " + item.getType()));
+			this.sellGui = Bukkit.createInventory(null, 36,Utils.chat("&a&lSelling &8&lCompressed " + itemName));
 		}
 		else {
-			this.sellGui = Bukkit.createInventory(null, 36,Utils.chat("&a&lSelling &8&l" + item.getType()));
+			this.sellGui = Bukkit.createInventory(null, 36,Utils.chat("&a&lSelling &8&l" + itemName));
 		}
 		
 		//Glass Slots
@@ -185,12 +199,21 @@ public class ItemsBuySellGui {
 	public void setItemBuyMeta(ItemStack item, int amount, ItemPrices prices) {
 		ItemMeta meta = item.getItemMeta();
 		List<String> lore = new ArrayList<String>();
-		if (meta.getDisplayName().contains("Compressed")) {
-			meta.setDisplayName(Utils.chat("&c&lBuy x" + amount + " " +  meta.getDisplayName()));
+		
+		String name = item.getType().name().replace('_', ' ').toLowerCase();
+		String itemName =   item.getType().name().toUpperCase().substring(0,1);
+		for (int i = 1; i<  item.getType().name().length();i++) {
+			if (name.charAt(i-1) == ' ') itemName += name.toUpperCase().charAt(i);
+
+			else itemName += name.charAt(i);
+		}	
+		
+		if (meta.getDisplayName().contains(Utils.chat("Compressed"))) {
+			meta.setDisplayName(Utils.chat("&c&lBuy x" + amount + " Compressed " + itemName));
 			lore.add(Utils.chat("&cBuy Price&7: &8$" + CurrencyUtils.currencyFormat(Math.floor(prices.getItemBuyPrice().get(item.getType())*amount*1000*1024)/1000)));
 		}
 		else {
-			meta.setDisplayName(Utils.chat("&c&lBuy x" + amount + " " + item.getType()));
+			meta.setDisplayName(Utils.chat("&c&lBuy x" + amount + " " + itemName));
 			lore.add(Utils.chat("&cBuy Price&7: &8$" + CurrencyUtils.currencyFormat(Math.floor(prices.getItemBuyPrice().get(item.getType())*amount*1000)/1000)));
 		}		
 		
@@ -201,12 +224,21 @@ public class ItemsBuySellGui {
 	public void setItemSellMeta(ItemStack item, int amount, ItemPrices prices) {
 		ItemMeta meta = item.getItemMeta();
 		List<String> lore = new ArrayList<String>();
-		if (meta.getDisplayName().contains("Compressed")) {
-			meta.setDisplayName(Utils.chat("&a&lSell x" + amount + " " +  meta.getDisplayName()));
+		
+		String name = item.getType().name().replace('_', ' ').toLowerCase();
+		String itemName =   item.getType().name().toUpperCase().substring(0,1);
+		for (int i = 1; i<  item.getType().name().length();i++) {
+			if (name.charAt(i-1) == ' ') itemName += name.toUpperCase().charAt(i);
+
+			else itemName += name.charAt(i);
+		}	
+		
+		if (meta.getDisplayName().contains(Utils.chat("Compressed"))) {
+			meta.setDisplayName(Utils.chat("&a&lSell x" + amount + " Compressed " + itemName));
 			lore.add(Utils.chat("&aSell Price&7: &8$" + CurrencyUtils.currencyFormat(Math.floor(prices.getItemSellPrice().get(item.getType())*amount*1000*1024)/1000)));
 		}
 		else {
-			meta.setDisplayName(Utils.chat("&a&lSell x" + amount + " " + item.getType()));
+			meta.setDisplayName(Utils.chat("&a&lSell x" + amount + " " + itemName));
 			lore.add(Utils.chat("&aSell Price&7: &8$" + CurrencyUtils.currencyFormat(Math.floor(prices.getItemSellPrice().get(item.getType())*amount*1000)/1000)));
 		}	
 				

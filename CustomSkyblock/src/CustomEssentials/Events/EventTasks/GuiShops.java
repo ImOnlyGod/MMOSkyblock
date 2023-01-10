@@ -371,7 +371,7 @@ public class GuiShops implements Listener{
 			
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 51) p.performCommand("shopBlocks2");
-			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick());
+			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick(),e.getView());
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&8&lBlocks Shop &7(Page 2)")))) {
@@ -388,7 +388,7 @@ public class GuiShops implements Listener{
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 47) p.performCommand("shopBlocks1");
 			if (e.getSlot() == 51) p.performCommand("shopBlocks3");
-			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick());
+			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick(),e.getView());
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&8&lBlocks Shop &7(Page 3)")))) {
@@ -403,7 +403,7 @@ public class GuiShops implements Listener{
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 47) p.performCommand("shopBlocks2");
 			if (e.getSlot() == 51) p.performCommand("shopBlocks4");
-			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick());
+			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick(),e.getView());
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&8&lBlocks Shop &7(Page 4)")))) {
@@ -418,7 +418,7 @@ public class GuiShops implements Listener{
 
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 47) p.performCommand("shopBlocks3");
-			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick());
+			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick(),e.getView());
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&2&lColor Blocks Shop &7(Page 1)")))) {
@@ -432,7 +432,7 @@ public class GuiShops implements Listener{
 			e.setCancelled(true);
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 51) p.performCommand("shopColorBlocks2");
-			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick());
+			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick(),e.getView());
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&2&lColor Blocks Shop &7(Page 2)")))) {
@@ -447,7 +447,7 @@ public class GuiShops implements Listener{
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 47) p.performCommand("shopColorBlocks1");
 			if (e.getSlot() == 51) p.performCommand("shopColorBlocks3");
-			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick());
+			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick(),e.getView());
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&2&lColor Blocks Shop &7(Page 3)")))) {
@@ -462,7 +462,7 @@ public class GuiShops implements Listener{
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 47) p.performCommand("shopColorBlocks2");
 			if (e.getSlot() == 51) p.performCommand("shopColorBlocks4");
-			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick());
+			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick(),e.getView());
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&2&lColor Blocks Shop &7(Page 4)")))) {
@@ -477,7 +477,7 @@ public class GuiShops implements Listener{
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 47) p.performCommand("shopColorBlocks3");
 			
-			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick());
+			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick(),e.getView());
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&2&lDecorative Blocks Shop &7(Page 1)")))) {
@@ -492,7 +492,7 @@ public class GuiShops implements Listener{
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 51) p.performCommand("shopDecorativeBlocks2");
 			
-			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick());
+			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick(),e.getView());
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&2&lDecorative Blocks Shop &7(Page 2)")))) {
@@ -508,7 +508,7 @@ public class GuiShops implements Listener{
 			if (e.getSlot() == 47) p.performCommand("shopDecorativeBlocks1");
 			if (e.getSlot() == 51) p.performCommand("shopDecorativeBlocks3");
 			
-			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick());
+			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick(),e.getView());
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&2&lDecorative Blocks Shop &7(Page 3)")))) {
@@ -523,7 +523,7 @@ public class GuiShops implements Listener{
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 47) p.performCommand("shopDecorativeBlocks2");
 			
-			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick());
+			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick(),e.getView());
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&a&lFarming Shop &7(Page 1)")))) {
@@ -538,7 +538,7 @@ public class GuiShops implements Listener{
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 51) p.performCommand("shopFarming2");
 			
-			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick());
+			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick(),e.getView());
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&a&lFarming Shop &7(Page 2)")))) {
@@ -554,7 +554,7 @@ public class GuiShops implements Listener{
 			if (e.getSlot() == 47) p.performCommand("shopFarming1");
 		
 			
-			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick());
+			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick(),e.getView());
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&6&lFood Shop &7(Page 1)")))) {
@@ -570,7 +570,7 @@ public class GuiShops implements Listener{
 			if (e.getSlot() == 51) p.performCommand("shopFood2");
 			
 			
-			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick());
+			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick(),e.getView());
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&6&lFood Shop &7(Page 2)")))) {
@@ -586,7 +586,7 @@ public class GuiShops implements Listener{
 			if (e.getSlot() == 47) p.performCommand("shopFood1");
 		
 			
-			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick());
+			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick(),e.getView());
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&b&lGems Shop &7(Page 1)")))) {
@@ -602,7 +602,7 @@ public class GuiShops implements Listener{
 			if (e.getSlot() == 51) p.performCommand("shopGems2");
 			
 			
-			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick());		
+			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick(),e.getView());		
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&b&lGems Shop &7(Page 2)")))) {
@@ -617,7 +617,7 @@ public class GuiShops implements Listener{
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 47) p.performCommand("shopGems1");
 		
-			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick());
+			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick(),e.getView());
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&f&lMiscellaneous Blocks Shop &7(Page 1)")))) {
@@ -632,7 +632,7 @@ public class GuiShops implements Listener{
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 51) p.performCommand("shopMisc2");
 			
-			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick());
+			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick(),e.getView());
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&f&lMiscellaneous Blocks Shop &7(Page 2)")))) {
@@ -647,7 +647,7 @@ public class GuiShops implements Listener{
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 47) p.performCommand("shopMisc1");
 			
-			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick());
+			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick(),e.getView());
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&c&lMob Drops Shop &7(Page 1)")))) {
@@ -662,7 +662,7 @@ public class GuiShops implements Listener{
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 51) p.performCommand("shopMob2");
 		
-			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick());
+			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick(),e.getView());
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&c&lMob Drops Shop &7(Page 2)")))) {
@@ -677,7 +677,7 @@ public class GuiShops implements Listener{
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 47) p.performCommand("shopMob1");
 			
-			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick());
+			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick(),e.getView());
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&4&lRedstone Shop &7(Page 1)")))) {
@@ -692,7 +692,7 @@ public class GuiShops implements Listener{
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 51) p.performCommand("shopRedstone2");
 			
-			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick());
+			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick(),e.getView());
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&4&lRedstone Shop &7(Page 2)")))) {
@@ -707,7 +707,7 @@ public class GuiShops implements Listener{
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 47) p.performCommand("shopRedstone1");
 			
-			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick());	
+			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick(),e.getView());	
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&5&lBrewing Shop &7(Page 1)")))) {
@@ -722,7 +722,7 @@ public class GuiShops implements Listener{
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 51) p.performCommand("shopBrewing2");
 			
-			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick());	
+			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick(),e.getView());	
 			return;
 		}
 		else if ((e.getView().getTitle().equalsIgnoreCase(Utils.chat("&5&lBrewing Shop &7(Page 2)")))) {
@@ -737,7 +737,7 @@ public class GuiShops implements Listener{
 			if (e.getSlot() == 0) p.performCommand("shop");
 			if (e.getSlot() == 47) p.performCommand("shopBrewing1");
 			
-			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick());		
+			generateItemActionSlots(e.getSlot(),e.getCurrentItem(),p,e.getClick(),e.getView());		
 			return;
 		}
 		else if ((e.getView().getTitle().contains(Utils.chat("&c&lBuying")))) {
@@ -786,9 +786,15 @@ public class GuiShops implements Listener{
 				return;
 			}
 			e.setCancelled(true);
-			if (!(e.getView().getTopInventory().getItem(e.getSlot()).getType().equals(Material.RED_STAINED_GLASS_PANE))) {
+			if (!(e.getView().getTopInventory().getItem(e.getSlot()).getType().equals(Material.RED_STAINED_GLASS_PANE)) && e.getView().getTopInventory().getItem(e.getSlot()) != null ) {
 				ItemsBuySellGui buySell = new ItemsBuySellGui(e.getCurrentItem(),p, this.shopPrices);
-				p.openInventory(buySell.getBuyGui());	
+				if (click.equals(ClickType.MIDDLE)) {
+					PlayerSellAllSingleEvent(p,e.getCurrentItem());
+					CustomItemSets compressedItems = new CustomItemSets();
+					if (!compressedItems.getVanillaToCustomItems().contains(e.getCurrentItem().getType())) p.openInventory(buySell.getBuyGui());
+					else p.openInventory(new CompressedItemOptionMenu(e.getCurrentItem(),p,this.shopPrices).getBuyGui());
+				}
+				else p.openInventory(buySell.getBuyGui());
 			}
 		}
 		else if ((e.getView().getTitle().contains(Utils.chat("&a&lSell Options&8&l")))) {
@@ -800,15 +806,21 @@ public class GuiShops implements Listener{
 				return;
 			}
 			e.setCancelled(true);
-			if (!(e.getView().getTopInventory().getItem(e.getSlot()).getType().equals(Material.LIME_STAINED_GLASS_PANE))) {
+			if (!(e.getView().getTopInventory().getItem(e.getSlot()).getType().equals(Material.LIME_STAINED_GLASS_PANE)) && e.getView().getTopInventory().getItem(e.getSlot()) != null) {
 				ItemsBuySellGui buySell = new ItemsBuySellGui(e.getCurrentItem(),p, this.shopPrices);
-				p.openInventory(buySell.getSellGui());	
+				if (click.equals(ClickType.MIDDLE)) {
+					PlayerSellAllSingleEvent(p,e.getCurrentItem());
+					CustomItemSets compressedItems = new CustomItemSets();
+					if (!compressedItems.getVanillaToCustomItems().contains(e.getCurrentItem().getType())) p.openInventory(buySell.getSellGui());
+					else p.openInventory(new CompressedItemOptionMenu(e.getCurrentItem(),p,this.shopPrices).getSellGui());
+				}
+				else p.openInventory(buySell.getSellGui());
 			}
 		}
 	}
 	
 	
-	public void generateItemActionSlots(int slot, ItemStack item, Player p, ClickType click) {
+	public void generateItemActionSlots(int slot, ItemStack item, Player p, ClickType click, InventoryView topInv) {
 		if ((slot > 9 && slot < 17) || (slot > 18 && slot < 26) || (slot > 27 && slot < 35) || (slot > 36 && slot < 44)) {
 			
 			if (item == null) {
@@ -829,7 +841,37 @@ public class GuiShops implements Listener{
 				else p.openInventory(new CompressedItemOptionMenu(item,p,this.shopPrices).getSellGui());
 			}
 			else if (click.equals(ClickType.MIDDLE)) {
-				PlayerSellAllEvent(p,item);
+				Bukkit.getScheduler().scheduleSyncDelayedTask(this.plugin, new Runnable() {
+					@Override
+					public void run() {
+						PlayerSellAllEvent(p,item);	
+						if (topInv.getTitle().equalsIgnoreCase(Utils.chat("&8&lBlocks Shop &7(Page 1)"))) p.performCommand("shopBlocks1");
+						if (topInv.getTitle().equalsIgnoreCase(Utils.chat("&8&lBlocks Shop &7(Page 2)"))) p.performCommand("shopBlocks2");
+						if (topInv.getTitle().equalsIgnoreCase(Utils.chat("&8&lBlocks Shop &7(Page 3)"))) p.performCommand("shopBlocks3");
+						if (topInv.getTitle().equalsIgnoreCase(Utils.chat("&8&lBlocks Shop &7(Page 4)"))) p.performCommand("shopBlocks4");
+						if (topInv.getTitle().equalsIgnoreCase(Utils.chat("&2&lColor Blocks Shop &7(Page 1)"))) p.performCommand("shopColorBlocks1");
+						if (topInv.getTitle().equalsIgnoreCase(Utils.chat("&2&lColor Blocks Shop &7(Page 2)"))) p.performCommand("shopColorBlocks2");
+						if (topInv.getTitle().equalsIgnoreCase(Utils.chat("&2&lColor Blocks Shop &7(Page 3)"))) p.performCommand("shopColorBlocks3");
+						if (topInv.getTitle().equalsIgnoreCase(Utils.chat("&2&lColor Blocks Shop &7(Page 4)"))) p.performCommand("shopColorBlocks4");
+						if (topInv.getTitle().equalsIgnoreCase(Utils.chat("&2&lDecorative Blocks Shop &7(Page 1)"))) p.performCommand("shopDecorativeBlocks1");
+						if (topInv.getTitle().equalsIgnoreCase(Utils.chat("&2&lDecorative Blocks Shop &7(Page 2)"))) p.performCommand("shopDecorativeBlocks2");
+						if (topInv.getTitle().equalsIgnoreCase(Utils.chat("&2&lDecorative Blocks Shop &7(Page 3)"))) p.performCommand("shopDecorativeBlocks3");
+						if (topInv.getTitle().equalsIgnoreCase(Utils.chat("&a&lFarming Shop &7(Page 1)"))) p.performCommand("shopFarming1");
+						if (topInv.getTitle().equalsIgnoreCase(Utils.chat("&a&lFarming Shop &7(Page 2)"))) p.performCommand("shopFarming2");
+						if (topInv.getTitle().equalsIgnoreCase(Utils.chat("&6&lFood Shop &7(Page 1)"))) p.performCommand("shopFood1");
+						if (topInv.getTitle().equalsIgnoreCase(Utils.chat("&6&lFood Shop &7(Page 2)"))) p.performCommand("shopFood2");
+						if (topInv.getTitle().equalsIgnoreCase(Utils.chat("&b&lGems Shop &7(Page 1)"))) p.performCommand("shopGems1");
+						if (topInv.getTitle().equalsIgnoreCase(Utils.chat("&b&lGems Shop &7(Page 2)"))) p.performCommand("shopGems2");
+						if (topInv.getTitle().equalsIgnoreCase(Utils.chat("&f&lMiscellaneous Blocks Shop &7(Page 1)"))) p.performCommand("shopMisc1");
+						if (topInv.getTitle().equalsIgnoreCase(Utils.chat("&f&lMiscellaneous Blocks Shop &7(Page 2)"))) p.performCommand("shopMisc2");
+						if (topInv.getTitle().equalsIgnoreCase(Utils.chat("&c&lMob Drops Shop &7(Page 1)"))) p.performCommand("shopMob1");
+						if (topInv.getTitle().equalsIgnoreCase(Utils.chat("&c&lMob Drops Shop &7(Page 2)"))) p.performCommand("shopMob2");
+						if (topInv.getTitle().equalsIgnoreCase(Utils.chat("&4&lRedstone Shop &7(Page 1)"))) p.performCommand("shopRedstone1");
+						if (topInv.getTitle().equalsIgnoreCase(Utils.chat("&4&lRedstone Shop &7(Page 2)"))) p.performCommand("shopRedstone2");
+						if (topInv.getTitle().equalsIgnoreCase(Utils.chat("&5&lBrewing Shop &7(Page 1)"))) p.performCommand("shopBrewing1");
+						if (topInv.getTitle().equalsIgnoreCase(Utils.chat("&5&lBrewing Shop &7(Page 2)"))) p.performCommand("shopBrewing2");
+					}
+				},1);				
 			}
 		
 		}
@@ -936,7 +978,7 @@ public class GuiShops implements Listener{
 		
 		p.getInventory().removeItem(itemForPlayer);
 		profile.addBalance(totalPrice);	
-		if (item.getItemMeta().getDisplayName().contains("Compressed")) {
+		if (item.getItemMeta().getDisplayName().contains(Utils.chat("&7&lCompressed"))) {
 			this.shopPrices.shiftPricesOnSell(item.getType(), amount*1024);
 		}
 		else this.shopPrices.shiftPricesOnSell(item.getType(), amount);
@@ -987,6 +1029,56 @@ public class GuiShops implements Listener{
 		}
 		
 		profile.addBalance(itemPrice*(amount+(compressedAmount*1024)));
+		p.sendMessage(Utils.chat(this.plugin.getConfig().getString("BalanceCommand.reciever_new_bal_msg") + profile.getBalance()));
+					
+
+	}
+	
+	public void PlayerSellAllSingleEvent(Player p, ItemStack item) {
+		
+		
+		if (item == null || item.getType().equals(Material.AIR)) return;
+		
+		if (this.shopPrices.getItemSellPrice().get(item.getType()) == null) return;
+				
+		Profile profile = this.plugin.getProfileManager().getPlayerProfile(p);
+		ItemStack playerItem = item;
+		
+		double itemPrice = this.shopPrices.getItemSellPrice().get(item.getType());
+		int amount = CountItem(p.getInventory(),playerItem);
+		if (item.getItemMeta().getDisplayName().contains("Compressed")) {
+			amount = CountCompressedItem(p.getInventory(),playerItem);
+			itemPrice *= 1024;
+		}		
+		
+		if (amount == 0) {
+			p.sendMessage("You dont have any items");
+			return;
+		}	
+		
+		if (item.getItemMeta().getDisplayName().contains("Compressed")) {
+			Inventory inv = p.getInventory();
+			for (int i = 0; i < 36; i++) {
+				if (inv.getItem(i) != null) {
+					if (inv.getItem(i).getType() == item.getType() && inv.getItem(i).getItemMeta().getDisplayName().contains(Utils.chat("&7&lCompressed"))) {
+						inv.removeItem(inv.getItem(i));
+					}
+				}
+			}
+			
+			this.shopPrices.shiftPricesOnSell(item.getType(), amount*1024);
+			p.sendMessage(Utils.chat("&7[&cShop&7]" + this.plugin.getConfig().getString("BalanceCommand.sell_item_msg") + amount + " &7of &bCompressed " + item.getType() + " &7for &a$" + itemPrice*amount*1024));
+			profile.addBalance(itemPrice*(amount*1024));
+			
+		}
+		else {
+			ItemStack sellItem = new ItemStack(item.getType(),amount);
+			p.getInventory().removeItem(sellItem);
+			this.shopPrices.shiftPricesOnSell(item.getType(), amount);
+			p.sendMessage(Utils.chat("&7[&cShop&7]" + this.plugin.getConfig().getString("BalanceCommand.sell_item_msg") + amount + " &7of &b" + item.getType() + " &7for &a$" + itemPrice*amount));
+			profile.addBalance(itemPrice*amount);
+		}
+			
 		p.sendMessage(Utils.chat(this.plugin.getConfig().getString("BalanceCommand.reciever_new_bal_msg") + profile.getBalance()));
 					
 
