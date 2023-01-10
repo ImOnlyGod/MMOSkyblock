@@ -421,21 +421,17 @@ public class MobEvents implements Listener{
 			return;
 		}
 		
-		if (e.getEntity().getCustomName().contains("starfiredamage") && e.getEntity() instanceof ArmorStand) {
-			e.setCancelled(true);
-			return;
+		if (e.getEntity() instanceof ArmorStand) {
+			if (e.getEntity().getCustomName().contains("starfiredamage")) {
+				e.setCancelled(true);
+				return;
+			}
 		}
 		
 		if (e.getDamager() instanceof CraftLightningStrike) {
 			
 			e.setDamage(10);
-			if (e.getDamager().getCustomName().contains("stormaxedamage")) {
-				
-				ItemStorageTable table = new ItemStorageTable();
-				ItemsCore axe = table.getIDtoItemsCore().get(6);
-				axe.createItem(1);
-				double damage =  axe.getItemBurstDamage();
-				e.setDamage(damage);
+			if (e.getDamager().getCustomName().contains("stormaxedamage")) {				
 				
 				String userPlayerName = e.getDamager().getName().replace("stormaxedamage", "");
 				Player userPlayer = null;
@@ -445,6 +441,9 @@ public class MobEvents implements Listener{
 					userPlayer = p;
 					break;
 				}
+				Stats userStats = this.plugin.getProfileManager().getPlayerProfile(userPlayer).getStats();
+				double damage = userStats.getMagicDamage();
+				e.setDamage(damage);
 				if (!(e.getEntity() instanceof LivingEntity)) return;
 				
 				if (!(e.getEntity() instanceof Player)) return;

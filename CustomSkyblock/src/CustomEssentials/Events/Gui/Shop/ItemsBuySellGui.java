@@ -27,7 +27,12 @@ public class ItemsBuySellGui {
 	}
 	
 	public void createBuyGui(ItemStack item, Player p, ItemPrices prices) {
-		this.buyGui = Bukkit.createInventory(null, 36,Utils.chat("&c&lBuying &8&l" + item.getType()));
+		if (item.getItemMeta().getDisplayName().contains("Compressed")) {
+			this.buyGui = Bukkit.createInventory(null, 36,Utils.chat("&c&lBuying &8&lCompressed " + item.getType()));
+		}
+		else {
+			this.buyGui = Bukkit.createInventory(null, 36,Utils.chat("&c&lBuying &8&l" + item.getType()));
+		}
 		
 		//Glass Slots
 		for (int i = 0; i < this.buyGui.getSize(); i++) {
@@ -38,57 +43,74 @@ public class ItemsBuySellGui {
 			}
 		
 		//Item Amounts
-		ItemStack item1 = new ItemStack(item.getType());
+		ItemStack item1 = item;
+		item1.setAmount(1);
 		setItemBuyMeta(item1,1, prices);
 		this.buyGui.setItem(10, item1);
 		
-		ItemStack item4 = new ItemStack(item.getType(),8);
+		ItemStack item4 = item;
+		item4.setAmount(8);
 		setItemBuyMeta(item4,8, prices);
 		this.buyGui.setItem(11, item4);
 		
-		ItemStack item8 = new ItemStack(item.getType(),16);
+		ItemStack item8 = item;
+		item8.setAmount(16);
 		setItemBuyMeta(item8,16, prices);
 		this.buyGui.setItem(12, item8);
 		
-		ItemStack item16 = new ItemStack(item.getType(),32);
+		ItemStack item16 = item;
+		item16.setAmount(32);
 		setItemBuyMeta(item16,32, prices);
 		this.buyGui.setItem(13, item16);
 		
-		ItemStack item32 = new ItemStack(item.getType(),64);
+		ItemStack item32 = item;
+		item32.setAmount(64);
 		setItemBuyMeta(item32,64, prices);
 		this.buyGui.setItem(14, item32);
 		
-		ItemStack item64 = new ItemStack(item.getType(),128);
+		ItemStack item64 = item;
+		item64.setAmount(128);
 		setItemBuyMeta(item64,128, prices);
 		this.buyGui.setItem(15, item64);
 		
-		ItemStack item128 = new ItemStack(item.getType(),256);
+		ItemStack item128 = item;
+		item128.setAmount(256);
 		setItemBuyMeta(item128,256, prices);
 		this.buyGui.setItem(16, item128);
 		
-		ItemStack item256 = new ItemStack(item.getType(),512);
+		ItemStack item256 = item;
+		item256.setAmount(512);
 		setItemBuyMeta(item256,512, prices);
 		this.buyGui.setItem(20, item256);
 		
-		ItemStack item512 = new ItemStack(item.getType(),1024);
+		ItemStack item512 = item;
+		item512.setAmount(1024);
 		setItemBuyMeta(item512,1024, prices);
 		this.buyGui.setItem(21, item512);
 		
-		ItemStack item1024 = new ItemStack(item.getType(),1536);
+		ItemStack item1024 = item;
+		item1024.setAmount(1536);
 		setItemBuyMeta(item1024,1536, prices);
 		this.buyGui.setItem(22, item1024);
 		
-		ItemStack item1536 = new ItemStack(item.getType(),2048);
+		ItemStack item1536 = item;
+		item1536.setAmount(2048);
 		setItemBuyMeta(item1536,2048, prices);
 		this.buyGui.setItem(23, item1536);
 		
-		ItemStack item2048 = new ItemStack(item.getType(),2304);
+		ItemStack item2048 = item;
+		item2048.setAmount(2304);
 		setItemBuyMeta(item2048,2304, prices);
 		this.buyGui.setItem(24, item2048);
 	}
 	
 	public void createSellGui(ItemStack item, Player p, ItemPrices prices) {
-		this.sellGui = Bukkit.createInventory(null, 36,Utils.chat("&a&lSelling &8&l" + item.getType()));
+		if (item.getItemMeta().getDisplayName().contains("Compressed")) {
+			this.sellGui = Bukkit.createInventory(null, 36,Utils.chat("&a&lSelling &8&lCompressed " + item.getType()));
+		}
+		else {
+			this.sellGui = Bukkit.createInventory(null, 36,Utils.chat("&a&lSelling &8&l" + item.getType()));
+		}
 		
 		//Glass Slots
 		for (int i = 0; i < this.sellGui.getSize(); i++) {
@@ -99,71 +121,95 @@ public class ItemsBuySellGui {
 			}
 		
 		//Item Amounts
-		ItemStack item1 = new ItemStack(item.getType());
-		setItemSellMeta(item1,1, prices );
+		ItemStack item1 = item;
+		item1.setAmount(1);
+		setItemSellMeta(item1,1, prices);
 		this.sellGui.setItem(10, item1);
 		
-		ItemStack item4 = new ItemStack(item.getType(),8);
+		ItemStack item4 = item;
+		item4.setAmount(8);
 		setItemSellMeta(item4,8, prices);
 		this.sellGui.setItem(11, item4);
 		
-		ItemStack item8 = new ItemStack(item.getType(),16);
+		ItemStack item8 = item;
+		item8.setAmount(16);
 		setItemSellMeta(item8,16, prices);
 		this.sellGui.setItem(12, item8);
 		
-		ItemStack item16 = new ItemStack(item.getType(),32);
+		ItemStack item16 = item;
+		item16.setAmount(32);
 		setItemSellMeta(item16,32, prices);
 		this.sellGui.setItem(13, item16);
 		
-		ItemStack item32 = new ItemStack(item.getType(),64);
+		ItemStack item32 = item;
+		item32.setAmount(64);
 		setItemSellMeta(item32,64, prices);
 		this.sellGui.setItem(14, item32);
 		
-		ItemStack item64 = new ItemStack(item.getType(),128);
+		ItemStack item64 = item;
+		item64.setAmount(128);
 		setItemSellMeta(item64,128, prices);
 		this.sellGui.setItem(15, item64);
 		
-		ItemStack item128 = new ItemStack(item.getType(),256);
+		ItemStack item128 = item;
+		item128.setAmount(256);
 		setItemSellMeta(item128,256, prices);
 		this.sellGui.setItem(16, item128);
 		
-		ItemStack item256 = new ItemStack(item.getType(),512);
+		ItemStack item256 = item;
+		item256.setAmount(512);
 		setItemSellMeta(item256,512, prices);
 		this.sellGui.setItem(20, item256);
 		
-		ItemStack item512 = new ItemStack(item.getType(),1024);
+		ItemStack item512 = item;
+		item512.setAmount(1024);
 		setItemSellMeta(item512,1024, prices);
 		this.sellGui.setItem(21, item512);
 		
-		ItemStack item1024 = new ItemStack(item.getType(),1536);
+		ItemStack item1024 = item;
+		item1024.setAmount(1536);
 		setItemSellMeta(item1024,1536, prices);
 		this.sellGui.setItem(22, item1024);
 		
-		ItemStack item1536 = new ItemStack(item.getType(),2048);
+		ItemStack item1536 = item;
+		item1536.setAmount(2048);
 		setItemSellMeta(item1536,2048, prices);
 		this.sellGui.setItem(23, item1536);
 		
-		ItemStack item2048 = new ItemStack(item.getType(),2304);
+		ItemStack item2048 = item;
+		item2048.setAmount(2304);
 		setItemSellMeta(item2048,2304, prices);
 		this.sellGui.setItem(24, item2048);
 	}
 	
 	public void setItemBuyMeta(ItemStack item, int amount, ItemPrices prices) {
 		ItemMeta meta = item.getItemMeta();
-		meta.setDisplayName(Utils.chat("&c&lBuy x" + amount + " " + item.getType()));
-		
 		List<String> lore = new ArrayList<String>();
-		lore.add(Utils.chat("&cBuy Price&7: &8$" + CurrencyUtils.currencyFormat(Math.floor(prices.getItemBuyPrice().get(item.getType())*amount*1000)/1000)));
+		if (meta.getDisplayName().contains("Compressed")) {
+			meta.setDisplayName(Utils.chat("&c&lBuy x" + amount + " " +  meta.getDisplayName()));
+			lore.add(Utils.chat("&cBuy Price&7: &8$" + CurrencyUtils.currencyFormat(Math.floor(prices.getItemBuyPrice().get(item.getType())*amount*1000*1024)/1000)));
+		}
+		else {
+			meta.setDisplayName(Utils.chat("&c&lBuy x" + amount + " " + item.getType()));
+			lore.add(Utils.chat("&cBuy Price&7: &8$" + CurrencyUtils.currencyFormat(Math.floor(prices.getItemBuyPrice().get(item.getType())*amount*1000)/1000)));
+		}		
+		
 		meta.setLore(lore);
 		item.setItemMeta(meta);
 	}
 	
 	public void setItemSellMeta(ItemStack item, int amount, ItemPrices prices) {
 		ItemMeta meta = item.getItemMeta();
-		meta.setDisplayName(Utils.chat("&a&lSell x" + amount + " " + item.getType()));
-		
 		List<String> lore = new ArrayList<String>();
-		lore.add(Utils.chat("&aSell Price&7: &8$" + CurrencyUtils.currencyFormat(Math.floor(prices.getItemSellPrice().get(item.getType())*amount*1000)/1000)));
+		if (meta.getDisplayName().contains("Compressed")) {
+			meta.setDisplayName(Utils.chat("&a&lSell x" + amount + " " +  meta.getDisplayName()));
+			lore.add(Utils.chat("&aSell Price&7: &8$" + CurrencyUtils.currencyFormat(Math.floor(prices.getItemSellPrice().get(item.getType())*amount*1000*1024)/1000)));
+		}
+		else {
+			meta.setDisplayName(Utils.chat("&a&lSell x" + amount + " " + item.getType()));
+			lore.add(Utils.chat("&aSell Price&7: &8$" + CurrencyUtils.currencyFormat(Math.floor(prices.getItemSellPrice().get(item.getType())*amount*1000)/1000)));
+		}	
+				
 		meta.setLore(lore);
 		item.setItemMeta(meta);
 	}

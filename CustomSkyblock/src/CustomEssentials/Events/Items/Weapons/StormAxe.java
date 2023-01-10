@@ -26,18 +26,18 @@ public class StormAxe extends ItemsCore{
 		
 		
 		//Add stats
-		setItemBasePhysicalDamage(250);
-		setItemPhysicalDamage(250);
-		setItemManaStat(400);
+		setItemBasePhysicalDamage(800);
+		setItemPhysicalDamage(800);
+		setItemManaStat(300);
 		setItemCritChance(15);
 		setItemCritDamage(0.6);
-		setItemBurstDamage(300);
+		setItemMagicDamage(3000);
 		
 		//meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, new AttributeModifier("generic.attackDamage", getItemPhysicalDamage(), Operation.ADD_NUMBER));
 		setItemFlags(meta);
 		
 		//Set name and lore
-		setItemName(Utils.chat("&fStorm Axe &8[&5Tier: &7A&8]"));
+		setItemName(Utils.chat("&fStorm Axe &8[&5Tier: &7C&8]"));
 		meta.setDisplayName(getItemName());	
 		meta.setCustomModelData(6);
 		
@@ -54,7 +54,7 @@ public class StormAxe extends ItemsCore{
 		ArrayList<String> lore = new ArrayList<String>();	
 		lore.add(Utils.chat("                          "));
 		lore.add(Utils.chat("&cDamage:&6 +"+ getItemPhysicalDamage() +"⚔"));
-		lore.add(Utils.chat("&5Burst Damage:&6 +"+ getItemBurstDamage() +"⚔"));
+		lore.add(Utils.chat("&5Magic Damage:&6 +"+ getItemMagicDamage() +"⚔"));
 		lore.add(Utils.chat("&eCritical Chance:&6 +"+ getItemCritChance() +"%✶🗡"));
 		lore.add(Utils.chat("&6Critical Damage:&6 +"+ getItemCritDamage() +"x🗡"));
 		lore.add(Utils.chat("&bMana:&6 +"+ getItemManaStat() +"✶"));

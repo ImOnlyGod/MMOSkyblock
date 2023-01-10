@@ -50,6 +50,8 @@ public class WeaponTabCommand implements TabExecutor{
 			return false;
 		}
 		
+		if (!sender.hasPermission("weaponCommand")) return true;
+		
 		if (args.length == 0) {
 			
 			Player p = (Player) sender;

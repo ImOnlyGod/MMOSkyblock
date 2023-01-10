@@ -37,17 +37,17 @@ public class StarFire extends ItemsCore{
 		
 		
 		//Add stats
-		setItemBasePhysicalDamage(350);
-		setItemPhysicalDamage(350);
+		setItemBasePhysicalDamage(3500);
+		setItemPhysicalDamage(3500);
 		setItemCritChance(20);
 		setItemCritDamage(2);
-		setItemBurstDamage(300);
+		setItemMagicDamage(5000);
 		
 		//meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, new AttributeModifier("generic.attackDamage", getItemPhysicalDamage(), Operation.ADD_NUMBER));
 		setItemFlags(meta);
 		
 		//Set name and lore
-		setItemName(Utils.chat("&bStarFire &8[&5Tier: &7A&8]"));
+		setItemName(Utils.chat("&bStarFire &8[&5Tier: &7C&8]"));
 		meta.setDisplayName(getItemName());	
 		meta.setCustomModelData(9);
 		
@@ -64,7 +64,7 @@ public class StarFire extends ItemsCore{
 		ArrayList<String> lore = new ArrayList<String>();	
 		lore.add(Utils.chat("                          "));
 		lore.add(Utils.chat("&cDamage:&6 +"+ getItemPhysicalDamage() +"⚔"));
-		lore.add(Utils.chat("&5Burst Damage:&6 +"+ getItemBurstDamage() +"✶"));
+		lore.add(Utils.chat("&5Magic Damage:&6 +"+ getItemMagicDamage() +"✶"));
 		lore.add(Utils.chat("&eCritical Chance:&6 +"+ getItemCritChance() +"%✶🗡"));
 		lore.add(Utils.chat("&6Critical Damage:&6 +"+ getItemCritDamage() +"x🗡"));
 		lore.add(Utils.chat("                          "));
@@ -74,7 +74,7 @@ public class StarFire extends ItemsCore{
 		lore.add(Utils.chat("&7Shoot a mini commet that does high damage"));
 		lore.add(Utils.chat("&7in a line of 15 blocks. (&b70 Mana&7)  "));
 		lore.add(Utils.chat("                          "));
-		lore.add(Utils.chat("&5&l&oEpic Weapon"));
+		lore.add(Utils.chat("&5&l&oRare Weapon"));
 		
 		return lore;
 	}
@@ -114,8 +114,8 @@ public class StarFire extends ItemsCore{
 						if (!(mob instanceof LivingEntity) || (mob instanceof Player) || (mob instanceof ArmorStand)) continue;
 						LivingEntity damageableMob = (LivingEntity) mob;
 						
-						damageableMob.damage(profile.getStats().getBurstDamage()+100, starfire);
-						EntityDamageEvent damageEvent = new EntityDamageEvent(damageableMob,DamageCause.MAGIC,profile.getStats().getBurstDamage()+100);
+						damageableMob.damage(profile.getStats().getMagicDamage()+profile.getStats().getBurstDamage(), starfire);
+						EntityDamageEvent damageEvent = new EntityDamageEvent(damageableMob,DamageCause.MAGIC,profile.getStats().getMagicDamage()+profile.getStats().getBurstDamage());
 						damageableMob.setLastDamageCause(damageEvent);
 ;
 					}					

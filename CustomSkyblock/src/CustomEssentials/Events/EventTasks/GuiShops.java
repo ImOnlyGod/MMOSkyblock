@@ -18,18 +18,19 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import com.mojang.authlib.yggdrasil.response.ProfileSearchResultsResponse;
-
 import CustomEssentials.Main;
 import CustomEssentials.Events.Profile;
 import CustomEssentials.Events.Gui.Enchants.EnchantTableGui;
 import CustomEssentials.Events.Gui.Path.PathStatsGui;
+import CustomEssentials.Events.Gui.Shop.CompressedItemOptionMenu;
 import CustomEssentials.Events.Gui.Shop.ItemsBuySellGui;
 import CustomEssentials.Events.Gui.Skills.SkillProgression;
 import CustomEssentials.Events.Items.ItemStorageTable;
 import CustomEssentials.Events.Items.ItemsCore;
 import CustomEssentials.Events.Items.Crafting.CustomCraft;
 import CustomEssentials.Events.Items.Crafting.CustomCraftingItemSet;
+import CustomEssentials.Events.Items.Crafting.CustomItemSets;
+import CustomEssentials.Events.Items.CustomItems.CompressedItems;
 import CustomEssentials.Events.PlayerPath.Paths.Archer;
 import CustomEssentials.Events.PlayerPath.Paths.Assassin;
 import CustomEssentials.Events.PlayerPath.Paths.Tank;
@@ -752,7 +753,10 @@ public class GuiShops implements Listener{
 			if (e.getSlot() != 4 && !(e.getView().getTopInventory().getItem(e.getSlot()).getType().equals(Material.RED_STAINED_GLASS_PANE))) {
 				int amount = this.shopPrices.getItemSlotPriceMultiplier().get(e.getSlot());
 				PlayerBuyItemEvent(p,e.getInventory().getItem(e.getSlot()),amount);
+				ItemsBuySellGui buySell = new ItemsBuySellGui(e.getCurrentItem(),p, this.shopPrices);
+				p.openInventory(buySell.getBuyGui());
 			}
+			
 			
 		}
 		else if ((e.getView().getTitle().contains(Utils.chat("&a&lSelling")))) {
@@ -768,9 +772,39 @@ public class GuiShops implements Listener{
 			if (e.getSlot() != 4 && !(e.getView().getTopInventory().getItem(e.getSlot()).getType().equals(Material.LIME_STAINED_GLASS_PANE))) {
 				int amount = this.shopPrices.getItemSlotPriceMultiplier().get(e.getSlot());
 				PlayerSellItemEvent(p,e.getInventory().getItem(e.getSlot()),amount);
+				ItemsBuySellGui buySell = new ItemsBuySellGui(e.getCurrentItem(),p, this.shopPrices);
+				p.openInventory(buySell.getSellGui());
 			}
 			
-		}	
+		}
+		else if ((e.getView().getTitle().contains(Utils.chat("&c&lBuy Options&8&l")))) {
+			ClickType click = e.getClick();
+			if (!isValidClick(click)) {
+				e.setCancelled(true);				
+			}
+			if (e.getClickedInventory() != e.getView().getTopInventory()) {
+				return;
+			}
+			e.setCancelled(true);
+			if (!(e.getView().getTopInventory().getItem(e.getSlot()).getType().equals(Material.RED_STAINED_GLASS_PANE))) {
+				ItemsBuySellGui buySell = new ItemsBuySellGui(e.getCurrentItem(),p, this.shopPrices);
+				p.openInventory(buySell.getBuyGui());	
+			}
+		}
+		else if ((e.getView().getTitle().contains(Utils.chat("&a&lSell Options&8&l")))) {
+			ClickType click = e.getClick();
+			if (!isValidClick(click)) {
+				e.setCancelled(true);				
+			}
+			if (e.getClickedInventory() != e.getView().getTopInventory()) {
+				return;
+			}
+			e.setCancelled(true);
+			if (!(e.getView().getTopInventory().getItem(e.getSlot()).getType().equals(Material.LIME_STAINED_GLASS_PANE))) {
+				ItemsBuySellGui buySell = new ItemsBuySellGui(e.getCurrentItem(),p, this.shopPrices);
+				p.openInventory(buySell.getSellGui());	
+			}
+		}
 	}
 	
 	
@@ -784,11 +818,15 @@ public class GuiShops implements Listener{
 			ItemsBuySellGui buySell = new ItemsBuySellGui(item,p, this.shopPrices);
 			if (click.isLeftClick()) {
 				if (!this.shopPrices.getItemBuyPrice().containsKey(item.getType())) return;
-				p.openInventory(buySell.getBuyGui());
+				CustomItemSets compressedItems = new CustomItemSets();
+				if (!compressedItems.getVanillaToCustomItems().contains(item.getType())) p.openInventory(buySell.getBuyGui());
+				else p.openInventory(new CompressedItemOptionMenu(item,p,this.shopPrices).getBuyGui());
 			}
 			else if (click.isRightClick()) {
 				if (!this.shopPrices.getItemSellPrice().containsKey(item.getType())) return;
-				p.openInventory(buySell.getSellGui());
+				CustomItemSets compressedItems = new CustomItemSets();
+				if (!compressedItems.getVanillaToCustomItems().contains(item.getType())) p.openInventory(buySell.getSellGui());
+				else p.openInventory(new CompressedItemOptionMenu(item,p,this.shopPrices).getSellGui());
 			}
 			else if (click.equals(ClickType.MIDDLE)) {
 				PlayerSellAllEvent(p,item);
@@ -802,6 +840,12 @@ public class GuiShops implements Listener{
 		
 		if (this.shopPrices.getItemBuyPrice().get(item.getType()) == null) return;
 		float itemPrice = this.shopPrices.getItemBuyPrice().get(item.getType());
+		ItemStack itemForPlayer = new ItemStack(item.getType(),amount);
+		if (item.getItemMeta().getDisplayName().contains("Compressed")) {
+			itemPrice = this.shopPrices.getItemBuyPrice().get(item.getType())*1024;
+			itemForPlayer = new CompressedItems().createItem(item.getType(),amount);
+		}
+		
 		double totalPrice = itemPrice * amount;
 		
 		Profile profile = this.plugin.getProfileManager().getPlayerProfile(p);
@@ -820,11 +864,12 @@ public class GuiShops implements Listener{
 			return;
 		}
 		
-		
-		ItemStack itemForPlayer = new ItemStack(item.getType(),amount);
 		profile.removeBalance(totalPrice);		
-		p.getInventory().addItem(itemForPlayer);	
-		this.shopPrices.shiftPricesOnBuy(item.getType(), amount);
+		p.getInventory().addItem(itemForPlayer);
+		if (item.getItemMeta().getDisplayName().contains("Compressed")) {
+			this.shopPrices.shiftPricesOnBuy(item.getType(), amount*1024);
+		}
+		else this.shopPrices.shiftPricesOnBuy(item.getType(), amount);
 		p.sendMessage(Utils.chat("&7[&cShop&7]" + this.plugin.getConfig().getString("BalanceCommand.buy_item_msg") + amount + " &7of &b" + item.getType() + " &7for &c$" + totalPrice));
 		p.sendMessage(Utils.chat(this.plugin.getConfig().getString("BalanceCommand.reciever_new_bal_msg") + profile.getBalance()));	
 	}
@@ -846,7 +891,21 @@ public class GuiShops implements Listener{
 		
 		for (int i = 0; i < 36; i++) {
 			if (inv.getItem(i) != null) {
-				if (inv.getItem(i).getType() == item.getType()) {
+				if (inv.getItem(i).getType() == item.getType() && !inv.getItem(i).getItemMeta().getDisplayName().contains(Utils.chat("&7&lCompressed"))) {
+					count += inv.getItem(i).getAmount();
+				}
+			}
+		}
+		
+		return count;
+	}	
+	
+	public int CountCompressedItem(PlayerInventory inv, ItemStack item) {
+		int count = 0;
+		
+		for (int i = 0; i < 36; i++) {
+			if (inv.getItem(i) != null) {
+				if (inv.getItem(i).getType() == item.getType() && inv.getItem(i).getItemMeta().getDisplayName().contains(Utils.chat("&7&lCompressed"))) {
 					count += inv.getItem(i).getAmount();
 				}
 			}
@@ -859,6 +918,11 @@ public class GuiShops implements Listener{
 		
 		if (this.shopPrices.getItemSellPrice().get(item.getType()) == null) return;
 		float itemPrice = this.shopPrices.getItemSellPrice().get(item.getType());
+		ItemStack itemForPlayer = new ItemStack(item.getType(),amount);
+		if (item.getItemMeta().getDisplayName().contains("Compressed")) {
+			itemPrice = this.shopPrices.getItemBuyPrice().get(item.getType())*1024;
+			itemForPlayer = new CompressedItems().createItem(item.getType(),amount);
+		}
 		double totalPrice = itemPrice * amount;
 		
 		Profile profile = this.plugin.getProfileManager().getPlayerProfile(p);
@@ -869,11 +933,13 @@ public class GuiShops implements Listener{
 			p.sendMessage("Not enough items");
 			return;
 		}
-		itemPlayer = new ItemStack(item.getType(),amount);
 		
-		p.getInventory().removeItem(itemPlayer);
+		p.getInventory().removeItem(itemForPlayer);
 		profile.addBalance(totalPrice);	
-		this.shopPrices.shiftPricesOnSell(item.getType(), amount);
+		if (item.getItemMeta().getDisplayName().contains("Compressed")) {
+			this.shopPrices.shiftPricesOnSell(item.getType(), amount*1024);
+		}
+		else this.shopPrices.shiftPricesOnSell(item.getType(), amount);
 		p.sendMessage(Utils.chat("&7[&cShop&7]" + this.plugin.getConfig().getString("BalanceCommand.sell_item_msg") + amount + " &7of &b" + item.getType() + " &7for &a$" + totalPrice));
 		p.sendMessage(Utils.chat(this.plugin.getConfig().getString("BalanceCommand.reciever_new_bal_msg") + profile.getBalance()));
 	}
@@ -888,22 +954,39 @@ public class GuiShops implements Listener{
 		
 		double itemPrice = this.shopPrices.getItemSellPrice().get(item.getType());
 		
-		
 		Profile profile = this.plugin.getProfileManager().getPlayerProfile(p);
-		ItemStack playerItem = new ItemStack(item.getType());
+		ItemStack playerItem = item;
 		
 		int amount = CountItem(p.getInventory(),playerItem);
+		int compressedAmount =  CountCompressedItem(p.getInventory(),playerItem);
 		
-		if (amount == 0) {
+		if (amount == 0 && compressedAmount == 0) {
 			p.sendMessage("You dont have any items");
 			return;
-		}
+		}	
 		
 		ItemStack sellItem = new ItemStack(item.getType(),amount);
-		p.getInventory().removeItem(sellItem);
-		profile.addBalance(itemPrice*amount);
-		this.shopPrices.shiftPricesOnSell(item.getType(), amount);
-		p.sendMessage(Utils.chat("&7[&cShop&7]" + this.plugin.getConfig().getString("BalanceCommand.sell_item_msg") + amount + " &7of &b" + item.getType() + " &7for &a$" + itemPrice*amount));
+		
+		Inventory inv = p.getInventory();
+		for (int i = 0; i < 36; i++) {
+			if (inv.getItem(i) != null) {
+				if (inv.getItem(i).getType() == item.getType() && inv.getItem(i).getItemMeta().getDisplayName().contains(Utils.chat("&7&lCompressed"))) {
+					inv.removeItem(inv.getItem(i));
+				}
+			}
+		}
+		
+		if (compressedAmount > 0) {
+			this.shopPrices.shiftPricesOnSell(item.getType(), compressedAmount*1024);
+			p.sendMessage(Utils.chat("&7[&cShop&7]" + this.plugin.getConfig().getString("BalanceCommand.sell_item_msg") + compressedAmount + " &7of &bCompressed " + item.getType() + " &7for &a$" + itemPrice*compressedAmount*1024));
+		}
+		if (amount > 0) {
+			this.shopPrices.shiftPricesOnSell(item.getType(), amount);
+			p.sendMessage(Utils.chat("&7[&cShop&7]" + this.plugin.getConfig().getString("BalanceCommand.sell_item_msg") + amount + " &7of &b" + item.getType() + " &7for &a$" + itemPrice*amount));
+			p.getInventory().removeItem(sellItem);
+		}
+		
+		profile.addBalance(itemPrice*(amount+(compressedAmount*1024)));
 		p.sendMessage(Utils.chat(this.plugin.getConfig().getString("BalanceCommand.reciever_new_bal_msg") + profile.getBalance()));
 					
 
@@ -914,6 +997,27 @@ public class GuiShops implements Listener{
 	public void CloseMenuEvent(InventoryCloseEvent e) {
 		Player p = (Player) e.getPlayer();
 		if ((e.getView().getTitle().contains(Utils.chat("&a&lSelling"))) || (e.getView().getTitle().contains(Utils.chat("&c&lBuying")))) {
+			ItemStack item = e.getInventory().getItem(10);
+			String menu = getPreviousMenu(item);
+			if (menu == null) return;
+			
+			Bukkit.getScheduler().scheduleSyncDelayedTask(this.plugin, new Runnable() {
+				@Override
+				public void run() {
+					if (p.getOpenInventory().getTitle().equalsIgnoreCase("Crafting")) {
+						CustomItemSets compressedItems = new CustomItemSets();
+						if (!compressedItems.getVanillaToCustomItems().contains(item.getType())) p.performCommand(menu);
+						else {
+							if (e.getView().getTitle().contains(Utils.chat("&a&lSelling")))	p.openInventory(new CompressedItemOptionMenu(item,p,shopPrices).getSellGui());			
+							else p.openInventory(new CompressedItemOptionMenu(item,p,shopPrices).getBuyGui());
+						}
+					}
+					
+				}
+			},1);
+			return;
+		}
+		else if ((e.getView().getTitle().contains(Utils.chat("&c&lBuy Options&8&l"))) || (e.getView().getTitle().contains(Utils.chat("&a&lSell Options&8&l")))) {
 			
 			String menu = getPreviousMenu(e.getInventory().getItem(10));
 			if (menu == null) return;
@@ -921,7 +1025,8 @@ public class GuiShops implements Listener{
 			Bukkit.getScheduler().scheduleSyncDelayedTask(this.plugin, new Runnable() {
 				@Override
 				public void run() {
-					p.performCommand(menu);
+					if (p.getOpenInventory().getTitle().equalsIgnoreCase("Crafting")) p.performCommand(menu);
+					
 				}
 			},1);
 			return;
