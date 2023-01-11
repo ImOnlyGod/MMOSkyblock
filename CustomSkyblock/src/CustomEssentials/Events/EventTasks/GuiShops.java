@@ -777,7 +777,7 @@ public class GuiShops implements Listener{
 			}
 			
 		}
-		else if ((e.getView().getTitle().contains(Utils.chat("&c&lBuy Options&8&l")))) {
+		else if ((e.getView().getTitle().contains(Utils.chat("&c&lItem Variants&8&l")))) {
 			ClickType click = e.getClick();
 			if (!isValidClick(click)) {
 				e.setCancelled(true);				
@@ -794,27 +794,8 @@ public class GuiShops implements Listener{
 					if (!compressedItems.getVanillaToCustomItems().contains(e.getCurrentItem().getType())) p.openInventory(buySell.getBuyGui());
 					else p.openInventory(new CompressedItemOptionMenu(e.getCurrentItem(),p,this.shopPrices).getBuyGui());
 				}
+				else if (click.equals(ClickType.RIGHT))  p.openInventory(buySell.getSellGui());
 				else p.openInventory(buySell.getBuyGui());
-			}
-		}
-		else if ((e.getView().getTitle().contains(Utils.chat("&a&lSell Options&8&l")))) {
-			ClickType click = e.getClick();
-			if (!isValidClick(click)) {
-				e.setCancelled(true);				
-			}
-			if (e.getClickedInventory() != e.getView().getTopInventory()) {
-				return;
-			}
-			e.setCancelled(true);
-			if (!(e.getView().getTopInventory().getItem(e.getSlot()).getType().equals(Material.LIME_STAINED_GLASS_PANE)) && e.getView().getTopInventory().getItem(e.getSlot()) != null) {
-				ItemsBuySellGui buySell = new ItemsBuySellGui(e.getCurrentItem(),p, this.shopPrices);
-				if (click.equals(ClickType.MIDDLE)) {
-					PlayerSellAllSingleEvent(p,e.getCurrentItem());
-					CustomItemSets compressedItems = new CustomItemSets();
-					if (!compressedItems.getVanillaToCustomItems().contains(e.getCurrentItem().getType())) p.openInventory(buySell.getSellGui());
-					else p.openInventory(new CompressedItemOptionMenu(e.getCurrentItem(),p,this.shopPrices).getSellGui());
-				}
-				else p.openInventory(buySell.getSellGui());
 			}
 		}
 	}
@@ -837,8 +818,8 @@ public class GuiShops implements Listener{
 			else if (click.isRightClick()) {
 				if (!this.shopPrices.getItemSellPrice().containsKey(item.getType())) return;
 				CustomItemSets compressedItems = new CustomItemSets();
-				if (!compressedItems.getVanillaToCustomItems().contains(item.getType())) p.openInventory(buySell.getSellGui());
-				else p.openInventory(new CompressedItemOptionMenu(item,p,this.shopPrices).getSellGui());
+				if (!compressedItems.getVanillaToCustomItems().contains(item.getType())) p.openInventory(buySell.getBuyGui());
+				else p.openInventory(new CompressedItemOptionMenu(item,p,this.shopPrices).getBuyGui());
 			}
 			else if (click.equals(ClickType.MIDDLE)) {
 				Bukkit.getScheduler().scheduleSyncDelayedTask(this.plugin, new Runnable() {
@@ -1109,7 +1090,7 @@ public class GuiShops implements Listener{
 			},1);
 			return;
 		}
-		else if ((e.getView().getTitle().contains(Utils.chat("&c&lBuy Options&8&l"))) || (e.getView().getTitle().contains(Utils.chat("&a&lSell Options&8&l")))) {
+		else if ((e.getView().getTitle().contains(Utils.chat("&c&lItem Variants&8&l")))) {
 			
 			String menu = getPreviousMenu(e.getInventory().getItem(10));
 			if (menu == null) return;

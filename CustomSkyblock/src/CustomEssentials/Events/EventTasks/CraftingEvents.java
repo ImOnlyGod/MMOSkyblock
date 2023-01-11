@@ -2,6 +2,7 @@ package CustomEssentials.Events.EventTasks;
 
 import java.util.ArrayList;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentOffer;
@@ -10,6 +11,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.enchantment.EnchantItemEvent;
 import org.bukkit.event.enchantment.PrepareItemEnchantEvent;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.inventory.InventoryType;
@@ -20,6 +22,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import CustomEssentials.Main;
 import CustomEssentials.Events.Gui.Enchants.EnchantTableGui;
+import CustomEssentials.Events.Items.Crafting.CustomCraft;
+import CustomEssentials.Events.Items.Crafting.CustomCraftingItemSet;
 import CustomEssentials.Events.Items.Enchants.CustomEnchants;
 import CustomEssentials.Utils.Utils;
 
@@ -27,6 +31,7 @@ import CustomEssentials.Utils.Utils;
 public class CraftingEvents implements Listener{
 	
 	private Main plugin;
+	private CustomCraftingItemSet craftingRecipeSet = new CustomCraftingItemSet();
 		
 	public CraftingEvents(Main plugin) {
 		this.setPlugin(plugin);
@@ -91,6 +96,17 @@ public class CraftingEvents implements Listener{
 					return;
 				}
 			}
+			Bukkit.getScheduler().scheduleSyncDelayedTask(this.plugin, new Runnable() {
+				@Override
+				public void run() {
+					CustomCraft recipe = new CustomCraft((Player) e.getView().getPlayer(), e.getView().getTopInventory(), craftingRecipeSet);
+					
+					recipe.processOutputClick(e.getView().getBottomInventory(), e.getView().getTopInventory(), 24, ClickType.LEFT);
+					
+					
+				}
+			},1);
+			
 			return;
 		}
 		for (int i: e.getRawSlots()) {	
