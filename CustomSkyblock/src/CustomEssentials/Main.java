@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
 
+import CustomEssentials.Commands.AdminItemCommand;
 import CustomEssentials.Commands.AdminSkillCommand;
 import CustomEssentials.Commands.BaseCommands;
 import CustomEssentials.Commands.CustomMobsCommand;
@@ -170,6 +171,7 @@ public class Main extends JavaPlugin{
 		new PayCommand(this);
 		new AdminEcoCommand(this);
 		new AdminSkillCommand(this);
+		new AdminItemCommand(this);
 		
 		this.generateShopGui();		
 		
