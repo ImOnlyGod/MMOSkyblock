@@ -43,7 +43,6 @@ public class WeaponTabCommand implements TabExecutor{
 
 	@Override
 	public boolean onCommand(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
-		
 		CommandSender sender = arg0;
 		String[] args = arg3;
 		if (!(sender instanceof Player)) {
@@ -53,7 +52,6 @@ public class WeaponTabCommand implements TabExecutor{
 		if (!sender.hasPermission("weaponCommand")) return true;
 		
 		if (args.length == 0) {
-			
 			Player p = (Player) sender;
 			ThickWoodenSword s = new ThickWoodenSword();
 			s.giveItems(p,1);
@@ -75,7 +73,6 @@ public class WeaponTabCommand implements TabExecutor{
 			if (this.NametoItemCore.containsKey(key)) {
 				Player p = (Player) sender;
 				ItemsCore weapon = this.NametoItemCore.get(key);
-				
 				
 				if (args[1].toLowerCase().matches("\\d+")) {
 					if (args.length == 2) {		

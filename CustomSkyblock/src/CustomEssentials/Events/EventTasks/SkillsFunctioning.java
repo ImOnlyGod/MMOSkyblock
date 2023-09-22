@@ -1,11 +1,14 @@
 package CustomEssentials.Events.EventTasks;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.block.CreatureSpawner;
@@ -23,9 +26,12 @@ import org.bukkit.event.player.PlayerFishEvent.State;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.metadata.FixedMetadataValue;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import CustomEssentials.Main;
 import CustomEssentials.Events.Profile;
+import CustomEssentials.Events.Items.ItemStorageTable;
+import CustomEssentials.Events.Items.ItemsCore;
 import CustomEssentials.Events.Items.Enchants.CustomEnchants;
 import CustomEssentials.Utils.Utils;
 
@@ -33,14 +39,64 @@ import CustomEssentials.Utils.Utils;
 public class SkillsFunctioning implements Listener{
 	
 	private Main plugin;
+	private HashMap<Integer, ItemsCore> IDtoItemCore;
 		
 	public SkillsFunctioning(Main plugin) {
 		this.plugin = plugin;
+		this.setIDtoItemCore(new ItemStorageTable().getIDtoItemsCore());
+	}
+	
+	public boolean isRegenBlockPlaced(ItemStack block) {
+		if (!block.hasItemMeta()) return false;
+		if (!block.getItemMeta().hasCustomModelData()) return false;
+		
+		int blockModelData = block.getItemMeta().getCustomModelData();
+		
+		if (!(blockModelData >= 8000)) return false;
+		
+		return true;
+	}
+	
+	public void setRegenBlockPlaced(Block block, ItemStack blockItem) {
+		String blockRegenModelData = String.valueOf(blockItem.getItemMeta().getCustomModelData());
+		block.setMetadata("regenBlock", new FixedMetadataValue(this.plugin,blockRegenModelData));	
+	}
+	
+	public boolean isRegenBlockBroken(Block block) {
+		if (block.hasMetadata("regenBlock")) return true;
+		
+		return false;
+	}
+	public void setRegenBlockBroken(Block block) {
+		new BukkitRunnable() {
+			@Override
+			public void run() {
+				block.setType(Material.BEDROCK);
+				cancel();
+			}			
+		}.runTaskTimer(plugin,0,1);
+		
+		new BukkitRunnable() {
+			@Override
+			public void run() {
+				int blockID = block.getMetadata("regenBlock").get(0).asInt();
+				Material blockReplacementType = getIDtoItemCore().get(blockID).createItem(1).getType();
+				block.removeMetadata("VEINMINE", plugin);
+				block.setType(blockReplacementType);
+				cancel();
+			}			
+		}.runTaskTimer(plugin,40,1);	
+		
+		
+		
 	}
 				
 	@EventHandler
 	public void onBlockPlace(BlockPlaceEvent e) {
 		Block block = e.getBlock();
+		ItemStack blockItem = e.getItemInHand();
+		
+		if (isRegenBlockPlaced(blockItem)) setRegenBlockPlaced(block,blockItem);
 		
 		if (block.getType() == Material.FARMLAND) return;
 		
@@ -105,13 +161,14 @@ public class SkillsFunctioning implements Listener{
 				!(block.getType() == Material.CACTUS) &&
 				!(block.getType() == Material.SUGAR_CANE)) return;
 		
-
+		
+		if (isRegenBlockBroken(block)) return;
+		
 		e.getBlock().setMetadata("placed", new FixedMetadataValue(this.plugin,"something"));
 	}	
 	
 	public void veinMineBlocks(Player p,Block block, int currentLevel, int enchantLevel) {
 		if (currentLevel >= enchantLevel) return;
-			
 		Material blockType = block.getType();
 		block.setMetadata("VEINMINE", new FixedMetadataValue(this.plugin,"veinmine"));
 		p.breakBlock(block);
@@ -164,6 +221,7 @@ public class SkillsFunctioning implements Listener{
 				CreatureSpawner spawner = (CreatureSpawner) block.getState();
 				item.setData(spawner.getData());
 				ItemMeta meta = item.getItemMeta();
+				
 				if (spawner.hasMetadata(Utils.chat("&6Wild Pig &7Spawner"))) meta.setDisplayName(Utils.chat("&6Wild Pig &7Spawner"));
 				else if (spawner.hasMetadata(Utils.chat("&6Agressive Golem &7Spawner")))  meta.setDisplayName(Utils.chat("&6Agressive Golem &7Spawner"));
 				else if (spawner.hasMetadata(Utils.chat("&6Basic Zombie &7Spawner")))  meta.setDisplayName(Utils.chat("&6Basic Zombie &7Spawner"));
@@ -213,6 +271,9 @@ public class SkillsFunctioning implements Listener{
 		profile.getForaging().generateWoodXp();
 		profile.getMining().generateBlockXp();
 		ItemStack item = p.getInventory().getItemInMainHand();
+		
+		if (isRegenBlockBroken(e.getBlock())) setRegenBlockBroken(e.getBlock());
+		
 		if (item != null) {
 			if (item.hasItemMeta()) {
 				if (item.getItemMeta().hasEnchant(CustomEnchants.EXPERIENCE_EXTRACTOR)) {
@@ -279,8 +340,7 @@ public class SkillsFunctioning implements Listener{
 			p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 2, 1);
 			
 			profile.getFarming().addCurrentXP(xpAmount*multiplier);
-		}
-		
+		}	
 		
 	}
 	
@@ -307,6 +367,14 @@ public class SkillsFunctioning implements Listener{
 			
 			p.getInventory().addItem(item);
 		}
+	}
+
+	public HashMap<Integer, ItemsCore> getIDtoItemCore() {
+		return IDtoItemCore;
+	}
+
+	public void setIDtoItemCore(HashMap<Integer, ItemsCore> iDtoItemCore) {
+		IDtoItemCore = iDtoItemCore;
 	}		
 	
 }
