@@ -34,12 +34,12 @@ public class MiningSkill extends Skills{
 		this.blockXp.put(Material.DEEPSLATE_LAPIS_ORE, (float) 5.0);
 		this.blockXp.put(Material.REDSTONE_ORE, (float) 6.0);
 		this.blockXp.put(Material.DEEPSLATE_REDSTONE_ORE, (float) 7.0);
-		this.blockXp.put(Material.GOLD_ORE, (float) 10);
-		this.blockXp.put(Material.DEEPSLATE_GOLD_ORE, (float) 15);
-		this.blockXp.put(Material.DIAMOND_ORE, (float) 20);
-		this.blockXp.put(Material.DEEPSLATE_DIAMOND_ORE, (float) 25);
-		this.blockXp.put(Material.EMERALD_ORE, (float) 35);
-		this.blockXp.put(Material.DEEPSLATE_EMERALD_ORE, (float) 50);	
+		this.blockXp.put(Material.GOLD_ORE, (float) 10.0);
+		this.blockXp.put(Material.DEEPSLATE_GOLD_ORE, (float) 15.0);
+		this.blockXp.put(Material.DIAMOND_ORE, (float) 20.0);
+		this.blockXp.put(Material.DEEPSLATE_DIAMOND_ORE, (float) 25.0);
+		this.blockXp.put(Material.EMERALD_ORE, (float) 35.0);
+		this.blockXp.put(Material.DEEPSLATE_EMERALD_ORE, (float) 50.0);	
 		//ADD MORE LATER :)
 	}
 	

@@ -4,11 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
-import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.block.CreatureSpawner;
@@ -40,11 +38,17 @@ public class SkillsFunctioning implements Listener{
 	
 	private Main plugin;
 	private HashMap<Integer, ItemsCore> IDtoItemCore;
+	private ArrayList<Block> regenBlockList;
+	
 		
-	public SkillsFunctioning(Main plugin) {
+	public SkillsFunctioning(Main plugin, ArrayList<Block> regenBlockList) {
 		this.plugin = plugin;
 		this.setIDtoItemCore(new ItemStorageTable().getIDtoItemsCore());
+		this.regenBlockList = regenBlockList;
+		
+		for (Block block : regenBlockList) block.setMetadata("regenBlock", new FixedMetadataValue(this.plugin,null));; 
 	}
+	
 	
 	public boolean isRegenBlockPlaced(ItemStack block) {
 		if (!block.hasItemMeta()) return false;
@@ -60,12 +64,14 @@ public class SkillsFunctioning implements Listener{
 	public void setRegenBlockPlaced(Block block, ItemStack blockItem) {
 		String blockRegenModelData = String.valueOf(blockItem.getItemMeta().getCustomModelData());
 		block.setMetadata("regenBlock", new FixedMetadataValue(this.plugin,blockRegenModelData));	
+		regenBlockList.add(block);	
 	}
 	
-	public boolean isRegenBlockBroken(Block block) {
-		if (block.hasMetadata("regenBlock")) return true;
+	public boolean isRegenBlockBroken(Block block, Player p) {
+		if (p.getGameMode() == GameMode.CREATIVE) return false;
+		if (!block.hasMetadata("regenBlock")) return false;
 		
-		return false;
+		return true;
 	}
 	public void setRegenBlockBroken(Block block) {
 		new BukkitRunnable() {
@@ -85,8 +91,7 @@ public class SkillsFunctioning implements Listener{
 				block.setType(blockReplacementType);
 				cancel();
 			}			
-		}.runTaskTimer(plugin,40,1);	
-		
+		}.runTaskTimer(plugin,200,1);	
 		
 		
 	}
@@ -162,23 +167,24 @@ public class SkillsFunctioning implements Listener{
 				!(block.getType() == Material.SUGAR_CANE)) return;
 		
 		
-		if (isRegenBlockBroken(block)) return;
+		if (isRegenBlockBroken(block,p)) return;
 		
 		e.getBlock().setMetadata("placed", new FixedMetadataValue(this.plugin,"something"));
 	}	
 	
-	public void veinMineBlocks(Player p,Block block, int currentLevel, int enchantLevel) {
+	public void veinMineBlocks(Player p,Block block, int currentLevel, int enchantLevel, Boolean setdrops) {
 		if (currentLevel >= enchantLevel) return;
 		Material blockType = block.getType();
-		block.setMetadata("VEINMINE", new FixedMetadataValue(this.plugin,"veinmine"));
+		block.setMetadata("VEINMINE", new FixedMetadataValue(this.plugin,"veinmine"));	
 		p.breakBlock(block);
 		
-		if (block.getRelative(-1,0,0).getType() == blockType) veinMineBlocks(p, block.getRelative(-1,0,0), currentLevel+1,enchantLevel);
-		if (block.getRelative(1,0,0).getType() == blockType) veinMineBlocks(p, block.getRelative(1,0,0), currentLevel+1,enchantLevel);
-		if (block.getRelative(0,-1,0).getType() == blockType) veinMineBlocks(p, block.getRelative(0,-1,0), currentLevel+1,enchantLevel);
-		if (block.getRelative(0,1,0).getType() == blockType) veinMineBlocks(p, block.getRelative(0,1,0), currentLevel+1,enchantLevel);
-		if (block.getRelative(0,0,-1).getType() == blockType) veinMineBlocks(p, block.getRelative(0,0,-1), currentLevel+1,enchantLevel);
-		if (block.getRelative(0,0,1).getType() == blockType) veinMineBlocks(p, block.getRelative(0,0,1), currentLevel+1,enchantLevel);
+		
+		if (block.getRelative(-1,0,0).getType() == blockType) veinMineBlocks(p, block.getRelative(-1,0,0), currentLevel+1,enchantLevel, true);
+		if (block.getRelative(1,0,0).getType() == blockType) veinMineBlocks(p, block.getRelative(1,0,0), currentLevel+1,enchantLevel, true);
+		if (block.getRelative(0,-1,0).getType() == blockType) veinMineBlocks(p, block.getRelative(0,-1,0), currentLevel+1,enchantLevel, true);
+		if (block.getRelative(0,1,0).getType() == blockType) veinMineBlocks(p, block.getRelative(0,1,0), currentLevel+1,enchantLevel, true);
+		if (block.getRelative(0,0,-1).getType() == blockType) veinMineBlocks(p, block.getRelative(0,0,-1), currentLevel+1,enchantLevel, true);
+		if (block.getRelative(0,0,1).getType() == blockType) veinMineBlocks(p, block.getRelative(0,0,1), currentLevel+1,enchantLevel, true);
 		
 		
 	}
@@ -193,9 +199,10 @@ public class SkillsFunctioning implements Listener{
 			drops.add(item);
 		}
 		
-		if (p.getInventory().getItemInMainHand().getItemMeta().hasEnchant(CustomEnchants.VEINMINE) && !block.hasMetadata("VEINMINE") && !block.hasMetadata("placed")) {
+		if (p.getInventory().getItemInMainHand().getItemMeta().hasEnchant(CustomEnchants.VEINMINE) && !block.hasMetadata("VEINMINE")) {
 			int enchantLevel = p.getInventory().getItemInMainHand().getItemMeta().getEnchantLevel(CustomEnchants.VEINMINE);
-			veinMineBlocks(p,block, 0, enchantLevel);
+			drops = new ArrayList<ItemStack>();
+			veinMineBlocks(p,block, 0, enchantLevel, false);
 			
 		}
 		if (p.getInventory().getItemInMainHand().getItemMeta().hasEnchant(CustomEnchants.GEM_EXTRACTOR) && !block.hasMetadata("placed")) {
@@ -212,7 +219,7 @@ public class SkillsFunctioning implements Listener{
 				else if (enchantLevel == 4)  item.setAmount(amount*3);
 			}
 		}
-		else if (p.getInventory().getItemInMainHand().getItemMeta().hasEnchant(CustomEnchants.JIGSAW)) {
+		else if (p.getInventory().getItemInMainHand().getItemMeta().hasEnchant(CustomEnchants.JIGSAW) && (!block.getType().equals(Material.AIR))) {
 			//FUNCTION WITH CUSTOM SPANWERS
 			ArrayList<ItemStack> silkdrops = new ArrayList<ItemStack>();
 			ItemStack item = new ItemStack(block.getType());
@@ -272,7 +279,7 @@ public class SkillsFunctioning implements Listener{
 		profile.getMining().generateBlockXp();
 		ItemStack item = p.getInventory().getItemInMainHand();
 		
-		if (isRegenBlockBroken(e.getBlock())) setRegenBlockBroken(e.getBlock());
+		if (isRegenBlockBroken(e.getBlock(),p)) setRegenBlockBroken(e.getBlock());
 		
 		if (item != null) {
 			if (item.hasItemMeta()) {
@@ -285,12 +292,11 @@ public class SkillsFunctioning implements Listener{
 		}
 		
 		e.setDropItems(checkEnchantsBlockBreak(p,e.getBlock()));
-		if (e.getBlock().hasMetadata("placed")) return;
+		if (e.getBlock().hasMetadata("placed")) return;		
 		
 		if (profile.getMining().getBlockXp().containsKey(block)) {
 				
 			Double xpAmount = profile.getMining().getXPamount(block);
-			
 			if (xpAmount == 0.0) return;
 			else {
 				plugin.setDisplayStats(1);
@@ -375,6 +381,16 @@ public class SkillsFunctioning implements Listener{
 
 	public void setIDtoItemCore(HashMap<Integer, ItemsCore> iDtoItemCore) {
 		IDtoItemCore = iDtoItemCore;
+	}
+
+
+	public ArrayList<Block> getRegenBlockList() {
+		return regenBlockList;
+	}
+
+
+	public void setRegenBlockList(ArrayList<Block> regenBlockList) {
+		this.regenBlockList = regenBlockList;
 	}		
 	
 }

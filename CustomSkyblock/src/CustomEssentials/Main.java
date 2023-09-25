@@ -1,10 +1,15 @@
 package CustomEssentials;
 
 import java.io.File;
+
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -81,11 +86,21 @@ public class Main extends JavaPlugin{
 	private int displayStats = 0;
 	private File playerDataFolderLocation;
 	private ItemPrices shopPrices;
+	private File shopPricesLocation;
+	private ArrayList<Block> regenBlockList = new ArrayList<Block>();
+	private File regenBlockListLocation;
 	
+	public ArrayList<Block> getRegenBlockList() {
+		return regenBlockList;
+	}
+
+	public void setRegenBlockList(ArrayList<Block> regenBlockList) {
+		this.regenBlockList = regenBlockList;
+	}
+
 	public ItemPrices getShopPrices() {
 		return shopPrices;
 	}
-
 
 	public void setShopPrices(ItemPrices shopPrices) {
 		this.shopPrices = shopPrices;
@@ -103,8 +118,6 @@ public class Main extends JavaPlugin{
 		this.shopPricesPrevious = shopPricesPrevious;
 	}
 
-
-	private File shopPricesLocation;
 
 	public void generateShopGui() {
 		new BlockShop1(this, this.shopPrices);
@@ -140,6 +153,7 @@ public class Main extends JavaPlugin{
 		//getServer().getConsoleSender().sendMessage(Utils.chat("&aPlugin has been enabled!"));
 		generatePlayerFolder();	
 		generateShopFile();
+		generateRegenBlockListFile();
 		this.profileManager = new PlayerProfileManager(this);
 
 		CustomEnchants.register();
@@ -155,10 +169,11 @@ public class Main extends JavaPlugin{
 		new CustomMobsCommand(this);
 		new BaseCommands(this);
 		readShopData();
+		readRegenBlockData();
 		getServer().getPluginManager().registerEvents(new MobEvents(this), this);
 		getServer().getPluginManager().registerEvents(new PlayerJoinLeave(this), this);
 		getServer().getPluginManager().registerEvents(new GuiShops(this, this.shopPrices), this);
-		getServer().getPluginManager().registerEvents(new SkillsFunctioning(this), this);
+		getServer().getPluginManager().registerEvents(new SkillsFunctioning(this, this.regenBlockList), this);
 		getServer().getPluginManager().registerEvents(new FoodSaturation(this), this);
 		getServer().getPluginManager().registerEvents(new FishingEvents(this), this);
 		getServer().getPluginManager().registerEvents(new CraftingEvents(this), this);
@@ -315,6 +330,7 @@ public class Main extends JavaPlugin{
 	public void onDisable() {		
 		saveShopPrices();
 		savePlayerData();
+		saveRegenBlockData();
 		saveConfig();
 		getServer().getConsoleSender().sendMessage("Plugin has been disabled!");
 		
@@ -323,6 +339,79 @@ public class Main extends JavaPlugin{
 	public void loadConfig() {
 		getConfig().options().copyDefaults(true);
 		saveConfig();
+	}
+	
+	public void generateRegenBlockListFile() {
+		setRegenBlockListLocation(this.getDataFolder());
+	}
+	
+	public void saveRegenBlockData() {
+		setRegenBlockListLocation(this.regenBlockListLocation);
+		writeRegenBlockData(this.regenBlockListLocation);
+	}	
+	
+	public void writeRegenBlockData(File directory) {
+		String FileName = "regen_block_data";
+		String path = directory.getPath();
+		File RegenBlockFile = new File(path + "\\" + FileName + ".yml");		
+		
+		if (!RegenBlockFile.exists())
+			try {
+				RegenBlockFile.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		
+		FileConfiguration regenBlockData = YamlConfiguration.loadConfiguration(RegenBlockFile);	
+		
+		try {
+			int blockNum = 0;
+			for (Block block : this.regenBlockList) {
+				String blockNumStr = String.valueOf(blockNum);
+				regenBlockData.createSection(blockNumStr);
+				regenBlockData.set(blockNumStr+"."+"x", block.getLocation().getX());
+				regenBlockData.set(blockNumStr+"."+"y", block.getLocation().getY());
+				regenBlockData.set(blockNumStr+"."+"z", block.getLocation().getZ());
+				regenBlockData.set(blockNumStr+"."+"worldName", block.getLocation().getWorld().getName());	
+				blockNum++;
+			}
+			
+			regenBlockData.save(RegenBlockFile);
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+	}
+	
+	public void readRegenBlockData() {
+		
+		String FileName = "regen_block_data";
+		String path = this.getShopPricesLocation().getPath();
+		File RegenBlockFile = new File(path + "\\" + FileName + ".yml");
+		
+		if (!RegenBlockFile.exists()) return;
+				
+		FileConfiguration regenBlockData = YamlConfiguration.loadConfiguration(RegenBlockFile);
+		
+		int blockNum = 0;
+		//FIND AMOUNT OF LINES
+		for (int i=0;i<12;i++) {
+			String blockNumStr = String.valueOf(blockNum);
+			if (regenBlockData.get(blockNumStr+"."+"x").equals(null)) break;
+
+			double x = (double) regenBlockData.get(blockNumStr+"."+"x");
+			double y = (double) regenBlockData.get(blockNumStr+"."+"y");
+			double z = (double) regenBlockData.get(blockNumStr+"."+"z");
+			String worldName = (String) regenBlockData.get(blockNumStr+"."+"worldName");
+			World world = this.getServer().getWorld(worldName);
+			Location loc = new Location(world, x, y, z);
+			
+			this.regenBlockList.add(loc.getBlock());
+			
+			blockNum++;
+			
+		}
+		
 	}
 	
 	public void generateShopFile() {
@@ -771,6 +860,14 @@ public class Main extends JavaPlugin{
 
 	public void setShopPricesLocation(File shopPricesLocation) {
 		this.shopPricesLocation = shopPricesLocation;
+	}
+
+	public File getRegenBlockListLocation() {
+		return regenBlockListLocation;
+	}
+
+	public void setRegenBlockListLocation(File regenBlockListLocation) {
+		this.regenBlockListLocation = regenBlockListLocation;
 	}
 	
 

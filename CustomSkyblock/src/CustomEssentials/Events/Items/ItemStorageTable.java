@@ -2,7 +2,7 @@ package CustomEssentials.Events.Items;
 
 import java.util.HashMap;
 
-import CustomEssentials.Events.Items.Blocks.Ruby_Ore;
+import CustomEssentials.Events.Items.Blocks.RegenBlocks.Regen_Emerald_Ore;
 import CustomEssentials.Events.Items.Tools.DarkPickaxe;
 import CustomEssentials.Events.Items.Vanilla.Armor.Boots.DiamondBoots;
 import CustomEssentials.Events.Items.Vanilla.Armor.Boots.GoldenBoots;
@@ -104,8 +104,9 @@ public class ItemStorageTable {
 		this.IDtoItemsCore.put(9, new StarFire());
 		this.CmdtoItemsCore.put("starfire", new StarFire());
 		
-		this.IDtoItemsCore.put(8000, new Ruby_Ore());
-		this.CmdtoItemsCore.put("ruby_ore", new Ruby_Ore());
+		//Vanilla Regen Block
+		this.IDtoItemsCore.put(8000, new Regen_Emerald_Ore());
+		this.CmdtoItemsCore.put("emeraldore", new Regen_Emerald_Ore());
 		
 		//Vanilla
 		this.IDtoItemsCore.put(100, new WoodenSword());
