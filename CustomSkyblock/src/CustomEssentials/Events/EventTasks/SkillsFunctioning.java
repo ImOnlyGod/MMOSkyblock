@@ -68,7 +68,10 @@ public class SkillsFunctioning implements Listener{
 	}
 	
 	public boolean isRegenBlockBroken(Block block, Player p) {
-		if (p.getGameMode() == GameMode.CREATIVE) return false;
+		if (p.getGameMode() == GameMode.CREATIVE && block.hasMetadata("regenBlock")) {
+			regenBlockList.remove(block);
+			return false;
+		}
 		if (!block.hasMetadata("regenBlock")) return false;
 		
 		return true;
@@ -195,9 +198,13 @@ public class SkillsFunctioning implements Listener{
 		if (!block.isPreferredTool(p.getInventory().getItemInMainHand())) return false;
 		if (p.getGameMode() == GameMode.CREATIVE) return true;
 		ArrayList<ItemStack> drops = new ArrayList<ItemStack>();
-		for (ItemStack item :block.getDrops()) {
-			drops.add(item);
+		
+		if (!block.getType().equals(Material.AIR)) {
+			for (ItemStack item :block.getDrops()) {
+				drops.add(item);
+			}
 		}
+		
 		
 		if (p.getInventory().getItemInMainHand().getItemMeta().hasEnchant(CustomEnchants.VEINMINE) && !block.hasMetadata("VEINMINE")) {
 			int enchantLevel = p.getInventory().getItemInMainHand().getItemMeta().getEnchantLevel(CustomEnchants.VEINMINE);
