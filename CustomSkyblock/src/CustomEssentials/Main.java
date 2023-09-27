@@ -358,6 +358,7 @@ public class Main extends JavaPlugin{
 		String path = directory.getPath();
 		File RegenBlockFile = new File(path + "\\" + FileName + ".yml");	
 		RegenBlockFile.delete();
+		RegenBlockFile = new File(path + "\\" + FileName + ".yml");
 		
 		if (!RegenBlockFile.exists())
 			try {

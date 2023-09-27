@@ -69,7 +69,7 @@ public class SkillsFunctioning implements Listener{
 		
 		int blockModelData = block.getItemMeta().getCustomModelData();
 		
-		if (!(blockModelData >= 8000)) return false;
+		if (!(blockModelData >= 8000 && blockModelData < 8100)) return false;
 		
 		return true;
 	}

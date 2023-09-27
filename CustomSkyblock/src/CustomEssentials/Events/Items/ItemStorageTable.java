@@ -2,7 +2,14 @@ package CustomEssentials.Events.Items;
 
 import java.util.HashMap;
 
+import CustomEssentials.Events.Items.Blocks.RegenBlocks.Regen_Coal_Ore;
+import CustomEssentials.Events.Items.Blocks.RegenBlocks.Regen_Copper_Ore;
+import CustomEssentials.Events.Items.Blocks.RegenBlocks.Regen_Diamond_Ore;
 import CustomEssentials.Events.Items.Blocks.RegenBlocks.Regen_Emerald_Ore;
+import CustomEssentials.Events.Items.Blocks.RegenBlocks.Regen_Gold_Ore;
+import CustomEssentials.Events.Items.Blocks.RegenBlocks.Regen_Iron_Ore;
+import CustomEssentials.Events.Items.Blocks.RegenBlocks.Regen_Lapis_Ore;
+import CustomEssentials.Events.Items.Blocks.RegenBlocks.Regen_Redstone_Ore;
 import CustomEssentials.Events.Items.Tools.DarkPickaxe;
 import CustomEssentials.Events.Items.Vanilla.Armor.Boots.DiamondBoots;
 import CustomEssentials.Events.Items.Vanilla.Armor.Boots.GoldenBoots;
@@ -107,6 +114,27 @@ public class ItemStorageTable {
 		//Vanilla Regen Block
 		this.IDtoItemsCore.put(8000, new Regen_Emerald_Ore());
 		this.CmdtoItemsCore.put("emeraldore", new Regen_Emerald_Ore());
+		
+		this.IDtoItemsCore.put(8001, new Regen_Coal_Ore());
+		this.CmdtoItemsCore.put("coalore", new Regen_Coal_Ore());
+		
+		this.IDtoItemsCore.put(8002, new Regen_Copper_Ore());
+		this.CmdtoItemsCore.put("copperore", new Regen_Copper_Ore());
+		
+		this.IDtoItemsCore.put(8003, new Regen_Diamond_Ore());
+		this.CmdtoItemsCore.put("diamondore", new Regen_Diamond_Ore());
+		
+		this.IDtoItemsCore.put(8004, new Regen_Gold_Ore());
+		this.CmdtoItemsCore.put("goldore", new Regen_Gold_Ore());
+		
+		this.IDtoItemsCore.put(8005, new Regen_Iron_Ore());
+		this.CmdtoItemsCore.put("ironore", new Regen_Iron_Ore());
+		
+		this.IDtoItemsCore.put(8006, new Regen_Lapis_Ore());
+		this.CmdtoItemsCore.put("lapisore", new Regen_Lapis_Ore());
+		
+		this.IDtoItemsCore.put(8007, new Regen_Redstone_Ore());
+		this.CmdtoItemsCore.put("redstoneore", new Regen_Redstone_Ore());
 		
 		//Vanilla
 		this.IDtoItemsCore.put(100, new WoodenSword());
