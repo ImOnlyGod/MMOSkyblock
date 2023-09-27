@@ -10,6 +10,7 @@ import CustomEssentials.Events.Items.Blocks.RegenBlocks.Regen_Gold_Ore;
 import CustomEssentials.Events.Items.Blocks.RegenBlocks.Regen_Iron_Ore;
 import CustomEssentials.Events.Items.Blocks.RegenBlocks.Regen_Lapis_Ore;
 import CustomEssentials.Events.Items.Blocks.RegenBlocks.Regen_Redstone_Ore;
+import CustomEssentials.Events.Items.Blocks.RegenBlocks.Regen_Stone;
 import CustomEssentials.Events.Items.Tools.DarkPickaxe;
 import CustomEssentials.Events.Items.Vanilla.Armor.Boots.DiamondBoots;
 import CustomEssentials.Events.Items.Vanilla.Armor.Boots.GoldenBoots;
@@ -135,6 +136,9 @@ public class ItemStorageTable {
 		
 		this.IDtoItemsCore.put(8007, new Regen_Redstone_Ore());
 		this.CmdtoItemsCore.put("redstoneore", new Regen_Redstone_Ore());
+		
+		this.IDtoItemsCore.put(8008, new Regen_Stone());
+		this.CmdtoItemsCore.put("stone", new Regen_Stone());
 		
 		//Vanilla
 		this.IDtoItemsCore.put(100, new WoodenSword());
