@@ -1,8 +1,10 @@
 package CustomEssentials;
 
 import java.io.File;
-
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.LineNumberReader;
 import java.util.ArrayList;
 
 import org.bukkit.Bukkit;
@@ -88,6 +90,7 @@ public class Main extends JavaPlugin{
 	private ItemPrices shopPrices;
 	private File shopPricesLocation;
 	private ArrayList<Block> regenBlockList = new ArrayList<Block>();
+	private ArrayList<Integer> regenBlockIDList = new ArrayList<Integer>();
 	private File regenBlockListLocation;
 	
 	public ArrayList<Block> getRegenBlockList() {
@@ -173,7 +176,7 @@ public class Main extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new MobEvents(this), this);
 		getServer().getPluginManager().registerEvents(new PlayerJoinLeave(this), this);
 		getServer().getPluginManager().registerEvents(new GuiShops(this, this.shopPrices), this);
-		getServer().getPluginManager().registerEvents(new SkillsFunctioning(this, this.regenBlockList), this);
+		getServer().getPluginManager().registerEvents(new SkillsFunctioning(this, this.regenBlockList, this.regenBlockIDList), this);
 		getServer().getPluginManager().registerEvents(new FoodSaturation(this), this);
 		getServer().getPluginManager().registerEvents(new FishingEvents(this), this);
 		getServer().getPluginManager().registerEvents(new CraftingEvents(this), this);
@@ -353,7 +356,8 @@ public class Main extends JavaPlugin{
 	public void writeRegenBlockData(File directory) {
 		String FileName = "regen_block_data";
 		String path = directory.getPath();
-		File RegenBlockFile = new File(path + "\\" + FileName + ".yml");		
+		File RegenBlockFile = new File(path + "\\" + FileName + ".yml");	
+		RegenBlockFile.delete();
 		
 		if (!RegenBlockFile.exists())
 			try {
@@ -373,6 +377,7 @@ public class Main extends JavaPlugin{
 				regenBlockData.set(blockNumStr+"."+"y", block.getLocation().getY());
 				regenBlockData.set(blockNumStr+"."+"z", block.getLocation().getZ());
 				regenBlockData.set(blockNumStr+"."+"worldName", block.getLocation().getWorld().getName());	
+				regenBlockData.set(blockNumStr+"."+"id", this.regenBlockIDList.get(blockNum));	
 				blockNum++;
 			}
 			
@@ -393,9 +398,21 @@ public class Main extends JavaPlugin{
 				
 		FileConfiguration regenBlockData = YamlConfiguration.loadConfiguration(RegenBlockFile);
 		
+		int numBlocks = 0;
+		try {
+			LineNumberReader lnr = new LineNumberReader(new FileReader(RegenBlockFile));
+			while (lnr.readLine() != null)	numBlocks +=1;
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		numBlocks = numBlocks/6;
+		
 		int blockNum = 0;
 		//FIND AMOUNT OF LINES
-		for (int i=0;i<12;i++) {
+		for (int i=0;i<numBlocks;i++) {
 			String blockNumStr = String.valueOf(blockNum);
 			if (regenBlockData.get(blockNumStr+"."+"x").equals(null)) break;
 
@@ -403,10 +420,13 @@ public class Main extends JavaPlugin{
 			double y = (double) regenBlockData.get(blockNumStr+"."+"y");
 			double z = (double) regenBlockData.get(blockNumStr+"."+"z");
 			String worldName = (String) regenBlockData.get(blockNumStr+"."+"worldName");
+			int customModelData = (int) regenBlockData.get(blockNumStr+"."+"id");
 			World world = this.getServer().getWorld(worldName);
 			Location loc = new Location(world, x, y, z);
 			
 			this.regenBlockList.add(loc.getBlock());
+			this.regenBlockIDList.add(customModelData);
+			System.out.println(x+" "+y+" "+z);
 			
 			blockNum++;
 			
@@ -868,6 +888,14 @@ public class Main extends JavaPlugin{
 
 	public void setRegenBlockListLocation(File regenBlockListLocation) {
 		this.regenBlockListLocation = regenBlockListLocation;
+	}
+
+	public ArrayList<Integer> getRegenBlockIDList() {
+		return regenBlockIDList;
+	}
+
+	public void setRegenBlockIDList(ArrayList<Integer> regenBlockIDList) {
+		this.regenBlockIDList = regenBlockIDList;
 	}
 	
 

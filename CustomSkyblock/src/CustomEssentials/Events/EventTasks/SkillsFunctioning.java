@@ -39,16 +39,29 @@ public class SkillsFunctioning implements Listener{
 	private Main plugin;
 	private HashMap<Integer, ItemsCore> IDtoItemCore;
 	private ArrayList<Block> regenBlockList;
+	private ArrayList<Integer> regenBlockCustomID;
+	
 	
 		
-	public SkillsFunctioning(Main plugin, ArrayList<Block> regenBlockList) {
+	public SkillsFunctioning(Main plugin, ArrayList<Block> regenBlockList, ArrayList<Integer> regenBlockCustomID) {
 		this.plugin = plugin;
 		this.setIDtoItemCore(new ItemStorageTable().getIDtoItemsCore());
 		this.regenBlockList = regenBlockList;
+		this.regenBlockCustomID = regenBlockCustomID;
 		
-		for (Block block : regenBlockList) block.setMetadata("regenBlock", new FixedMetadataValue(this.plugin,null));; 
+		for (int i=0;i<regenBlockList.size();i++) {
+			ItemStack blockItem = IDtoItemCore.get(regenBlockCustomID.get(i)).createItem(1);
+			loadRegenBlock(regenBlockList.get(i),blockItem);
+			Material blockType = blockItem.getType();
+			regenBlockList.get(i).setType(blockType);
+		}
 	}
 	
+	public void loadRegenBlock(Block block, ItemStack blockItem) {
+		int blockRegenCustomID = blockItem.getItemMeta().getCustomModelData();
+		String blockRegenModelData = String.valueOf(blockRegenCustomID);
+		block.setMetadata("regenBlock", new FixedMetadataValue(this.plugin,blockRegenModelData));	
+	}	
 	
 	public boolean isRegenBlockPlaced(ItemStack block) {
 		if (!block.hasItemMeta()) return false;
@@ -62,14 +75,38 @@ public class SkillsFunctioning implements Listener{
 	}
 	
 	public void setRegenBlockPlaced(Block block, ItemStack blockItem) {
-		String blockRegenModelData = String.valueOf(blockItem.getItemMeta().getCustomModelData());
+		int blockRegenCustomID = blockItem.getItemMeta().getCustomModelData();
+		String blockRegenModelData = String.valueOf(blockRegenCustomID);
 		block.setMetadata("regenBlock", new FixedMetadataValue(this.plugin,blockRegenModelData));	
 		regenBlockList.add(block);	
+		regenBlockCustomID.add(blockRegenCustomID);
+	}
+	
+	public void removeRegenBlock(Block block) {
+		Location loc = block.getLocation();
+		int x = loc.getBlockX();
+		int y = loc.getBlockY();
+		int z = loc.getBlockZ();
+		
+		for (int i=0;i<this.regenBlockList.size();i++) {
+			Block delBlock = this.regenBlockList.get(i);
+			Location delBlockLoc = delBlock.getLocation();
+			int blockX = delBlockLoc.getBlockX();
+			int blockY = delBlockLoc.getBlockY();
+			int blockZ = delBlockLoc.getBlockZ();
+			if (blockX == x && blockY == y && blockZ ==z) {
+				this.regenBlockList.remove(i);
+				this.regenBlockCustomID.remove(i);
+				break;
+			}
+		}
+				
 	}
 	
 	public boolean isRegenBlockBroken(Block block, Player p) {
 		if (p.getGameMode() == GameMode.CREATIVE && block.hasMetadata("regenBlock")) {
-			regenBlockList.remove(block);
+			removeRegenBlock(block);
+			
 			return false;
 		}
 		if (!block.hasMetadata("regenBlock")) return false;
@@ -398,6 +435,16 @@ public class SkillsFunctioning implements Listener{
 
 	public void setRegenBlockList(ArrayList<Block> regenBlockList) {
 		this.regenBlockList = regenBlockList;
+	}
+
+
+	public ArrayList<Integer> getRegenBlockCustomID() {
+		return regenBlockCustomID;
+	}
+
+
+	public void setRegenBlockCustomID(ArrayList<Integer> regenBlockCustomID) {
+		this.regenBlockCustomID = regenBlockCustomID;
 	}		
 	
 }
