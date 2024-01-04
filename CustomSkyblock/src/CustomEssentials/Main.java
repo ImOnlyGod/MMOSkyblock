@@ -1,7 +1,6 @@
 package CustomEssentials;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.LineNumberReader;
@@ -11,6 +10,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.WorldCreator;
+import org.bukkit.WorldType;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -79,6 +80,7 @@ import CustomEssentials.Utils.ArmorUtils;
 import CustomEssentials.Utils.HealthUtils;
 import CustomEssentials.Utils.ManaUtils;
 import CustomEssentials.Utils.StatsUtil;
+import CustomEssentials.WorldMechanics.VoidChunkGenerator;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 
@@ -160,6 +162,8 @@ public class Main extends JavaPlugin{
 		this.profileManager = new PlayerProfileManager(this);
 
 		CustomEnchants.register();
+				
+		this.generateplayerIslands();
 		
 		new MenuGui(this);
 		new SkillsGui(this);
@@ -342,6 +346,26 @@ public class Main extends JavaPlugin{
 	public void loadConfig() {
 		getConfig().options().copyDefaults(true);
 		saveConfig();
+	}
+	
+	public void createVoidWorld(String worldName, WorldType worldType) {
+		WorldCreator wc = new WorldCreator(worldName);
+		wc.environment(World.Environment.NORMAL);
+		wc.type(worldType);
+		
+		wc.generator(new VoidChunkGenerator());
+		
+		wc.createWorld();
+	}
+	
+	public void generateplayerIslands() {
+		String worldName = "voidIslands";
+		if (Bukkit.getWorld(worldName) != null)	return;
+		
+		WorldType worldType = WorldType.NORMAL;
+		
+		this.createVoidWorld(worldName, worldType);			
+		
 	}
 	
 	public void generateRegenBlockListFile() {
