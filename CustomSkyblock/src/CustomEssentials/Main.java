@@ -83,6 +83,7 @@ import CustomEssentials.Utils.StatsUtil;
 import CustomEssentials.WorldMechanics.VoidChunkGenerator;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
+import net.minecraft.world.level.border.WorldBorder;
 
 public class Main extends JavaPlugin{
 
@@ -364,7 +365,7 @@ public class Main extends JavaPlugin{
 		
 		WorldType worldType = WorldType.NORMAL;
 		
-		this.createVoidWorld(worldName, worldType);			
+		this.createVoidWorld(worldName, worldType);				
 		
 	}
 	

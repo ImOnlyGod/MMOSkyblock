@@ -2,18 +2,13 @@ package CustomEssentials.WorldMechanics;
 
 import java.util.Random;
 
-import javax.annotation.Nonnull;
-
-import org.bukkit.World;
 import org.bukkit.generator.ChunkGenerator;
+import org.bukkit.generator.WorldInfo;
 
 public class VoidChunkGenerator extends ChunkGenerator{
 	
-	@SuppressWarnings("deprecation")
 	@Override
-	@Nonnull
-	public ChunkData generateChunkData(@Nonnull World world,@Nonnull Random random, int x, int z, @Nonnull BiomeGrid biome) {
-		return createChunkData(world);
+	public void generateNoise(WorldInfo worldInfo, Random random, int chunkX, int chunkZ,  ChunkData chunkData) {
 	}
 
 }
