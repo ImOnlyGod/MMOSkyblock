@@ -5,7 +5,11 @@ import java.util.ArrayList;
 public class islandStats {
 	
 	private int islandId;
+	private String islandName;
 	private double islandSize=25;
+	private int islandLevel = 0;
+	private double islandCurrentXp = 0;
+	private double islandLevelUpXp = 10; 
 	private double islandValue;
 	private double islandBankBalance = 0.0;
 	//team info
@@ -34,7 +38,7 @@ public class islandStats {
 	private float visitorSpawnPitch;
 	//Options
 	private boolean visitors;
-	private boolean border;
+	private boolean border = true;
 	private String borderColor;
 	
 	public islandStats() {
@@ -43,6 +47,70 @@ public class islandStats {
 	
 	public void setIslandStats() {
 		
+	}
+
+	public int getIslandLevel() {
+		return islandLevel;
+	}
+
+	public void setIslandLevel(int islandLevel) {
+		this.islandLevel = islandLevel;
+	}
+
+	public double getIslandCurrentXp() {
+		return islandCurrentXp;
+	}
+
+	public void setIslandCurrentXp(double islandCurrentXp) {
+		this.islandCurrentXp = islandCurrentXp;
+	}
+
+	public double getIslandLevelUpXp() {
+		return islandLevelUpXp;
+	}
+
+	public void setIslandLevelUpXp(double islandLevelUpXp) {
+		this.islandLevelUpXp = islandLevelUpXp;
+	}
+
+	public void setIslandSize(double islandSize) {
+		this.islandSize = islandSize;
+	}
+
+	public void setCentreX(double centreX) {
+		this.centreX = centreX;
+	}
+
+	public void setCentreY(double centreY) {
+		this.centreY = centreY;
+	}
+
+	public void setCentreZ(double centreZ) {
+		this.centreZ = centreZ;
+	}
+
+	public void setTeamSpawnX(double teamSpawnX) {
+		this.teamSpawnX = teamSpawnX;
+	}
+
+	public void setTeamSpawnY(double teamSpawnY) {
+		this.teamSpawnY = teamSpawnY;
+	}
+
+	public void setTeamSpawnZ(double teamSpawnZ) {
+		this.teamSpawnZ = teamSpawnZ;
+	}
+
+	public void setVisitorSpawnX(double visitorSpawnX) {
+		this.visitorSpawnX = visitorSpawnX;
+	}
+
+	public void setVisitorSpawnY(double visitorSpawnY) {
+		this.visitorSpawnY = visitorSpawnY;
+	}
+
+	public void setVisitorSpawnZ(double visitorSpawnZ) {
+		this.visitorSpawnZ = visitorSpawnZ;
 	}
 
 	public int getIslandId() {
@@ -259,6 +327,14 @@ public class islandStats {
 
 	public void setBorderColor(String borderColor) {
 		this.borderColor = borderColor;
+	}
+
+	public String getIslandName() {
+		return islandName;
+	}
+
+	public void setIslandName(String islandName) {
+		this.islandName = islandName;
 	}
 	
 	

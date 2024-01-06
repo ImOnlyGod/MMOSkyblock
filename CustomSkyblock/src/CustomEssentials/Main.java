@@ -1,9 +1,15 @@
 package CustomEssentials;
 
 import java.io.File;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.LineNumberReader;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import org.bukkit.Bukkit;
@@ -83,7 +89,6 @@ import CustomEssentials.Utils.StatsUtil;
 import CustomEssentials.WorldMechanics.VoidChunkGenerator;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
-import net.minecraft.world.level.border.WorldBorder;
 
 public class Main extends JavaPlugin{
 
@@ -95,6 +100,7 @@ public class Main extends JavaPlugin{
 	private ArrayList<Block> regenBlockList = new ArrayList<Block>();
 	private ArrayList<Integer> regenBlockIDList = new ArrayList<Integer>();
 	private File regenBlockListLocation;
+	private Connection databaseConnection;
 	
 	public ArrayList<Block> getRegenBlockList() {
 		return regenBlockList;
@@ -153,15 +159,69 @@ public class Main extends JavaPlugin{
 		new BrewingShop2(this, this.shopPrices);
 	}
 	
+	public void connectDatabase() {
+		
+		File directory = this.regenBlockListLocation;
+		String FileName = "database";
+		String path = directory.getPath();
+		File databaseFile = new File(path + "\\" + FileName + ".yml");	
+		if (!databaseFile.exists()) {
+			try {
+				databaseFile.createNewFile();
+				FileConfiguration databaseData = YamlConfiguration.loadConfiguration(databaseFile);	
+				
+				databaseData.set("url", "");
+				databaseData.set("username", "");
+				databaseData.set("password", "");
+				
+				databaseData.save(databaseFile);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		
+			return;
+		}			
+		
+		FileConfiguration databaseData = YamlConfiguration.loadConfiguration(databaseFile);
+		
+		String url = (String) databaseData.get("url");
+		String user = (String) databaseData.get("username");
+		String pass = (String) databaseData.get("password");
+		
+		if (url == null) return;
+		
+		try {
+			Connection connection = DriverManager.getConnection(url,user,pass);
+			this.setDatabaseConnection(connection);
+			System.out.println("Connected to the Database.");
+		} catch (SQLException e) {
+			System.out.println("Unable to connect to the Database.");
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void setupDBTables() {
+		try {
+			Statement statement = this.databaseConnection.createStatement();
+			String createBlockRegenTable = "CREATE TABLE IF NOT EXISTS regenBlockData(id varchar(10), x double, y double, z double, worldName varchar(10), custom_item_id int)";
+			statement.execute(createBlockRegenTable);
+			statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	@Override
 	public void onEnable() {
-		
+			
 		//getServer().getConsoleSender().sendMessage(Utils.chat("&aPlugin has been enabled!"));
 		generatePlayerFolder();	
 		generateShopFile();
 		generateRegenBlockListFile();
 		this.profileManager = new PlayerProfileManager(this);
-
+		connectDatabase();
+		setupDBTables();
 		CustomEnchants.register();
 				
 		this.generateplayerIslands();
@@ -335,10 +395,17 @@ public class Main extends JavaPlugin{
 	}
 	
 	
-	public void onDisable() {		
+	public void onDisable() {	
 		saveShopPrices();
 		savePlayerData();
 		saveRegenBlockData();
+		
+		try {
+			this.databaseConnection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 		saveConfig();
 		getServer().getConsoleSender().sendMessage("Plugin has been disabled!");
 		
@@ -373,10 +440,30 @@ public class Main extends JavaPlugin{
 		setRegenBlockListLocation(this.getDataFolder());
 	}
 	
-	public void saveRegenBlockData() {
+	public void saveRegenBlockData() {		
+		
 		setRegenBlockListLocation(this.regenBlockListLocation);
 		writeRegenBlockData(this.regenBlockListLocation);
 	}	
+	
+	public void addRegenBlockDataToDB(String id, double x, double y, double z, String worldName, int custom_item_id) {
+		
+		try {
+			PreparedStatement addRegenBlockToDB = this.getDatabaseConnection().prepareStatement("INSERT INTO regenBlockData(id, x, y, z, worldName, custom_item_id) VALUES (?, ?, ?, ?, ?, ?)");
+			addRegenBlockToDB.setString(1, id);
+			addRegenBlockToDB.setDouble(2, x);
+			addRegenBlockToDB.setDouble(3, y);
+			addRegenBlockToDB.setDouble(4, z);
+			addRegenBlockToDB.setString(5, worldName);
+			addRegenBlockToDB.setInt(6, custom_item_id);
+			
+			addRegenBlockToDB.executeUpdate();
+			addRegenBlockToDB.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public void writeRegenBlockData(File directory) {
 		String FileName = "regen_block_data";
@@ -395,9 +482,22 @@ public class Main extends JavaPlugin{
 		FileConfiguration regenBlockData = YamlConfiguration.loadConfiguration(RegenBlockFile);	
 		
 		try {
+			PreparedStatement removeOLDRegenBlocks = this.getDatabaseConnection().prepareStatement("DELETE FROM regenBlockData");
+			
+			removeOLDRegenBlocks.executeUpdate();
+			removeOLDRegenBlocks.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		try {
 			int blockNum = 0;
 			for (Block block : this.regenBlockList) {
 				String blockNumStr = String.valueOf(blockNum);
+				
+				this.addRegenBlockDataToDB(blockNumStr,block.getLocation().getX(),block.getLocation().getY(),block.getLocation().getZ(),block.getLocation().getWorld().getName(),this.regenBlockIDList.get(blockNum));			
+				
 				regenBlockData.createSection(blockNumStr);
 				regenBlockData.set(blockNumStr+"."+"x", block.getLocation().getX());
 				regenBlockData.set(blockNumStr+"."+"y", block.getLocation().getY());
@@ -412,6 +512,8 @@ public class Main extends JavaPlugin{
 			
 			e.printStackTrace();
 		}
+				
+		
 	}
 	
 	public void readRegenBlockData() {
@@ -452,7 +554,6 @@ public class Main extends JavaPlugin{
 			
 			this.regenBlockList.add(loc.getBlock());
 			this.regenBlockIDList.add(customModelData);
-			System.out.println(x+" "+y+" "+z);
 			
 			blockNum++;
 			
@@ -922,6 +1023,14 @@ public class Main extends JavaPlugin{
 
 	public void setRegenBlockIDList(ArrayList<Integer> regenBlockIDList) {
 		this.regenBlockIDList = regenBlockIDList;
+	}
+
+	public Connection getDatabaseConnection() {
+		return databaseConnection;
+	}
+
+	public void setDatabaseConnection(Connection databaseConnection) {
+		this.databaseConnection = databaseConnection;
 	}
 	
 
