@@ -2,6 +2,8 @@ package CustomEssentials.WorldMechanics.playerIslands;
 
 import java.util.ArrayList;
 
+import org.bukkit.entity.Player;
+
 public class islandStats {
 	
 	private int islandId;
@@ -10,43 +12,54 @@ public class islandStats {
 	private int islandLevel = 0;
 	private double islandCurrentXp = 0;
 	private double islandLevelUpXp = 10; 
-	private double islandValue;
+	private double islandValue = 0.0;
 	private double islandBankBalance = 0.0;
 	//team info
 	private String islandOwner;
-	private ArrayList<String> islandCoOwners;
-	private ArrayList<String> islandAdmins;
-	private ArrayList<String> islandMods;
-	private ArrayList<String> islandMembers;	
+	private ArrayList<String> islandCoOwners = new ArrayList<String>();
+	private ArrayList<String> islandAdmins = new ArrayList<String>();
+	private ArrayList<String> islandMods = new ArrayList<String>();
+	private ArrayList<String> islandMembers = new ArrayList<String>();	
 	//island centre location
 	private double centreX;
-	private double centreY;
+	private double centreY = 70.0;
 	private double centreZ;
 	private double centreYaw = 0.0;
 	private double centrePitch = 0.0;
 	//team spawn location
 	private double teamSpawnX;
-	private double teamSpawnY;
+	private double teamSpawnY = 70.0;
 	private double teamSpawnZ;
-	private float teamSpawnYaw;
-	private float teamSpawnPitch;
+	private double teamSpawnYaw = 0.0;
+	private double teamSpawnPitch = 0.0;
 	//visitor spawn location
 	private double visitorSpawnX;
-	private double visitorSpawnY;
+	private double visitorSpawnY = 70.0;
 	private double visitorSpawnZ;
-	private float visitorSpawnYaw;
-	private float visitorSpawnPitch;
+	private double visitorSpawnYaw = 0.0;
+	private double visitorSpawnPitch = 0.0;
 	//Options
-	private boolean visitors;
+	private boolean visitors = false;
 	private boolean border = true;
-	private String borderColor;
+	private String borderColor = "Red";
 	
-	public islandStats() {
+	public islandStats(int islandID, Player owner, double x, double z) {
+		this.islandId = islandID;
+		this.islandName = "Default Island Name";
+		this.islandOwner = owner.getUniqueId().toString();
+		this.centreX = x;
+		this.centreZ = z;
+		this.teamSpawnX = x;
+		this.teamSpawnZ = z;
+		this.visitorSpawnX = x;
+		this.visitorSpawnZ = z;
 		
 	}
 	
-	public void setIslandStats() {
-		
+	public void addIslandMember(Player member) {
+		ArrayList<String> currentMembers = this.getIslandMembers();
+		currentMembers.add(member.getUniqueId().toString());
+		this.setIslandMembers(currentMembers);
 	}
 
 	public int getIslandLevel() {
@@ -249,7 +262,7 @@ public class islandStats {
 		this.teamSpawnZ = teamSpawnZ;
 	}
 
-	public float getTeamSpawnYaw() {
+	public double getTeamSpawnYaw() {
 		return teamSpawnYaw;
 	}
 
@@ -257,7 +270,7 @@ public class islandStats {
 		this.teamSpawnYaw = teamSpawnYaw;
 	}
 
-	public float getTeamSpawnPitch() {
+	public double getTeamSpawnPitch() {
 		return teamSpawnPitch;
 	}
 
@@ -289,7 +302,7 @@ public class islandStats {
 		this.visitorSpawnZ = visitorSpawnZ;
 	}
 
-	public float getVisitorSpawnYaw() {
+	public double getVisitorSpawnYaw() {
 		return visitorSpawnYaw;
 	}
 
@@ -297,7 +310,7 @@ public class islandStats {
 		this.visitorSpawnYaw = visitorSpawnYaw;
 	}
 
-	public float getVisitorSpawnPitch() {
+	public double getVisitorSpawnPitch() {
 		return visitorSpawnPitch;
 	}
 
