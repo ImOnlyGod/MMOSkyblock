@@ -10,7 +10,6 @@ public class PlayerIslandManager {
 	
 	private Main plugin;
 	private ArrayList<islandStats> playerIslands = new ArrayList<islandStats>();
-	
 	public PlayerIslandManager(Main plugin) {
 		this.plugin = plugin;
 	}
@@ -37,7 +36,7 @@ public class PlayerIslandManager {
 	}
 	
 	public void setPlayerIsland(Player owner, Player member) {
-		
+
 		if (owner.equals(member)) {
 			this.createPlayerIsland(owner);
 			return;
@@ -55,8 +54,7 @@ public class PlayerIslandManager {
 	}
 
 	public Main getPlugin() {
-		return plugin;
-	}
+		return plugin;}
 
 	public void setPlugin(Main plugin) {
 		this.plugin = plugin;

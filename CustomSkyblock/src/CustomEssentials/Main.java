@@ -220,8 +220,8 @@ public class Main extends JavaPlugin{
 		generateShopFile();
 		generateRegenBlockListFile();
 		this.profileManager = new PlayerProfileManager(this);
-		connectDatabase();
-		setupDBTables();
+		//connectDatabase();
+		//setupDBTables();
 		CustomEnchants.register();
 				
 		this.generateplayerIslands();
