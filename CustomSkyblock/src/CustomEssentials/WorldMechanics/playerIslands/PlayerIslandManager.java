@@ -50,6 +50,7 @@ public class PlayerIslandManager {
 		
 		//find role for player
 		//set to member in new island
+		//TEST
 		
 	}
 
